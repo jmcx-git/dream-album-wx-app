@@ -4,11 +4,11 @@ Page({
      inputVal:"",
      kjsearchList:['圣诞快乐','旧时光','周岁','双12'],
      items:[
-       {title:'模版1',cover:'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg'},
-       {title:'模版2',cover:'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg'},
-       {title:'模版3',cover:'http://img.huiyoobao.com/funny/columnback/1473825601094_orign.jpg'},
-       {title:'模版4',cover:'http://img.huiyoobao.com/funny/columnback/1473825076410_orign.jpg'},
-       {title:'模版5',cover:'http://img.huiyoobao.com/funny/columnback/1473825075998_orign.jpg'}],
+       {id:1,title:'模版1',cover:'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg'},
+       {id:2,title:'模版2',cover:'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg'},
+       {id:3,title:'模版3',cover:'http://img.huiyoobao.com/funny/columnback/1473825601094_orign.jpg'},
+       {id:4,title:'模版4',cover:'http://img.huiyoobao.com/funny/columnback/1473825076410_orign.jpg'},
+       {id:5,title:'模版5',cover:'http://img.huiyoobao.com/funny/columnback/1473825075998_orign.jpg'}],
     winHeight:0,
     winWidth:0,
     searchKeyWords:'',
@@ -37,6 +37,13 @@ Page({
   },
   collectApi:function(e){
     console.log("此处进行收藏！");
+  },
+  previewImage:function(e){
+    console.log(e.currentTarget.dataset.albumid);
+    //进入创作页面
+    // wx.navigateTo({
+    //   url: '?albumId='+e.currentTarget.dataset.albumid
+    // })
   },
   onLoad:function(options){
     let that=this;
