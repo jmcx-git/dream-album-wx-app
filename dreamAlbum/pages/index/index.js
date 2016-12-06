@@ -95,7 +95,7 @@ Page({
           }
         })
     }
-    // this.search('');
+    this.search('');
   },
   searchKeyWords:function(e){
     console.log("搜索开始了了！");
@@ -113,21 +113,23 @@ Page({
     let that=this;
     wx.request({
       url: 'http://10.1.1.197:8080/dream-album/dream/album/common/homepage.json',
-      data: {},
+      data: {
+        keyword:queryWords
+      },
       method: 'GET',
       success: function(res){
         console.log(res);
         that.setData({
-          items:res.data
+          items:res.data.albumList
         })
       }
     })
   },
   getKeywords:function(e){
-    this.setData({
-      searchKeyWords:e.detail.value
-    })
-    console.log(e.detail.value);
+    // this.setData({
+    //   searchKeyWords:e.detail.value
+    // })
+    this.search(e.detail.value);
   },
   onReady:function(){
     // 页面渲染完成
