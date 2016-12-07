@@ -65,21 +65,36 @@ Page({
               //用户点击确定
               wx.login({
                 success: function(res){
-                  wx.getUserInfo({
-                    success: function(res){
-                      console.log(res);
-                      wx.setStorageSync('userId',res.signature);
-                      // wx.request({
-                      //   url: 'https://URL',
-                      //   data: {},
-                      //   method: 'POST',
-                      //   success: function(res){
-
-                      //   }
-                      // })
+                  //获取code
+                  wx.request({
+                    url: 'http://localhost:8080/dream-album/dream/user/login/getSession.json',
+                    data: {
+                      code:res.code
                     },
-                    fail: function() {
-                      console.log("获取用户信息出错！");
+                    method: 'GET',
+                    success: function(ress){
+                       wx.getUserInfo({
+                        success: function(ress){
+                          //缓存第三方key
+                          wx.setStorageSync('threeSessionKey',ress.data);
+                          wx.request({
+                            url: 'http://localhost:8080/dream-album/dream/user/login/getUserInfo.json',
+                            data: {
+                              threeSessionKey:ress.data,
+                              encryptedData:res.encryptedData,
+                              iv:res.iv
+                            },
+                            method: 'GET',
+                            success: function(res){
+                              //缓存用户id
+                              wx.setStorageSync('userId', res.data)
+                            }
+                          })
+                        },
+                        fail: function() {
+                          console.log("获取用户信息出错！");
+                        }
+                      })
                     }
                   })
                 },
