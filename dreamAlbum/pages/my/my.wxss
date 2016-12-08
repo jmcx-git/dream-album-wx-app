@@ -18,7 +18,8 @@
     border: 1px solid #aaa;
     border-radius: 10px;
     display: flex;
-    color: #ff5956;
+    font-size: 18px;
+    color: #b2b2b2;
 }
 .userinfo-avatar {
   position: absolute;
@@ -52,8 +53,7 @@
 }
 /*顶部切换*/
 .on{
-  color: #fff; 
-  background: #f85f48;
+  color: #ff5956; 
 }
 /*my*/
 .mobileListBorder{
@@ -87,13 +87,6 @@
     height:158px;
     top:10px;
     left:12px;
-}
-.collectImage{
-    width:30px;
-    height:30px;
-    position: absolute;
-    right:25px;
-    top:20px;
 }
 .subMainText{
     text-align: center;
