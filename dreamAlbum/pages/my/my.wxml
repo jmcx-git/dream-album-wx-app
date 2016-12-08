@@ -1,15 +1,21 @@
-<view class="userinfo">
-  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+<view class="allTop">
+    <view class="topClass"></view>
+    <view class="avautarClass">
+        <view class="collectClass">
+            <view>收藏</view>
+            <view class="countClass">01</view>
+        </view>
+        <view class="verticalClass">|</view>
+        <view class="myClass">
+            <view>我的</view>
+            <view class="countClass">10</view>
+        </view>
+    </view>
+    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
 </view>
-<!--顶部切换-->
-<view class="swiper-tab">
-  <view wx:for="{{barTitle}}" wx:key="bar" data-currenttab="{{item.currentTab}}" class="swiper-tab-list {{currentTab==item.currentTab?'on':''}}"  bindtap="swichNav">{{item.name}}</view>
-</view>
-
 <!--模版列表-->
 <view class="mobileListBorder">
-     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" style="height:400px;">
+     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" style="height:{{winHeight-150}}px;">
         <view class="main">
             <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain">
                 <view class="subMainImage">

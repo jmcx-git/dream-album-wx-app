@@ -3,8 +3,7 @@ Page({
   data: {
     userInfo: {},
     barTitle:[{'name':'收藏',currentTab:0},
-              {'name':'制作',currentTab:1},
-              {'name':'我的',currentTab:2}],
+              {'name':'我的',currentTab:1}],
     items:[
        {title:'模版1',cover:'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg'},
        {title:'模版2',cover:'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg'},
