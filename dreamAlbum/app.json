@@ -6,14 +6,14 @@
   ],
   "window":{
     "backgroundTextStyle":"dark",
-    "navigationBarBackgroundColor": "#3f3f3f",
+    "navigationBarBackgroundColor": "#ff5956",
     "navigationBarTitleText": "聚梦相册",
     "backgroundColor": "#fff",
     "navigationBarTextStyle":"#dark"
   },
   "tabBar":{
     "color": "#74777e",
-    "selectedColor": "#11cd6e",
+    "selectedColor": "#f85f48",
     "borderStyle": "white",
     "backgroundColor": "#f7f7fa",
     "list":[
