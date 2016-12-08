@@ -73,21 +73,23 @@ Page({
                     },
                     method: 'GET',
                     success: function(ress){
+                       //缓存第三方key
+                      wx.setStorageSync('threeSessionKey',ress.data);
                        wx.getUserInfo({
-                        success: function(ress){
-                          //缓存第三方key
-                          wx.setStorageSync('threeSessionKey',ress.data);
+                        success: function(resinfo){
                           wx.request({
                             url: 'http://localhost:8080/dream-album/dream/user/login/getUserInfo.json',
                             data: {
                               threeSessionKey:ress.data,
-                              encryptedData:res.encryptedData,
-                              iv:res.iv
+                              encryptedData:resinfo.encryptedData,
+                              iv:resinfo.iv
                             },
                             method: 'GET',
-                            success: function(res){
+                            success: function(resuser){
+                              console.log(resuser);
                               //缓存用户id
-                              wx.setStorageSync('userId', res.data)
+                              wx.setStorageSync('userId', resuser.data);
+                              console.log("用户id:"+resuser.data);
                             }
                           })
                         },
@@ -104,13 +106,27 @@ Page({
               })
             }else{
               //用户点击取消
-              var randomStr=randomChar();
-              wx.setStorageSync('userId',randomStr);
+              // var randomStr=randomChar();
+              wx.request({
+                url: 'http://localhost:8080/dream-album/dream/user/login/addUser.json',
+                data: {
+
+                },
+                method: 'GET',
+                success: function(res){
+                  wx.setStorageSync('userId',res.data);
+                  console.log("用户id:"+res.data);
+                },
+                fail: function(e) {
+                  console.log("新增用户失败！");
+                  console.log(e);
+                }
+              })
             }
           }
         })
     }
-    this.search('');
+    // this.search('');
   },
   searchKeyWords:function(e){
     console.log("搜索开始了了！");
