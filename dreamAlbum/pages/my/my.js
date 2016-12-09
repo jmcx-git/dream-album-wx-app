@@ -16,6 +16,9 @@ Page({
     this.setData({
       currentTab:e.currentTarget.dataset.id
     })
+    this.setData({
+      items:[]
+    })
     this.getData(e.currentTarget.dataset.id);
   },
   onLoad: function () {

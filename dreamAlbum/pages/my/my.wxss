@@ -93,6 +93,20 @@
     left:20.2%;
     border-radius: 5px;
 }
+.finishImage{
+    width:120px;
+    height:50px;
+    position: absolute;
+    right:25px;
+    top:60px;
+}
+.finishImage.on{
+    width:120px;
+    height:50px;
+    position: absolute;
+    right:40px;
+    top:60px;
+}
 .downImage.on{
     position: absolute;
     height:80%;
@@ -114,6 +128,12 @@
     top:15.2%;
     left:10.2%;
     border-radius: 5px;
+}
+.images.on.no{
+    opacity:0.5;
+}
+.images.no{
+    opacity:0.5;
 }
 .subMainText{
     text-align: center;
