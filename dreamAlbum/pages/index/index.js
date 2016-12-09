@@ -7,6 +7,8 @@ Page({
     winHeight:0,
     winWidth:0,
     searchKeyWords:'',
+    start:0,
+    size:10,
     placeholderWords:'请输入搜索关键词...',
     hostConfig:'http://localhost:8080/dream-album/'
   },
@@ -37,6 +39,7 @@ Page({
     let userId=wx.getStorageSync('userId');
     let currentStatus=e.currentTarget.dataset.collect;
     let status=currentStatus==0?'1':0;
+    let message=currentStatus==0?'收藏成功':'取消收藏';
     that.data.items[index].collect=status;
     this.setData({
       items:that.data.items
@@ -50,7 +53,11 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log(res);
+        wx.showToast({
+          title:message,
+          icon:'success',
+          duration:1000
+        })
       }
     })
   },
@@ -102,12 +109,10 @@ Page({
                             },
                             method: 'GET',
                             success: function(resuser){
-                              console.log(resuser);
                               var ss=(''+resuser.data).split("#");
                               //缓存用户id
                               wx.setStorageSync('userId', ss[0]);
                               wx.setStorageSync('avatarUrl', ss[1]);
-                              console.log("用户id:"+ss[0]);
                               that.search('',ss[0]);
                             }
                           })
@@ -131,7 +136,6 @@ Page({
                 method: 'GET',
                 success: function(res){
                   wx.setStorageSync('userId',res.data);
-                  console.log("用户id:"+res.data);
                   that.search('',res.data);
                 },
                 fail: function(e) {
@@ -146,33 +150,66 @@ Page({
       that.search('',wx.getStorageSync('userId'));
     }
   },
-  searchKeyWords:function(e){
+  onPullDownRefresh:function(){
+    this.refreshData();
+    wx.stopPullDownRefresh();
+  },
+  refreshData:function(){
     let that=this;
-    if(that.data.searchKeyWords==that.data.placeholderWords){
-      return;
-    }
+    this.setData({
+      start:0,
+      size:that.data.size,
+      items:[]
+    })
+    this.search(that.data.searchKeyWords,wx.getStorageSync('userId'));
+  },
+  moreData:function(){
+    let that=this;
     that.search(that.data.searchKeyWords,wx.getStorageSync('userId'));
   },
   searchKeyWordsFast:function(e){
+    let that=this;
+    that.setData({
+      searchKeyWords:e.currentTarget.dataset.keyword,
+      start:0,
+      size:that.data.size,
+      items:[]
+    })
     this.search(e.currentTarget.dataset.keyword,wx.getStorageSync('userId'));
   },
   search(queryWords,userId){
+    wx.showToast({
+      title: '加载中...',
+      icon: 'loading',
+      duration: 5000
+    })
     let that=this;
     wx.request({
       url: that.data.hostConfig+'dream/album/common/homepage.json',
       data: {
         keyword:queryWords,
-        userId:userId
+        userId:userId,
+        size:that.data.size,
+        start:that.data.start
       },
       method: 'GET',
       success: function(res){
         that.setData({
-          items:res.data.albumList
+          items:that.data.items.concat(res.data.albumList),
+          start:that.data.start+res.data.albumList.length
         })
+        wx.hideToast();
       }
     })
   },
   getKeywords:function(e){
+    let that=this;
+    that.setData({
+      searchKeyWords:e.detail.value,
+      start:0,
+      size:that.data.size,
+      items:[]
+    })
     this.search(e.detail.value,wx.getStorageSync('userId'));
   },
   onReady:function(){

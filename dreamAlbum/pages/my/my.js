@@ -1,7 +1,6 @@
 var app = getApp()
 Page({
   data: {
-    userInfo: {},
     barTitle:[{'name':'收藏',currentTab:0},
               {'name':'我的',currentTab:1}],
     winHeight:0,
@@ -9,6 +8,7 @@ Page({
     currentTab:0,
     collectCount:0,
     myCount:0,
+    items:[],
     hostConfig:'http://localhost:8080/dream-album/',
     avatarUrl:''
   },
@@ -33,6 +33,11 @@ Page({
     })
     this.getData(that.data.currentTab);
   },
+  onPullDownRefresh:function(){
+    let that=this;
+    this.getData(that.data.currentTab);
+    wx.stopPullDownRefresh();
+  },
   previewImage:function(e){
     console.log(e.currentTarget.dataset.albumid);
     //进入创作页面
@@ -40,7 +45,16 @@ Page({
     //   url: '?albumId='+e.currentTarget.dataset.albumid
     // })
   },
+  refreshData:function(){
+    let that=this;
+    this.getData(that.data.currentTab);
+  },
   getData(type){
+    wx.showToast({
+      title:'加载中...',
+      icon:'loading',
+      duration:50000
+    })
     let that=this;
     var userId=wx.getStorageSync('userId');
     let url=that.data.hostConfig+'dream/user/login/getUserCollectAlbum.json';
@@ -67,6 +81,7 @@ Page({
             myCount:res.data.length
           })
         }
+        wx.hideToast();
       },
       fail: function() {
         console.log("获取数据失败！");
