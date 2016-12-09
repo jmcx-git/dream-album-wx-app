@@ -29,9 +29,9 @@
                     <image src="../../image/background-down.png" class="downImage {{index%2==1?'on':''}}"/>
                     <image src="../../image/background-up.png" class="upImage {{index%2==1?'on':''}}"/>
                     <image data-albumid="{{item.id}}" src="{{item.cover}}" bindtap="previewImage" class="images {{index%2==1?'on':''}}"/>
-                    <image src="../../image/collect.png" class="collectImage {{index%2==1?'on':''}}" bindtap="collectApi"/>
+                    <image src="{{item.collect==0?'../../image/collect.png':'../../image/collectready.png'}}" data-albumid="{{item.id}}" data-collect="{{item.collect}}" data-index="{{index}}" class="collectImage {{index%2==1?'on':''}}" bindtap="collectApi"/>
                 </view>
-                <view class="subMainText">{{item.title}}</view>
+                <view class="subMainText {{index%2==1?'on':''}}">{{item.title}}</view>
             </view>
         </view>
     </scroll-view>

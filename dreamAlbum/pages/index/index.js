@@ -3,16 +3,12 @@ Page({
      inputShowed:false,
      inputVal:"",
      kjsearchList:['圣诞快乐','旧时光','周岁','双12'],
-     items:[
-       {id:1,title:'模版1',cover:'http://img.huiyoobao.com/funny/columnback/1474432200020_orign.jpg'},
-       {id:2,title:'模版2',cover:'http://img.huiyoobao.com/funny/columnback/1473825600311_orign.jpg'},
-       {id:3,title:'模版3',cover:'http://img.huiyoobao.com/funny/columnback/1473825601094_orign.jpg'},
-       {id:4,title:'模版4',cover:'http://img.huiyoobao.com/funny/columnback/1473825076410_orign.jpg'},
-       {id:5,title:'模版5',cover:'http://img.huiyoobao.com/funny/columnback/1473825075998_orign.jpg'}],
+    items:[],
     winHeight:0,
     winWidth:0,
     searchKeyWords:'',
-    placeholderWords:'请输入搜索关键词...'
+    placeholderWords:'请输入搜索关键词...',
+    hostConfig:'http://localhost:8080/dream-album/'
   },
   showInput:function(){
     this.setData({
@@ -36,7 +32,27 @@ Page({
     })
   },
   collectApi:function(e){
-    console.log("此处进行收藏！");
+    let that=this;
+    let index=e.currentTarget.dataset.index;
+    let userId=wx.getStorageSync('userId');
+    let currentStatus=e.currentTarget.dataset.collect;
+    let status=currentStatus==0?'1':0;
+    that.data.items[index].collect=status;
+    this.setData({
+      items:that.data.items
+    })
+    wx.request({
+      url: that.data.hostConfig+'dream/user/login/updatecollectstatus.json',
+      data: {
+          userId:userId,
+          albumId:e.currentTarget.dataset.albumid,
+          status:status
+      },
+      method: 'GET',
+      success: function(res){
+        console.log(res);
+      }
+    })
   },
   previewImage:function(e){
     console.log(e.currentTarget.dataset.albumid);
@@ -67,7 +83,7 @@ Page({
                 success: function(res){
                   //获取code
                   wx.request({
-                    url: 'http://localhost:8080/dream-album/dream/user/login/getSession.json',
+                    url: that.data.hostConfig+'dream/user/login/getSession.json',
                     data: {
                       code:res.code
                     },
@@ -78,7 +94,7 @@ Page({
                        wx.getUserInfo({
                         success: function(resinfo){
                           wx.request({
-                            url: 'http://localhost:8080/dream-album/dream/user/login/getUserInfo.json',
+                            url: that.data.hostConfig+'dream/user/login/getUserInfo.json',
                             data: {
                               threeSessionKey:ress.data,
                               encryptedData:resinfo.encryptedData,
@@ -87,9 +103,12 @@ Page({
                             method: 'GET',
                             success: function(resuser){
                               console.log(resuser);
+                              var ss=(''+resuser.data).split("#");
                               //缓存用户id
-                              wx.setStorageSync('userId', resuser.data);
-                              console.log("用户id:"+resuser.data);
+                              wx.setStorageSync('userId', ss[0]);
+                              wx.setStorageSync('avatarUrl', ss[1]);
+                              console.log("用户id:"+ss[0]);
+                              that.search('',ss[0]);
                             }
                           })
                         },
@@ -106,16 +125,14 @@ Page({
               })
             }else{
               //用户点击取消
-              // var randomStr=randomChar();
               wx.request({
-                url: 'http://localhost:8080/dream-album/dream/user/login/addUser.json',
-                data: {
-
-                },
+                url: that.data.hostConfig+'dream/user/login/addUser.json',
+                data: {},
                 method: 'GET',
                 success: function(res){
                   wx.setStorageSync('userId',res.data);
                   console.log("用户id:"+res.data);
+                  that.search('',res.data);
                 },
                 fail: function(e) {
                   console.log("新增用户失败！");
@@ -125,31 +142,30 @@ Page({
             }
           }
         })
+    }else{
+      that.search('',wx.getStorageSync('userId'));
     }
-    // this.search('');
   },
   searchKeyWords:function(e){
-    console.log("搜索开始了了！");
     let that=this;
     if(that.data.searchKeyWords==that.data.placeholderWords){
       return;
     }
-    that.search(that.data.searchKeyWords);
+    that.search(that.data.searchKeyWords,wx.getStorageSync('userId'));
   },
   searchKeyWordsFast:function(e){
-    this.search(e.currentTarget.dataset.keyword);
+    this.search(e.currentTarget.dataset.keyword,wx.getStorageSync('userId'));
   },
-  search(queryWords){
-    console.log("当前搜索关键词："+queryWords);
+  search(queryWords,userId){
     let that=this;
     wx.request({
-      url: 'http://10.1.1.197:8080/dream-album/dream/album/common/homepage.json',
+      url: that.data.hostConfig+'dream/album/common/homepage.json',
       data: {
-        keyword:queryWords
+        keyword:queryWords,
+        userId:userId
       },
       method: 'GET',
       success: function(res){
-        console.log(res);
         that.setData({
           items:res.data.albumList
         })
@@ -157,10 +173,7 @@ Page({
     })
   },
   getKeywords:function(e){
-    // this.setData({
-    //   searchKeyWords:e.detail.value
-    // })
-    this.search(e.detail.value);
+    this.search(e.detail.value,wx.getStorageSync('userId'));
   },
   onReady:function(){
     // 页面渲染完成
@@ -175,13 +188,3 @@ Page({
     // 页面关闭
   }
 })
-function  randomChar()  {
-  var l=Math.random()*10;
-  var  x="0123456789qwertyuioplkjhgfdsazxcvbnm";
-  var  tmp="";
-  var timestamp = new Date().getTime();
-  for(var  i=0;i<  l;i++)  {
-  tmp  +=  x.charAt(Math.ceil(Math.random()*100000000)%x.length);
-  }
-  return  timestamp+tmp;
-}
