@@ -76,21 +76,43 @@
     height:80%;
     width:80%;
     top:10%;
-    left:10%;
+    left:15%;
 }
 .upImage{
     position: absolute;
     height:80%;
     width:80%;
     top:10%;
-    left:10%;
+    left:15%;
 }
 .images{
     position: absolute;
     height:69.54%;
     width:69.54%;
     top:15.2%;
-    left:15.2%;
+    left:20.2%;
+    border-radius: 5px;
+}
+.downImage.on{
+    position: absolute;
+    height:80%;
+    width:80%;
+    top:10%;
+    left:5%;
+}
+.upImage.on{
+    position: absolute;
+    height:80%;
+    width:80%;
+    top:10%;
+    left:5%;
+}
+.images.on{
+    position: absolute;
+    height:69.54%;
+    width:69.54%;
+    top:15.2%;
+    left:10.2%;
     border-radius: 5px;
 }
 .subMainText{
