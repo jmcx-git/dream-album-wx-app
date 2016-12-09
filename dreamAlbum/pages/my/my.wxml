@@ -11,7 +11,7 @@
             <view class="countClass">{{myCount}}</view>
         </view>
     </view>
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
 </view>
 <!--模版列表-->
 <view class="mobileListBorder">
@@ -23,7 +23,7 @@
                     <image src="../../image/background-up.png" class="upImage {{index%2==1?'on':''}}"/>
                     <image class="images {{index%2==1?'on':''}}" bindtap="previewImage"  data-albumid="{{item.id}}" src="{{item.cover}}"/>
                 </view>
-                <view class="subMainText">{{item.title}}</view>
+                <view class="subMainText {{index%2==1?'on':''}}">{{item.title}}</view>
             </view>
         </view>
     </scroll-view>

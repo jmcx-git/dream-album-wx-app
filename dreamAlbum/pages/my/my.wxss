@@ -120,6 +120,14 @@
     font-size:14px;
     color:#b2b2b2;
     position: absolute;
-    left:45%;
+    left:40%;
+    top:95%;
+}
+.subMainText.on{
+    text-align: center;
+    font-size:14px;
+    color:#b2b2b2;
+    position: absolute;
+    left:30%;
     top:95%;
 }
