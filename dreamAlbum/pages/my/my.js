@@ -42,11 +42,27 @@ Page({
     wx.stopPullDownRefresh();
   },
   previewImage:function(e){
-    console.log(e.currentTarget.dataset.albumid);
     //进入创作页面
-    wx.navigateTo({
-       url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
-    })
+    var complete=e.currentTarget.dataset.complete;
+    if(complete==undefined){//此时状态为收藏
+      wx.navigateTo({
+        url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
+      })
+    }else if(complete>0){//此时状态为已制作完成
+      var urls=[];
+      urls.push(e.currentTarget.dataset.productimg);
+      wx.previewImage({
+        current: e.currentTarget.dataset.productimg, // 当前显示图片的链接，不填则默认为 urls 的第一张
+        urls: urls,
+        success: function(res){
+          // success
+        }
+      })
+    }else{//此时状态为制作中
+      wx.navigateTo({
+        url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
+      })
+    }
   },
   refreshData:function(){
     let that=this;
@@ -79,6 +95,7 @@ Page({
           })
         }else{
           //渲染我的数据
+          console.log(res);
           that.setData({
             items:res.data,
             myCount:res.data.length
