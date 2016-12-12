@@ -10,14 +10,14 @@ Page({
     start:0,
     size:10,
     placeholderWords:'请输入搜索关键词...',
-    hostConfig:'http://localhost:8080/dream-album/'
+    hostConfig:'https://api.mokous.com/wx/'
   },
   showInput:function(){
     this.setData({
       inputShowed:true
     });
   },
-  hideInput:function(){
+  hideInput:function(){    
     this.setData({
       inputVal:"",
       inputShowed:false
@@ -25,13 +25,20 @@ Page({
   },
   clearInput:function(){
     this.setData({
-      inuptVal:""
+      inputVal:""
     })
   },
   inputTyping:function(e){
     this.setData({
       inputVal:e.detail.value
     })
+  },
+  requestFailed: function(res){
+    wx.showModal({
+      title:"提示",
+      content: "网络错误，请稍后再试！"
+    }),
+    wx.hideToast()
   },
   collectApi:function(e){
     let that=this;
@@ -58,15 +65,18 @@ Page({
           icon:'success',
           duration:1000
         })
-      }
+      },
+      fail: function(res){
+        that.requestFailed(res)
+      },
     })
   },
   previewImage:function(e){
     console.log(e.currentTarget.dataset.albumid);
     //进入创作页面
-    // wx.navigateTo({
-    //   url: '?albumId='+e.currentTarget.dataset.albumid
-    // })
+    wx.navigateTo({
+       url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
+     })
   },
   onLoad:function(options){
     let that=this;
@@ -182,7 +192,7 @@ Page({
       title: '加载中...',
       icon: 'loading',
       duration: 5000
-    })
+    });
     let that=this;
     wx.request({
       url: that.data.hostConfig+'dream/album/common/homepage.json',
@@ -196,9 +206,15 @@ Page({
       success: function(res){
         that.setData({
           items:that.data.items.concat(res.data.albumList),
-          start:that.data.start+res.data.albumList.length
-        })
+          start:that.data.start+res.data.albumList.length,
+          inputVal: queryWords,
+          inputShowed: queryWords.length != 0
+        });
+        console.log("Finish load album list.");
         wx.hideToast();
+      },
+      fail: function(res){
+        that.requestFailed(res)
       }
     })
   },

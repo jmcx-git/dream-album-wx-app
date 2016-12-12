@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/create/create",
     "pages/my/my"
   ],
   "window":{

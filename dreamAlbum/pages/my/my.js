@@ -9,7 +9,7 @@ Page({
     collectCount:0,
     myCount:0,
     items:[],
-    hostConfig:'http://localhost:8080/dream-album/',
+    hostConfig:'https://api.mokous.com/wx/',
     avatarUrl:''
   },
   swichNav:function(e){
@@ -44,9 +44,9 @@ Page({
   previewImage:function(e){
     console.log(e.currentTarget.dataset.albumid);
     //进入创作页面
-    // wx.navigateTo({
-    //   url: '?albumId='+e.currentTarget.dataset.albumid
-    // })
+    wx.navigateTo({
+       url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
+    })
   },
   refreshData:function(){
     let that=this;

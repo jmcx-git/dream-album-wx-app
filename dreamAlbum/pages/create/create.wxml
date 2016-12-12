@@ -1,0 +1,12 @@
+<view class="content" style="width:100%; height:{{contentHeight}};">
+  <image class="bg_img" style="width:{{bgWidth}}; height:{{bgHeight}};" src="{{submodules[index].bgsrc}}"/>
+  <image class="bg_elm" src="{{submodules[index].userImg}}" animation ="{{animation}}" mode='aspectFit' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" />
+  <!--class="{{choosed?'elm_choosed':(pressed?'elm_pressed':'elm_fnt')}}"-->
+  <view class="{{choosed?'':(pressed?'elm_fnt':'elm_fnt')}}" animation = "{{animation}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtap="chooseImage" hidden="{{elm_fnt}}">
+    <view class="{{choosed?'':'plus_icon'}}" animation="{{anim_icon}}"/>
+  </view>
+</view>
+<view class="footer2">
+<button class="footer2_item" catchtap="back">{{back}}</button>
+<button class="footer2_item" catchtap="next">{{next}}</button>
+</view>
