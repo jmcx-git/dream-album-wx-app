@@ -31,7 +31,8 @@ Page({
   },
   clearInput:function(){
     this.setData({
-      inputVal:""
+      inputVal:"",
+      hideSearchCancel:true
     })
   },
   inputTyping:function(e){
