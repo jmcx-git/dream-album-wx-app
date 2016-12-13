@@ -3,17 +3,24 @@
     <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="getKeywords" />
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearInput" />
             <view class="weui-icon-clear" hidden="{{inputVal.length == 0}}" bindtap="clearInput">
                 <icon type="clear" size="14"></icon>
             </view>
         </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+        <label class="weui-search-bar__label" hidden="{{!hideSearch}}" bindtap="showInput">
             <icon class="weui-icon-search" type="search" size="14"></icon>
             <view class="weui-search-bar__text">搜索</view>
         </label>
     </view>
-    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{hideSearchCancel}}" bindtap="hideInput">取消</view>
+</view>
+<view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && hideSearchLine}}">
+    <view bindtap="getKeywords" data-words="{{inputVal}}" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+            <view>{{inputVal}}</view>
+        </view>
+    </view>
 </view>
 <!--快捷搜索-->
 <view class="kjss">

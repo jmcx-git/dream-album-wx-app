@@ -1,6 +1,9 @@
 Page({
   data:{
      inputShowed:false,
+     hideSearch:true,
+     hideSearchLine:false,
+     hideSearchCancel:true,
      inputVal:"",
      kjsearchList:['圣诞快乐','旧时光','周岁','双12'],
     items:[],
@@ -14,13 +17,16 @@ Page({
   },
   showInput:function(){
     this.setData({
-      inputShowed:true
+      inputShowed:true,
+      hideSearch:false
     });
   },
   hideInput:function(){    
     this.setData({
       inputVal:"",
-      inputShowed:false
+      inputShowed:false,
+      hideSearch:true,
+      hideSearchCancel:true
     })
   },
   clearInput:function(){
@@ -30,7 +36,10 @@ Page({
   },
   inputTyping:function(e){
     this.setData({
-      inputVal:e.detail.value
+      inputVal:e.detail.value,
+      hideSearch:false,
+      hideSearchLine:true,
+      hideSearchCancel:false
     })
   },
   requestFailed: function(res){
@@ -207,8 +216,7 @@ Page({
         that.setData({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length,
-          inputVal: queryWords,
-          inputShowed: queryWords.length != 0
+          inputVal: queryWords
         });
         console.log("Finish load album list.");
         wx.hideToast();
@@ -217,16 +225,33 @@ Page({
         that.requestFailed(res)
       }
     })
+    // var itemss=[{
+    //   title:'1111',cover:'http://static.yingyonghui.com/article/1481086832682_a.jpg',id:1,collect:0
+    // },{
+    //   title:'2222',cover:'http://static.yingyonghui.com/article/1481086891489_a.jpg',id:2,collect:1
+    // },{
+    //   title:'3333',cover:'http://static.yingyonghui.com/article/1481087037411_a.jpg',id:3,collect:0
+    // }]
+    //  that.setData({
+    //     items:itemss,
+    //     start:0,
+    //     inputVal: queryWords,
+    //     inputShowed:false
+    //   });
+    // console.log("Finish load album list.");
+    // wx.hideToast();
   },
   getKeywords:function(e){
     let that=this;
     that.setData({
-      searchKeyWords:e.detail.value,
+      searchKeyWords:e.currentTarget.dataset.words,
       start:0,
       size:that.data.size,
-      items:[]
+      items:[],
+      hideSearchLine:false,
+      hideSearchCancel:true
     })
-    this.search(e.detail.value,wx.getStorageSync('userId'));
+    this.search(e.currentTarget.dataset.words,wx.getStorageSync('userId'));
   },
   onReady:function(){
     // 页面渲染完成
