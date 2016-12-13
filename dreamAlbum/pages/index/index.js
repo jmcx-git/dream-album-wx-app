@@ -4,6 +4,7 @@ Page({
      hideSearch:true,
      hideSearchLine:false,
      hideSearchCancel:true,
+     iconHidden:true,
      inputVal:"",
      kjsearchList:['圣诞快乐','旧时光','周岁','双12'],
     items:[],
@@ -32,7 +33,8 @@ Page({
   clearInput:function(){
     this.setData({
       inputVal:"",
-      hideSearchCancel:true
+      hideSearchCancel:true,
+      iconHidden:true
     })
   },
   inputTyping:function(e){
@@ -40,7 +42,8 @@ Page({
       inputVal:e.detail.value,
       hideSearch:false,
       hideSearchLine:true,
-      hideSearchCancel:false
+      hideSearchCancel:false,
+      iconHidden:false
     })
   },
   requestFailed: function(res){
@@ -226,21 +229,6 @@ Page({
         that.requestFailed(res)
       }
     })
-    // var itemss=[{
-    //   title:'1111',cover:'http://static.yingyonghui.com/article/1481086832682_a.jpg',id:1,collect:0
-    // },{
-    //   title:'2222',cover:'http://static.yingyonghui.com/article/1481086891489_a.jpg',id:2,collect:1
-    // },{
-    //   title:'3333',cover:'http://static.yingyonghui.com/article/1481087037411_a.jpg',id:3,collect:0
-    // }]
-    //  that.setData({
-    //     items:itemss,
-    //     start:0,
-    //     inputVal: queryWords,
-    //     inputShowed:false
-    //   });
-    // console.log("Finish load album list.");
-    // wx.hideToast();
   },
   getKeywords:function(e){
     let that=this;
@@ -250,7 +238,8 @@ Page({
       size:that.data.size,
       items:[],
       hideSearchLine:false,
-      hideSearchCancel:true
+      hideSearchCancel:true,
+      iconHidden:true
     })
     this.search(e.currentTarget.dataset.words,wx.getStorageSync('userId'));
   },

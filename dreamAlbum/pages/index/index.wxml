@@ -4,7 +4,7 @@
         <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
             <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearInput" />
-            <view class="weui-icon-clear" hidden="{{inputVal.length == 0}}" bindtap="clearInput">
+            <view class="weui-icon-clear" hidden="{{iconHidden}}" bindtap="clearInput">
                 <icon type="clear" size="14"></icon>
             </view>
         </view>
