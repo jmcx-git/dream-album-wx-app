@@ -213,7 +213,6 @@ Page({
     this.search(e.currentTarget.dataset.keyword,wx.getStorageSync('userId'));
   },
   search(queryWords,userId){
-    console.log('当前搜索词为：'+queryWords);
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
