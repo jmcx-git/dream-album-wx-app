@@ -37,6 +37,14 @@ Page({
       iconHidden:true
     })
   },
+  clearInputs:function(e){
+    this.setData({
+      inputVal:e.detail.value==""?"":e.detail.value,
+      hideSearchCancel:true,
+      iconHidden:true,
+      hideSearchLine:false
+    })
+  },
   inputTyping:function(e){
     this.setData({
       inputVal:e.detail.value,
