@@ -19,7 +19,8 @@ Page({
   showInput:function(){
     this.setData({
       inputShowed:true,
-      hideSearch:false
+      hideSearch:false,
+      hideSearchCancel:false
     });
   },
   hideInput:function(){    
@@ -34,7 +35,8 @@ Page({
     this.setData({
       inputVal:"",
       hideSearchCancel:true,
-      iconHidden:true
+      iconHidden:true,
+      inputShowed:false
     })
   },
   clearInputs:function(e){
@@ -42,7 +44,8 @@ Page({
       inputVal:e.detail.value==""?"":e.detail.value,
       hideSearchCancel:true,
       iconHidden:true,
-      hideSearchLine:false
+      hideSearchLine:false,
+      inputShowed:false
     })
   },
   inputTyping:function(e){
@@ -51,7 +54,8 @@ Page({
       hideSearch:false,
       hideSearchLine:true,
       hideSearchCancel:false,
-      iconHidden:false
+      iconHidden:false,
+      inputShowed:false
     })
   },
   requestFailed: function(res){
@@ -209,6 +213,7 @@ Page({
     this.search(e.currentTarget.dataset.keyword,wx.getStorageSync('userId'));
   },
   search(queryWords,userId){
+    console.log('当前搜索词为：'+queryWords);
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
@@ -240,6 +245,7 @@ Page({
   },
   getKeywords:function(e){
     let that=this;
+    console.log(e);
     that.setData({
       searchKeyWords:e.currentTarget.dataset.words,
       start:0,
@@ -249,6 +255,7 @@ Page({
       hideSearchCancel:true,
       iconHidden:true
     })
+    console.log("搜索");
     this.search(e.currentTarget.dataset.words,wx.getStorageSync('userId'));
   },
   onReady:function(){

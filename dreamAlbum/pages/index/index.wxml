@@ -2,7 +2,7 @@
     <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
             <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindblur="clearInputs" />
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindfocus="inputTyping" bindinput="inputTyping" bindblur="clearInputs" />
             <view class="weui-icon-clear" hidden="{{iconHidden}}" bindtap="clearInput">
                 <icon type="clear" size="14"></icon>
             </view>
@@ -13,8 +13,8 @@
         </label>
     </view>
     <view class="weui-search-bar__cancel-btn" hidden="{{hideSearchCancel}}" bindtap="hideInput">取消</view>
-</view>
-<view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && hideSearchLine}}">
+    </view>
+    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && hideSearchLine}}">
     <view bindtap="getKeywords" data-words="{{inputVal}}" class="weui-cell" hover-class="weui-cell_active">
         <view class="weui-cell__bd">
             <view>{{inputVal}}</view>
