@@ -23,7 +23,7 @@ Page({
       hideSearchCancel:false
     });
   },
-  hideInput:function(){    
+  hideInput:function(){
     this.setData({
       inputVal:"",
       inputShowed:false,
@@ -47,6 +47,7 @@ Page({
       hideSearchLine:false,
       inputShowed:false
     })
+    this.search(e.detail.value,wx.getStorageSync('userId'));
   },
   inputTyping:function(e){
     this.setData({
