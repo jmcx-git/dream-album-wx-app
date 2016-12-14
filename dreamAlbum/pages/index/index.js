@@ -244,7 +244,6 @@ Page({
   },
   getKeywords:function(e){
     let that=this;
-    console.log(e);
     that.setData({
       searchKeyWords:e.currentTarget.dataset.words,
       start:0,
@@ -254,7 +253,6 @@ Page({
       hideSearchCancel:true,
       iconHidden:true
     })
-    console.log("搜索");
     this.search(e.currentTarget.dataset.words,wx.getStorageSync('userId'));
   },
   onReady:function(){
