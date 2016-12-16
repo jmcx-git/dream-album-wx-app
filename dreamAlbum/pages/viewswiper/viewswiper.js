@@ -47,7 +47,6 @@ Page({
     })
   },
   saveImg:function(e){
-    console.log(e.currentTarget.dataset.src);
     wx.showActionSheet({
       itemList:['保存到本地'],
       success:function(res){
