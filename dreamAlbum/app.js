@@ -13,6 +13,7 @@ App({
   },
   globalData:{
     windowWidth: 375,
-    windowHeight: 625
+    windowHeight: 625,
+    serverHost: "https://developer.mokous.com/wx/",
   }
 })
