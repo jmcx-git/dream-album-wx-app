@@ -1,10 +1,9 @@
+var app=getApp();
 Page({
   data: {
     winHeight:0,
     winWidth:0,
     items:[],
-    hostConfig:'https://api.mokous.com/wx/',
-    testConfig:'https://developer.mokous.com/wx/',
     avatarUrl:'',
     nopichidden:'none',
     viewtap:false,
@@ -13,13 +12,9 @@ Page({
   },
   onLoad: function () {
     let that=this;
-    wx.getSystemInfo({
-      success: function(res) {
-        that.setData({
-          winHeight:res.windowHeight,
-          winWidth:res.windowWidth
-        })
-      }
+    that.setData({
+      winWidth:app.globalData.windowWidth,
+      winHeight:app.globalData.windowHeight
     })
     if(!wx.getStorageSync('userId')){
         wx.showModal({
@@ -33,7 +28,7 @@ Page({
                 success: function(res){
                   //获取code
                   wx.request({
-                    url: that.data.hostConfig+'dream/user/login/getSession.json',
+                    url: app.globalData.serverHost+'dream/user/login/getSession.json',
                     data: {
                       code:res.code
                     },
@@ -44,7 +39,7 @@ Page({
                        wx.getUserInfo({
                         success: function(resinfo){
                           wx.request({
-                            url: that.data.hostConfig+'dream/user/login/getUserInfo.json',
+                            url: app.globalData.serverHost+'dream/user/login/getUserInfo.json',
                             data: {
                               threeSessionKey:ress.data,
                               encryptedData:resinfo.encryptedData,
@@ -74,7 +69,7 @@ Page({
             }else{
               //用户点击取消
               wx.request({
-                url: that.data.hostConfig+'dream/user/login/addUser.json',
+                url: app.globalData.serverHost+'dream/user/login/addUser.json',
                 data: {},
                 method: 'GET',
                 success: function(res){
@@ -130,7 +125,7 @@ Page({
       duration:50000
     })
     var userId=wx.getStorageSync('userId');
-    var url=that.data.testConfig+'dream/album/common/myalbum.json';
+    var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
     wx.request({
       url: url,
       data: {

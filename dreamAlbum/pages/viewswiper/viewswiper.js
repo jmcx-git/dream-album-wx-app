@@ -1,3 +1,4 @@
+var app=getApp();
 Page({
   data:{
     indicatorDots: true,
@@ -9,25 +10,19 @@ Page({
     currentTab:0,
     pptHidden:false,
     portHidden:true,
-    hostConfig:'https://api.mokous.com/wx/',
-    testConfig:'https://developer.mokous.com/wx/',
     bigPreImg:'',
     loopPreImgs:[]
   },
   onLoad:function(options){
     let that=this;
-    wx.getSystemInfo({
-      success: function(res) {
-        that.setData({
-            winWidth:res.windowWidth,
-            winHeight:res.windowHeight
-        })
-      }
+    that.setData({
+        winWidth:app.globalData.windowWidth,
+        winHeight:app.globalData.windowHeight
     })
     var albumId=options.albumId;
     var userAlbumId=options.userAlbumId;
     wx.request({
-      url: that.data.testConfig+'dream/album/common/getpreview.json?',
+      url: app.globalData.serverHost+'dream/album/common/getpreview.json?',
       data: {
         albumId:albumId==undefined?'':albumId,
         userAlbumId:userAlbumId==undefined?'':userAlbumId
@@ -52,11 +47,17 @@ Page({
     })
   },
   saveImg:function(e){
+    console.log(e.currentTarget.dataset.src);
     wx.showActionSheet({
       itemList:['保存到本地'],
       success:function(res){
         if(!res.cancel){
           if(res.tapIndex==0){
+            wx.showToast({
+              title:'下载中...',
+              duration:50000,
+              icon:'loading'
+            })
             wx.downloadFile({
               url: e.currentTarget.dataset.src,
               type: 'image', // 下载资源的类型，用于客户端识别处理，有效值：image/audio/video
@@ -65,6 +66,8 @@ Page({
                  wx.saveFile({
                     tempFilePath: ress.tempFilePath,
                     success: function(resl){
+                      console.log(resl);
+                      wx.hideToast();
                       wx.showToast({
                         title:'保存成功',
                         icon:'success',
@@ -76,6 +79,10 @@ Page({
                       console.log(res);
                   }
                 })
+              },
+              fail:function(nn){
+                console.log("出错了");
+                console.log(nn);
               }
             })
           }

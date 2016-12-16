@@ -1,3 +1,4 @@
+var app=getApp();
 Page({
   data:{
     items:[],
@@ -5,8 +6,6 @@ Page({
     winWidth:0,
     start:0,
     size:10,
-    hostConfig:'https://api.mokous.com/wx/',
-    testConfig:'https://developer.mokous.com/wx/',
     nomore:false
   },
   previewImage:function(e){
@@ -23,13 +22,9 @@ Page({
   },
   onLoad:function(options){
     let that=this;
-    wx.getSystemInfo({
-      success: function(res) {
-        that.setData({
-          winHeight:res.windowHeight,
-          winWidth:res.windowWidth
-        })
-      }
+    that.setData({
+      winWidth:app.globalData.windowWidth,
+      winHeight:app.globalData.windowHeight
     })
    this.search();
   },
@@ -68,7 +63,7 @@ Page({
       duration: 5000
     });
     wx.request({
-      url: that.data.hostConfig+'dream/album/common/homepage.json',
+      url: app.globalData.serverHost+'dream/album/common/homepage.json',
       data: {
         size:that.data.size,
         start:that.data.start
