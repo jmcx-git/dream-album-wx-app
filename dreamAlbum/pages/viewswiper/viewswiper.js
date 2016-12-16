@@ -57,18 +57,25 @@ Page({
       success:function(res){
         if(!res.cancel){
           if(res.tapIndex==0){
-            wx.saveFile({
-              tempFilePath: e.currentTarget.dataset.src,
-              success: function(res){
-                wx.showToast({
-                  title:'保存成功',
-                  icon:'success',
-                  duration:1000
+            wx.downloadFile({
+              url: e.currentTarget.dataset.src,
+              type: 'image', // 下载资源的类型，用于客户端识别处理，有效值：image/audio/video
+              // header: {}, // 设置请求的 header
+              success: function(ress){
+                 wx.saveFile({
+                    tempFilePath: ress.tempFilePath,
+                    success: function(resl){
+                      wx.showToast({
+                        title:'保存成功',
+                        icon:'success',
+                        duration:1000
+                      })
+                    },
+                    fail:function(resx){
+                      console.log("失败");
+                      console.log(res);
+                  }
                 })
-              },
-              fail:function(res){
-                console.log("失败");
-                console.log(res);
               }
             })
           }
