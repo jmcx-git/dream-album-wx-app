@@ -121,7 +121,6 @@ Page({
       duration:50000
     })
     var userId=wx.getStorageSync('userId');
-    console.log(userId);
     var url=that.data.testConfig+'dream/album/common/myalbum.json';
     wx.request({
       url: url,
