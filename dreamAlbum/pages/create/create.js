@@ -68,7 +68,7 @@ let pageData = {
       submodule.bgsrc = amodule.editImgUrl;
       // submodule.elesrc = amodule.userOriginImgUrl
       // if(submodule.elesrc == undefined || submodule.elesrc == ""){
-      submodule.elesrc = amodule.previewImgUrl
+      submodule.elesrc = ''
       // }
       //可编辑图片区域设置
       let editImgInfos = JSON.parse(amodule.editImgInfos)
@@ -144,7 +144,7 @@ let pageData = {
   next: function(e){
     let index = this.data.index;
     let length = this.data.submodules.length;
-
+    let that = this
     if(!this.data.elm_fnt){
       this.save(index)
     }
@@ -153,7 +153,14 @@ let pageData = {
     }else{
       wx.showModal({
         title:"提示",
-        content:"制作完成，请返回个人中心查看相册"
+        content:"制作完成，请返回我的相册查看",
+        success: function(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../my/my'
+            })
+          }
+        }
       })
     }
   },
