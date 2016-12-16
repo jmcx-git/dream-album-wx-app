@@ -27,9 +27,10 @@ Page({
     var albumId=options.albumId;
     var userAlbumId=options.userAlbumId;
     wx.request({
-      url: that.data.testConfig+'dream/album/common/getpreview.json?userAlbumId='+(userAlbumId==undefined?'':userAlbumId),
+      url: that.data.testConfig+'dream/album/common/getpreview.json?',
       data: {
-        albumId:albumId
+        albumId:albumId==undefined?'':albumId,
+        userAlbumId:userAlbumId==undefined?'':userAlbumId
       },
       method: 'GET',
       success: function(res){

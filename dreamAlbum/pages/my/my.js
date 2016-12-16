@@ -116,7 +116,7 @@ Page({
       return;
     }
       wx.navigateTo({
-        url: '../viewswiper/viewswiper?userAlbumId='+e.currentTarget.dataset.useralbumid+'&albumId='+e.currentTarget.dataset.albumid
+        url: '../viewswiper/viewswiper?userAlbumId='+e.currentTarget.dataset.useralbumid
       })
   },
   getData(){
@@ -140,7 +140,6 @@ Page({
       success: function(res){
           //渲染我的数据
         if(res.statusCode==200){
-          console.log("进来了");
           if(res.data.length==0){
             that.setData({
               nopichidden:'block'
