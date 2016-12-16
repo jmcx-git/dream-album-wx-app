@@ -127,7 +127,7 @@ Page({
     wx.showToast({
       title:'加载中...',
       icon:'loading',
-      duration:50000
+      duration:10000
     })
     var userId=wx.getStorageSync('userId');
     var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
@@ -144,13 +144,13 @@ Page({
             that.setData({
               nopichidden:'block'
             })
-            return;
+          }else{
+            that.setData({
+              items:res.data,
+              nopichidden:'none',
+              viewtap:true
+            })
           }
-          that.setData({
-            items:res.data,
-            nopichidden:'none',
-            viewtap:true
-          })
           wx.hideToast();
         }
       },
