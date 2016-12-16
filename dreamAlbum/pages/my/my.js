@@ -111,7 +111,6 @@ Page({
     this.getData();
   },
   previewImage:function(e){
-    console.log(this.data.viewtap);
     let that=this;
     if(!that.data.viewtap){
       return;
