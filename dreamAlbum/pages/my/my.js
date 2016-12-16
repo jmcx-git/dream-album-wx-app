@@ -139,7 +139,8 @@ Page({
       method: 'GET',
       success: function(res){
           //渲染我的数据
-        if(res.data.statusCode==200){
+        if(res.statusCode==200){
+          console.log("进来了");
           if(res.data.length==0){
             that.setData({
               nopichidden:'block'
