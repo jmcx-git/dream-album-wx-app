@@ -1,33 +1,15 @@
 {
   "pages":[
+    "pages/my/my",
     "pages/index/index",
     "pages/create/create",
-    "pages/my/my"
+    "pages/viewswiper/viewswiper"
   ],
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#ff5956",
     "navigationBarTitleText": "聚梦相册",
     "backgroundColor": "#fff",
-    "navigationBarTextStyle":"#dark"
-  },
-  "tabBar":{
-    "color": "#74777e",
-    "selectedColor": "#ff5956",
-    "borderStyle": "white",
-    "backgroundColor": "#f7f7fa",
-    "list":[
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "image/fx.png",
-        "selectedIconPath": "image/fxselect.png",
-        "text": "发现"
-    }, {
-        "pagePath": "pages/my/my",
-        "iconPath": "image/my.png",
-        "selectedIconPath": "image/myselect.png",
-        "text": "我的"
-    }
-    ]
+    "navigationBarTextStyle":"white"
   }
 }
