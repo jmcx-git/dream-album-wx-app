@@ -35,7 +35,7 @@ Page({
       success: function(res){
         that.setData({
           loopPreImgs:res.data.loopPreImgs,
-          bigPreImg:'https://img.mokous.com/album/template/mc/2d5b/pre.jpg'
+          bigPreImg:res.data.bigPreImg
         })
       }
     })

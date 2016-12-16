@@ -7,6 +7,7 @@ Page({
     size:10,
     hostConfig:'https://api.mokous.com/wx/',
     testConfig:'https://developer.mokous.com/wx/',
+    nomore:false
   },
   previewImage:function(e){
     //进入预览页面
@@ -48,7 +49,8 @@ Page({
     this.setData({
       start:0,
       size:that.data.size,
-      items:[]
+      items:[],
+      nomore:false
     })
     this.search();
   },
@@ -56,12 +58,15 @@ Page({
     this.search();
   },
   search(){
+    let that=this;
+    if(that.data.nomore){
+      return;
+    }
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
       duration: 5000
     });
-    let that=this;
     wx.request({
       url: that.data.hostConfig+'dream/album/common/homepage.json',
       data: {
@@ -74,6 +79,11 @@ Page({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length,
         });
+        if(res.data.albumList.length<that.data.size){
+          that.setData({
+            nomore:true
+          })
+        }
         console.log("Finish load album list.");
         wx.hideToast();
       },

@@ -1,7 +1,7 @@
 <view class="allTop" style="width:{{winWidth}}px;">
     <image class="titleClass" src="../../image/title.png"/>
     <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
-    <image class="insertClass" src="../../image/insert.png" bindtap="viewTemplateList" style="padding-top:{{winHeight/2+150+winHeight/2/4.5}}px;"/>
+    <image class="insertClass" src="../../image/insert.png" bindtap="viewTemplateList" style="padding-top:{{winHeight/2+150+winHeight/2/8}}px;"/>
     <image style="display:{{nopichidden}}" class="nopicClass" src="../../image/nopic.png" />
 </view>
 <!--模版列表-->
