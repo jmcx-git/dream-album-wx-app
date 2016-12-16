@@ -25,12 +25,12 @@ Page({
             if(res.confirm){
               //用户点击确定
               wx.login({
-                success: function(res){
+                success: function(resl){
                   //获取code
                   wx.request({
                     url: app.globalData.serverHost+'dream/user/login/getSession.json',
                     data: {
-                      code:res.code
+                      code:resl.code
                     },
                     method: 'GET',
                     success: function(ress){
@@ -59,11 +59,16 @@ Page({
                           console.log("获取用户信息出错！");
                         }
                       })
+                    },
+                    fail:function(trd){
+                      console.log("缓存第三方key出错！");
+                      console.log(trd);
                     }
                   })
                 },
-                fail: function() {
+                fail: function(ee) {
                   console.log("登录出错了！");
+                  console.log(ee);
                 }
               })
             }else{
