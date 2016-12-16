@@ -50,6 +50,27 @@ Page({
       title: e.currentTarget.dataset.title
     })
   },
+  saveImg:function(e){
+    wx.showActionSheet({
+      itemList:['保存到本地'],
+      success:function(res){
+        if(!res.cancel){
+          if(res.tapIndex==0){
+            wx.saveFile({
+              tempFilePath: e.currentTarget.dataset.src,
+              success: function(res){
+                wx.showToast({
+                  title:'保存成功',
+                  icon:'success',
+                  duration:1000
+                })
+              }
+            })
+          }
+        }
+      }
+    })
+  },
   onReady:function(){
     // 页面渲染完成
   },

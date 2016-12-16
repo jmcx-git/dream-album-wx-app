@@ -7,6 +7,7 @@ Page({
     testConfig:'https://developer.mokous.com/wx/',
     avatarUrl:'',
     nopichidden:'none',
+    viewtap:false,
     authorizeTitle:"请确认授权以下信息",
     authorizeContent:". 获得你的公开信息(昵称、头像等)"
   },
@@ -93,8 +94,7 @@ Page({
     }
   },
   onPullDownRefresh:function(){
-    let that=this;
-    this.getData(that.data.currentTab);
+    this.refreshData();
     wx.stopPullDownRefresh();
   },
   viewTemplateList:function(e){
@@ -103,9 +103,19 @@ Page({
     })
   },
   refreshData:function(){
+    this.setData({
+      items:[],
+      nopichidden:'none',
+      viewtap:false
+    })
     this.getData();
   },
   previewImage:function(e){
+    console.log(this.data.viewtap);
+    let that=this;
+    if(!that.data.viewtap){
+      return;
+    }
       wx.navigateTo({
         url: '../viewswiper/viewswiper?userAlbumId='+e.currentTarget.dataset.useralbumid+'&albumId='+e.currentTarget.dataset.albumid
       })
@@ -130,17 +140,20 @@ Page({
       method: 'GET',
       success: function(res){
           //渲染我的数据
-        if(res.data.length==0){
+        if(res.data.statusCode==200){
+          if(res.data.length==0){
+            that.setData({
+              nopichidden:'block'
+            })
+            return;
+          }
           that.setData({
-            nopichidden:'block'
+            items:res.data,
+            nopichidden:'none',
+            viewtap:true
           })
-          return;
+          wx.hideToast();
         }
-        that.setData({
-          items:res.data,
-          nopichidden:'none'
-        })
-        wx.hideToast();
       },
       fail: function() {
         console.log("获取数据失败！");

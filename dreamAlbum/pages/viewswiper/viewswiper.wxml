@@ -10,7 +10,7 @@
 
 <view hidden="{{portHidden}}">
   <scroll-view scroll-y="true" style="width:{{winWidth}}px;height:{{winHeight-50}}px;">
-    <image src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight-50)*loopPreImgs.length}}px;" />
+    <image src="{{bigPreImg}}" bindlongtap="saveImg" data-src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight-50)*loopPreImgs.length}}px;" />
   </scroll-view>
 </view>
 <view class="bottomClass" style="width:{{winWidth}}px;height:50px;">
