@@ -1,3 +1,5 @@
 {
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "navigationBarTitleText": "相册模版",
+    "navigationBarBackgroundColor": "#ff5956"
 }

@@ -1,42 +1,23 @@
-<view class="weui-search-bar"> 
-    <view class="weui-search-bar__form">
-        <view class="weui-search-bar__box">
-            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindfocus="inputTyping" bindinput="inputTyping"/>
-            <view class="weui-icon-clear" hidden="{{iconHidden}}" bindtap="clearInput">
-                <icon type="clear" size="14"></icon>
-            </view>
-        </view>
-        <label class="weui-search-bar__label" hidden="{{!hideSearch}}" bindtap="showInput">
-            <icon class="weui-icon-search" type="search" size="14"></icon>
-            <view class="weui-search-bar__text">搜索</view>
-        </label>
-    </view>
-    <view class="weui-search-bar__cancel-btn" hidden="{{hideSearchCancel}}" bindtap="hideInput">取消</view>
-</view>
-<view bindtap="getKeywords" data-words="{{inputVal}}" class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0 && hideSearchLine}}">
-    <view class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-            <view>{{inputVal}}</view>
-        </view>
-    </view>
-</view>
-<!--快捷搜索-->
-<view class="kjss">
-    <text wx:for="{{kjsearchList}}" data-keyword="{{item}}" bindtap="searchKeyWordsFast" wx:key="kjsearchList" class="kjsousuo"> {{item}} </text>
-</view>
 <!--模版列表-->
 <view class="mobileListBorder">
-     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" bindscrolltoupper="refreshData" bindscrolltolower="moreData" style="height:{{winHeight-127}}px;">
+     <scroll-view scroll-y="true" bindscrolltolower="moreData"  wx:if="{{items.length>0}}" style="height:{{winHeight}}px;">
         <view class="main">
-            <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain" style="width:{{winWidth/2}}px;height:{{winWidth/2}}px;">
-                <view class="subMainImage">
-                    <image src="../../image/background-down.png" class="downImage {{index%2==1?'on':''}}"/>
-                    <image src="../../image/background-up.png" class="upImage {{index%2==1?'on':''}}"/>
-                    <image data-albumid="{{item.id}}" src="{{item.cover}}" bindtap="previewImage" class="images {{index%2==1?'on':''}}"/>
-                    <image src="{{item.collect==0?'../../image/collect.png':'../../image/collectready.png'}}" data-albumid="{{item.id}}" data-collect="{{item.collect}}" data-index="{{index}}" class="collectImage {{index%2==1?'on':''}}" bindtap="collectApi"/>
+            <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain" style="width:{{winWidth/2}}px;height:{{winHeight/2-30}}px;">
+                <view class="subMainImage {{index%2==1?'on':''}}">
+                    <image class="images" data-albumid="{{item.id}}" src="{{item.cover}}"/>
                 </view>
-                <view class="subMainText {{index%2==1?'on':''}}">{{item.title}}</view>
+                <view class="bottomBar {{index%2==1?'on':''}}">
+                    <view class="bottomImage">
+                        <image class="createImage" bindtap="createImage" data-albumid="{{item.id}}" src="../../image/create.png"/>
+                    </view>
+                    <view class="lineImage">
+                        <image class="lineImagePic" src="../../image/line.png" />
+                    </view>
+                    <view class="bottomImage">
+                        <image class="viewImage" bindtap="previewImage" data-albumid="{{item.id}}" src="../../image/view.png" />
+                    </view>
+                </view>
+                <view class="subMainText">{{item.title}}</view>
             </view>
         </view>
     </scroll-view>

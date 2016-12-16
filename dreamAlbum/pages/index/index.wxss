@@ -1,122 +1,70 @@
-/*searchBar self*/
-.searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
+page{
+    background-color: #efeff4;
 }
-.searchbar-result:before{
-    display: none;
-}
-.weui-cell{
-    padding: 12px 15px 12px 35px;
-}
-/*快捷搜索*/
-.kjss{
-    margin-top:30px;
-}
-.kjsousuo{
-    display:inline;    
-    word-break:keep-all;   
-    white-space:nowrap;
-    text-overflow: ellipsis;
-    padding:5px 15px;
-    border:1px solid #d2d2d2;
-    border-radius:8px;
-    background-color: #d2d2d2;
-    overflow: hidden;
-    margin:15px 7px;
-    line-height:120%;
-    font-size: 14px;
-    color:#fff;
-    text-align: center;
-    font-family:Arial, Helvetica, sans-serif;
-}
-/*列表*/
-.mobileListBorder{
-    margin-top:30px;
-}
+/*模版列表*/
+
 .main{
     display:flex;
     flex-wrap: wrap;
 }
 .subMain{
-    position: relative;
+    padding:5% 0px;
+    position:relative; 
 }
 .subMainImage{
-    position: relative;
+    height:100%;
+    width:90%;
+    margin-left: 6.5%;
+}
+.subMainImage.on{
+    margin-left: 3%;
+}
+.images{
+    border-radius: 8px;
     width:100%;
     height:100%;
 }
-.downImage{
-    position: absolute;
-    height:80%;
-    width:80%;
-    top:10%;
-    left:15%;
-}
-.upImage{
-    position: absolute;
-    height:80%;
-    width:80%;
-    top:10%;
-    left:15%;
-}
-.images{
-    position: absolute;
-    height:69.54%;
-    width:69.54%;
-    top:15.2%;
-    left:20.2%;
-    border-radius: 5px;
-}
-.downImage.on{
-    position: absolute;
-    height:80%;
-    width:80%;
-    top:10%;
-    left:5%;
-}
-.upImage.on{
-    position: absolute;
-    height:80%;
-    width:80%;
-    top:10%;
-    left:5%;
-}
-.images.on{
-    position: absolute;
-    height:69.54%;
-    width:69.54%;
-    top:15.2%;
-    left:10.2%;
-    border-radius: 5px;
-}
-.collectImage{
-    width:30px;
-    height:30px;
-    position: absolute;
-    right:25px;
-    top:35px;
-}
-.collectImage.on{
-    width:30px;
-    height:30px;
-    position: absolute;
-    right:42px;
-    top:35px;
-}
 .subMainText{
     text-align: center;
-    font-size:14px;
-    color:#b2b2b2;
-    position: absolute;
-    left:40%;
-    top:95%;
+    font-size: 14px;
+    color:#353535;
+    margin-top:6px;
 }
-.subMainText.on{
-    text-align: center;
-    font-size:14px;
-    color:#b2b2b2;
+
+.bottomBar{
     position: absolute;
-    left:30%;
-    top:95%;
+    display: flex;
+    top:84%;
+    height:10%;
+    width:90%;
+    left:6.5%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+}
+.bottomBar.on{
+    left:3%;
+}
+.createImage{
+    width:28px;
+    height:20px;
+}
+.viewImage{
+    width:28px;
+    height:20px;
+}
+
+.bottomImage{
+    width:45%;
+    text-align: center;
+    padding-top:2%;
+    flex: 3;
+}
+.lineImage{
+    width:5%;
+    height:100%;
+}
+.lineImagePic{
+    height:100%;
+    width:1px;
 }

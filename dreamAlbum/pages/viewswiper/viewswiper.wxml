@@ -1,0 +1,24 @@
+<view hidden="{{pptHidden}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight-50}}px;">
+        <block wx:for="{{loopPreImgs}}" wx:key="imgs">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" style="width:{{winWidth}}px;height:{{winHeight-50}}px;"/>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+
+<view hidden="{{portHidden}}">
+  <scroll-view scroll-y="true" style="width:{{winWidth}}px;height:{{winHeight-50}}px;">
+    <image src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight-50)*loopPreImgs.length}}px;" />
+  </scroll-view>
+</view>
+<view class="bottomClass" style="width:{{winWidth}}px;height:50px;">
+    <view class="pptClass ppt {{currentTab==0?'on':''}}" bindtap="swichNav" data-title="PPT预览" data-id="0">
+       PPT预览
+    </view>
+    <view class="pptClass {{currentTab==1?'on':''}}"  bindtap="swichNav" data-title="海报预览" data-id="1">
+        海报预览
+    </view>
+</view>
+

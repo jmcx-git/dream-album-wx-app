@@ -1,108 +1,24 @@
 Page({
   data:{
-     inputShowed:false,
-     hideSearch:true,
-     hideSearchLine:false,
-     hideSearchCancel:true,
-     iconHidden:true,
-     inputVal:"",
-     kjsearchList:['圣诞快乐','旧时光','周岁','双12'],
     items:[],
     winHeight:0,
     winWidth:0,
-    searchKeyWords:'',
     start:0,
     size:10,
-    placeholderWords:'请输入搜索关键词...',
-    hostConfig:'https://api.mokous.com/wx/'
-  },
-  showInput:function(){
-    this.setData({
-      inputShowed:true,
-      hideSearch:false,
-      hideSearchCancel:false
-    });
-  },
-  hideInput:function(){
-    this.setData({
-      inputVal:"",
-      inputShowed:false,
-      hideSearch:true,
-      hideSearchCancel:true
-    })
-  },
-  clearInput:function(){
-    this.setData({
-      inputVal:"",
-      hideSearchCancel:true,
-      iconHidden:true,
-      inputShowed:false
-    })
-  },
-  clearInputs:function(e){
-    this.setData({
-      inputVal:e.detail.value==""?"":e.detail.value,
-      hideSearchCancel:true,
-      iconHidden:true,
-      hideSearchLine:false,
-      inputShowed:false
-    })
-    this.search(e.detail.value,wx.getStorageSync('userId'));
-  },
-  inputTyping:function(e){
-    this.setData({
-      inputVal:e.detail.value,
-      hideSearch:false,
-      hideSearchLine:true,
-      hideSearchCancel:false,
-      iconHidden:false,
-      inputShowed:false
-    })
-  },
-  requestFailed: function(res){
-    wx.showModal({
-      title:"提示",
-      content: "网络错误，请稍后再试！"
-    }),
-    wx.hideToast()
-  },
-  collectApi:function(e){
-    let that=this;
-    let index=e.currentTarget.dataset.index;
-    let userId=wx.getStorageSync('userId');
-    let currentStatus=e.currentTarget.dataset.collect;
-    let status=currentStatus==0?'1':0;
-    let message=currentStatus==0?'收藏成功':'取消收藏';
-    that.data.items[index].collect=status;
-    this.setData({
-      items:that.data.items
-    })
-    wx.request({
-      url: that.data.hostConfig+'dream/user/login/updatecollectstatus.json',
-      data: {
-          userId:userId,
-          albumId:e.currentTarget.dataset.albumid,
-          status:status
-      },
-      method: 'GET',
-      success: function(res){
-        wx.showToast({
-          title:message,
-          icon:'success',
-          duration:1000
-        })
-      },
-      fail: function(res){
-        that.requestFailed(res)
-      },
-    })
+    hostConfig:'https://api.mokous.com/wx/',
+    testConfig:'https://developer.mokous.com/wx/',
   },
   previewImage:function(e){
-    console.log(e.currentTarget.dataset.albumid);
-    //进入创作页面
+    //进入预览页面
     wx.navigateTo({
-       url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
+      url:'../viewswiper/viewswiper?albumId='+e.currentTarget.dataset.albumid
      })
+  },
+  createImage:function(e){
+    //进入制作页面
+    wx.navigateTo({
+      url: '../create/create?albumId='+e.currentTarget.dataset.albumid
+    })
   },
   onLoad:function(options){
     let that=this;
@@ -114,77 +30,14 @@ Page({
         })
       }
     })
-    if(!wx.getStorageSync('userId')){
-        wx.showModal({
-          title:'授权提示',
-          content:'将访问你的基本信息',
-          showCancel:true,
-          success:function(res){
-            if(res.confirm){
-              //用户点击确定
-              wx.login({
-                success: function(res){
-                  //获取code
-                  wx.request({
-                    url: that.data.hostConfig+'dream/user/login/getSession.json',
-                    data: {
-                      code:res.code
-                    },
-                    method: 'GET',
-                    success: function(ress){
-                       //缓存第三方key
-                      wx.setStorageSync('threeSessionKey',ress.data);
-                       wx.getUserInfo({
-                        success: function(resinfo){
-                          wx.request({
-                            url: that.data.hostConfig+'dream/user/login/getUserInfo.json',
-                            data: {
-                              threeSessionKey:ress.data,
-                              encryptedData:resinfo.encryptedData,
-                              iv:resinfo.iv
-                            },
-                            method: 'GET',
-                            success: function(resuser){
-                              var ss=(''+resuser.data).split("#");
-                              //缓存用户id
-                              wx.setStorageSync('userId', ss[0]);
-                              wx.setStorageSync('avatarUrl', ss[1]);
-                              that.search('',ss[0]);
-                            }
-                          })
-                        },
-                        fail: function() {
-                          console.log("获取用户信息出错！");
-                        }
-                      })
-                    }
-                  })
-                },
-                fail: function() {
-                  console.log("登录出错了！");
-                }
-              })
-            }else{
-              //用户点击取消
-              wx.request({
-                url: that.data.hostConfig+'dream/user/login/addUser.json',
-                data: {},
-                method: 'GET',
-                success: function(res){
-                  wx.setStorageSync('userId',res.data);
-                  that.search('',res.data);
-                },
-                fail: function(e) {
-                  console.log("新增用户失败！");
-                  console.log(e);
-                }
-              })
-            }
-          }
-        })
-    }else{
-      that.search('',wx.getStorageSync('userId'));
-    }
+   this.search();
+  },
+  requestFailed: function(res){
+    wx.showModal({
+      title:"提示",
+      content: "网络错误，请稍后再试！"
+    }),
+    wx.hideToast()
   },
   onPullDownRefresh:function(){
     this.refreshData();
@@ -197,23 +50,12 @@ Page({
       size:that.data.size,
       items:[]
     })
-    this.search(that.data.searchKeyWords,wx.getStorageSync('userId'));
+    this.search();
   },
   moreData:function(){
-    let that=this;
-    that.search(that.data.searchKeyWords,wx.getStorageSync('userId'));
+    this.search();
   },
-  searchKeyWordsFast:function(e){
-    let that=this;
-    that.setData({
-      searchKeyWords:e.currentTarget.dataset.keyword,
-      start:0,
-      size:that.data.size,
-      items:[]
-    })
-    this.search(e.currentTarget.dataset.keyword,wx.getStorageSync('userId'));
-  },
-  search(queryWords,userId){
+  search(){
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
@@ -223,8 +65,6 @@ Page({
     wx.request({
       url: that.data.hostConfig+'dream/album/common/homepage.json',
       data: {
-        keyword:queryWords,
-        userId:userId,
         size:that.data.size,
         start:that.data.start
       },
@@ -233,7 +73,6 @@ Page({
         that.setData({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length,
-          inputVal: queryWords
         });
         console.log("Finish load album list.");
         wx.hideToast();
@@ -242,19 +81,6 @@ Page({
         that.requestFailed(res)
       }
     })
-  },
-  getKeywords:function(e){
-    let that=this;
-    that.setData({
-      searchKeyWords:e.currentTarget.dataset.words,
-      start:0,
-      size:that.data.size,
-      items:[],
-      hideSearchLine:false,
-      hideSearchCancel:true,
-      iconHidden:true
-    })
-    this.search(e.currentTarget.dataset.words,wx.getStorageSync('userId'));
   },
   onReady:function(){
     // 页面渲染完成

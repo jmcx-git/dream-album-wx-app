@@ -1,25 +1,14 @@
-var app = getApp()
 Page({
   data: {
-    barTitle:[{'name':'收藏',currentTab:0},
-              {'name':'我的',currentTab:1}],
     winHeight:0,
     winWidth:0,
-    currentTab:0,
-    collectCount:0,
-    myCount:0,
     items:[],
     hostConfig:'https://api.mokous.com/wx/',
-    avatarUrl:''
-  },
-  swichNav:function(e){
-    this.setData({
-      currentTab:e.currentTarget.dataset.id
-    })
-    this.setData({
-      items:[]
-    })
-    this.getData(e.currentTarget.dataset.id);
+    testConfig:'https://developer.mokous.com/wx/',
+    avatarUrl:'',
+    nopichidden:'none',
+    authorizeTitle:"请确认授权以下信息",
+    authorizeContent:". 获得你的公开信息(昵称、头像等)"
   },
   onLoad: function () {
     let that=this;
@@ -31,55 +20,108 @@ Page({
         })
       }
     })
-    this.setData({
-      avatarUrl:wx.getStorageSync('avatarUrl')
-    })
-    this.getData(that.data.currentTab);
+    if(!wx.getStorageSync('userId')){
+        wx.showModal({
+          title:that.data.authorizeTitle,
+          content:that.data.authorizeContent,
+          showCancel:false,
+          success:function(res){
+            if(res.confirm){
+              //用户点击确定
+              wx.login({
+                success: function(res){
+                  //获取code
+                  wx.request({
+                    url: that.data.hostConfig+'dream/user/login/getSession.json',
+                    data: {
+                      code:res.code
+                    },
+                    method: 'GET',
+                    success: function(ress){
+                       //缓存第三方key
+                      wx.setStorageSync('threeSessionKey',ress.data);
+                       wx.getUserInfo({
+                        success: function(resinfo){
+                          wx.request({
+                            url: that.data.hostConfig+'dream/user/login/getUserInfo.json',
+                            data: {
+                              threeSessionKey:ress.data,
+                              encryptedData:resinfo.encryptedData,
+                              iv:resinfo.iv
+                            },
+                            method: 'GET',
+                            success: function(resuser){
+                              var ss=(''+resuser.data).split("#");
+                              //缓存用户id
+                              wx.setStorageSync('userId', ss[0]);
+                              wx.setStorageSync('avatarUrl', ss[1]);
+                              that.getData();
+                            }
+                          })
+                        },
+                        fail: function() {
+                          console.log("获取用户信息出错！");
+                        }
+                      })
+                    }
+                  })
+                },
+                fail: function() {
+                  console.log("登录出错了！");
+                }
+              })
+            }else{
+              //用户点击取消
+              wx.request({
+                url: that.data.hostConfig+'dream/user/login/addUser.json',
+                data: {},
+                method: 'GET',
+                success: function(res){
+                  wx.setStorageSync('userId',res.data);
+                  that.search('',res.data);
+                },
+                fail: function(e) {
+                  console.log("新增用户失败！");
+                  console.log(e);
+                }
+              })
+            }
+          }
+        })
+    }else{
+      that.getData();
+    }
   },
   onPullDownRefresh:function(){
     let that=this;
     this.getData(that.data.currentTab);
     wx.stopPullDownRefresh();
   },
-  previewImage:function(e){
-    //进入创作页面
-    var complete=e.currentTarget.dataset.complete;
-    if(complete==undefined){//此时状态为收藏
-      wx.navigateTo({
-        url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
-      })
-    }else if(complete>0){//此时状态为已制作完成
-      var urls=[];
-      urls.push(e.currentTarget.dataset.productimg);
-      wx.previewImage({
-        current: e.currentTarget.dataset.productimg, // 当前显示图片的链接，不填则默认为 urls 的第一张
-        urls: urls,
-        success: function(res){
-          // success
-        }
-      })
-    }else{//此时状态为制作中
-      wx.navigateTo({
-        url: '../create/create?albumId=' + e.currentTarget.dataset.albumid
-      })
-    }
+  viewTemplateList:function(e){
+    wx.navigateTo({
+      url: '../index/index'
+    })
   },
   refreshData:function(){
-    let that=this;
-    this.getData(that.data.currentTab);
+    this.getData();
   },
-  getData(type){
+  previewImage:function(e){
+      wx.navigateTo({
+        url: '../viewswiper/viewswiper?userAlbumId='+e.currentTarget.dataset.useralbumid+'&albumId='+e.currentTarget.dataset.albumid
+      })
+  },
+  getData(){
+    let that=this;
+    this.setData({
+      avatarUrl:wx.getStorageSync('avatarUrl')
+    })
     wx.showToast({
       title:'加载中...',
       icon:'loading',
       duration:50000
     })
-    let that=this;
     var userId=wx.getStorageSync('userId');
-    let url=that.data.hostConfig+'dream/user/login/getUserCollectAlbum.json';
-    if(type>0){
-      url=that.data.hostConfig+'dream/album/common/myalbum.json';
-    }
+    var url=that.data.testConfig+'dream/album/common/myalbum.json';
     wx.request({
       url: url,
       data: {
@@ -87,20 +129,17 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        if(type==0){
-          that.setData({
-            items:res.data.collectList,
-            collectCount:res.data.collectList.length,
-            myCount:res.data.count
-          })
-        }else{
           //渲染我的数据
-          console.log(res);
+        if(res.data.length==0){
           that.setData({
-            items:res.data,
-            myCount:res.data.length
+            nopichidden:'block'
           })
+          return;
         }
+        that.setData({
+          items:res.data,
+          nopichidden:'none'
+        })
         wx.hideToast();
       },
       fail: function() {
