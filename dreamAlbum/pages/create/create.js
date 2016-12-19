@@ -41,27 +41,7 @@ let pageData = {
     this.currentIndex=0;
 
     // 循环读取 albumItemInfos
-    let submodules = []
-    // if(albumItemInfos.length >0 && userAlbumItemInfos.length >0){
-    //   let i = 0
-    //   let j = 0
-    //   while (i< albumItemInfos.length && j<userAlbumItemInfos.length){
-    //     let subm1 = albumItemInfos[i]
-    //     let subm2 = userAlbumItemInfos[j]
-    //     if(subm1.rank === subm2.rank){
-    //       subm1.userOriginImgUrl = subm2.userOriginImgUrl
-    //       i++
-    //       j++
-    //     }
-    //     if(subm1.rank < subm2.rank){
-    //       i++
-    //     }
-    //     if(subm1.rank > subm2.rank){
-    //       j++
-    //     }
-    //   }
-    // }
-    // for(let amodule of albumItemInfos){
+    let submodules = [];
     for(let i=0;i<albumItemInfos.length;i++){
       let amodule = albumItemInfos[i]
       let submodule = {}
@@ -174,8 +154,8 @@ let pageData = {
         filePath: submodule.elesrc,
         name: 'image',
         formData: {
-          'userAlbumId': this.data.userAlbumId,
-          'albumItemId': submodule.id
+          userAlbumId: that.data.userAlbumId + "",
+          albumItemId: submodule.id + ""
         },
         success: function(res){
           //上传已选图片,清零choosed状态

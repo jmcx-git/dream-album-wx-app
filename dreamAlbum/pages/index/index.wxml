@@ -3,7 +3,7 @@
      <scroll-view scroll-y="true" bindscrolltolower="moreData"  wx:if="{{items.length>0}}" style="height:{{winHeight}}px;">
         <view class="main">
             <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain" style="width:{{winWidth/2}}px;height:{{winHeight/2-30}}px;">
-                <view class="subMainImage {{index%2==1?'on':''}}">
+                <view bindtap="createImage" data-albumid="{{item.id}}" class="subMainImage {{index%2==1?'on':''}}">
                     <image class="images" data-albumid="{{item.id}}" src="{{item.cover}}"/>
                 </view>
                 <view class="bottomBar {{index%2==1?'on':''}}">

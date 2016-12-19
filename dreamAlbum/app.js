@@ -2,7 +2,6 @@
 App({
   onLaunch: function () {
     //调用API从本地缓存中获取数据
-   //wx.clearStorageSync();
    let that = this
    wx.getSystemInfo({
      success: function(res){
