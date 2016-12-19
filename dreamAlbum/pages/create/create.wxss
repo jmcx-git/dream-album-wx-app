@@ -9,12 +9,6 @@
   z-index: 1;
 }
 
-.elm_fnt{
-  position:absolute;
-  z-index:2;
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
 .footer{
   position: fixed;
   bottom: 0rpx;
