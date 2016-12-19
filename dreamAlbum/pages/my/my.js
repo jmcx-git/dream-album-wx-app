@@ -158,5 +158,11 @@ Page({
         console.log("获取数据失败！");
       }
     })
+  },
+  onShow:function(){
+    if(app.globalData.finishCreateFlag){
+      this.refreshData();
+      app.globalData.finishCreateFlag=false;
+    }
   }
 })

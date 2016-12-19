@@ -133,11 +133,13 @@ let pageData = {
     }else{
       wx.showModal({
         title:"提示",
-        content:"制作完成，请返回我的相册查看",
+        content:"制作完成，点击确定预览",
+        showCancel:false,
         success: function(res) {
           if (res.confirm) {
-            wx.navigateTo({
-              url: '../my/my'
+            app.globalData.finishCreateFlag=true;
+            wx.redirectTo({
+              url: '../viewswiper/viewswiper?userAlbumId='+that.data.userAlbumId
             })
           }
         }
