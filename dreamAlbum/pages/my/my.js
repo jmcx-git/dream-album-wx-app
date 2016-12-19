@@ -9,7 +9,9 @@ Page({
     viewtap:false,
     isPullDown:false,
     authorizeTitle:"请确认授权以下信息",
-    authorizeContent:". 获得你的公开信息(昵称、头像等)"
+    authorizeContent:". 获得你的公开信息(昵称、头像等)",
+    picLoadFinish:false,
+    picLoadCount:0
   },
   onLoad: function () {
     let that=this;
@@ -110,7 +112,9 @@ Page({
     this.setData({
       items:[],
       nopichidden:'none',
-      viewtap:false
+      viewtap:false,
+      picLoadFinish:false,
+      picLoadCount:0
     })
     this.getData();
   },
@@ -159,7 +163,7 @@ Page({
               isPullDown:false
             })
           }
-          wx.hideToast();
+          // wx.hideToast();
         }
       },
       fail: function() {
@@ -167,10 +171,28 @@ Page({
       }
     })
   },
+  picLoad:function(e){
+    let that=this;
+    this.setData({
+      picLoadCount:that.data.picLoadCount+1
+    })
+    if(this.data.picLoadCount==this.data.items.length){
+      wx.hideToast();
+      that.setData({
+        picLoadFinish:true
+      })
+    }
+  },
   onShow:function(){
     if(app.globalData.finishCreateFlag){
       this.refreshData();
       app.globalData.finishCreateFlag=false;
     }
+    let that=this;
+    setTimeout(function(){
+        that.setData({
+          picLoadFinish:true
+        })
+    },10000)
   }
 })
