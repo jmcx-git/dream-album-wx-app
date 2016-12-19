@@ -14,5 +14,6 @@ App({
     windowWidth: 375,
     windowHeight: 625,
     serverHost: "https://developer.mokous.com/wx/",
+    finishCreateFlag:false
   }
 })
