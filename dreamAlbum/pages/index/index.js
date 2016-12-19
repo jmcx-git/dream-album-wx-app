@@ -6,6 +6,7 @@ Page({
     winWidth:0,
     start:0,
     size:10,
+    isPullDown:false,
     nomore:false
   },
   previewImage:function(e){
@@ -36,6 +37,9 @@ Page({
     wx.hideToast()
   },
   onPullDownRefresh:function(){
+    this.setData({
+      isPullDown:true
+    })
     this.refreshData();
     wx.stopPullDownRefresh();
   },
@@ -57,11 +61,13 @@ Page({
     if(that.data.nomore){
       return;
     }
-    wx.showToast({
-      title: '加载中...',
-      icon: 'loading',
-      duration: 5000
-    });
+    if(!that.data.isPullDown){
+      wx.showToast({
+        title: '加载中...',
+        icon: 'loading',
+        duration: 5000
+      });
+    }
     wx.request({
       url: app.globalData.serverHost+'dream/album/common/homepage.json',
       data: {
@@ -73,6 +79,7 @@ Page({
         that.setData({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length,
+          isPullDown:false
         });
         if(res.data.albumList.length<that.data.size){
           that.setData({

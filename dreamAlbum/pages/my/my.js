@@ -7,6 +7,7 @@ Page({
     avatarUrl:'',
     nopichidden:'none',
     viewtap:false,
+    isPullDown:false,
     authorizeTitle:"请确认授权以下信息",
     authorizeContent:". 获得你的公开信息(昵称、头像等)"
   },
@@ -94,6 +95,9 @@ Page({
     }
   },
   onPullDownRefresh:function(){
+    this.setData({
+      isPullDown:true
+    })
     this.refreshData();
     wx.stopPullDownRefresh();
   },
@@ -124,11 +128,13 @@ Page({
     this.setData({
       avatarUrl:wx.getStorageSync('avatarUrl')
     })
-    wx.showToast({
-      title:'加载中...',
-      icon:'loading',
-      duration:10000
-    })
+    if(!that.data.isPullDown){
+      wx.showToast({
+        title:'加载中...',
+        icon:'loading',
+        duration:10000
+      })
+    }
     var userId=wx.getStorageSync('userId');
     var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
     wx.request({
@@ -142,13 +148,15 @@ Page({
         if(res.statusCode==200){
           if(res.data.length==0){
             that.setData({
-              nopichidden:'block'
+              nopichidden:'block',
+              isPullDown:false
             })
           }else{
             that.setData({
               items:res.data,
               nopichidden:'none',
-              viewtap:true
+              viewtap:true,
+              isPullDown:false
             })
           }
           wx.hideToast();

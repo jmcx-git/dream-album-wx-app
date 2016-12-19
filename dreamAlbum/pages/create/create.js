@@ -149,7 +149,7 @@ let pageData = {
   save: function(index){
     var that = this;
     // 点击下一步时保存数据
-    let submodule = this.data.submodules[index];   
+    let submodule = this.data.submodules[index];
     if(submodule.choosed){
       wx.uploadFile({
         url: app.globalData.serverHost+"/dream/album/common/uploadalbumpage.json",
