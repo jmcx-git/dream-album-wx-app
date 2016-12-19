@@ -24,7 +24,6 @@ Page({
     })
   },
   onLoad:function(options){
-    console.log("页面onload");
     let that=this;
     that.setData({
       winWidth:app.globalData.windowWidth,
@@ -44,7 +43,7 @@ Page({
       isPullDown:true
     })
     this.refreshData();
-    wx.stopPullDownRefresh();
+    // wx.stopPullDownRefresh();
   },
   refreshData:function(){
     let that=this;
@@ -81,6 +80,7 @@ Page({
       },
       method: 'GET',
       success: function(res){
+        that.consoleImage(that.data.isPullDown);
         that.setData({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length,
@@ -115,13 +115,18 @@ Page({
     console.log("页面ready");
   },
   onShow:function(){
-    console.log("页面onshow");
+    
+  },
+  consoleImage:function(isPullDown){
     let that=this;
     setTimeout(function(){
         that.setData({
           picLoadFinish:true
         })
-    },10000)
+        if(that.data.isPullDown){
+          wx.stopPullDownRefresh();
+        }
+    },isPullDown?4000:10000)
   },
   onHide:function(){
     // 页面隐藏

@@ -101,7 +101,7 @@ Page({
       isPullDown:true
     })
     this.refreshData();
-    wx.stopPullDownRefresh();
+    // wx.stopPullDownRefresh();
   },
   viewTemplateList:function(e){
     wx.navigateTo({
@@ -150,6 +150,7 @@ Page({
       success: function(res){
           //渲染我的数据
         if(res.statusCode==200){
+          that.consoleImage(that.data.isPullDown);
           if(res.data.length==0){
             that.setData({
               nopichidden:'block',
@@ -178,21 +179,29 @@ Page({
     })
     if(this.data.picLoadCount==this.data.items.length){
       wx.hideToast();
+      if(that.data.isPullDown){
+        wx.stopPullDownRefresh();
+      }
       that.setData({
         picLoadFinish:true
       })
     }
+  },
+  consoleImage:function(isPullDown){
+    let that=this;
+    setTimeout(function(){
+        that.setData({
+          picLoadFinish:true
+        })
+        if(that.data.isPullDown){
+          wx.stopPullDownRefresh();
+        }
+    },isPullDown?4000:10000)
   },
   onShow:function(){
     if(app.globalData.finishCreateFlag){
       this.refreshData();
       app.globalData.finishCreateFlag=false;
     }
-    let that=this;
-    setTimeout(function(){
-        that.setData({
-          picLoadFinish:true
-        })
-    },10000)
   }
 })
