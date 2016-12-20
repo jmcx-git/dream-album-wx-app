@@ -1,0 +1,8 @@
+{
+  "backgroundTextStyle":"dark",
+  "navigationBarBackgroundColor": "#ff5956",
+  "navigationBarTitleText": "创建相册",  
+  "backgroundColor": "#fff",
+  "navigationBarTextStyle":"dark",
+  "enablePullDownRefresh":false
+}
