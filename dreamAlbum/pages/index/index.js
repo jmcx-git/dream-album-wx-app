@@ -6,7 +6,6 @@ Page({
     winWidth:0,
     start:0,
     size:10,
-    isPullDown:false,
     nomore:false,
     picLoadFinish:false,
     picLoadCount:0
@@ -39,11 +38,8 @@ Page({
     wx.hideToast()
   },
   onPullDownRefresh:function(){
-    this.setData({
-      isPullDown:true
-    })
     this.refreshData();
-    // wx.stopPullDownRefresh();
+    wx.stopPullDownRefresh();
   },
   refreshData:function(){
     let that=this;
@@ -65,13 +61,11 @@ Page({
     if(that.data.nomore){
       return;
     }
-    if(!that.data.isPullDown){
-      wx.showToast({
-        title: '加载中...',
-        icon: 'loading',
-        duration: 10000
-      });
-    }
+    wx.showToast({
+      title: '加载中...',
+      icon: 'loading',
+      duration: 10000
+    })
     wx.request({
       url: app.globalData.serverHost+'dream/album/common/homepage.json',
       data: {
@@ -80,11 +74,10 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        that.consoleImage(that.data.isPullDown);
+        that.consoleImage();
         that.setData({
           items:that.data.items.concat(res.data.albumList),
-          start:that.data.start+res.data.albumList.length,
-          isPullDown:false
+          start:that.data.start+res.data.albumList.length
         });
         if(res.data.albumList.length<that.data.size){
           that.setData({
@@ -117,15 +110,12 @@ Page({
   onShow:function(){
     
   },
-  consoleImage:function(isPullDown){
+  consoleImage:function(){
     let that=this;
     setTimeout(function(){
         that.setData({
           picLoadFinish:true
         })
-        if(isPullDown){
-          wx.stopPullDownRefresh();
-        }
     },10000)
   },
   onHide:function(){

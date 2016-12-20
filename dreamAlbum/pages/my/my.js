@@ -7,7 +7,6 @@ Page({
     avatarUrl:'',
     nopichidden:'none',
     viewtap:false,
-    isPullDown:false,
     authorizeTitle:"请确认授权以下信息",
     authorizeContent:". 获得你的公开信息(昵称、头像等)",
     picLoadFinish:false,
@@ -97,11 +96,8 @@ Page({
     }
   },
   onPullDownRefresh:function(){
-    this.setData({
-      isPullDown:true
-    })
     this.refreshData();
-    // wx.stopPullDownRefresh();
+    wx.stopPullDownRefresh();
   },
   viewTemplateList:function(e){
     wx.navigateTo({
@@ -117,6 +113,7 @@ Page({
       picLoadCount:0
     })
     this.getData();
+    wx.stopPullDownRefresh();
   },
   previewImage:function(e){
     let that=this;
@@ -132,13 +129,11 @@ Page({
     this.setData({
       avatarUrl:wx.getStorageSync('avatarUrl')
     })
-    if(!that.data.isPullDown){
-      wx.showToast({
-        title:'加载中...',
-        icon:'loading',
-        duration:10000
-      })
-    }
+    wx.showToast({
+      title:'加载中...',
+      icon:'loading',
+      duration:10000
+    })
     var userId=wx.getStorageSync('userId');
     var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
     wx.request({
@@ -150,18 +145,16 @@ Page({
       success: function(res){
           //渲染我的数据
         if(res.statusCode==200){
-          that.consoleImage(that.data.isPullDown);
+          that.consoleImage();
           if(res.data.length==0){
             that.setData({
-              nopichidden:'block',
-              isPullDown:false
+              nopichidden:'block'
             })
           }else{
             that.setData({
               items:res.data,
               nopichidden:'none',
-              viewtap:true,
-              isPullDown:false
+              viewtap:true
             })
           }
           // wx.hideToast();
@@ -179,23 +172,18 @@ Page({
     })
     if(this.data.picLoadCount==this.data.items.length){
       wx.hideToast();
-      if(that.data.isPullDown){
-        wx.stopPullDownRefresh();
-      }
       that.setData({
         picLoadFinish:true
       })
     }
   },
-  consoleImage:function(isPullDown){
+  consoleImage:function(){
     let that=this;
     setTimeout(function(){
         that.setData({
           picLoadFinish:true
         })
-        if(isPullDown){
-          wx.stopPullDownRefresh();
-        }
+        wx.hideToast();
     },10000)
   },
   onShow:function(){
