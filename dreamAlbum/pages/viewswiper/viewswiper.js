@@ -11,7 +11,10 @@ Page({
     pptHidden:false,
     portHidden:true,
     bigPreImg:'',
-    loopPreImgs:[]
+    loopPreImgs:[],
+    bottomDisplay:'block',
+    intervalOver:true,
+    bottomHidden:false
   },
   onLoad:function(options){
     let that=this;
@@ -33,6 +36,14 @@ Page({
           loopPreImgs:res.data.loopPreImgs,
           bigPreImg:res.data.bigPreImg
         })
+        setTimeout(function(){
+          that.setData({
+            bottomDisplay:'none',
+            winHeight:that.data.winHeight+50,
+            intervalOver:false,
+            bottomHidden:true
+          })
+        },3000)
       }
     })
   },
@@ -89,6 +100,26 @@ Page({
       }
     })
   },
+  showBottom:function(){
+    let that=this;
+    if(that.data.intervalOver){
+      return;
+    }
+    this.setData({
+      bottomDisplay:'block',
+      winHeight:that.data.winHeight-50,
+      intervalOver:true,
+      bottomHidden:false
+    })
+    setTimeout(function(){
+      that.setData({
+        bottomDisplay:'none',
+        winHeight:that.data.winHeight+50,
+        intervalOver:false,
+        bottomHidden:true
+      })
+    },2000)
+  },
   onReady:function(){
     // 页面渲染完成
   },
@@ -99,6 +130,10 @@ Page({
     // 页面隐藏
   },
   onUnload:function(){
-    // 页面关闭
+    if(app.globalData.finishCreateFlag){
+        wx.navigateBack({
+          delta: 6
+        })
+    } 
   }
 })

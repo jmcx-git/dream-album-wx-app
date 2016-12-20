@@ -8,7 +8,9 @@ Page({
     nopichidden:'none',
     viewtap:false,
     authorizeTitle:"请确认授权以下信息",
-    authorizeContent:". 获得你的公开信息(昵称、头像等)"
+    authorizeContent:". 获得你的公开信息(昵称、头像等)",
+    picLoadFinish:false,
+    picLoadCount:0
   },
   onLoad: function () {
     let that=this;
@@ -106,7 +108,9 @@ Page({
     this.setData({
       items:[],
       nopichidden:'none',
-      viewtap:false
+      viewtap:false,
+      picLoadFinish:false,
+      picLoadCount:0
     })
     this.getData();
   },
@@ -127,8 +131,9 @@ Page({
     wx.showToast({
       title:'加载中...',
       icon:'loading',
-      duration:50000
+      duration:10000
     })
+    that.consoleImage();
     var userId=wx.getStorageSync('userId');
     var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
     wx.request({
@@ -144,19 +149,47 @@ Page({
             that.setData({
               nopichidden:'block'
             })
-            return;
+            wx.hideToast();
+          }else{
+            that.setData({
+              items:res.data,
+              nopichidden:'none',
+              viewtap:true
+            })
           }
-          that.setData({
-            items:res.data,
-            nopichidden:'none',
-            viewtap:true
-          })
-          wx.hideToast();
+          // wx.hideToast();
         }
       },
       fail: function() {
         console.log("获取数据失败！");
       }
     })
+  },
+  picLoad:function(e){
+    let that=this;
+    this.setData({
+      picLoadCount:that.data.picLoadCount+1
+    })
+    if(this.data.picLoadCount==this.data.items.length){
+      wx.hideToast();
+      that.setData({
+        picLoadFinish:true
+      })
+    }
+  },
+  consoleImage:function(){
+    let that=this;
+    setTimeout(function(){
+        that.setData({
+          picLoadFinish:true
+        })
+        wx.hideToast();
+    },10000)
+  },
+  onShow:function(){
+    if(app.globalData.finishCreateFlag){
+      this.refreshData();
+      app.globalData.finishCreateFlag=false;
+    }
   }
 })

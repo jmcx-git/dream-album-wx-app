@@ -37,7 +37,6 @@ let pageData = {
   handleResult: function (res) {
     let albumItemInfos = res.data.albumItemInfos;
     this.currentIndex = 0;
-
     let submodules = []
     for (let i = 0; i < albumItemInfos.length; i++) {
       let amodule = albumItemInfos[i]

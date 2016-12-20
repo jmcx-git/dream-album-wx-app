@@ -6,7 +6,9 @@ Page({
     winWidth:0,
     start:0,
     size:10,
-    nomore:false
+    nomore:false,
+    picLoadFinish:false,
+    picLoadCount:0
   },
   previewImage:function(e){
     //进入预览页面
@@ -45,7 +47,9 @@ Page({
       start:0,
       size:that.data.size,
       items:[],
-      nomore:false
+      nomore:false,
+      picLoadFinish:false,
+      picLoadCount:0
     })
     this.search();
   },
@@ -60,8 +64,9 @@ Page({
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
-      duration: 5000
-    });
+      duration: 10000
+    })
+    that.consoleImage();
     wx.request({
       url: app.globalData.serverHost+'dream/album/common/homepage.json',
       data: {
@@ -72,7 +77,7 @@ Page({
       success: function(res){
         that.setData({
           items:that.data.items.concat(res.data.albumList),
-          start:that.data.start+res.data.albumList.length,
+          start:that.data.start+res.data.albumList.length
         });
         if(res.data.albumList.length<that.data.size){
           that.setData({
@@ -80,18 +85,38 @@ Page({
           })
         }
         console.log("Finish load album list.");
-        wx.hideToast();
+        // wx.hideToast();
       },
       fail: function(res){
         that.requestFailed(res)
       }
     })
   },
+  picLoad:function(e){
+    let that=this;
+    this.setData({
+      picLoadCount:that.data.picLoadCount+1
+    })
+    if(this.data.picLoadCount==this.data.items.length){
+      wx.hideToast();
+      that.setData({
+        picLoadFinish:true
+      })
+    }
+  },
   onReady:function(){
-    // 页面渲染完成
+    console.log("页面ready");
   },
   onShow:function(){
-    // 页面显示
+    
+  },
+  consoleImage:function(){
+    let that=this;
+    setTimeout(function(){
+        that.setData({
+          picLoadFinish:true
+        })
+    },10000)
   },
   onHide:function(){
     // 页面隐藏
