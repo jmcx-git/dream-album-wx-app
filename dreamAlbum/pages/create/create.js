@@ -132,6 +132,7 @@ let pageData = {
           if (index < length - 1) {
             that.init(++index)
           } else {
+            app.globalData.finishCreateFlag=true;
             wx.redirectTo({
               url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
             })
@@ -161,6 +162,7 @@ let pageData = {
             that.init(++index)
           } else {
             wx.hideToast()
+            app.globalData.finishCreateFlag=true;
             wx.redirectTo({
               url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
             })
