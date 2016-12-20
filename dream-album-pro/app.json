@@ -1,0 +1,15 @@
+{
+  "pages":[
+    "pages/my/my",
+    "pages/index/index",
+    "pages/create/create",
+    "pages/viewswiper/viewswiper"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#ff5956",
+    "navigationBarTitleText": "聚梦相册",
+    "backgroundColor": "#fff",
+    "navigationBarTextStyle":"white"
+  }
+}

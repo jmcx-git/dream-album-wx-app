@@ -1,0 +1,22 @@
+.page{
+    background-color: #efeff4;
+}
+.bottomClass{
+    width:100%;
+    display: flex;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+.pptClass{
+    width:50%;
+    box-sizing: border-box;
+    text-align: center;
+    padding:10px;
+    color: #353535;
+}
+.pptClass.ppt.on{
+    background-color: #ff5956;
+}
+.pptClass.on{
+    background-color: #ff5956;
+}

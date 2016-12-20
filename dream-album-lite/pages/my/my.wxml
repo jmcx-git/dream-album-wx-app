@@ -1,0 +1,19 @@
+<view class="allTop" style="width:{{winWidth}}px;">
+    <image class="titleClass" src="../../image/title.png"/>
+    <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
+    <image class="insertClass" src="../../image/insert.png" bindtap="viewTemplateList" style="margin-top:{{winHeight/2+150+winHeight/2/8}}px;"/>
+    <image style="display:{{nopichidden}}" class="nopicClass" src="../../image/nopic.png" />
+</view>
+<!--模版列表-->
+<view class="mobileListBorder" hidden="{{!picLoadFinish}}">
+     <scroll-view scroll-y="true"  wx:if="{{items.length>0}}" style="height:{{winHeight-150}}px;">
+        <view class="main">
+            <view wx:for="{{items}}" wx:key="{{itemsss}}" class="subMain" style="width:{{winWidth/2}}px;height:{{winHeight/2-30}}px;">
+                <view class="subMainImage {{index%2==1?'on':''}}">
+                    <image class="images" bindload="picLoad" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}" src="{{item.cover}}"/>
+                </view>
+                <view class="subMainText">{{item.title}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

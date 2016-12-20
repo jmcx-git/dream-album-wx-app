@@ -1,0 +1,11 @@
+<view class="content" hidden="{{preview}}">
+  <image class="bg_img" src="{{submodules[index].bgsrc}}"/>
+  <image class="bg_elm" src="{{submodules[index].elesrc}}" animation ="{{animation}}" mode='aspectFit'/>
+  <view class="elm_fnt" animation = "{{animation}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtap="chooseImage" hidden="{{elm_fnt}}"/>
+</view>
+<view class="content" hidden="!{{preview}}">
+	<image src="{{preview.imgurl}}"/>
+</view>
+<view class="footer weui-flex">
+  	<image bindtap="next" class= "control-panel-img" src="../../image/changed.png"/>
+</view>

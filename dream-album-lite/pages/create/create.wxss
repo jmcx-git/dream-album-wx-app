@@ -1,0 +1,51 @@
+.content{
+  overflow: hidden;
+  padding: 60rpx; 
+  width: 630rpx; 
+}
+
+.bg_img{
+  position: absolute;
+  z-index: 1;
+}
+
+.footer{
+  position: fixed;
+  bottom: 0rpx;
+  width: 750rpx;
+  color: #1aad19;
+  z-index:10;
+  display: flex;
+  height: 100rpx;
+}
+
+.footer_item{
+  background-color: #ff5956;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.footer_item .back{
+  position: relative;
+  top: 25rpx;
+  left: 50rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.footer_item .add{
+  position: relative;
+  top: 25rpx;
+  left: 100rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.footer_item .next{
+  position: relative;
+  top: 25rpx;
+  left: 150rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
