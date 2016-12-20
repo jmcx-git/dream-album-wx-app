@@ -14,7 +14,8 @@ Page({
     loopPreImgs:[],
     bottomDisplay:'block',
     intervalOver:true,
-    bottomHidden:false
+    bottomHidden:false,
+    clickCount:0
   },
   onLoad:function(options){
     let that=this;
@@ -100,8 +101,27 @@ Page({
       }
     })
   },
-  showBottom:function(){
+  showBottom:function(e){
     let that=this;
+    this.setData({
+      clickCount:that.data.clickCount+1
+    })
+    if(this.data.clickCount==2){
+      var urls=[];
+      urls.push(e.currentTarget.dataset.img);
+      wx.previewImage({
+        // current: 'String', // 当前显示图片的链接，不填则默认为 urls 的第一张
+        urls: urls,
+        success: function(res){
+          that.setData({
+            clickCount:0
+          })
+        }
+      })
+      that.setData({
+        clickCount:0
+      })
+    }
     if(that.data.intervalOver){
       return;
     }
