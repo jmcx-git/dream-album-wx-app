@@ -22,7 +22,7 @@ Page({
       url: '../create/create?albumId='+e.currentTarget.dataset.albumid
     })
   },
-  onLoad:function(options){
+  onLoad:function(){
     let that=this;
     that.setData({
       winWidth:app.globalData.windowWidth,
