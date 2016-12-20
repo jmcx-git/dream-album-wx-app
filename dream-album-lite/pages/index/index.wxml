@@ -8,7 +8,7 @@
                 </view>
                 <view class="bottomBar {{index%2==1?'on':''}}">
                     <view class="bottomImage">
-                        <image class="createImage" bindtap="createImage" data-albumid="{{item.id}}" src="../../image/create.png"/>
+                        <image class="createImage" bindtap="createImage" data-albumid="{{item.id}}" data-totalitems="{{item.totalItems}}" src="../../image/create.png"/>
                     </view>
                     <view class="lineImage">
                         <image class="lineImagePic" src="../../image/line.png" />
