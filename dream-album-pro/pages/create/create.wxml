@@ -1,0 +1,17 @@
+<view class="content" style="height:{{contentHeight}};">
+  <image class="bg_img" style="width:{{bgWidth}}; height:{{bgHeight}};" src="{{submodules[index].bgsrc}}"/>
+  <view style ="position:absolute;width:{{editAreaRelativeWidth}};height:{{editAreaRelativeHeight}};top:{{editAreaRelativeTop}};left:{{editAreaRelativeLeft}};">
+    <image src="{{submodules[index].elesrc}}" style="width:100%;height:100%;"/>
+  </view>
+</view>
+<view class="footer">
+  <view class="footer_item">
+    <image class="back" catchtap="back" src="../../image/back.png"></image>
+  </view>
+  <view class="footer_item">
+    <image class="add" catchtap="chooseImage" src="../../image/add.png"></image>
+  </view>
+  <view class="footer_item">
+    <image class="next" catchtap="save" src="../../image/next.png"></image>
+  </view>
+</view>

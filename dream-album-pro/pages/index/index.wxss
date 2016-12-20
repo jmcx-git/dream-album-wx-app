@@ -1,0 +1,70 @@
+page{
+    background-color: #efeff4;
+}
+/*模版列表*/
+
+.main{
+    display:flex;
+    flex-wrap: wrap;
+}
+.subMain{
+    padding:5% 0px;
+    position:relative; 
+}
+.subMainImage{
+    height:100%;
+    width:90%;
+    margin-left: 6.5%;
+}
+.subMainImage.on{
+    margin-left: 3%;
+}
+.images{
+    border-radius: 8px;
+    width:100%;
+    height:100%;
+}
+.subMainText{
+    text-align: center;
+    font-size: 14px;
+    color:#353535;
+    margin-top:6px;
+}
+
+.bottomBar{
+    position: absolute;
+    display: flex;
+    top:84%;
+    height:10%;
+    width:90%;
+    left:6.5%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom-right-radius:5px;
+    border-bottom-left-radius:5px;
+}
+.bottomBar.on{
+    left:3%;
+}
+.createImage{
+    width:28px;
+    height:20px;
+}
+.viewImage{
+    width:28px;
+    height:20px;
+}
+
+.bottomImage{
+    width:45%;
+    text-align: center;
+    padding-top:2%;
+    flex: 3;
+}
+.lineImage{
+    width:5%;
+    height:100%;
+}
+.lineImagePic{
+    height:100%;
+    width:1px;
+}

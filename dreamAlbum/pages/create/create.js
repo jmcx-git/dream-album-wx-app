@@ -37,7 +37,6 @@ let pageData = {
   handleResult: function (res) {
     let albumItemInfos = res.data.albumItemInfos;
     this.currentIndex = 0;
-
     let submodules = []
     for (let i = 0; i < albumItemInfos.length; i++) {
       let amodule = albumItemInfos[i]
@@ -123,8 +122,8 @@ let pageData = {
         filePath: submodule.elesrc,
         name: 'image',
         formData: {
-          'userAlbumId': that.data.userAlbumId,
-          'albumItemId': submodule.id
+          'userAlbumId': that.data.userAlbumId + "",
+          'albumItemId': submodule.id + ""
         },
         success: function (res) {
           //上传已选图片,清零choosed状态
@@ -133,6 +132,7 @@ let pageData = {
           if (index < length - 1) {
             that.init(++index)
           } else {
+            app.globalData.finishCreateFlag=true;
             wx.redirectTo({
               url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
             })
@@ -153,8 +153,8 @@ let pageData = {
       wx.request({
         url: app.globalData.serverHost + "/dream/album/common/uploademptypage.json",
         data: {
-          'userAlbumId': that.data.userAlbumId,
-          'albumItemId': submodule.id
+          'userAlbumId': that.data.userAlbumId + "",
+          'albumItemId': submodule.id + ""
         },
         method: 'GET',
         success: function (res) {
@@ -162,6 +162,7 @@ let pageData = {
             that.init(++index)
           } else {
             wx.hideToast()
+            app.globalData.finishCreateFlag=true;
             wx.redirectTo({
               url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
             })
@@ -177,6 +178,11 @@ let pageData = {
     let index = this.data.index;
     if (index > 0) {
       this.init(--index)
+    }else{
+      wx.navigateBack({
+        delta: 1
+      });
+      // console.log(wx.getCurrentPages());
     }
   },
   requestfailed: function (res) {
