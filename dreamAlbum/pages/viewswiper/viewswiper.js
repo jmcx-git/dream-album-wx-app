@@ -13,7 +13,8 @@ Page({
     bigPreImg:'',
     loopPreImgs:[],
     bottomDisplay:'block',
-    intervalOver:true
+    intervalOver:true,
+    bottomHidden:false
   },
   onLoad:function(options){
     let that=this;
@@ -39,7 +40,8 @@ Page({
           that.setData({
             bottomDisplay:'none',
             winHeight:that.data.winHeight+50,
-            intervalOver:false
+            intervalOver:false,
+            bottomHidden:true
           })
         },3000)
       }
@@ -106,13 +108,15 @@ Page({
     this.setData({
       bottomDisplay:'block',
       winHeight:that.data.winHeight-50,
-      intervalOver:true
+      intervalOver:true,
+      bottomHidden:false
     })
     setTimeout(function(){
       that.setData({
         bottomDisplay:'none',
         winHeight:that.data.winHeight+50,
-        intervalOver:false
+        intervalOver:false,
+        bottomHidden:true
       })
     },2000)
   },
