@@ -113,7 +113,6 @@ Page({
       picLoadCount:0
     })
     this.getData();
-    wx.stopPullDownRefresh();
   },
   previewImage:function(e){
     let that=this;
@@ -134,6 +133,7 @@ Page({
       icon:'loading',
       duration:10000
     })
+    that.consoleImage();
     var userId=wx.getStorageSync('userId');
     var url=app.globalData.serverHost+'dream/album/common/myalbum.json';
     wx.request({
@@ -145,7 +145,6 @@ Page({
       success: function(res){
           //渲染我的数据
         if(res.statusCode==200){
-          that.consoleImage();
           if(res.data.length==0){
             that.setData({
               nopichidden:'block'

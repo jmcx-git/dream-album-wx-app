@@ -66,6 +66,7 @@ Page({
       icon: 'loading',
       duration: 10000
     })
+    that.consoleImage();
     wx.request({
       url: app.globalData.serverHost+'dream/album/common/homepage.json',
       data: {
@@ -74,7 +75,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        that.consoleImage();
         that.setData({
           items:that.data.items.concat(res.data.albumList),
           start:that.data.start+res.data.albumList.length
