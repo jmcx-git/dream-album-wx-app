@@ -99,15 +99,7 @@ let pageData = {
   },
   chooseImage: function(e){
     let that = this;
-    let index = this.data.index;
-    if(index==0){
-      wx.showToast({
-        title: '首页无上传图片!',
-        icon: 'success',
-        duration: 2000
-      })
-      return;
-    }
+    let index = this.data.index;    
     wx.chooseImage({
       sizeType:["original","compressed"],
       scourceType:["album","camera"],
