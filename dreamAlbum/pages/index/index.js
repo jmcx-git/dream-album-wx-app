@@ -123,10 +123,10 @@ Page({
         that.setData({
           picLoadFinish:true
         })
-        if(that.data.isPullDown){
+        if(isPullDown){
           wx.stopPullDownRefresh();
         }
-    },isPullDown?4000:10000)
+    },10000)
   },
   onHide:function(){
     // 页面隐藏
