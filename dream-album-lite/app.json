@@ -8,7 +8,7 @@
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#ff5956",
-    "navigationBarTitleText": "聚梦相册",
+    "navigationBarTitleText": "极简相册",
     "backgroundColor": "#fff",
     "navigationBarTextStyle":"white"
   }
