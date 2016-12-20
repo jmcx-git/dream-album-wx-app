@@ -122,8 +122,8 @@ let pageData = {
         filePath: submodule.elesrc,
         name: 'image',
         formData: {
-          'userAlbumId': that.data.userAlbumId,
-          'albumItemId': submodule.id
+          'userAlbumId': that.data.userAlbumId + "",
+          'albumItemId': submodule.id + ""
         },
         success: function (res) {
           //上传已选图片,清零choosed状态
@@ -153,8 +153,8 @@ let pageData = {
       wx.request({
         url: app.globalData.serverHost + "/dream/album/common/uploademptypage.json",
         data: {
-          'userAlbumId': that.data.userAlbumId,
-          'albumItemId': submodule.id
+          'userAlbumId': that.data.userAlbumId + "",
+          'albumItemId': submodule.id + ""
         },
         method: 'GET',
         success: function (res) {
@@ -178,6 +178,11 @@ let pageData = {
     let index = this.data.index;
     if (index > 0) {
       this.init(--index)
+    }else{
+      wx.navigateBack({
+        delta: 1
+      });
+      // console.log(wx.getCurrentPages());
     }
   },
   requestfailed: function (res) {
