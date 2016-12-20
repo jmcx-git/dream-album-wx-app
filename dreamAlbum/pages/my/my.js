@@ -149,6 +149,7 @@ Page({
             that.setData({
               nopichidden:'block'
             })
+            wx.hideToast();
           }else{
             that.setData({
               items:res.data,

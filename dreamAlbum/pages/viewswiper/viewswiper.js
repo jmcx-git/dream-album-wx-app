@@ -12,7 +12,8 @@ Page({
     portHidden:true,
     bigPreImg:'',
     loopPreImgs:[],
-    bottomDisplay:'block'
+    bottomDisplay:'block',
+    intervalOver:true
   },
   onLoad:function(options){
     let that=this;
@@ -37,7 +38,8 @@ Page({
         setTimeout(function(){
           that.setData({
             bottomDisplay:'none',
-            winHeight:that.data.winHeight+50
+            winHeight:that.data.winHeight+50,
+            intervalOver:false
           })
         },3000)
       }
@@ -98,14 +100,19 @@ Page({
   },
   showBottom:function(){
     let that=this;
+    if(that.data.intervalOver){
+      return;
+    }
     this.setData({
       bottomDisplay:'block',
-      winHeight:that.data.winHeight-50
+      winHeight:that.data.winHeight-50,
+      intervalOver:true
     })
     setTimeout(function(){
       that.setData({
         bottomDisplay:'none',
-        winHeight:that.data.winHeight+50
+        winHeight:that.data.winHeight+50,
+        intervalOver:false
       })
     },2000)
   },
