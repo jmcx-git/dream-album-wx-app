@@ -7,14 +7,24 @@
                     <image class="images" bindload="picLoad" data-albumid="{{item.id}}" src="{{item.cover}}"/>
                 </view>
                 <view class="bottomBar {{index%2==1?'on':''}}">
-                    <view class="bottomImage">
-                        <image class="createImage" bindtap="createImage" data-albumid="{{item.id}}" src="../../image/create.png"/>
+                    <view class="bottomImage" bindtap="createImage" data-albumid="{{item.id}}">
+                        <view class="bottomImageText">
+                            <text>创建</text>
+                        </view>
+                        <view class="bottomImagePicHead">
+                            <image class="createImage" src="../../image/createblue.png"/>
+                        </view>
                     </view>
                     <view class="lineImage">
                         <image class="lineImagePic" src="../../image/line.png" />
                     </view>
-                    <view class="bottomImage">
-                        <image class="viewImage" bindtap="previewImage" data-albumid="{{item.id}}" src="../../image/view.png" />
+                    <view class="bottomImage" bindtap="previewImage" data-albumid="{{item.id}}">
+                        <view class="bottomImageText">
+                            <text>预览</text>
+                        </view>
+                        <view class="bottomImagePicHead">
+                            <image class="viewImage" src="../../image/viewblue.png" />
+                        </view>
                     </view>
                 </view>
                 <view class="subMainText">{{item.title}}</view>
