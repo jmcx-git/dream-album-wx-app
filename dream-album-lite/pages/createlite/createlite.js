@@ -12,19 +12,20 @@ let pageData = {
   data: {
     start:0,  // 用于模板列表分页请求
     size:10,
-    choosed: 0,
+    choosed: 1,
     tempFilePaths:[],  // 用户选中的图片 共4(app.globalData.albumPageCount)张
     albumList:[],
     submodules:[],
     moduleWidth:0,  // 预览部分，每个背景图图片的宽高
     moduleHeight:0,
     templateWidth:0,  // 模板选择部分，每个图片的宽高
-    templateHeight:0
+    templateHeight:0,
+    content_hegiht: 0 // content 部分高度
   },
   onLoad: function (option) {
     // 读取传入和本地数据
-    let tempFilePaths= option.tmpfilepaths.split(',')
-    // console.log(tempFilePaths);
+    this.data.tempFilePaths = option.tmpfilepaths.split(',')
+    console.log(this.data.tempFilePaths);
     this.init()
   },
   initAlbumDetail:function(index){
@@ -39,6 +40,7 @@ let pageData = {
       submodule.bgsrc = amodule.shadowImgUrl;
       submodule.editsrc = amodule.editImgUrl;
       submodule.elesrc = i< that.data.tempFilePaths.length ? that.data.tempFilePaths[i] : ""
+      console.log(submodule.elesrc, that.data.tempFilePaths.length, i)
       //可编辑图片区域设置
       let editImgInfos = JSON.parse(amodule.editImgInfos)
       //for editarea position
@@ -49,16 +51,17 @@ let pageData = {
       submodule.bgImgWidth = amodule.imgWidth;
       submodule.bgImgHeight = amodule.imgHeight;
 
-      submodule.shadowImgWidth = submodule.editAreaWidth / submodule.bgImgWidth
-      submodule.shadowImgHeight = submodule.editAreaHeight /  submodule.bgImgHeight
-      submodule.shadowImgLeft = submodule.editAreaLeft / submodule.bgImgWidth
-      submodule.shadowImgTop = submodule.editAreaTop / submodule.bgImgHeight
+      submodule.shadowImgWidth = submodule.editAreaWidth / submodule.bgImgWidth * that.data.moduleWidth
+      submodule.shadowImgHeight = submodule.editAreaHeight /  submodule.bgImgHeight * that.data.moduleHeight
+      submodule.shadowImgLeft = submodule.editAreaLeft / submodule.bgImgWidth * that.data.moduleWidth
+      submodule.shadowImgTop = submodule.editAreaTop / submodule.bgImgHeight * that.data.moduleHeight
 
       submodule.rank = amodule.rank
       submodule.elecount = amodule.editCount
       submodule.id = amodule.id
       submodules.push(submodule)
     }
+    // submodules = submodules.concat(submodules)
     console.log(submodules)
     this.setData({
       submodules: submodules
@@ -73,10 +76,12 @@ let pageData = {
     })
 
     this.setData({
-      moduleWidth :app.globalData.windowWidth/2-60,
+      moduleWidth :(app.globalData.windowWidth-60)/2,
       moduleHeight :((app.globalData.windowHeight - 20)/5*4 -40)/2,
-      templateWidth :app.globalData.windowWidth /3.3 -80,
-      templateHeight :(app.globalData.windowHeight -20)/5 - 20
+      templateWidth :(app.globalData.windowWidth  -80)/3.3,
+      templateHeight :(app.globalData.windowHeight -20)/5 - 20,
+      content_hegiht : (app.globalData.windowHeight - 20)/5*4,
+      item_width: app.globalData.windowWidth
     })
 
     wx.request({
@@ -88,8 +93,10 @@ let pageData = {
       method: 'GET',
       success: function(res){
         // console.log(res)
+        let alist = that.data.albumList.concat(res.data)
+        alist = alist.concat(res.data)
         that.setData({
-          albumList:that.data.albumList.concat(res.data),
+          albumList:alist,
           start:that.data.start+res.data.length
         });
         if(res.data.length<that.data.size){

@@ -8,9 +8,18 @@
 }
 .content_item{
   display:block;
+  margin: 20px 0 0 20px;
 }
-.scroll-view_content{
-
+.item{
+  position: absolute;
+  margin-top :40px
+}
+.item_detail{
+  white-space: nowrap;
+}
+.item_item{
+  display:inline-block;
+  margin: 0 0 0 20px;
 }
 
 .bg_img{
