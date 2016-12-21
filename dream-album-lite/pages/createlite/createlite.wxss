@@ -16,6 +16,7 @@
 }
 .item_detail{
   white-space: nowrap;
+  padding: 0
 }
 .item_item{
   display:inline-block;

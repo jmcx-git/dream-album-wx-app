@@ -25,14 +25,14 @@ let pageData = {
   onLoad: function (option) {
     // 读取传入和本地数据
     this.data.tempFilePaths = option.tmpfilepaths.split(',')
-    console.log(this.data.tempFilePaths);
+
     this.init()
   },
   initAlbumDetail:function(index){
     // 加载第一个模板的详细数据
     let that = this
     let albumItemList = that.data.albumList[index].albumItemList
-    console.log(albumItemList);
+
     let submodules = []
     for (let i = 0; i < albumItemList.length; i++) {
       let amodule = albumItemList[i]
@@ -40,7 +40,7 @@ let pageData = {
       submodule.bgsrc = amodule.shadowImgUrl;
       submodule.editsrc = amodule.editImgUrl;
       submodule.elesrc = i< that.data.tempFilePaths.length ? that.data.tempFilePaths[i] : ""
-      console.log(submodule.elesrc, that.data.tempFilePaths.length, i)
+
       //可编辑图片区域设置
       let editImgInfos = JSON.parse(amodule.editImgInfos)
       //for editarea position
@@ -62,7 +62,7 @@ let pageData = {
       submodules.push(submodule)
     }
     // submodules = submodules.concat(submodules)
-    console.log(submodules)
+
     this.setData({
       submodules: submodules
     })
@@ -92,7 +92,7 @@ let pageData = {
       },
       method: 'GET',
       success: function(res){
-        // console.log(res)
+        
         let alist = that.data.albumList.concat(res.data)
         alist = alist.concat(res.data)
         that.setData({
@@ -110,12 +110,19 @@ let pageData = {
       }
     })
   },
-  requestFailed(res){
+  requestFailed:function(res){
     wx.showModal({
       title:"提示",
       content: "网络错误，请稍后再试！"
     }),
     wx.hideToast()
+  },
+  loadMoreTmplate:function(e){
+    let alist = this.data.albumList
+    alist = alist.concat(this.data.albumList)
+    this.setData({
+      albumList:alist,
+    });
   }
 }
 Page(pageData)
