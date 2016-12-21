@@ -99,9 +99,36 @@ Page({
     this.refreshData();
     wx.stopPullDownRefresh();
   },
-  viewTemplateList:function(e){
+  createAlbum: function(e, tempFilePaths){
+    // tempFilePaths.push(tempFilePaths[0])
+    let url = "../createlite/createlite?tmpfilepaths="+tempFilePaths.join(",")
+    // console.log(url, tempFilePaths)
     wx.navigateTo({
-      url: '../index/index'
+      url: url
+    })
+  },
+  viewTemplateList:function(e){
+    // wx.navigateTo({
+    //   url: '../index/index'
+    // })
+    let that = this
+    wx.chooseImage({
+      count: app.globalData.albumPageCount,
+      success: function(res){
+        if(res.tempFilePaths.length < app.globalData.albumPageCount){
+          wx.showModal({
+            title:"提示",
+            content: "该相册可以上传"+app.globalData.albumPageCount+"张照片，您选中"+res.tempFilePaths.length+"张 确认是否制作",
+            success: function(rescfm){
+              if(rescfm.confirm){
+                that.createAlbum(e, res.tempFilePaths)
+              }
+            }
+          })
+        }else{
+          that.createAlbum(e, res.tempFilePaths)
+        }
+      }
     })
   },
   refreshData:function(){

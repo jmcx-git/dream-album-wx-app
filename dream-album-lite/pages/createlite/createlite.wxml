@@ -1,0 +1,19 @@
+<view class="content">
+<scroll-view class="scroll-view_content" scroll-y='true' style="width: 100%">
+  <view class="content_detail">
+    <view class="content_item" wx:for="{{submodules}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}px; height:{{moduleHeight}}px;">
+      <image class="bg_img" style="width:{{moduleWidth}}px; height:{{moduleHeight}}px;" src="{{submodules[index].bgsrc}}"/>
+      <view style ="position:absolute;width:{{editAreaRelativeWidth}};height:{{editAreaRelativeHeight}};top:{{editAreaRelativeTop}};left:{{editAreaRelativeLeft}};">
+        <image src="{{submodules[index].elesrc}}" style="width:100%;height:100%;"/>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+</view>
+<view class="item" wx:if="{{false}}">
+  <scroll-view class="scroll-view_item" scroll-x="true" style="width: 100%" scroll-into-view="red">
+    <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}">
+      <image src="{{item.cover}}" style="width:100%;height:100%;"/>
+    </view>
+  </scroll-view>
+</view>

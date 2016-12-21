@@ -58,27 +58,30 @@ Page({
   },
   createImage:function(e){
     //进入制作页面
-    let that = this
-    wx.chooseImage({
-      count: e.currentTarget.dataset.totalitems,
-      success: function(res){
-        if(res.tempFilePaths.length < e.currentTarget.dataset.totalitems){
-          wx.showModal({
-            title:"提示",
-            content: "该相册可以上传"+e.currentTarget.dataset.totalitems+"张照片，您选中"+res.tempFilePaths.length+"张 确认是否上传",
-            success: function(rescfm){
-              if(rescfm.confirm){
-                that.confirmUploadImage(e, res.tempFilePaths)
-              }else{
-                that.createImage(e)
-              }
-            }
-          })
-        }else{
-          that.confirmUploadImage(e, res.tempFilePaths)
-        }
-      }
+    wx.navigateTo({
+      url: '../create/create?albumId='+e.currentTarget.dataset.albumid
     })
+    // let that = this
+    // wx.chooseImage({
+    //   count: e.currentTarget.dataset.totalitems,
+    //   success: function(res){
+    //     if(res.tempFilePaths.length < e.currentTarget.dataset.totalitems){
+    //       wx.showModal({
+    //         title:"提示",
+    //         content: "该相册可以上传"+e.currentTarget.dataset.totalitems+"张照片，您选中"+res.tempFilePaths.length+"张 确认是否上传",
+    //         success: function(rescfm){
+    //           if(rescfm.confirm){
+    //             that.confirmUploadImage(e, res.tempFilePaths)
+    //           }else{
+    //             that.createImage(e)
+    //           }
+    //         }
+    //       })
+    //     }else{
+    //       that.confirmUploadImage(e, res.tempFilePaths)
+    //     }
+    //   }
+    // })
   },
   onLoad:function(options){
     this.userId = wx.getStorageSync('userId');
