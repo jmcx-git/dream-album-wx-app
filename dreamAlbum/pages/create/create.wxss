@@ -1,3 +1,6 @@
+page{
+    background-color: #efeff4;
+}
 .content{
   overflow: hidden;
   padding: 60rpx; 
