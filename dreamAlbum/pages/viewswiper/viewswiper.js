@@ -12,7 +12,6 @@ Page({
     portHidden:true,
     bigPreImg:'',
     loopPreImgs:[],
-    bottomDisplay:'block',
     intervalOver:true,
     bottomHidden:false,
     clickCount:0
@@ -39,7 +38,6 @@ Page({
         })
         setTimeout(function(){
           that.setData({
-            bottomDisplay:'none',
             winHeight:that.data.winHeight+50,
             intervalOver:false,
             bottomHidden:true
@@ -106,6 +104,9 @@ Page({
     this.setData({
       clickCount:that.data.clickCount+1
     })
+    if(this.data.clickCount==1){
+      that.clearInTime();
+    }
     if(this.data.clickCount==2){
       var urls=[];
       urls.push(e.currentTarget.dataset.img);
@@ -126,19 +127,25 @@ Page({
       return;
     }
     this.setData({
-      bottomDisplay:'block',
       winHeight:that.data.winHeight-50,
       intervalOver:true,
       bottomHidden:false
     })
     setTimeout(function(){
       that.setData({
-        bottomDisplay:'none',
         winHeight:that.data.winHeight+50,
         intervalOver:false,
         bottomHidden:true
       })
     },2000)
+  },
+  clearInTime:function(){
+    let that=this;
+    setTimeout(function(){
+      that.setData({
+        clickCount:0
+      })
+    },1000)
   },
   onReady:function(){
     // 页面渲染完成

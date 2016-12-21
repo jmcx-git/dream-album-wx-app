@@ -12,10 +12,10 @@ page{
 /* + */
 .insertClass{
     position: absolute;
-    width:50px;
-    height:50px;
+    width:100rpx;
+    height:100rpx;
     z-index: 10;
-    right:20px;
+    right:40rpx;
 }
 .userinfo-avatar {
   position: absolute;
@@ -30,8 +30,8 @@ page{
     position: absolute;
     padding-top:215px;
     padding-left:calc(50% - 45px);
-    width:90px;
-    height:130px;
+    width:180rpx;
+    height:260rpx;
 }
 /*模版列表*/
 .mobileListBorder{
@@ -53,13 +53,13 @@ page{
     margin-left: 3%;
 }
 .images{
-    border-radius: 8px;
+    border-radius: 16rpx;
     width:100%;
     height:100%;
 }
 .subMainText{
     text-align: center;
-    font-size: 14px;
+    font-size: 28rpx;
     color:#353535;
-    margin-top:6px;
+    margin-top:12rpx;
 }

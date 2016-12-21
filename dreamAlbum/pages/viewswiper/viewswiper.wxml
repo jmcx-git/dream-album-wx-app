@@ -14,11 +14,21 @@
   </scroll-view>
 </view>
 <view class="bottomClass" style="width:{{winWidth}}px;height:50px;" hidden="{{bottomHidden}}">
-    <view class="pptClass ppt {{currentTab==0?'on':''}}" bindtap="swichNav" data-title="PPT预览" data-id="0" style="display:{{bottomDisplay}};">
-       PPT预览
+    <view class="pptClass ppt {{currentTab==0?'on':''}}" bindtap="swichNav" data-title="相册预览" data-id="0">
+       <view class="pptImage">
+            <image class="albumImg" src="{{currentTab==0?'../../image/albumyes.png':'../../image/albumno.png'}}" />
+        </view>
+       <view class="pptText">
+            相册预览
+        </view>
     </view>
-    <view class="pptClass {{currentTab==1?'on':''}}"  bindtap="swichNav" data-title="海报预览" data-id="1" style="display:{{bottomDisplay}};">
-        海报预览
+    <view class="pptClass {{currentTab==1?'on':''}}"  bindtap="swichNav" data-title="海报预览" data-id="1">
+        <view class="pptImage">
+            <image class="portImg" src="{{currentTab==1?'../../image/portyes.png':'../../image/portno.png'}}"/>
+        </view>
+        <view class="pptText">
+            海报预览
+        </view>
     </view>
 </view>
 
