@@ -48,10 +48,12 @@ page{
 .createImage{
     width:36rpx;
     height:32rpx;
+    padding-left:5%;
 }
 .viewImage{
     width:36rpx;
     height:32rpx;
+    padding-left:5%;
 }
 
 .bottomImage{
