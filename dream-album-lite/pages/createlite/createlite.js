@@ -80,7 +80,7 @@ let pageData = {
       templateFontSize: (templateHeight - (templateWidth * 0.9)) *0.7,
       content_hegiht : (app.globalData.windowHeight - 20)/5*4,
       item_width: app.globalData.windowWidth,
-      icon_top: ((app.globalData.windowHeight - 20)/5*4 -80 +10)/2,
+      icon_top: ((app.globalData.windowHeight - 20)/5*4 -80 +20)/2,
       icon_left:(app.globalData.windowWidth-80) /2,
       sy_top: 20,
       sy_left: 20
@@ -96,7 +96,7 @@ let pageData = {
     wx.hideToast()
   },
   loadMoreTmplate:function(e){
-    console.log("loadmore")
+
     let that = this
     if(this.data.nomore){
       return
@@ -172,7 +172,7 @@ let pageData = {
             uploadfailed = true
           },
           success: function(res){
-            console.log("uploaduserimg success", res)
+
             let jsdata = JSON.parse(res.data)
             that.redirectToView(i, jsdata.data)
           }
@@ -189,7 +189,7 @@ let pageData = {
             uploadfailed = true
           },
           success: function(res){
-            console.log("uploadnotuserimg success", res)
+            
             let usrAlbId = res.data.data
             that.redirectToView(i, usrAlbId)
           }
