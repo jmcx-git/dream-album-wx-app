@@ -3,8 +3,8 @@ page{
 }
 .content{
   overflow: hidden;
-  padding: 60rpx; 
-  width: 630rpx; 
+  padding: 33rpx 55rpx; 
+  width: 640rpx; 
 }
 
 .bg_img{
