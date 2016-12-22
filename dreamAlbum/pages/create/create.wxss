@@ -1,7 +1,10 @@
+page{
+    background-color: #efeff4;
+}
 .content{
   overflow: hidden;
-  padding: 60rpx; 
-  width: 630rpx; 
+  padding: 33rpx 55rpx; 
+  width: 640rpx; 
 }
 
 .bg_img{
@@ -20,15 +23,16 @@
 }
 
 .footer_item{
-  background-color: #ff5956;
+  background-color: #00adef;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
+          flex-wrap: wrap;
 }
 
 .footer_item .back{
   position: relative;
-  top: 25rpx;
+  top: 22rpx;
   left: 50rpx;
   width: 50rpx;
   height: 50rpx;
@@ -44,8 +48,22 @@
 
 .footer_item .next{
   position: relative;
-  top: 25rpx;
+  top: -35rpx;
   left: 150rpx;
   width: 50rpx;
   height: 50rpx;
+}
+.backText{
+  color: #fff;
+  font-size: 36rpx;
+  position: relative;
+  top:-43rpx;
+  left: 110rpx;
+}
+.nextText{
+  color: #fff;
+  font-size: 36rpx;
+  position: relative;
+  top:20rpx;
+  right:-30rpx;
 }

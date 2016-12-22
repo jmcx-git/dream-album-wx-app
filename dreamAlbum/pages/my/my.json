@@ -1,6 +1,6 @@
 {
     "navigationBarTitleText": "聚梦相册",
-    "navigationBarBackgroundColor": "#ff5956",
+    "navigationBarBackgroundColor": "#00adef",
     "enablePullDownRefresh": true,
-    "backgroundColor": "#ff5956"
+    "backgroundColor": "#00adef"
 }

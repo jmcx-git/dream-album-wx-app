@@ -12,16 +12,21 @@ Page({
     portHidden:true,
     bigPreImg:'',
     loopPreImgs:[],
-    bottomDisplay:'block',
     intervalOver:true,
     bottomHidden:false,
-    clickCount:0
+    clickCount:0,
+    shareTitle:'分享我的相册',
+    shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
+    shareAlbumId:'',
+    shareUserAlbumId:''
   },
   onLoad:function(options){
     let that=this;
     that.setData({
         winWidth:app.globalData.windowWidth,
-        winHeight:app.globalData.windowHeight
+        winHeight:app.globalData.windowHeight,
+        shareAlbumId:options.albumId,
+        shareUserAlbumId:options.userAlbumId
     })
     var albumId=options.albumId;
     var userAlbumId=options.userAlbumId;
@@ -39,7 +44,6 @@ Page({
         })
         setTimeout(function(){
           that.setData({
-            bottomDisplay:'none',
             winHeight:that.data.winHeight+50,
             intervalOver:false,
             bottomHidden:true
@@ -106,6 +110,9 @@ Page({
     this.setData({
       clickCount:that.data.clickCount+1
     })
+    if(this.data.clickCount==1){
+      that.clearInTime();
+    }
     if(this.data.clickCount==2){
       var urls=[];
       urls.push(e.currentTarget.dataset.img);
@@ -126,19 +133,25 @@ Page({
       return;
     }
     this.setData({
-      bottomDisplay:'block',
       winHeight:that.data.winHeight-50,
       intervalOver:true,
       bottomHidden:false
     })
     setTimeout(function(){
       that.setData({
-        bottomDisplay:'none',
         winHeight:that.data.winHeight+50,
         intervalOver:false,
         bottomHidden:true
       })
     },2000)
+  },
+  clearInTime:function(){
+    let that=this;
+    setTimeout(function(){
+      that.setData({
+        clickCount:0
+      })
+    },1000)
   },
   onReady:function(){
     // 页面渲染完成
@@ -155,5 +168,13 @@ Page({
           delta: 6
         })
     } 
+  },
+  onShareAppMessage:function(){
+    let that=this;
+    return{
+      title:that.data.shareTitle,
+      desc:that.data.shareDesc,
+      path:'/pages/viewswiper/viewswiper?albumId='+that.data.shareAlbumId+'&userAlbumId='+that.data.shareUserAlbumId
+    }
   }
 })

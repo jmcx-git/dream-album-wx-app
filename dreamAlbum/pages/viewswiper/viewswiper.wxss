@@ -4,7 +4,6 @@
 .bottomClass{
     width:100%;
     display: flex;
-    font-size: 18px;
     box-sizing: border-box;
 }
 .pptClass{
@@ -13,10 +12,35 @@
     text-align: center;
     padding:10px;
     color: #353535;
+    display: flex;
+    flex-wrap: wrap;
 }
 .pptClass.ppt.on{
-    background-color: #ff5956;
+    background-color: #00adef;
+    color: #fff;
 }
 .pptClass.on{
-    background-color: #ff5956;
+    background-color: #00adef;
+    color:#fff;
+}
+.albumImg{
+    width:45rpx;
+    height:45rpx;
+    padding-top:5%;
+    padding-right:8%;
+}
+.portImg{
+    width:45rpx;
+    height:45rpx;
+    padding-top:5%;
+    padding-right:8%;
+}
+.pptText{
+    font-size: 36rpx;
+    width:70%;
+    text-align: left;
+}
+.pptImage{
+    width:30%;
+    text-align: right;
 }
