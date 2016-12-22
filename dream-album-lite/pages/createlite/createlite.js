@@ -134,19 +134,20 @@ let pageData = {
     this.initAlbumDetail(this.data.choosed)
   },
   redirectToView: function(i, userAlbumId){
-    this.tag = this.tag? this.tag+i: i;
-    let length = this.data.submodules.length
 
-    let needRedirect = (length-1)*length/2 == this.tag
-
-    if(needRedirect){
-      wx.hideToast()
-      wx.redirectTo({
-        url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId
-      })
+    if(!this.redirectOk){
+      setTimeout(function () {
+        wx.hideToast()
+        wx.redirectTo({
+          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId
+        })
+      }, 10000)
+      this.redirectOk = true
     }
+
   },
   createAlbum: function(e){
+    this.redirectOk = false;
     let that = this;
     wx.showToast({
       title: '正在上传照片...',
@@ -157,14 +158,14 @@ let pageData = {
     let uploadfailed = false
     for(let i =0;i< that.data.submodules.length && !uploadfailed;i++){
       let submodule = that.data.submodules[i]
-
+      console.log("upload img at index = "+i)
       if(submodule.elesrc != ""){
         wx.uploadFile({
           url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
           filePath: submodule.elesrc,
           name: 'image',
           formData: {
-            'userId': "3",//wx.getStorageSync('userId'),
+            'userId': wx.getStorageSync('userId'),
             'albumItemId': submodule.id+"",
             'albumId': albumId+""
           },
@@ -172,7 +173,7 @@ let pageData = {
             uploadfailed = true
           },
           success: function(res){
-
+            console.log("uploaduserimg success at index "+i)
             let jsdata = JSON.parse(res.data)
             that.redirectToView(i, jsdata.data)
           }
@@ -181,7 +182,7 @@ let pageData = {
         wx.request({
           url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
           data: {
-            'userId': "3",//wx.getStorageSync('userId'),
+            'userId': wx.getStorageSync('userId'),
             'albumItemId': submodule.id+"",
             'albumId': albumId+""
           },
@@ -189,7 +190,7 @@ let pageData = {
             uploadfailed = true
           },
           success: function(res){
-
+            console.log("uploadnotuserimg success at index "+i)
             let usrAlbId = res.data.data
             that.redirectToView(i, usrAlbId)
           }
