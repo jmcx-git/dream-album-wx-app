@@ -14,13 +14,19 @@ Page({
     loopPreImgs:[],
     intervalOver:true,
     bottomHidden:false,
-    clickCount:0
+    clickCount:0,
+    shareTitle:'分享我的相册',
+    shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
+    shareAlbumId:'',
+    shareUserAlbumId:''
   },
   onLoad:function(options){
     let that=this;
     that.setData({
         winWidth:app.globalData.windowWidth,
-        winHeight:app.globalData.windowHeight
+        winHeight:app.globalData.windowHeight,
+        shareAlbumId:options.albumId,
+        shareUserAlbumId:options.userAlbumId
     })
     var albumId=options.albumId;
     var userAlbumId=options.userAlbumId;
@@ -162,5 +168,13 @@ Page({
           delta: 6
         })
     } 
+  },
+  onShareAppMessage:function(){
+    let that=this;
+    return{
+      title:that.data.shareTitle,
+      desc:that.data.shareDesc,
+      path:'/pages/viewswiper/viewswiper?albumId='+that.data.shareAlbumId+'&userAlbumId='+that.data.shareUserAlbumId
+    }
   }
 })
