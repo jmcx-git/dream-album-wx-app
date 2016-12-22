@@ -10,11 +10,14 @@
   </view>
 </scroll-view>
 </view>
+<image class="createbtn" src="../../image/insert.png" bindtap="createAlbum"/>
 <view class="item" wx:if="{{true}}">
   <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}px" bindscrolltolower="loadMoreTmplate">
     <view class="item_detail" style="height:{{templateHeight}}px;">
-      <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}" style="width:{{templateWidth}}px;height:{{templateHeight}}px;">
-        <image src="{{item.cover}}" style="width:100%;height:100%;"/>
+      <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}"  style="width:{{templateWidth}}px;height:{{templateHeight}}px;">
+        <image src="{{item.cover}}" style="width:100%;height:100%;" bindtap="chooseTemplate" data-albumIndex="{{index}}"/>
+        <view style="position:relative; left: -{{templateWidth}}px; display:inline-block; background:rgba(0, 0, 0, 0.4); width:{{templateWidth}}px;height:{{templateHeight}}px;"
+        wx:if='{{index === choosed}}'/>
       </view>
     </view>
   </scroll-view>

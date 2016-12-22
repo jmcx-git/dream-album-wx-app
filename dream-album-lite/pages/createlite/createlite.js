@@ -1,18 +1,9 @@
 var app = getApp();
 let pageData = {
-  // cst:{
-  //   interval_content_item: 20,
-  //   interval_content_row: 20,
-  //   interval_content_column: 20,
-  //   interval_item_row:20,
-  //   interval_item_column:20,
-  //   content_weight:4,
-  //   item_weight:1
-  // },
   data: {
     start:0,  // 用于模板列表分页请求
     size:10,
-    choosed: 1,
+    choosed: 0,
     tempFilePaths:[],  // 用户选中的图片 共4(app.globalData.albumPageCount)张
     albumList:[],
     submodules:[],
@@ -83,7 +74,22 @@ let pageData = {
       content_hegiht : (app.globalData.windowHeight - 20)/5*4,
       item_width: app.globalData.windowWidth
     })
+    that.loadMoreTmplate(0)
 
+  },
+  requestFailed:function(res){
+    wx.showModal({
+      title:"提示",
+      content: "网络错误，请稍后再试！"
+    }),
+    wx.hideToast()
+  },
+  loadMoreTmplate:function(e){
+    console.log("loadmore")
+    let that = this
+    if(this.data.nomore){
+      return
+    }
     wx.request({
       url: app.globalData.serverHost+'dream/album/common/listalbums.json',
       data: {
@@ -92,7 +98,7 @@ let pageData = {
       },
       method: 'GET',
       success: function(res){
-        
+
         let alist = that.data.albumList.concat(res.data)
         alist = alist.concat(res.data)
         that.setData({
@@ -110,19 +116,87 @@ let pageData = {
       }
     })
   },
-  requestFailed:function(res){
-    wx.showModal({
-      title:"提示",
-      content: "网络错误，请稍后再试！"
-    }),
-    wx.hideToast()
-  },
-  loadMoreTmplate:function(e){
-    let alist = this.data.albumList
-    alist = alist.concat(this.data.albumList)
+  chooseTemplate: function(e){
     this.setData({
-      albumList:alist,
-    });
+      choosed:e.target.dataset.albumindex
+    })
+    this.initAlbumDetail(this.data.choosed)
+  },
+  redirectToView: function(i, userAlbumId){
+    console.log("redirectToView",i, userAlbumId)
+    this.tag[i] = true;
+    let needRedirect = false
+    for(let i = 0; i < this.data.submodules.length; i++){
+      if(this.tag[i] != true){
+        needRedirect = false
+        break
+      }
+      needRedirect = true
+    }
+    if(needRedirect){
+      wx.hideToast()
+      wx.redirectTo({
+        url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId
+      })
+    }
+  },
+  createAlbum: function(e){
+    let that = this;
+    wx.showToast({
+      title: '正在上传照片...',
+      icon: 'loading',
+      duration: 10000
+    })
+    let albumId = that.data.albumList[that.data.choosed].id
+    let uploadfailed = false
+    for(let i =0;i< that.data.submodules.length && !uploadfailed;i++){
+      let submodule = that.data.submodules[i]
+      if(submodule.elesrc != ""){
+        wx.uploadFile({
+          url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
+          filePath: submodule.elesrc,
+          name: 'image',
+          formData: {
+            'userId': wx.getStorageSync('userId'),
+            'albumItemId': submodule.id+"",
+            'albumId': albumId+""
+          },
+          fail: function (res) {
+            uploadfailed = true
+          },
+          success: function(res){
+            console.log("uploaduserimg success", res)
+            let jsdata = JSON.parse(res.data)
+            that.redirectToView(i, jsdata.data)
+          }
+        })
+      }else{
+        wx.request({
+          url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
+          data: {
+            'userId': wx.getStorageSync('userId'),
+            'albumItemId': submodule.id+"",
+            'albumId': albumId+""
+          },
+          fail: function (res) {
+            uploadfailed = true
+          },
+          success: function(res){
+            console.log("uploadnotuserimg success", res)
+            let usrAlbId = res.data.data
+            that.redirectToView(i, usrAlbId)
+          }
+        })
+      }
+    }
+    if (uploadfailed){
+      wx.hideToast()
+      wx.showModal({
+        title: "提示",
+        content: "上传文件错误，请从新上传",
+        showCancel: false
+      })
+    }
   }
 }
 Page(pageData)
