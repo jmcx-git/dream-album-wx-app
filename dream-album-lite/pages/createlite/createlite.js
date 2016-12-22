@@ -11,7 +11,9 @@ let pageData = {
     moduleHeight:0,
     templateWidth:0,  // 模板选择部分，每个图片的宽高
     templateHeight:0,
-    content_hegiht: 0 // content 部分高度
+    content_hegiht: 0, // content 部分高度
+    icon_top:0,   // 完成按钮的top和left值
+    icon_left:0
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -66,13 +68,22 @@ let pageData = {
       duration: 10000
     })
 
+    let templateHeight = (app.globalData.windowHeight -20)/5 - 20
+    let templateWidth = (app.globalData.windowWidth  -80)/3.3
     this.setData({
       moduleWidth :(app.globalData.windowWidth-60)/2,
-      moduleHeight :((app.globalData.windowHeight - 20)/5*4 -40)/2,
-      templateWidth :(app.globalData.windowWidth  -80)/3.3,
-      templateHeight :(app.globalData.windowHeight -20)/5 - 20,
+      moduleHeight :((app.globalData.windowHeight - 20)/5*4 -30)/2,
+      templateWidth :templateWidth,
+      templateHeight : templateHeight,
+      templateIconSize: templateWidth * 0.8, // 宽度的0.8
+      templateTextSize: templateHeight - (templateWidth * 0.8) ,
+      templateFontSize: (templateHeight - (templateWidth * 0.9)) *0.7,
       content_hegiht : (app.globalData.windowHeight - 20)/5*4,
-      item_width: app.globalData.windowWidth
+      item_width: app.globalData.windowWidth,
+      icon_top: ((app.globalData.windowHeight - 20)/5*4 -80 +10)/2,
+      icon_left:(app.globalData.windowWidth-80) /2,
+      sy_top: 20,
+      sy_left: 20
     })
     that.loadMoreTmplate(0)
 
@@ -123,16 +134,11 @@ let pageData = {
     this.initAlbumDetail(this.data.choosed)
   },
   redirectToView: function(i, userAlbumId){
-    console.log("redirectToView",i, userAlbumId)
-    this.tag[i] = true;
-    let needRedirect = false
-    for(let i = 0; i < this.data.submodules.length; i++){
-      if(this.tag[i] != true){
-        needRedirect = false
-        break
-      }
-      needRedirect = true
-    }
+    this.tag = this.tag? this.tag+i: i;
+    let length = this.data.submodules.length
+
+    let needRedirect = (length-1)*length/2 == this.tag
+
     if(needRedirect){
       wx.hideToast()
       wx.redirectTo({
@@ -151,13 +157,14 @@ let pageData = {
     let uploadfailed = false
     for(let i =0;i< that.data.submodules.length && !uploadfailed;i++){
       let submodule = that.data.submodules[i]
+
       if(submodule.elesrc != ""){
         wx.uploadFile({
           url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
           filePath: submodule.elesrc,
           name: 'image',
           formData: {
-            'userId': wx.getStorageSync('userId'),
+            'userId': "3",//wx.getStorageSync('userId'),
             'albumItemId': submodule.id+"",
             'albumId': albumId+""
           },
@@ -174,7 +181,7 @@ let pageData = {
         wx.request({
           url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
           data: {
-            'userId': wx.getStorageSync('userId'),
+            'userId': "3",//wx.getStorageSync('userId'),
             'albumItemId': submodule.id+"",
             'albumId': albumId+""
           },

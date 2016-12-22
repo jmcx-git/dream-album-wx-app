@@ -1,6 +1,13 @@
+page{
+  background-color: #efeff4;
+}
 .content{
+  background-color: #ffffff;
   display:flex;
   flex-wrap: wrap;
+}
+.scroll-view_content{
+  
 }
 .content_detail{
   display:flex;
@@ -8,11 +15,11 @@
 }
 .content_item{
   display:block;
-  margin: 20px 0 0 20px;
+  margin: 5px 0 0 5px;
 }
 .item{
   position: absolute;
-  margin-top :40px
+  margin-top :20px
 }
 .item_detail{
   white-space: nowrap;
@@ -21,6 +28,7 @@
 .item_item{
   display:inline-block;
   margin: 0 0 0 20px;
+  position: relative;
 }
 .choosed{
   display:inline-block;
@@ -32,14 +40,18 @@
 }
 .createbtn{
   position: absolute;
-  width:50px;
-  height:50px;
+  width:80px;
+  height:80px;
   z-index: 10;
   right:20px;
 }
 .bg_img{
   position: absolute;
   z-index: 1;
+}
+
+.border_choosed{
+  border: 1px solid rgb(0,170,243);
 }
 
 .footer{
