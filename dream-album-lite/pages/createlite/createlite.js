@@ -139,7 +139,7 @@ let pageData = {
       setTimeout(function () {
         wx.hideToast()
         wx.redirectTo({
-          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId
+          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId+'&from=1'
         })
       }, 10000)
       this.redirectOk = true
