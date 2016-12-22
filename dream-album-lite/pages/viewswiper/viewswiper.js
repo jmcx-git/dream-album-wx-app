@@ -41,7 +41,18 @@ Page({
         icon: 'loading',
         duration: 5000
       })
+      setTimeout(function(){
+        that.requestData()
+      },5000)
+    }else{
+      that.requestData()
     }
+
+  },
+  requestData: function (e) {
+    let that = this
+    let albumId = that.albumId;
+    let userAlbumId = that.userAlbumId;
     wx.request({
       url: app.globalData.serverHost + 'dream/album/common/getpreview.json?',
       data: {
@@ -66,11 +77,9 @@ Page({
             })
           }, 3000)
         } else {
-          setTimeout(function () {
-            that.setData({
-              refreshtip: '点击页面刷新'
-            })
-          }, 5000)
+          that.setData({
+            refreshtip: '点击页面刷新'
+          })
         }
       }
     })
