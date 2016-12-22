@@ -111,7 +111,7 @@ let pageData = {
       success: function(res){
 
         let alist = that.data.albumList.concat(res.data)
-        alist = alist.concat(res.data)
+        // alist = alist.concat(res.data)
         that.setData({
           albumList:alist,
           start:that.data.start+res.data.length
@@ -189,7 +189,7 @@ let pageData = {
             uploadfailed = true
           },
           success: function(res){
-            
+
             let usrAlbId = res.data.data
             that.redirectToView(i, usrAlbId)
           }
