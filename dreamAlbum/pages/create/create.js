@@ -70,16 +70,16 @@ let pageData = {
     // init data
     let submodule = this.data.submodules[index]
 
-    let shadowImgWidth = submodule.editAreaWidth / submodule.bgImgWidth * (this.windowWidth * 0.84) * this.convertTimes;
-    let shadowImgHeight = submodule.editAreaHeight / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 220);
-    let shadowImgLeft = 0.08 * this.windowWidth * this.convertTimes + submodule.editAreaLeft / submodule.bgImgWidth * (this.windowWidth * 0.84) * this.convertTimes;
-    let shadowImgTop = 0.08 * this.windowWidth * this.convertTimes + submodule.editAreaTop / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 220);
+    let shadowImgWidth = submodule.editAreaWidth / submodule.bgImgWidth * 640;
+    let shadowImgHeight = submodule.editAreaHeight / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
+    let shadowImgLeft = 55 + submodule.editAreaLeft / submodule.bgImgWidth * 640;
+    let shadowImgTop = 55 + submodule.editAreaTop / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
     // 设置数据：
     this.setData({
       index: index,
-      contentHeight: this.windowHeight * this.convertTimes - 220 + "rpx",
-      bgWidth: (this.windowWidth * 0.84) * this.convertTimes + "rpx",
-      bgHeight: this.windowHeight * this.convertTimes - 220 + "rpx",
+      contentHeight: this.windowHeight * this.convertTimes - 166 + "rpx",
+      bgWidth: "640rpx",
+      bgHeight: this.windowHeight * this.convertTimes - 166 + "rpx",
       editAreaRelativeTop: shadowImgTop + "rpx",
       editAreaRelativeLeft: shadowImgLeft + "rpx",
       editAreaRelativeWidth: shadowImgWidth + "rpx",
@@ -93,6 +93,7 @@ let pageData = {
     let that = this;
     let index = this.data.index;
     wx.chooseImage({
+      count:1,
       sizeType: ["original", "compressed"],
       scourceType: ["album", "camera"],
       success: function (res) {
