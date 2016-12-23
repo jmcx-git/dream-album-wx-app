@@ -133,39 +133,81 @@ let pageData = {
     })
     this.initAlbumDetail(this.data.choosed)
   },
-  redirectToView: function(i, userAlbumId){
-    console.log("userAlbumId", userAlbumId)
-    console.log(this.tag)
-
-    if(this.uploadfailed&& this.modalShowed != true){
-      this.modalShowed = true
-      wx.hideToast()
-      wx.showModal({
-        title: "提示",
-        content: "上传文件错误，请从新上传",
-        showCancel: false
+  uploadImage: function(index){
+    // 上传图片， index：图片在 that.data.submodules 的下表
+    let that = this
+    wx.hideToast()
+    console.log(index)
+    // 一些必要的数据
+    let albumId = that.data.albumList[that.data.choosed].id
+    // 判断index = lenght：应该停止，跳转下一页
+    if(index == that.data.submodules.length){
+      wx.redirectTo({
+        url: '../viewswiper/viewswiper?userAlbumId=' + this.userAlbumId+ "&from=1"
+      })
+      return
+    }
+    // 显示，正在生成第index+1张模板照片
+    wx.showToast({
+      title: '正在上传第'+(index +1)+'张照片',
+      icon: 'loading',
+      duration: 10000
+    })
+    // 根据是否有elesrc判断使用的接口
+      // 接口回调 fail 走失败路径，显示上传错误提示
+      // 接口回调success 走成功路径，继续上传下一张
+    let submodule = that.data.submodules[index]
+    console.log(submodule,that.data.submodules, index)
+    if(submodule.elesrc != ""){
+      wx.uploadFile({
+        url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
+        filePath: submodule.elesrc,
+        name: 'image',
+        formData: {
+          'userId': wx.getStorageSync('userId'),
+          'albumItemId': submodule.id+"",
+          'albumId': albumId+""
+        },
+        fail: function (res) {
+          console.log(res)
+          wx.hideToast()
+          wx.showModal({
+            title: "提示",
+            content: "上传文件错误，请从新上传",
+            showCancel: false
+          })
+        },
+        success: function(res){
+          console.log("uploaduserimg success at index "+index)
+          let jsdata = JSON.parse(res.data)
+          this.userAlbumId = jsdata.data;
+          that.uploadImage(index+1)
+        }
       })
     }else{
-      let needRedirect = true;
-      for(let i=0;i< this.data.submodules.length; i++){
-          if(this.tag[i] != 1){
-            needRedirect = false
-            break
-          }
-          if(this.tag[i] === 1){
-            this.userAlbumId = userAlbumId
-          }
-      }
-      if(needRedirect){
-        // 4张图片均正确返回
-        this.timeout = false // 不需要走timeout跳转逻辑
-        clearTimeout(this.timeoutId) // 清楚 settimeout
-        console.log("全部正确返回跳转")
-        wx.hideToast()
-        wx.redirectTo({
-          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId+ "&from=1"
-        })
-      }
+      wx.request({
+        url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
+        data: {
+          'userId': wx.getStorageSync('userId'),
+          'albumItemId': submodule.id+"",
+          'albumId': albumId+""
+        },
+        fail: function (res) {
+          console.log(res)
+          wx.hideToast()
+          wx.showModal({
+            title: "提示",
+            content: "上传文件错误，请从新上传",
+            showCancel: false
+          })
+        },
+        success: function(res){
+          console.log("uploadnotuserimg success at index "+index)
+          let usrAlbId = res.data.data
+          that.userAlbumId = usrAlbId
+          that.uploadImage(index+1)
+        }
+      })
     }
   },
   createAlbum: function(e){
@@ -177,68 +219,7 @@ let pageData = {
       icon: 'loading',
       duration: 10000
     })
-    let albumId = that.data.albumList[that.data.choosed].id
-    this.uploadfailed = false
-    for(let i =0;i< that.data.submodules.length && !this.uploadfailed;i++){
-      let submodule = that.data.submodules[i]
-      console.log("upload img at index = "+i)
-      this.tag.push(0)
-      if(submodule.elesrc != ""){
-        wx.uploadFile({
-          url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
-          filePath: submodule.elesrc,
-          name: 'image',
-          formData: {
-            'userId': wx.getStorageSync('userId'),
-            'albumItemId': submodule.id+"",
-            'albumId': albumId+""
-          },
-          fail: function (res) {
-            console.log(res)
-            that.uploadfailed = true
-            that.tag[i] = -1
-            that.redirectToView(i, 0)
-          },
-          success: function(res){
-            console.log("uploaduserimg success at index "+i)
-            let jsdata = JSON.parse(res.data)
-            that.tag[i] = 1
-            that.redirectToView(i, jsdata.data)
-          }
-        })
-      }else{
-        wx.request({
-          url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
-          data: {
-            'userId': wx.getStorageSync('userId'),
-            'albumItemId': submodule.id+"",
-            'albumId': albumId+""
-          },
-          fail: function (res) {
-            console.log(res)
-            that.uploadfailed = true
-            that.tag[i] = -1
-            that.redirectToView(i, 0)
-          },
-          success: function(res){
-            console.log("uploadnotuserimg success at index "+i)
-            let usrAlbId = res.data.data
-            that.tag[i] = 1
-            that.redirectToView(i, usrAlbId)
-          }
-        })
-      }
-    }
-    // 设置10s后跳转
-    this.timeoutId = setTimeout(function () {
-      if (!this.uploadfailed && this.timeout){
-        console.log("超时跳转")
-        wx.hideToast()
-        wx.redirectTo({
-          url: '../viewswiper/viewswiper?userAlbumId=' + this.userAlbumId+ "&from=1"
-        })
-      }
-    }, 10000)
+    this.uploadImage(0)
 
   }
 }
