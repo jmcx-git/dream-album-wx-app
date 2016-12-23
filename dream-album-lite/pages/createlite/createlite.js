@@ -134,20 +134,43 @@ let pageData = {
     this.initAlbumDetail(this.data.choosed)
   },
   redirectToView: function(i, userAlbumId){
+    console.log("userAlbumId", userAlbumId)
+    console.log(this.tag)
 
-    if(!this.redirectOk){
-      setTimeout(function () {
+    if(this.uploadfailed&& this.modalShowed != true){
+      this.modalShowed = true
+      wx.hideToast()
+      wx.showModal({
+        title: "提示",
+        content: "上传文件错误，请从新上传",
+        showCancel: false
+      })
+    }else{
+      let needRedirect = true;
+      for(let i=0;i< this.data.submodules.length; i++){
+          if(this.tag[i] != 1){
+            needRedirect = false
+            break
+          }
+          if(this.tag[i] === 1){
+            this.userAlbumId = userAlbumId
+          }
+      }
+      if(needRedirect){
+        // 4张图片均正确返回
+        this.timeout = false // 不需要走timeout跳转逻辑
+        clearTimeout(this.timeoutId) // 清楚 settimeout
+        console.log("全部正确返回跳转")
         wx.hideToast()
         wx.redirectTo({
-          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId
+          url: '../viewswiper/viewswiper?userAlbumId=' + userAlbumId+ "&from=1"
         })
-      }, 10000)
-      this.redirectOk = true
+      }
     }
-
   },
   createAlbum: function(e){
-    this.redirectOk = false;
+    this.tag = []
+    this.timeout = true;// 是否走timeout自动跳转逻辑
     let that = this;
     wx.showToast({
       title: '正在上传照片...',
@@ -155,10 +178,11 @@ let pageData = {
       duration: 10000
     })
     let albumId = that.data.albumList[that.data.choosed].id
-    let uploadfailed = false
-    for(let i =0;i< that.data.submodules.length && !uploadfailed;i++){
+    this.uploadfailed = false
+    for(let i =0;i< that.data.submodules.length && !this.uploadfailed;i++){
       let submodule = that.data.submodules[i]
       console.log("upload img at index = "+i)
+      this.tag.push(0)
       if(submodule.elesrc != ""){
         wx.uploadFile({
           url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
@@ -170,11 +194,15 @@ let pageData = {
             'albumId': albumId+""
           },
           fail: function (res) {
-            uploadfailed = true
+            console.log(res)
+            that.uploadfailed = true
+            that.tag[i] = -1
+            that.redirectToView(i, 0)
           },
           success: function(res){
             console.log("uploaduserimg success at index "+i)
             let jsdata = JSON.parse(res.data)
+            that.tag[i] = 1
             that.redirectToView(i, jsdata.data)
           }
         })
@@ -187,24 +215,31 @@ let pageData = {
             'albumId': albumId+""
           },
           fail: function (res) {
-            uploadfailed = true
+            console.log(res)
+            that.uploadfailed = true
+            that.tag[i] = -1
+            that.redirectToView(i, 0)
           },
           success: function(res){
             console.log("uploadnotuserimg success at index "+i)
             let usrAlbId = res.data.data
+            that.tag[i] = 1
             that.redirectToView(i, usrAlbId)
           }
         })
       }
     }
-    if (uploadfailed){
-      wx.hideToast()
-      wx.showModal({
-        title: "提示",
-        content: "上传文件错误，请从新上传",
-        showCancel: false
-      })
-    }
+    // 设置10s后跳转
+    this.timeoutId = setTimeout(function () {
+      if (!this.uploadfailed && this.timeout){
+        console.log("超时跳转")
+        wx.hideToast()
+        wx.redirectTo({
+          url: '../viewswiper/viewswiper?userAlbumId=' + this.userAlbumId+ "&from=1"
+        })
+      }
+    }, 10000)
+
   }
 }
 Page(pageData)
