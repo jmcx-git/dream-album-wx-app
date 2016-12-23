@@ -86,6 +86,9 @@ let pageData = {
       editAreaRelativeHeight: shadowImgHeight + "rpx"
     })
   },
+  picLoad: function(e){
+    wx.hideToast();
+  },
   chooseImage: function (e) {
     let that = this;
     let index = this.data.index;
@@ -100,6 +103,11 @@ let pageData = {
         that.data.submodules[index].choosed = true
         that.setData({
           submodules: that.data.submodules
+        })
+        wx.showToast({
+          title: "加载背景中...",
+          icon: "loading",
+          duration: 3000
         })
       }
     })
