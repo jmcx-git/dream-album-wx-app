@@ -24,6 +24,7 @@ Page({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight
     })
+    that.from=options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
     that.init()
@@ -33,9 +34,10 @@ Page({
     that.setData({
       refreshtip: ''
     })
+    let from = that.from;
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
-    if (userAlbumId != undefined) {
+    if (userAlbumId != undefined&&from==1) {
       wx.showToast({
         title: '加载中',
         icon: 'loading',

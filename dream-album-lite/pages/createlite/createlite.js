@@ -137,7 +137,7 @@ let pageData = {
     // 上传图片， index：图片在 that.data.submodules 的下表
     let that = this
     wx.hideToast()
-    console.log(index)
+
     // 一些必要的数据
     let albumId = that.data.albumList[that.data.choosed].id
     // 判断index = lenght：应该停止，跳转下一页
@@ -157,7 +157,7 @@ let pageData = {
       // 接口回调 fail 走失败路径，显示上传错误提示
       // 接口回调success 走成功路径，继续上传下一张
     let submodule = that.data.submodules[index]
-    console.log(submodule,that.data.submodules, index)
+
     if(submodule.elesrc != ""){
       wx.uploadFile({
         url: app.globalData.serverHost + "/dream/album/common/uploaduserimg.json",
@@ -169,7 +169,7 @@ let pageData = {
           'albumId': albumId+""
         },
         fail: function (res) {
-          console.log(res)
+
           wx.hideToast()
           wx.showModal({
             title: "提示",
@@ -178,7 +178,7 @@ let pageData = {
           })
         },
         success: function(res){
-          console.log("uploaduserimg success at index "+index)
+
           let jsdata = JSON.parse(res.data)
           this.userAlbumId = jsdata.data;
           that.uploadImage(index+1)
@@ -193,7 +193,7 @@ let pageData = {
           'albumId': albumId+""
         },
         fail: function (res) {
-          console.log(res)
+
           wx.hideToast()
           wx.showModal({
             title: "提示",
@@ -202,7 +202,7 @@ let pageData = {
           })
         },
         success: function(res){
-          console.log("uploadnotuserimg success at index "+index)
+
           let usrAlbId = res.data.data
           that.userAlbumId = usrAlbId
           that.uploadImage(index+1)
