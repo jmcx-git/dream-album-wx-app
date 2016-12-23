@@ -20,3 +20,17 @@
 .pptClass.on{
     background-color: #ff5956;
 }
+.loading_page{
+    position: absolute;
+    padding: 150rpx 275rpx; 
+}
+.loading_pic{
+    width: 200rpx;
+    height: 350rpx;
+}
+.loading_text{
+    display: block;
+    font-size: 0.8em;
+    color: #afafaf;
+    margin-top: 180rpx;
+}
