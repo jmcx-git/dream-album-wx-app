@@ -141,7 +141,7 @@ let pageData = {
     // 一些必要的数据
     let albumId = that.data.albumList[that.data.choosed].id
     // 判断index = lenght：应该停止，跳转下一页
-    console.log("userAlbumId", this.userAlbumId)
+    
     if(index == that.data.submodules.length){
       wx.redirectTo({
         url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId+ "&from=1"
@@ -179,10 +179,10 @@ let pageData = {
           })
         },
         success: function(res){
-          console.log("with img",res)
+
           let jsdata = JSON.parse(res.data)
           that.userAlbumId = jsdata.data;
-          console.log("with img",that.userAlbumId)
+
           that.uploadImage(index+1)
         }
       })
@@ -204,10 +204,10 @@ let pageData = {
           })
         },
         success: function(res){
-          console.log("without img",res)
+
           let usrAlbId = res.data.data
           that.userAlbumId = usrAlbId
-          console.log("without img", that.userAlbumId)
+
           that.uploadImage(index+1)
         }
       })
