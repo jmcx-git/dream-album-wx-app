@@ -170,7 +170,7 @@ Page({
     this.setData({
       picLoadCount:that.data.picLoadCount+1
     })
-    if(this.data.picLoadCount==this.data.items.length){
+    if(this.data.picLoadCount > 0  && this.data.picLoadCount >= this.data.items.length / 2 ){
       wx.hideToast();
       that.setData({
         picLoadFinish:true
