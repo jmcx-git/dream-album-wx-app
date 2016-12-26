@@ -141,7 +141,7 @@ let pageData = {
     // 一些必要的数据
     let albumId = that.data.albumList[that.data.choosed].id
     // 判断index = lenght：应该停止，跳转下一页
-    
+
     if(index == that.data.submodules.length){
       wx.redirectTo({
         url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId+ "&from=1"
@@ -223,7 +223,23 @@ let pageData = {
       duration: 10000
     })
     this.uploadImage(0)
-
+  },
+  chooseImage: function(e){
+    let index = e.target.dataset.index
+    let submodule = this.data.submodules[index]
+    let that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType:['album', 'camera'],
+      success: function(res){
+        // let tmppaths = res.tempFilePaths;
+        submodule.elesrc = res.tempFilePaths[0]
+        that.setData({
+          submodules: that.data.submodules
+        })
+      }
+    })
   }
 }
 Page(pageData)

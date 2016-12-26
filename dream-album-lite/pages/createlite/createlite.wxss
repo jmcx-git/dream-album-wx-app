@@ -7,13 +7,14 @@ page{
   flex-wrap: wrap;
 }
 .scroll-view_content{
-  
+
 }
 .content_detail{
   display:flex;
   flex-wrap: wrap;
 }
 .content_item{
+  position: relative;
   display:block;
   margin: 5px 0 0 5px;
 }
