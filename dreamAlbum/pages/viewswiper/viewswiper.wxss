@@ -12,7 +12,7 @@
     text-align: center;
     padding:10px;
     color: #353535;
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
 }
 .pptClass.ppt.on{
