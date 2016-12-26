@@ -1,8 +1,6 @@
 {
   "pages":[
     "pages/my/my",
-    "pages/index/index",
-    "pages/create/create",
     "pages/createlite/createlite",
     "pages/viewswiper/viewswiper"
   ],

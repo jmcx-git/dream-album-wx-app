@@ -15,6 +15,8 @@ Page({
     bottomDisplay: 'block',
     intervalOver: true,
     bottomHidden: false,
+    shareAlbumId: '',
+    shareUserAlbumId: '',
     refresh: true,
     refreshtip: ''
   },
@@ -22,9 +24,11 @@ Page({
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
-      winHeight: app.globalData.windowHeight
+      winHeight: app.globalData.windowHeight,
+      shareAlbumId: options.albumId,
+      shareUserAlbumId: options.userAlbumId
     })
-    that.from=options.from;
+    that.from = options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
     that.init()
@@ -37,16 +41,16 @@ Page({
     let from = that.from;
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
-    if (userAlbumId != undefined&&from==1) {
+    if (userAlbumId != undefined && from == 1) {
       wx.showToast({
         title: '加载中',
         icon: 'loading',
         duration: 5000
       })
-      setTimeout(function(){
+      setTimeout(function () {
         that.requestData()
-      },5000)
-    }else{
+      }, 5000)
+    } else {
       that.requestData()
     }
 
@@ -173,6 +177,14 @@ Page({
       wx.navigateBack({
         delta: 6
       })
+    }
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: '分享我的相册',
+      desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
+      path: '/pages/viewswiper/viewswiper?albumId=' + that.data.shareAlbumId + '&userAlbumId=' + that.data.shareUserAlbumId
     }
   }
 })
