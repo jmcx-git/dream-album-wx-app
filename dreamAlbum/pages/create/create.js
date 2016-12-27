@@ -2,7 +2,10 @@ var app = getApp();
 let pageData = {
   data: {
     submodules: [],
-    index: 0
+    index: 0,
+    backTxt:"上一页",
+    nextTxt: "下一页",
+    nextTxtRight: 30
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -74,6 +77,22 @@ let pageData = {
     let shadowImgHeight = submodule.editAreaHeight / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
     let shadowImgLeft = 55 + submodule.editAreaLeft / submodule.bgImgWidth * 640;
     let shadowImgTop = 55 + submodule.editAreaTop / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
+
+    // back，next 的文字描述
+    if(index ==0){
+      this.data.backTxt = "返回首页"
+    }else{
+      this.data.backTxt ="上一页"
+    }
+    if(index == this.data.submodules.length-1){
+      this.data.nextTxt = "生成相册"
+      this.data.nextTxtRight = 0
+    }else{
+      this.data.nextTxt = "下一页"
+      this.data.nextTxtRight = 30
+    }
+
+
     // 设置数据：
     this.setData({
       index: index,
@@ -83,7 +102,10 @@ let pageData = {
       editAreaRelativeTop: shadowImgTop + "rpx",
       editAreaRelativeLeft: shadowImgLeft + "rpx",
       editAreaRelativeWidth: shadowImgWidth + "rpx",
-      editAreaRelativeHeight: shadowImgHeight + "rpx"
+      editAreaRelativeHeight: shadowImgHeight + "rpx",
+      backTxt: this.data.backTxt,
+      nextTxt: this.data.nextTxt,
+      nextTxtRight: this.data.nextTxtRight
     })
   },
   picLoad: function(e){
@@ -142,8 +164,22 @@ let pageData = {
             that.init(++index)
           } else {
             app.globalData.finishCreateFlag=true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
@@ -172,8 +208,22 @@ let pageData = {
           } else {
             wx.hideToast()
             app.globalData.finishCreateFlag=true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
