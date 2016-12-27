@@ -128,11 +128,8 @@ Page({
         dbClick: false,
         clickCount: 0
       })
+      that.showBottomNav();
     },1000)
-    if(that.data.intervalOver){
-      return;
-    }
-    that.showBottomNav();
     setTimeout(function(){
       if(that.data.goClick){
         return;
