@@ -180,10 +180,17 @@ Page({
   },
   onShareAppMessage: function () {
     let that = this;
+    let queryStr = "appId=" + app.globalData.appId
+    if(typeof this.data.shareAlbumId !== "undefined"){
+        queryStr = queryStr + "&albumId=" + this.data.shareAlbumId;
+    }
+    if(typeof this.data.shareUserAlbumId !== "undefined"){
+        queryStr = queryStr + "&userAlbumId=" + this.data.shareUserAlbumId;
+    }
     return {
       title: '分享我的相册',
       desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
-      path: '/pages/viewswiper/viewswiper?albumId=' + that.data.shareAlbumId + '&userAlbumId=' + that.data.shareUserAlbumId + '&appId=' + app.globalData.appId
+      path: '/pages/viewswiper/viewswiper?' +  queryStr
     }
   }
 })

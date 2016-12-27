@@ -14,6 +14,7 @@ App({
     windowWidth: 375,
     windowHeight: 625,
     serverHost: "https://developer.mokous.com/wx/",
-    finishCreateFlag:false
+    finishCreateFlag:false,
+    appId: "wx0ddc8673b8df3827"
   }
 })
