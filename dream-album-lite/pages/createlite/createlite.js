@@ -143,9 +143,24 @@ let pageData = {
     // 判断index = lenght：应该停止，跳转下一页
 
     if(index == that.data.submodules.length){
-      wx.redirectTo({
-        url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId+ "&from=1"
+      wx.showModal({
+        title: "创建完成",
+        // content: "立即预览相册",
+        cancelText: "返回首页",
+        confirmText: "预览相册",
+        success: function(res){
+          if(res.confirm){
+            wx.redirectTo({
+              url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId+ "&from=1"
+            })
+          }else {
+            wx.navigateBack({
+              delta: 2
+            });
+          }
+        }
       })
+
       return
     }
     // 显示，正在生成第index+1张模板照片
