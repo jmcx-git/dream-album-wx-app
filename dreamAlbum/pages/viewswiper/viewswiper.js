@@ -19,7 +19,6 @@ Page({
     shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
     shareAlbumId:'',
     shareUserAlbumId:'',
-    currentFade:'',
     bottomHeight: 50,
     dbClick: false,
     goClick: true
@@ -47,17 +46,11 @@ Page({
           bigPreImg:res.data.bigPreImg
         })
         setTimeout(function(){
-          that.setData({
-            currentFade:'on'
-          })
-          setTimeout(function(){
             that.setData({
               intervalOver:false,
-              bottomHidden:true,
-              currentFade:''
+              bottomHidden:true
             })
-          },1000)
-        },5000)
+        },3000)
       }
     })
   },
@@ -162,16 +155,10 @@ Page({
     that.clearData();
     setTimeout(function(){
         that.setData({
-          currentFade:'on'
+          intervalOver:false,
+          bottomHidden:true
         })
-        setTimeout(function(){
-          that.setData({
-            intervalOver:false,
-            bottomHidden:true,
-            currentFade:''
-          })
-        },1000)
-      },5000)
+      },3000)
   },
   clearData: function(){
     this.setData({
