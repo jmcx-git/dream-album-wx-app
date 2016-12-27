@@ -64,6 +64,8 @@ page{
     margin-top:6px;
     height: 22px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .subMainInput{
     text-align: center;
