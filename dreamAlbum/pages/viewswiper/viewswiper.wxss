@@ -2,9 +2,50 @@
     background-color: #efeff4;
 }
 .bottomClass{
+    height:50px;
     width:100%;
     display: flex;
     box-sizing: border-box;
+    position: fixed;
+    z-index: 10;
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 2s; 
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 0s; 
+}
+.bottomFadeClass{
+    height:50px;
+    width:100%;
+    display: flex;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 10;
+    -webkit-animation-name: fadeOut;
+    -webkit-animation-duration: 2s; 
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-delay: 0s; 
+}
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 1; 
+    }
+}
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0; 
+    }
+    100% {
+        opacity: 0; 
+    }
 }
 .pptClass{
     width:50%;

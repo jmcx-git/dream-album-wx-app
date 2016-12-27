@@ -18,7 +18,8 @@ Page({
     shareTitle:'分享我的相册',
     shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
     shareAlbumId:'',
-    shareUserAlbumId:''
+    shareUserAlbumId:'',
+    currentFade:''
   },
   onLoad:function(options){
     let that=this;
@@ -44,11 +45,16 @@ Page({
         })
         setTimeout(function(){
           that.setData({
-            winHeight:that.data.winHeight+50,
-            intervalOver:false,
-            bottomHidden:true
+            currentFade:'on'
           })
-        },3000)
+          setTimeout(function(){
+            that.setData({
+              intervalOver:false,
+              bottomHidden:true,
+              currentFade:''
+            })
+          },1000)
+        },5000)
       }
     })
   },
@@ -133,17 +139,21 @@ Page({
       return;
     }
     this.setData({
-      winHeight:that.data.winHeight-50,
       intervalOver:true,
       bottomHidden:false
     })
     setTimeout(function(){
-      that.setData({
-        winHeight:that.data.winHeight+50,
-        intervalOver:false,
-        bottomHidden:true
-      })
-    },2000)
+        that.setData({
+          currentFade:'on'
+        })
+        setTimeout(function(){
+          that.setData({
+            intervalOver:false,
+            bottomHidden:true,
+            currentFade:''
+          })
+        },1000)
+      },5000)
   },
   clearInTime:function(){
     let that=this;
