@@ -105,7 +105,10 @@ let pageData = {
       editAreaRelativeTop: shadowImgTop + "rpx",
       editAreaRelativeLeft: shadowImgLeft + "rpx",
       editAreaRelativeWidth: shadowImgWidth + "rpx",
-      editAreaRelativeHeight: shadowImgHeight + "rpx"
+      editAreaRelativeHeight: shadowImgHeight + "rpx",
+      backTxt: this.data.backTxt,
+      nextTxt: this.data.nextTxt,
+      nextTxtRight: this.data.nextTxtRight
     })
   },
   picLoad: function (e) {
@@ -176,9 +179,23 @@ let pageData = {
           if (index < length - 1) {
             that.init(++index)
           } else {
-            app.globalData.finishCreateFlag = true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            app.globalData.finishCreateFlag=true;
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
@@ -207,9 +224,23 @@ let pageData = {
             that.init(++index)
           } else {
             wx.hideToast()
-            app.globalData.finishCreateFlag = true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            app.globalData.finishCreateFlag=true;
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
