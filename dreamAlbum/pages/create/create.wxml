@@ -8,16 +8,21 @@
   <view class="footer_item" catchtap="back">
     <image class="back" src="../../image/backblue.png"></image>
     <view class="backText">
-      <text>上一页</text>
+      <text>{{back}}</text>
     </view>
   </view>
   <view class="footer_item">
-    <image class="add" catchtap="chooseImage" src="../../image/addblue.png"></image>
+    <view wx:if="{{submodules[index].addStatus}}">
+      <image class="add" catchtap="chooseImage" src="../../image/addblue.png"></image>
+    </view>
+    <view wx:else>
+      <image class="add" catchtap="deleteImage" src="../../image/delete.png"></image>
+    </view>
   </view>
   <view class="footer_item" catchtap="save">
-    <view class="nextText">
-      <text>下一页</text>
-    </view>
     <image class="next" src="../../image/nextblue.png"></image>
+    <view class="nextText">
+      <text>{{next}}</text>
+    </view>
   </view>
 </view>
