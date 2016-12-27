@@ -32,7 +32,8 @@ Page({
                 wx.request({
                   url: app.globalData.serverHost + 'dream/user/login/getSession.json',
                   data: {
-                    code: resl.code
+                    code: resl.code,
+                    appId: app.globalData.appId
                   },
                   method: 'GET',
                   success: function (ress) {
@@ -45,7 +46,8 @@ Page({
                           data: {
                             threeSessionKey: ress.data,
                             encryptedData: resinfo.encryptedData,
-                            iv: resinfo.iv
+                            iv: resinfo.iv,
+                            appId: app.globalData.appId
                           },
                           method: 'GET',
                           success: function (resuser) {
@@ -77,7 +79,9 @@ Page({
             //用户点击取消
             wx.request({
               url: app.globalData.serverHost + 'dream/user/login/addUser.json',
-              data: {},
+              data: {
+                appId: app.globalData.appId
+              },
               method: 'GET',
               success: function (res) {
                 wx.setStorageSync('userId', res.data);
@@ -166,7 +170,8 @@ Page({
     wx.request({
       url: url,
       data: {
-        userId: userId
+        userId: userId,
+        appId: app.globalData.appId
       },
       method: 'GET',
       success: function (res) {
@@ -258,7 +263,8 @@ Page({
               url: url,
               data: {
                 userAlbumId: itemx.userAlbumId,
-                title: title
+                title: title,
+                appId: app.globalData.appId
               },
               method: 'GET',
               success: function (res) {

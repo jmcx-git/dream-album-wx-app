@@ -63,7 +63,8 @@ Page({
       url: app.globalData.serverHost + 'dream/album/common/getpreview.json?',
       data: {
         albumId: albumId == undefined ? '' : albumId,
-        userAlbumId: userAlbumId == undefined ? '' : userAlbumId
+        userAlbumId: userAlbumId == undefined ? '' : userAlbumId,
+        appId: app.globalData.appId
       },
       method: 'GET',
       success: function (res) {
@@ -77,7 +78,6 @@ Page({
           setTimeout(function () {
             that.setData({
               bottomDisplay: 'none',
-              winHeight: that.data.winHeight + 50,
               intervalOver: false,
               bottomHidden: true
             })
@@ -150,14 +150,12 @@ Page({
     }
     this.setData({
       bottomDisplay: 'block',
-      winHeight: that.data.winHeight - 50,
       intervalOver: true,
       bottomHidden: false
     })
     setTimeout(function () {
       that.setData({
         bottomDisplay: 'none',
-        winHeight: that.data.winHeight + 50,
         intervalOver: false,
         bottomHidden: true
       })
@@ -167,6 +165,7 @@ Page({
     // 页面渲染完成
   },
   onShow: function () {
+      console.log(getCurrentPages().length);
     // 页面显示
   },
   onHide: function () {
@@ -174,8 +173,8 @@ Page({
   },
   onUnload: function () {
     if (app.globalData.finishCreateFlag) {
-      wx.navigateBack({
-        delta: 6
+      wx.redirectTo({
+        url: "../my/my"
       })
     }
   },
@@ -184,7 +183,7 @@ Page({
     return {
       title: '分享我的相册',
       desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
-      path: '/pages/viewswiper/viewswiper?albumId=' + that.data.shareAlbumId + '&userAlbumId=' + that.data.shareUserAlbumId
+      path: '/pages/viewswiper/viewswiper?albumId=' + that.data.shareAlbumId + '&userAlbumId=' + that.data.shareUserAlbumId + '&appId=' + app.globalData.appId
     }
   }
 })

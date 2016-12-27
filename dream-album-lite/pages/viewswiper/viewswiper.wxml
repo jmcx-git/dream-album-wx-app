@@ -6,18 +6,18 @@
 </view>
 <view wx:else>
     <view hidden="{{pptHidden}}">
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight-50}}px;">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
-                    <image src="{{item}}" class="slide-image" bindtap="showBottom" style="width:{{winWidth}}px;height:{{winHeight-50}}px;"/>
+                    <image src="{{item}}" class="slide-image" bindtap="showBottom" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                 </swiper-item>
             </block>
         </swiper>
     </view>
 
     <view hidden="{{portHidden}}">
-    <scroll-view scroll-y="true" style="width:{{winWidth}}px;height:{{winHeight-50}}px;">
-        <image src="{{bigPreImg}}" bindlongtap="saveImg" bindtap="showBottom" data-src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight-50)*loopPreImgs.length}}px;" />
+    <scroll-view scroll-y="true" style="width:{{winWidth}}px;height:{{winHeight}}px;">
+        <image src="{{bigPreImg}}" bindlongtap="saveImg" bindtap="showBottom" data-src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight)*loopPreImgs.length}}px;" />
     </scroll-view>
     </view>
     <view class="bottomClass" style="width:{{winWidth}}px;height:50px;" hidden="{{bottomHidden}}">
