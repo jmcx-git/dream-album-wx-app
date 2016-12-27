@@ -15,6 +15,8 @@ Page({
     bottomDisplay: 'block',
     intervalOver: true,
     bottomHidden: false,
+    shareAlbumId: '',
+    shareUserAlbumId: '',
     refresh: true,
     refreshtip: ''
   },
@@ -22,9 +24,11 @@ Page({
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
-      winHeight: app.globalData.windowHeight
+      winHeight: app.globalData.windowHeight,
+      shareAlbumId: options.albumId,
+      shareUserAlbumId: options.userAlbumId
     })
-    that.from=options.from;
+    that.from = options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
     that.init()
@@ -37,16 +41,16 @@ Page({
     let from = that.from;
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
-    if (userAlbumId != undefined&&from==1) {
+    if (userAlbumId != undefined && from == 1) {
       wx.showToast({
         title: '加载中',
         icon: 'loading',
         duration: 5000
       })
-      setTimeout(function(){
+      setTimeout(function () {
         that.requestData()
-      },5000)
-    }else{
+      }, 5000)
+    } else {
       that.requestData()
     }
 
@@ -59,7 +63,8 @@ Page({
       url: app.globalData.serverHost + 'dream/album/common/getpreview.json?',
       data: {
         albumId: albumId == undefined ? '' : albumId,
-        userAlbumId: userAlbumId == undefined ? '' : userAlbumId
+        userAlbumId: userAlbumId == undefined ? '' : userAlbumId,
+        appId: app.globalData.appId
       },
       method: 'GET',
       success: function (res) {
@@ -73,7 +78,6 @@ Page({
           setTimeout(function () {
             that.setData({
               bottomDisplay: 'none',
-              winHeight: that.data.winHeight + 50,
               intervalOver: false,
               bottomHidden: true
             })
@@ -146,14 +150,12 @@ Page({
     }
     this.setData({
       bottomDisplay: 'block',
-      winHeight: that.data.winHeight - 50,
       intervalOver: true,
       bottomHidden: false
     })
     setTimeout(function () {
       that.setData({
         bottomDisplay: 'none',
-        winHeight: that.data.winHeight + 50,
         intervalOver: false,
         bottomHidden: true
       })
@@ -163,6 +165,7 @@ Page({
     // 页面渲染完成
   },
   onShow: function () {
+      console.log(getCurrentPages().length);
     // 页面显示
   },
   onHide: function () {
@@ -170,9 +173,17 @@ Page({
   },
   onUnload: function () {
     if (app.globalData.finishCreateFlag) {
-      wx.navigateBack({
-        delta: 6
+      wx.redirectTo({
+        url: "../my/my"
       })
+    }
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: '分享我的相册',
+      desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
+      path: '/pages/viewswiper/viewswiper?albumId=' + that.data.shareAlbumId + '&userAlbumId=' + that.data.shareUserAlbumId + '&appId=' + app.globalData.appId
     }
   }
 })

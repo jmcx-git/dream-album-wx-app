@@ -2,9 +2,12 @@
     background-color: #efeff4;
 }
 .bottomClass{
+    height:50px;
     width:100%;
     display: flex;
     box-sizing: border-box;
+    position: fixed;
+    z-index: 10;
 }
 .pptClass{
     width:50%;
@@ -12,7 +15,7 @@
     text-align: center;
     padding:10px;
     color: #353535;
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
 }
 .pptClass.ppt.on{

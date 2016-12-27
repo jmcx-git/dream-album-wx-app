@@ -18,7 +18,10 @@ Page({
     shareTitle:'分享我的相册',
     shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
     shareAlbumId:'',
-    shareUserAlbumId:''
+    shareUserAlbumId:'',
+    bottomHeight: 50,
+    dbClick: false,
+    goClick: true
   },
   onLoad:function(options){
     let that=this;
@@ -43,11 +46,10 @@ Page({
           bigPreImg:res.data.bigPreImg
         })
         setTimeout(function(){
-          that.setData({
-            winHeight:that.data.winHeight+50,
-            intervalOver:false,
-            bottomHidden:true
-          })
+            that.setData({
+              intervalOver:false,
+              bottomHidden:true
+            })
         },3000)
       }
     })
@@ -108,50 +110,62 @@ Page({
   showBottom:function(e){
     let that=this;
     this.setData({
-      clickCount:that.data.clickCount+1
+      clickCount: that.data.clickCount + 1
     })
-    if(this.data.clickCount==1){
-      that.clearInTime();
-    }
-    if(this.data.clickCount==2){
-      var urls=[];
-      urls.push(e.currentTarget.dataset.img);
-      wx.previewImage({
-        // current: 'String', // 当前显示图片的链接，不填则默认为 urls 的第一张
-        urls: urls,
-        success: function(res){
-          that.setData({
-            clickCount:0
-          })
-        }
-      })
+    setTimeout(function(){
+      if(that.data.dbClick){
+        return;
+      }
       that.setData({
-        clickCount:0
+        goClick: true,
+        dbClick: false,
+        clickCount: 0
       })
-    }
-    if(that.data.intervalOver){
-      return;
-    }
-    this.setData({
-      winHeight:that.data.winHeight-50,
+      that.showBottomNav();
+    },1000)
+    setTimeout(function(){
+      if(that.data.goClick){
+        return;
+      }
+      if(that.data.clickCount >= 2){
+        that.setData({
+          goClick: false,
+          dbClick: true,
+          clickCount: 0
+        });
+        that.showPreviewImage(e.currentTarget.dataset.img);
+      }
+    }, 500);
+  },
+  showPreviewImage: function(imgs){
+    let that = this;
+    var urls=[];
+    urls.push(imgs);
+    wx.previewImage({
+      urls: urls
+    });
+    that.clearData();
+  },
+  showBottomNav: function(){
+    let that = this;
+    that.setData({
       intervalOver:true,
       bottomHidden:false
-    })
+    });
+    that.clearData();
     setTimeout(function(){
-      that.setData({
-        winHeight:that.data.winHeight+50,
-        intervalOver:false,
-        bottomHidden:true
-      })
-    },2000)
+        that.setData({
+          intervalOver:false,
+          bottomHidden:true
+        })
+      },3000)
   },
-  clearInTime:function(){
-    let that=this;
-    setTimeout(function(){
-      that.setData({
-        clickCount:0
-      })
-    },1000)
+  clearData: function(){
+    this.setData({
+      dbClick: false,
+      goClick: false,
+      clickCount:0
+    })
   },
   onReady:function(){
     // 页面渲染完成

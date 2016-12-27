@@ -28,11 +28,12 @@ page{
   -webkit-flex: 1;
           flex: 1;
           flex-wrap: wrap;
+          display: inline-flex;
 }
 
 .footer_item .back{
   position: relative;
-  top: 22rpx;
+  top: 25rpx;
   left: 50rpx;
   width: 50rpx;
   height: 50rpx;
@@ -48,7 +49,7 @@ page{
 
 .footer_item .next{
   position: relative;
-  top: -35rpx;
+  top: 25rpx;
   left: 150rpx;
   width: 50rpx;
   height: 50rpx;
@@ -56,14 +57,14 @@ page{
 .backText{
   color: #fff;
   font-size: 36rpx;
-  position: relative;
-  top:-43rpx;
+  position: absolute;
+  top:22rpx;
   left: 110rpx;
 }
 .nextText{
   color: #fff;
   font-size: 36rpx;
-  position: relative;
-  top:20rpx;
-  right:-30rpx;
+  position: absolute;
+  top:22rpx;
+  right:110rpx;
 }

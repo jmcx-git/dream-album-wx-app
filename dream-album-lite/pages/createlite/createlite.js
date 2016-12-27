@@ -13,7 +13,8 @@ let pageData = {
     templateHeight:0,
     content_hegiht: 0, // content 部分高度
     icon_top:0,   // 完成按钮的top和left值
-    icon_left:0
+    icon_left:0,
+    created: false
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -105,11 +106,11 @@ let pageData = {
       url: app.globalData.serverHost+'dream/album/common/listalbums.json',
       data: {
         size:that.data.size,
-        start:that.data.start
+        start:that.data.start,
+        appId: app.globalData.appId
       },
       method: 'GET',
       success: function(res){
-
         let alist = that.data.albumList.concat(res.data)
         // alist = alist.concat(res.data)
         that.setData({
@@ -141,11 +142,33 @@ let pageData = {
     // 一些必要的数据
     let albumId = that.data.albumList[that.data.choosed].id
     // 判断index = lenght：应该停止，跳转下一页
-    
+
     if(index == that.data.submodules.length){
-      wx.redirectTo({
-        url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId+ "&from=1"
+      app.globalData.finishCreateFlag = true;
+      wx.showModal({
+        title: "创建完成",
+        // content: "立即预览相册",
+        cancelText: "返回首页",
+        confirmText: "预览相册",
+        success: function(res){
+          if(res.confirm){
+            let userId = wx.getStorageSync("userId");
+            wx.redirectTo({
+              url: '../viewswiper/viewswiper?userId=' + userId + 'albumId=' + albumId+ '&userAlbumId=' + that.userAlbumId+ "&from=1"
+            })
+          }else {
+            wx.navigateBack({
+              delta: getCurrentPages().length
+            });
+          }
+        },
+        complete: function(){
+          that.setData({
+            created: false
+          })
+        }
       })
+
       return
     }
     // 显示，正在生成第index+1张模板照片
@@ -165,12 +188,12 @@ let pageData = {
         filePath: submodule.elesrc,
         name: 'image',
         formData: {
-          'userId': wx.getStorageSync('userId'),
+          'userId': wx.getStorageSync('userId') + "",
           'albumItemId': submodule.id+"",
-          'albumId': albumId+""
+          'albumId': albumId+"",
+          'appId': app.globalData.appId + ""
         },
         fail: function (res) {
-
           wx.hideToast()
           wx.showModal({
             title: "提示",
@@ -179,20 +202,19 @@ let pageData = {
           })
         },
         success: function(res){
-
-          let jsdata = JSON.parse(res.data)
+          let jsdata = JSON.parse(res.data);
           that.userAlbumId = jsdata.data;
-
-          that.uploadImage(index+1)
+          that.uploadImage(index+1);
         }
       })
     }else{
       wx.request({
         url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
         data: {
-          'userId': wx.getStorageSync('userId'),
+          'userId': wx.getStorageSync('userId') + "",
           'albumItemId': submodule.id+"",
-          'albumId': albumId+""
+          'albumId': albumId+"",
+          'appId': app.globalData.appId + ""
         },
         fail: function (res) {
 
@@ -204,16 +226,20 @@ let pageData = {
           })
         },
         success: function(res){
-
           let usrAlbId = res.data.data
           that.userAlbumId = usrAlbId
-
           that.uploadImage(index+1)
         }
       })
     }
   },
   createAlbum: function(e){
+    if(this.data.created){
+      return;
+    }
+    this.setData({
+      created: true
+    })
     this.tag = []
     this.timeout = true;// 是否走timeout自动跳转逻辑
     let that = this;
@@ -223,7 +249,23 @@ let pageData = {
       duration: 10000
     })
     this.uploadImage(0)
-
+  },
+  chooseImage: function(e){
+    let index = e.target.dataset.index
+    let submodule = this.data.submodules[index]
+    let that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType:['album', 'camera'],
+      success: function(res){
+        // let tmppaths = res.tempFilePaths;
+        submodule.elesrc = res.tempFilePaths[0]
+        that.setData({
+          submodules: that.data.submodules
+        })
+      }
+    })
   }
 }
 Page(pageData)

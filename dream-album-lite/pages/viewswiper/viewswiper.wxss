@@ -2,10 +2,13 @@
     background-color: #efeff4;
 }
 .bottomClass{
+    height:50px;
     width:100%;
     display: flex;
-    font-size: 18px;
     box-sizing: border-box;
+    bottom:0px;
+    position: fixed;
+    z-index: 10;
 }
 .pptClass{
     width:50%;
@@ -13,13 +16,51 @@
     text-align: center;
     padding:10px;
     color: #353535;
+    display: flex !important;
+    flex-wrap: wrap;
+    background-color: #00adef;
+    filter:alpha(opacity = 66);  
+    -moz-opacity:0.66;  
+    -khtml-opacity: 0.66;  
+    opacity: 0.66; 
 }
 .pptClass.ppt.on{
-    background-color: #ff5956;
+    filter:alpha(opacity = 100);  
+    -moz-opacity:1;  
+    -khtml-opacity: 1;  
+    opacity: 1; 
 }
 .pptClass.on{
-    background-color: #ff5956;
+    filter:alpha(opacity = 1);  
+    -moz-opacity:1;  
+    -khtml-opacity: 1;  
+    opacity: 1; 
 }
+
+.pptText{
+    font-size: 36rpx;
+    width:70%;
+    text-align: left;
+}
+.pptImage{
+    width:30%;
+    text-align: right;
+}
+
+.albumImg{
+    width:45rpx;
+    height:45rpx;
+    padding-top:5%;
+    padding-right:8%;
+}
+
+.portImg{
+    width:45rpx;
+    height:45rpx;
+    padding-top:5%;
+    padding-right:8%;
+}
+
 .loading_page{
     position: absolute;
     padding: 150rpx 275rpx; 
