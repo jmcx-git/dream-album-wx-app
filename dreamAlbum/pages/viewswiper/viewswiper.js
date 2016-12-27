@@ -19,13 +19,19 @@ Page({
     shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
     shareAlbumId:'',
     shareUserAlbumId:'',
+<<<<<<< HEAD
     currentFade:''
+=======
+    bottomHeight: 50,
+    dbClick: false,
+    goClick: true
+>>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
   },
   onLoad:function(options){
     let that=this;
     that.setData({
         winWidth:app.globalData.windowWidth,
-        winHeight:app.globalData.windowHeight,
+        winHeight:app.globalData.windowHeight - that.data.bottomHeight,
         shareAlbumId:options.albumId,
         shareUserAlbumId:options.userAlbumId
     })
@@ -45,7 +51,13 @@ Page({
         })
         setTimeout(function(){
           that.setData({
+<<<<<<< HEAD
             currentFade:'on'
+=======
+            winHeight:app.globalData.windowHeight,
+            intervalOver:false,
+            bottomHidden:true
+>>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
           })
           setTimeout(function(){
             that.setData({
@@ -114,35 +126,60 @@ Page({
   showBottom:function(e){
     let that=this;
     this.setData({
-      clickCount:that.data.clickCount+1
+      clickCount: that.data.clickCount + 1
     })
-    if(this.data.clickCount==1){
-      that.clearInTime();
-    }
-    if(this.data.clickCount==2){
-      var urls=[];
-      urls.push(e.currentTarget.dataset.img);
-      wx.previewImage({
-        // current: 'String', // 当前显示图片的链接，不填则默认为 urls 的第一张
-        urls: urls,
-        success: function(res){
-          that.setData({
-            clickCount:0
-          })
-        }
-      })
+    setTimeout(function(){
+      if(that.data.dbClick){
+        return;
+      }
       that.setData({
-        clickCount:0
+        goClick: true,
+        dbClick: false,
+        clickCount: 0
       })
+<<<<<<< HEAD
     }
     if(that.data.intervalOver){
       return;
     }
     this.setData({
+=======
+      that.showBottomNav();
+    }, 1000);
+    setTimeout(function(){
+      if(that.data.goClick){
+        return;
+      }
+      if(that.data.clickCount >= 2){
+        that.setData({
+          goClick: false,
+          dbClick: true,
+          clickCount: 0
+        });
+        that.showPreviewImage(e.currentTarget.dataset.img);
+      }
+    }, 500);
+  },
+  showPreviewImage: function(imgs){
+    let that = this;
+    var urls=[];
+    urls.push(imgs);
+    wx.previewImage({
+      urls: urls
+    });
+    that.clearData();
+  },
+  showBottomNav: function(){
+    let that = this;
+    that.setData({
+      winHeight: app.globalData.windowHeight - that.data.bottomHeight,
+>>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
       intervalOver:true,
       bottomHidden:false
-    })
+    });
+    that.clearData();
     setTimeout(function(){
+<<<<<<< HEAD
         that.setData({
           currentFade:'on'
         })
@@ -154,14 +191,21 @@ Page({
           })
         },1000)
       },5000)
-  },
-  clearInTime:function(){
-    let that=this;
-    setTimeout(function(){
+=======
       that.setData({
-        clickCount:0
+        winHeight: app.globalData.windowHeight,
+        intervalOver:false,
+        bottomHidden:true
       })
-    },1000)
+    },2000)
+>>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
+  },
+  clearData: function(){
+    this.setData({
+      dbClick: false,
+      goClick: false,
+      clickCount:0
+    })
   },
   onReady:function(){
     // 页面渲染完成

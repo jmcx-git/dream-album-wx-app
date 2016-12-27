@@ -13,7 +13,11 @@
     <image src="{{bigPreImg}}" bindlongtap="saveImg" data-img="{{bigPreImg}}" bindtap="showBottom" data-src="{{bigPreImg}}" style="width:{{winWidth}}px;height:{{(winHeight)*loopPreImgs.length}}px;" />
   </scroll-view>
 </view>
+<<<<<<< HEAD
 <view class="{{currentFade==''?'bottomClass':'bottomFadeClass'}}" style="width:{{winWidth}}px;top:{{winHeight-50}}px;" hidden="{{bottomHidden}}">
+=======
+<view class="bottomClass" style="width:{{winWidth}}px;height:{{bottomHeight}}px;" hidden="{{bottomHidden}}">
+>>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
     <view class="pptClass ppt {{currentTab==0?'on':''}}" bindtap="swichNav" data-title="相册预览" data-id="0">
        <view class="pptImage">
             <image class="albumImg" src="{{currentTab==0?'../../image/albumyes.png':'../../image/albumno.png'}}" />

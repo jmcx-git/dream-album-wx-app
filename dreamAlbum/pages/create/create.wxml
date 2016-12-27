@@ -1,23 +1,28 @@
 <view catchtap="chooseImage" class="content" style="height:{{contentHeight}};">
   <image class="bg_img" style="width:{{bgWidth}}; height:{{bgHeight}};" src="{{submodules[index].bgsrc}}"/>
   <view style ="position:absolute;width:{{editAreaRelativeWidth}};height:{{editAreaRelativeHeight}};top:{{editAreaRelativeTop}};left:{{editAreaRelativeLeft}};">
-    <image wx-if="{{submodules[index].elesrc!=''}}" src="{{submodules[index].elesrc}}" style="width:100%;height:100%;"/>
+    <image wx-if="{{submodules[index].elesrc!=''}}" bindload="picLoad" src="{{submodules[index].elesrc}}" style="width:100%;height:100%;"/>
   </view>
 </view>
 <view class="footer">
   <view class="footer_item" catchtap="back">
     <image class="back" src="../../image/backblue.png"></image>
     <view class="backText">
-      <text>上一页</text>
+      <text>{{back}}</text>
     </view>
   </view>
   <view class="footer_item">
-    <image class="add" catchtap="chooseImage" src="../../image/addblue.png"></image>
+    <view wx:if="{{submodules[index].addStatus}}">
+      <image class="add" catchtap="chooseImage" src="../../image/addblue.png"></image>
+    </view>
+    <view wx:else>
+      <image class="add" catchtap="deleteImage" src="../../image/delete.png"></image>
+    </view>
   </view>
   <view class="footer_item" catchtap="save">
-    <view class="nextText">
-      <text>下一页</text>
-    </view>
     <image class="next" src="../../image/nextblue.png"></image>
+    <view class="nextText">
+      <text>{{next}}</text>
+    </view>
   </view>
 </view>

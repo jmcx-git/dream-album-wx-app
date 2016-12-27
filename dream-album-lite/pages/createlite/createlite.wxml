@@ -1,0 +1,30 @@
+<view class="content">
+<scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 {{sy_left}}px;">
+  <view class="content_detail">
+    <view class="content_item" wx:for="{{submodules}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}px; height:{{moduleHeight}}px;">
+      <image class="bg_img" style="border-radius: 8px; width:{{moduleWidth}}px; height:{{moduleHeight}}px;" src="{{item.bgsrc}}"/>
+      <view style ="position:absolute;width:{{item.shadowImgWidth}}px;height:{{item.shadowImgHeight}}px;top:{{item.shadowImgTop}}px;left:{{item.shadowImgLeft}}px;">
+        <image src="{{item.elesrc}}" style="width:100%;height:100%;"/>
+      </view>
+      <view style ="z-index:2; position:absolute;width:{{item.shadowImgWidth}}px;height:{{item.shadowImgHeight}}px;top:{{item.shadowImgTop}}px;left:{{item.shadowImgLeft}}px;"  bindtap="chooseImage" data-index="{{index}}"/>
+    </view>
+  </view>
+</scroll-view>
+</view>
+<image class="createbtn" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/create_icon.png" bindtap="createAlbum"/>
+<view class="item">
+  <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}px" bindscrolltolower="loadMoreTmplate">
+    <view class="item_detail" style="height:{{templateHeight}}px;">
+      <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}"  style="width:{{templateWidth}}px;height:{{templateHeight}}px;">
+        <view style="display: inline-block; margin:0 {{(templateWidth-templateIconSize)/2}}px; width:{{templateIconSize}}px;height:{{templateIconSize}}px;">
+          <image class="{{index === choosed?'border_choosed':''}}" src="{{item.cover}}" style="border-radius: 5px; width:100%;height:100%;" bindtap="chooseTemplate" data-albumIndex="{{index}}"/>
+        </view>
+
+        <view style="color:{{index === choosed?'#00adef':'#888888'}}; text-align: center; font-size: {{templateFontSize}}px; display: inline-block; width:100%; position:absolute; top:{{templateIconSize}}px;left:0px; height:{{templateTextSize}}px">
+          {{item.title}}
+        </view>
+
+      </view>
+    </view>
+  </scroll-view>
+</view>

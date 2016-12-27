@@ -2,7 +2,9 @@ var app = getApp();
 let pageData = {
   data: {
     submodules: [],
-    index: 0
+    index: 0,
+    back: '上一页',
+    next: '下一页'
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -41,7 +43,9 @@ let pageData = {
     for (let i = 0; i < albumItemInfos.length; i++) {
       let amodule = albumItemInfos[i]
       let submodule = {}
+      //默认带阴影的图片为背景图
       submodule.bgsrc = amodule.shadowImgUrl;
+      submodule.shadowsrc = amodule.shadowImgUrl;
       submodule.editsrc = amodule.editImgUrl;
       submodule.elesrc = ''
       //可编辑图片区域设置
@@ -57,6 +61,8 @@ let pageData = {
       submodule.rank = amodule.rank
       submodule.elecount = amodule.editCount
       submodule.id = amodule.id
+      submodule.addStatus = true
+      submodule.isDelStatus = false
       submodules.push(submodule)
     }
     this.setData({
@@ -68,29 +74,51 @@ let pageData = {
   },
   init: function (index) {
     // init data
+    let that = this;
     let submodule = this.data.submodules[index]
 
     let shadowImgWidth = submodule.editAreaWidth / submodule.bgImgWidth * 640;
     let shadowImgHeight = submodule.editAreaHeight / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
     let shadowImgLeft = 55 + submodule.editAreaLeft / submodule.bgImgWidth * 640;
     let shadowImgTop = 55 + submodule.editAreaTop / submodule.bgImgHeight * (this.windowHeight * this.convertTimes - 166);
+    let back = this.data.back
+    let next = this.data.next
+    let length = this.data.submodules.length;
+    if (index == 0) {
+      back = '返回'
+    } else {
+      back = '上一页'
+    }
+    if (index == length - 1) {
+      next = '完成'
+    } else {
+      next = '下一页'
+    }
     // 设置数据：
     this.setData({
       index: index,
+      back: back,
+      next: next,
       contentHeight: this.windowHeight * this.convertTimes - 166 + "rpx",
       bgWidth: "640rpx",
       bgHeight: this.windowHeight * this.convertTimes - 166 + "rpx",
       editAreaRelativeTop: shadowImgTop + "rpx",
       editAreaRelativeLeft: shadowImgLeft + "rpx",
       editAreaRelativeWidth: shadowImgWidth + "rpx",
-      editAreaRelativeHeight: shadowImgHeight + "rpx"
+      editAreaRelativeHeight: shadowImgHeight + "rpx",
+      backTxt: this.data.backTxt,
+      nextTxt: this.data.nextTxt,
+      nextTxtRight: this.data.nextTxtRight
     })
+  },
+  picLoad: function (e) {
+    wx.hideToast();
   },
   chooseImage: function (e) {
     let that = this;
     let index = this.data.index;
     wx.chooseImage({
-      count:1,
+      count: 1,
       sizeType: ["original", "compressed"],
       scourceType: ["album", "camera"],
       success: function (res) {
@@ -98,10 +126,28 @@ let pageData = {
         that.data.submodules[index].bgsrc = that.data.submodules[index].editsrc
         //每次选图以后choosed状态为true，将会走保存图片操作
         that.data.submodules[index].choosed = true
+        that.data.submodules[index].addStatus = false
         that.setData({
           submodules: that.data.submodules
         })
+        wx.showToast({
+          title: "加载背景中...",
+          icon: "loading",
+          duration: 3000
+        })
       }
+    })
+  },
+  deleteImage: function (e) {
+    let that = this;
+    let index = this.data.index;
+    that.data.submodules[index].elesrc = '';
+    that.data.submodules[index].bgsrc = that.data.submodules[index].shadowsrc
+    that.data.submodules[index].choosed = false
+    that.data.submodules[index].addStatus = true
+    that.data.submodules[index].isDelStatus = true
+    that.setData({
+      submodules: that.data.submodules
     })
   },
   save: function (e) {
@@ -134,8 +180,22 @@ let pageData = {
             that.init(++index)
           } else {
             app.globalData.finishCreateFlag=true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
@@ -155,7 +215,8 @@ let pageData = {
         url: app.globalData.serverHost + "/dream/album/common/uploademptypage.json",
         data: {
           'userAlbumId': that.data.userAlbumId + "",
-          'albumItemId': submodule.id + ""
+          'albumItemId': submodule.id + "",
+          'isDeleteInfo' : submodule.isDelStatus
         },
         method: 'GET',
         success: function (res) {
@@ -164,8 +225,22 @@ let pageData = {
           } else {
             wx.hideToast()
             app.globalData.finishCreateFlag=true;
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+            wx.showModal({
+              title: "创建完成",
+              // content: "立即预览相册",
+              cancelText: "返回首页",
+              confirmText: "预览相册",
+              success: function(res){
+                if(res.confirm){
+                  wx.redirectTo({
+                    url: '../viewswiper/viewswiper?userAlbumId=' + that.data.userAlbumId
+                  })
+                }else {
+                  wx.navigateBack({
+                    delta: 2
+                  });
+                }
+              }
             })
           }
         },
@@ -179,7 +254,7 @@ let pageData = {
     let index = this.data.index;
     if (index > 0) {
       this.init(--index)
-    }else{
+    } else {
       wx.navigateBack({
         delta: 1
       });
