@@ -19,19 +19,16 @@ Page({
     shareDesc:'欢迎来参观我的相册，这里有我给你最好的时光！',
     shareAlbumId:'',
     shareUserAlbumId:'',
-<<<<<<< HEAD
-    currentFade:''
-=======
+    currentFade:'',
     bottomHeight: 50,
     dbClick: false,
     goClick: true
->>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
   },
   onLoad:function(options){
     let that=this;
     that.setData({
         winWidth:app.globalData.windowWidth,
-        winHeight:app.globalData.windowHeight - that.data.bottomHeight,
+        winHeight:app.globalData.windowHeight,
         shareAlbumId:options.albumId,
         shareUserAlbumId:options.userAlbumId
     })
@@ -51,13 +48,7 @@ Page({
         })
         setTimeout(function(){
           that.setData({
-<<<<<<< HEAD
             currentFade:'on'
-=======
-            winHeight:app.globalData.windowHeight,
-            intervalOver:false,
-            bottomHidden:true
->>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
           })
           setTimeout(function(){
             that.setData({
@@ -137,15 +128,11 @@ Page({
         dbClick: false,
         clickCount: 0
       })
-<<<<<<< HEAD
-    }
+    },1000)
     if(that.data.intervalOver){
       return;
     }
-    this.setData({
-=======
-      that.showBottomNav();
-    }, 1000);
+    that.showBottomNav();
     setTimeout(function(){
       if(that.data.goClick){
         return;
@@ -172,14 +159,11 @@ Page({
   showBottomNav: function(){
     let that = this;
     that.setData({
-      winHeight: app.globalData.windowHeight - that.data.bottomHeight,
->>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
       intervalOver:true,
       bottomHidden:false
     });
     that.clearData();
     setTimeout(function(){
-<<<<<<< HEAD
         that.setData({
           currentFade:'on'
         })
@@ -191,14 +175,6 @@ Page({
           })
         },1000)
       },5000)
-=======
-      that.setData({
-        winHeight: app.globalData.windowHeight,
-        intervalOver:false,
-        bottomHidden:true
-      })
-    },2000)
->>>>>>> 87748938b5f6351ce962ea4389fb984d2ae1509e
   },
   clearData: function(){
     this.setData({
