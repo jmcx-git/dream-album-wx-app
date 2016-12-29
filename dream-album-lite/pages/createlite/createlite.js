@@ -3,10 +3,12 @@ let pageData = {
   data: {
     start: 0,  // 用于模板列表分页请求
     size: 10,
-    choosed: 0,
-    tempFilePaths: [],  // 用户选中的图片 共4(app.globalData.albumPageCount)张
-    albumList: [],
-    submodules: [],
+    choosed: 0, // 当前选中的模板
+    tempFilePaths: [],  // 用户选中的图片
+    albumList: [],  // 模板列表
+    pageList: [], // 页面列表 每个模板中页面为多个
+    photoList: [], // 照片列表  每个页面中的照片为多个
+    
     moduleWidth: 0,  // 预览部分，每个背景图图片的宽高
     moduleHeight: 0,
     templateWidth: 0,  // 模板选择部分，每个图片的宽高
