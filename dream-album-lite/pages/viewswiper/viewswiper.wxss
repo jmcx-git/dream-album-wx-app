@@ -11,8 +11,10 @@
     height: 350rpx;
 }
 .loading_text{
-    display: block;
+    display: inline-block;
     font-size: 0.8em;
     color: #afafaf;
     margin-top: 180rpx;
+    width: 200rpx;
+    text-align: center;
 }
