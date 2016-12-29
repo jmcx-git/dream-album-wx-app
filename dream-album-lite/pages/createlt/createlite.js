@@ -8,7 +8,7 @@ let pageData = {
     albumList: [],  // 模板列表
     pageList: [], // 页面列表 每个模板中页面为多个
     photoList: [], // 照片列表  每个页面中的照片为多个
-
+    
     moduleWidth: 0,  // 预览部分，每个背景图图片的宽高
     moduleHeight: 0,
     templateWidth: 0,  // 模板选择部分，每个图片的宽高
@@ -20,6 +20,7 @@ let pageData = {
   },
   onLoad: function (option) {
     // 读取传入和本地数据
+    // this.data.tempFilePaths = option.tmpfilepaths.split(',')
 
     this.init()
   },
@@ -72,7 +73,6 @@ let pageData = {
 
     let templateHeight = (app.globalData.windowHeight - 20) / 5 - 20
     let templateWidth = (app.globalData.windowWidth - 80) / 3.3
-    let content_hegiht = (app.globalData.windowHeight - 20) / 5 * 4
     this.setData({
       moduleWidth: (app.globalData.windowWidth - 60) / 2,
       moduleHeight: ((app.globalData.windowHeight - 20) / 5 * 4 - 30) / 2,
@@ -81,17 +81,13 @@ let pageData = {
       templateIconSize: templateWidth * 0.8, // 宽度的0.8
       templateTextSize: templateHeight - (templateWidth * 0.8),
       templateFontSize: (templateHeight - (templateWidth * 0.9)) * 0.7,
-      content_hegiht: content_hegiht,
-      pageFullHeight: content_hegiht *0.8,
-      pageFullWidth: app.globalData.windowWidth *0.8,
-
+      content_hegiht: (app.globalData.windowHeight - 20) / 5 * 4,
       item_width: app.globalData.windowWidth,
       icon_top: ((app.globalData.windowHeight - 20) / 5 * 4 - 80 + 20) / 2,
       icon_left: (app.globalData.windowWidth - 80) / 2,
       sy_top: 20,
       sy_left: 20
     })
-
     that.loadMoreTmplate(0)
 
   },
