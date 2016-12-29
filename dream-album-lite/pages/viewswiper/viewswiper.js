@@ -7,18 +7,14 @@ Page({
     duration: 500,
     winWidth: 0,
     winHeight: 0,
-    currentTab: 0,
-    pptHidden: false,
-    portHidden: true,
     bigPreImg: '',
     loopPreImgs: [],
-    bottomDisplay: 'block',
-    intervalOver: true,
-    bottomHidden: false,
     shareAlbumId: '',
     shareUserAlbumId: '',
     refresh: true,
-    refreshtip: ''
+    refreshtip: '',
+    extraPic:undefined,
+    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg'
   },
   onLoad: function (options) {
     let that = this;
@@ -31,6 +27,9 @@ Page({
     that.from = options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
+    this.setData({
+      extraPic:options.lastId
+    })
     that.init()
   },
   init: function (e) {
@@ -69,35 +68,20 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          wx.hideToast()
+          wx.hideToast();
+          if(that.data.extraPic!=undefined){
+            res.data.loopPreImgs.push(that.data.extraPic);
+          }
           that.setData({
             refresh: false,
-            loopPreImgs: res.data.loopPreImgs,
-            bigPreImg: res.data.bigPreImg
+            loopPreImgs: res.data.loopPreImgs
           })
-          setTimeout(function () {
-            that.setData({
-              bottomDisplay: 'none',
-              intervalOver: false,
-              bottomHidden: true
-            })
-          }, 3000)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
           })
         }
       }
-    })
-  },
-  swichNav: function (e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.id,
-      pptHidden: e.currentTarget.dataset.id == 1 ? true : false,
-      portHidden: e.currentTarget.dataset.id == 0 ? true : false
-    })
-    wx.setNavigationBarTitle({
-      title: e.currentTarget.dataset.title
     })
   },
   saveImg: function (e) {
@@ -143,29 +127,18 @@ Page({
       }
     })
   },
-  showBottom: function () {
-    let that = this;
-    if (that.data.intervalOver) {
-      return;
-    }
+  showIndex:function(){
     this.setData({
-      bottomDisplay: 'block',
-      intervalOver: true,
-      bottomHidden: false
+      extraPic:undefined
     })
-    setTimeout(function () {
-      that.setData({
-        bottomDisplay: 'none',
-        intervalOver: false,
-        bottomHidden: true
-      })
-    }, 2000)
+    wx.redirectTo({
+      url: '../my/my'
+    })
   },
   onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {
-      console.log(getCurrentPages().length);
     // 页面显示
   },
   onHide: function () {
@@ -187,6 +160,7 @@ Page({
     if(typeof this.data.shareUserAlbumId !== "undefined"){
         queryStr = queryStr + "&userAlbumId=" + this.data.shareUserAlbumId;
     }
+    queryStr=queryStr+"&lastId="+that.data.currentLink;
     return {
       title: '分享我的相册',
       desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
