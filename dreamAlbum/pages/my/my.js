@@ -32,7 +32,8 @@ Page({
                   wx.request({
                     url: app.globalData.serverHost+'dream/user/login/getSession.json',
                     data: {
-                      code:resl.code
+                      code:resl.code,
+                      appId: app.globalData.appId
                     },
                     method: 'GET',
                     success: function(ress){
