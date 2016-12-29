@@ -9,9 +9,9 @@
         <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
-                    <image wx:if="{{extraPic==undefined}}" src="{{item}}" class="slide-image" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
+                    <image wx:if="{{extraPic==undefined}}" data-img="{{item}}" src="{{item}}" class="slide-image" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                     <image wx:elif="{{item==currentLink}}" src="{{item}}" class="slide-image" bindtap="showIndex" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
-                    <image wx:else src="{{item}}" class="slide-image" bindtap="show" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
+                    <image wx:else src="{{item}}" class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                 </swiper-item>
             </block>
         </swiper>

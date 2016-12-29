@@ -14,6 +14,7 @@ Page({
     refresh: true,
     refreshtip: '',
     extraPic:undefined,
+    clickCount:0,
     currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg'
   },
   onLoad: function (options) {
@@ -84,55 +85,38 @@ Page({
       }
     })
   },
-  saveImg: function (e) {
-    wx.showActionSheet({
-      itemList: ['保存到本地'],
-      success: function (res) {
-        if (!res.cancel) {
-          if (res.tapIndex == 0) {
-            wx.showToast({
-              title: '下载中...',
-              duration: 50000,
-              icon: 'loading'
-            })
-            wx.downloadFile({
-              url: e.currentTarget.dataset.src,
-              type: 'image', // 下载资源的类型，用于客户端识别处理，有效值：image/audio/video
-              // header: {}, // 设置请求的 header
-              success: function (ress) {
-                wx.saveFile({
-                  tempFilePath: ress.tempFilePath,
-                  success: function (resl) {
-                    console.log(resl);
-                    wx.hideToast();
-                    wx.showToast({
-                      title: '保存成功',
-                      icon: 'success',
-                      duration: 1000
-                    })
-                  },
-                  fail: function (resx) {
-                    console.log("失败");
-                    console.log(res);
-                  }
-                })
-              },
-              fail: function (nn) {
-                console.log("出错了");
-                console.log(nn);
-              }
-            })
-          }
-        }
-      }
-    })
-  },
   showIndex:function(){
     this.setData({
       extraPic:undefined
     })
     wx.redirectTo({
       url: '../my/my'
+    })
+  },
+  showAlbum:function(e){
+    let that=this;
+    this.setData({
+      clickCount: that.data.clickCount + 1
+    })
+    setTimeout(function(){
+      if(that.data.clickCount >= 2){
+        that.showPreviewImage(e.currentTarget.dataset.img);
+      }else{
+         that.setData({
+          clickCount:0
+        })
+      }
+    }, 500);
+  },
+  showPreviewImage: function(imgs){
+    let that = this;
+    var urls=[];
+    urls.push(imgs);
+    wx.previewImage({
+      urls: urls
+    });
+    that.setData({
+      clickCount:0
     })
   },
   onReady: function () {
