@@ -18,7 +18,7 @@ let pageData = {
   },
   onLoad: function (option) {
     // 读取传入和本地数据
-    this.data.tempFilePaths = option.tmpfilepaths.split(',')
+    // this.data.tempFilePaths = option.tmpfilepaths.split(',')
 
     this.init()
   },
@@ -154,7 +154,7 @@ let pageData = {
           if(res.confirm){
             let userId = wx.getStorageSync("userId");
             wx.redirectTo({
-              url: '../viewswiper/viewswiper?userId=' + userId + 'albumId=' + albumId+ '&userAlbumId=' + that.userAlbumId+ "&from=1"
+              url: '../viewswiper/viewswiper?userId=' + userId + '&albumId=' + albumId+ '&userAlbumId=' + that.userAlbumId+ "&from=1"
             })
           }else {
             wx.navigateBack({
@@ -234,21 +234,45 @@ let pageData = {
     }
   },
   createAlbum: function(e){
-    if(this.data.created){
-      return;
-    }
-    this.setData({
-      created: true
-    })
-    this.tag = []
-    this.timeout = true;// 是否走timeout自动跳转逻辑
     let that = this;
-    wx.showToast({
-      title: '正在上传照片...',
-      icon: 'loading',
-      duration: 10000
+    wx.chooseImage({
+      count: app.globalData.albumPageCount,
+      success: function (res) {
+        if (res.tempFilePaths.length < app.globalData.albumPageCount) {
+          wx.showModal({
+            title: "提示",
+            content: "该相册可以上传" + app.globalData.albumPageCount + "张照片，您选中" + res.tempFilePaths.length + "张 确认是否制作",
+            success: function (rescfm) {
+              if (rescfm.confirm) {
+                that.setData({
+                    tempFilePaths : res.tempFilePaths
+                })
+              }
+            }
+          })
+        } else {
+          that.setData({
+                tempFilePaths : res.tempFilePaths
+          })
+          console.log(that.data.tempFilePaths)
+        }
+      }
     })
-    this.uploadImage(0)
+    // if(this.data.created){
+    //   return;
+    // }
+    // this.setData({
+    //   created: true
+    // })
+    // this.tag = []
+    // this.timeout = true;// 是否走timeout自动跳转逻辑
+    // let that = this;
+    // wx.showToast({
+    //   title: '正在上传照片...',
+    //   icon: 'loading',
+    //   duration: 10000
+    // })
+    // this.uploadImage(0)
   },
   chooseImage: function(e){
     let index = e.target.dataset.index

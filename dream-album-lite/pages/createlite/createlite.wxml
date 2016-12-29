@@ -1,4 +1,4 @@
-<view class="content">
+<view class="content" hidden="{{true}}">
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 {{sy_left}}px;">
   <view class="content_detail">
     <view class="content_item" wx:for="{{submodules}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}px; height:{{moduleHeight}}px;">
@@ -11,6 +11,8 @@
     </view>
   </view>
 </scroll-view>
+</view>
+<view class="content" style="width: 100%; height:{{content_hegiht}}px">
 </view>
 <image class="createbtn" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/create_icon.png" bindtap="createAlbum"/>
 <view class="item">
