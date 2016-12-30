@@ -19,7 +19,7 @@ Page({
     imgUrl:'',
     imgs:[],
     animationData: {},
-    animationDataPre: {},
+    // animationDataPre: {},
     currentIndex:0,
     picHeight:260,
     picWidth:150,
@@ -136,7 +136,7 @@ Page({
   onShow: function () {
     // 页面显示 
     console.log("页面显示");
-    this.executeAction();
+    // this.executeAction();
   },
   onHide: function () {
     // 页面隐藏
@@ -144,9 +144,9 @@ Page({
   onUnload: function () {
     let that=this;
     this.setData({
-      animationData:{},
       currentIndex:0,
-      imgs:[]
+      imgs:[],
+      animationData:{}
     })
     if (app.globalData.finishCreateFlag) {
       wx.redirectTo({
@@ -176,16 +176,13 @@ Page({
     if(that.data.currentIndex<that.data.imgs.length){
       console.log("图片总数:"+this.data.imgs.length);
       console.log("当前图片索引:"+this.data.currentIndex);
-      console.log(that.data.animationDataPre);
        that.setData({
-          imgUrl:that.data.imgs[that.data.currentIndex],
-          animationData:that.data.animationDataPre
+          imgUrl:that.data.imgs[that.data.currentIndex]
         })
-        // that.executeAction();
+        that.executeAction();
         setTimeout(function(){
             that.setData({
-              currentIndex:that.data.currentIndex+1,
-              animationData:{}
+              currentIndex:that.data.currentIndex+1
             })
             that.prepareAction();
         },11000)
@@ -220,7 +217,7 @@ Page({
     console.log("当前动画参数：");
     console.log(this.animation);
     this.setData({
-      animationDataPre:that.animation.export()
+      animationData:that.animation.export()
     })
   },
   reloadPlay:function(){
