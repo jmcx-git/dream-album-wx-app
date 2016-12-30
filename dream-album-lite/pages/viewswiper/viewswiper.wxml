@@ -4,7 +4,7 @@
         <text class="loading_text">{{refreshtip}}</text>
     </view>
 </view>
-<view wx:else>
+<!--<view wx:else>
     <view hidden="{{pptHidden}}">
         <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
@@ -16,5 +16,15 @@
             </block>
         </swiper>
     </view>
+</view>-->
+<view wx:else>
+    <image wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" style="height:{{picHeight}}px;width:{{picWidth}}px;"/>
+    <image wx:elif="{{imgUrl==currentLink}}" src="{{imgUrl}}" animation="{{animationData}}" bindtap="showIndex" style="height:{{picHeight}}px;width:{{picWidth}}px;"/>
+    <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" style="height:{{picHeight}}px;width:{{picWidth}}px;"/>
+    <view hidden="{{reloadHidden}}">
+        <button type="primary" bindtap="reloadPlay" style="bottom:0">重播</button>
+    </view>
 </view>
+
+
 

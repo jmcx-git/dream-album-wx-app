@@ -15,7 +15,16 @@ Page({
     refreshtip: '',
     extraPic:undefined,
     clickCount:0,
-    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg'
+    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg',
+    imgUrl:'',
+    imgs:[],
+    animationData: {},
+    animationDataPre: {},
+    currentIndex:0,
+    picHeight:260,
+    picWidth:150,
+    reloadHidden:true,
+    shareAnimationDatas:[]
   },
   onLoad: function (options) {
     let that = this;
@@ -29,7 +38,7 @@ Page({
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
     this.setData({
-      extraPic:options.lastId
+      extraPic:options.lastId,
     })
     that.init()
   },
@@ -75,8 +84,10 @@ Page({
           }
           that.setData({
             refresh: false,
-            loopPreImgs: res.data.loopPreImgs
+            loopPreImgs: res.data.loopPreImgs,
+            imgs:res.data.loopPreImgs
           })
+          that.prepareAction();
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -123,12 +134,20 @@ Page({
     // 页面渲染完成
   },
   onShow: function () {
-    // 页面显示
+    // 页面显示 
+    console.log("页面显示");
+    this.executeAction();
   },
   onHide: function () {
     // 页面隐藏
   },
   onUnload: function () {
+    let that=this;
+    this.setData({
+      animationData:{},
+      currentIndex:0,
+      imgs:[]
+    })
     if (app.globalData.finishCreateFlag) {
       wx.redirectTo({
         url: "../my/my"
@@ -150,5 +169,65 @@ Page({
       desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
       path: '/pages/viewswiper/viewswiper?' +  queryStr
     }
+  },
+  // 动画效果
+  prepareAction:function(){
+    let that=this;
+    if(that.data.currentIndex<that.data.imgs.length){
+      console.log("图片总数:"+this.data.imgs.length);
+      console.log("当前图片索引:"+this.data.currentIndex);
+      console.log(that.data.animationDataPre);
+       that.setData({
+          imgUrl:that.data.imgs[that.data.currentIndex],
+          animationData:that.data.animationDataPre
+        })
+        // that.executeAction();
+        setTimeout(function(){
+            that.setData({
+              currentIndex:that.data.currentIndex+1,
+              animationData:{}
+            })
+            that.prepareAction();
+        },11000)
+     }else{
+        console.log("没有图片了了！");
+        that.setData({
+          reloadHidden:false
+        })
+      }
+  },
+  executeAction:function(){
+    let animations=wx.createAnimation({
+      duration: 5000,
+      timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
+      delay: 0,
+      transformOrigin: '50% 50%',
+      success: function(res) {
+        console.log(res);
+      }
+    })
+    this.animation=animations;
+    // this.removePositionToMiddle();
+    this.toMiddleScale();
+  },
+   //放到屏幕中心位置,放大缩小
+  toMiddleScale:function(){
+    let that=this;
+    var x=this.data.winWidth/2-this.data.picWidth/2;
+    var y=this.data.winHeight/2-this.data.picHeight/2;
+    this.animation.translate(x,y).scale(2,2).step();
+    this.animation.scale(0,0).step();
+    console.log("当前动画参数：");
+    console.log(this.animation);
+    this.setData({
+      animationDataPre:that.animation.export()
+    })
+  },
+  reloadPlay:function(){
+    this.setData({
+      reloadHidden:true,
+      currentIndex:0
+    })
+    this.prepareAction();
   }
 })
