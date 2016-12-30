@@ -254,6 +254,7 @@ Page({
           let itemx = that.data.items[index];
           if (!res.confirm) {
             itemx.title = orititle;
+            
             that.setData({
               items: that.data.items
             })
@@ -277,6 +278,12 @@ Page({
           }
         }
       })
+    }
+  },onShareAppMessage: function () {
+    return {
+      title: '分享一个相册工具',
+      desc: '亲爱的，相信我，你会爱上她的，点击查看！',
+      path: '/pages/my/my'
     }
   }
 })

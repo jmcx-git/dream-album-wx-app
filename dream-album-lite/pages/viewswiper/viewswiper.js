@@ -7,18 +7,24 @@ Page({
     duration: 500,
     winWidth: 0,
     winHeight: 0,
-    currentTab: 0,
-    pptHidden: false,
-    portHidden: true,
     bigPreImg: '',
     loopPreImgs: [],
-    bottomDisplay: 'block',
-    intervalOver: true,
-    bottomHidden: false,
     shareAlbumId: '',
     shareUserAlbumId: '',
     refresh: true,
-    refreshtip: ''
+    refreshtip: '',
+    extraPic:undefined,
+    clickCount:0,
+    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg',
+    imgUrl:'',
+    imgs:[],
+    animationData: {},
+    animationDataPre: {},
+    currentIndex:0,
+    picHeight:260,
+    picWidth:150,
+    reloadHidden:true,
+    shareAnimationDatas:[]
   },
   onLoad: function (options) {
     let that = this;
@@ -31,6 +37,9 @@ Page({
     that.from = options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
+    this.setData({
+      extraPic:options.lastId,
+    })
     that.init()
   },
   init: function (e) {
@@ -69,19 +78,16 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          wx.hideToast()
+          wx.hideToast();
+          if(that.data.extraPic!=undefined){
+            res.data.loopPreImgs.push(that.data.extraPic);
+          }
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
-            bigPreImg: res.data.bigPreImg
+            imgs:res.data.loopPreImgs
           })
-          setTimeout(function () {
-            that.setData({
-              bottomDisplay: 'none',
-              intervalOver: false,
-              bottomHidden: true
-            })
-          }, 3000)
+          that.prepareAction();
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -90,88 +96,58 @@ Page({
       }
     })
   },
-  swichNav: function (e) {
+  showIndex:function(){
     this.setData({
-      currentTab: e.currentTarget.dataset.id,
-      pptHidden: e.currentTarget.dataset.id == 1 ? true : false,
-      portHidden: e.currentTarget.dataset.id == 0 ? true : false
+      extraPic:undefined
     })
-    wx.setNavigationBarTitle({
-      title: e.currentTarget.dataset.title
+    wx.redirectTo({
+      url: '../my/my'
     })
   },
-  saveImg: function (e) {
-    wx.showActionSheet({
-      itemList: ['保存到本地'],
-      success: function (res) {
-        if (!res.cancel) {
-          if (res.tapIndex == 0) {
-            wx.showToast({
-              title: '下载中...',
-              duration: 50000,
-              icon: 'loading'
-            })
-            wx.downloadFile({
-              url: e.currentTarget.dataset.src,
-              type: 'image', // 下载资源的类型，用于客户端识别处理，有效值：image/audio/video
-              // header: {}, // 设置请求的 header
-              success: function (ress) {
-                wx.saveFile({
-                  tempFilePath: ress.tempFilePath,
-                  success: function (resl) {
-                    console.log(resl);
-                    wx.hideToast();
-                    wx.showToast({
-                      title: '保存成功',
-                      icon: 'success',
-                      duration: 1000
-                    })
-                  },
-                  fail: function (resx) {
-                    console.log("失败");
-                    console.log(res);
-                  }
-                })
-              },
-              fail: function (nn) {
-                console.log("出错了");
-                console.log(nn);
-              }
-            })
-          }
-        }
+  showAlbum:function(e){
+    let that=this;
+    this.setData({
+      clickCount: that.data.clickCount + 1
+    })
+    setTimeout(function(){
+      if(that.data.clickCount >= 2){
+        that.showPreviewImage(e.currentTarget.dataset.img);
+      }else{
+         that.setData({
+          clickCount:0
+        })
       }
-    })
+    }, 500);
   },
-  showBottom: function () {
+  showPreviewImage: function(imgs){
     let that = this;
-    if (that.data.intervalOver) {
-      return;
-    }
-    this.setData({
-      bottomDisplay: 'block',
-      intervalOver: true,
-      bottomHidden: false
+    var urls=[];
+    urls.push(imgs);
+    wx.previewImage({
+      urls: urls
+    });
+    that.setData({
+      clickCount:0
     })
-    setTimeout(function () {
-      that.setData({
-        bottomDisplay: 'none',
-        intervalOver: false,
-        bottomHidden: true
-      })
-    }, 2000)
   },
   onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {
-      console.log(getCurrentPages().length);
-    // 页面显示
+    // 页面显示 
+    console.log("页面显示");
+    this.executeAction();
   },
   onHide: function () {
     // 页面隐藏
   },
   onUnload: function () {
+    let that=this;
+    this.setData({
+      animationData:{},
+      currentIndex:0,
+      imgs:[]
+    })
     if (app.globalData.finishCreateFlag) {
       wx.redirectTo({
         url: "../my/my"
@@ -187,10 +163,71 @@ Page({
     if(typeof this.data.shareUserAlbumId !== "undefined"){
         queryStr = queryStr + "&userAlbumId=" + this.data.shareUserAlbumId;
     }
+    queryStr=queryStr+"&lastId="+that.data.currentLink;
     return {
       title: '分享我的相册',
       desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
       path: '/pages/viewswiper/viewswiper?' +  queryStr
     }
+  },
+  // 动画效果
+  prepareAction:function(){
+    let that=this;
+    if(that.data.currentIndex<that.data.imgs.length){
+      console.log("图片总数:"+this.data.imgs.length);
+      console.log("当前图片索引:"+this.data.currentIndex);
+      console.log(that.data.animationDataPre);
+       that.setData({
+          imgUrl:that.data.imgs[that.data.currentIndex],
+          animationData:that.data.animationDataPre
+        })
+        // that.executeAction();
+        setTimeout(function(){
+            that.setData({
+              currentIndex:that.data.currentIndex+1,
+              animationData:{}
+            })
+            that.prepareAction();
+        },11000)
+     }else{
+        console.log("没有图片了了！");
+        that.setData({
+          reloadHidden:false
+        })
+      }
+  },
+  executeAction:function(){
+    let animations=wx.createAnimation({
+      duration: 5000,
+      timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
+      delay: 0,
+      transformOrigin: '50% 50%',
+      success: function(res) {
+        console.log(res);
+      }
+    })
+    this.animation=animations;
+    // this.removePositionToMiddle();
+    this.toMiddleScale();
+  },
+   //放到屏幕中心位置,放大缩小
+  toMiddleScale:function(){
+    let that=this;
+    var x=this.data.winWidth/2-this.data.picWidth/2;
+    var y=this.data.winHeight/2-this.data.picHeight/2;
+    this.animation.translate(x,y).scale(2,2).step();
+    this.animation.scale(0,0).step();
+    console.log("当前动画参数：");
+    console.log(this.animation);
+    this.setData({
+      animationDataPre:that.animation.export()
+    })
+  },
+  reloadPlay:function(){
+    this.setData({
+      reloadHidden:true,
+      currentIndex:0
+    })
+    this.prepareAction();
   }
 })
