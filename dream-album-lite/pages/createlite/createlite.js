@@ -137,9 +137,9 @@ let pageData = {
 
     // 一些必要的数据
     let albumId = that.data.albumList[that.data.choosed].id
-    // 判断index = length：应该停止，跳转下一页
 
-    if (index == that.data.submodules.length) {
+    // 判断index = length：应该停止，跳转下一页
+    if (index == this.tmpPhotoList.length) {
       app.globalData.finishCreateFlag = true;
       wx.showModal({
         title: "创建完成",
@@ -175,18 +175,26 @@ let pageData = {
     // 根据是否有elesrc判断使用的接口
     // 接口回调 fail 走失败路径，显示上传错误提示
     // 接口回调success 走成功路径，继续上传下一张
-    let submodule = that.data.submodules[index]
 
-    if (submodule.elesrc != "") {
+    let photo = this.tmpPhotoList[index]
+
+    if (photo.elesrc != "" && photo.elesrc != undefined) {
       wx.uploadFile({
         url: app.globalData.serverHost + "/dream/album/lite/common/uploaduserimg.json",
-        filePath: submodule.elesrc,
+        filePath: photo.elesrc,
         name: 'image',
         formData: {
           'userId': wx.getStorageSync('userId') + "",
-          'albumItemId': submodule.id + "",
+          'albumItemId': photo.albumItemId + "",
           'albumId': albumId + "",
-          'appId': app.globalData.appId + ""
+          'index':photo.rank,
+          'appId': app.globalData.appId + "",
+          'cssElmMoveX': photo.cssShowX/photo.rateWidth,
+          'cssElmMoveY': photo.cssShowY/photo.rateHeight,
+          'cssElmWidth': photo.cssShowWidth/photo.rateWidth,
+          'cssElmWidth': photo.cssShowHeight/photo.rateHeight,
+          'cssElmRotate': photo.cssElmRotate,
+          'isCompelete': index == this.tmpPhotoList.length-1
         },
         fail: function (res) {
           wx.hideToast()
@@ -217,12 +225,14 @@ let pageData = {
       })
     } else {
       wx.request({
-        url: app.globalData.serverHost + "dream/album/common/uploadnotuserimg.json",
+        url: app.globalData.serverHost + "dream/album/lite/common/uploadnotuserimg.json",
         data: {
           'userId': wx.getStorageSync('userId') + "",
-          'albumItemId': submodule.id + "",
+          'albumItemId': photo.albumItemId + "",
           'albumId': albumId + "",
-          'appId': app.globalData.appId + ""
+          'index':photo.rank,
+          'appId': app.globalData.appId + "",
+          'isCompelete': index == this.tmpPhotoList.length-1
         },
         fail: function (res) {
           wx.hideToast()
@@ -260,6 +270,13 @@ let pageData = {
       icon: 'loading',
       duration: 10000
     })
+    // 将所有photolist 提取出来
+    this.tmpPhotoList = []
+    for(let i=0; i<this.data.pageList.length; i++){
+      let tmpplist = this.data.pageList[i]
+      this.tmpPhotoList.concat(tmpplist.photoInfos)
+    }
+    // uploadimg
     this.uploadImage(0)
   },
   chooseImageList: function(e){
@@ -316,6 +333,8 @@ let pageData = {
 
     for(let i = 0; i<photoList.length; i++){
       let photo = photoList[i]
+      photo.rateWidth = rateWidth
+      photo.rateHeight = rateHeight
       photo.cssShowWidth = photo.cssElmWidth * rateWidth
       photo.cssShowHeight = photo.cssElmHeight * rateHeight
       photo.cssShowX = photo.cssElmMoveX * rateWidth
@@ -324,7 +343,6 @@ let pageData = {
       let transformData = this.anim.export()
       photo.transformShadow = transformData;  // 前面阴影部分的动画
       photo.transformImg = transformData;   // 后端图片部分的动画
-
     }
 
     this.setData({
@@ -344,7 +362,7 @@ let pageData = {
   },
   chooseImage: function (e) {
     let index = e.target.dataset.index
-    let submodule = this.data.submodules[index]
+    let photo = this.getPhotoList()[index]
     let that = this
     wx.chooseImage({
       count: 1,
@@ -352,9 +370,9 @@ let pageData = {
       sourceType: ['album', 'camera'],
       success: function (res) {
         // let tmppaths = res.tempFilePaths;
-        submodule.elesrc = res.tempFilePaths[0]
+        photo.elesrc = res.tempFilePaths[0]
         that.setData({
-          submodules: that.data.submodules
+          photoList: that.getPhotoList()
         })
       }
     })
