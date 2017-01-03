@@ -18,9 +18,9 @@
     </view>
 </view>-->
 <view wx:else>
-    <image wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
-    <image wx:elif="{{imgUrl==currentLink}}" src="{{imgUrl}}" animation="{{animationData}}" bindtap="showIndex" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
-    <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
+    <image wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
+    <image wx:elif="{{imgUrl==currentLink}}" src="{{imgUrl}}" animation="{{animationData}}" bindtap="showIndex" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
+    <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
     <view hidden="{{reloadHidden}}">
         <button type="primary" bindtap="reloadPlay" class="replayButton">重播</button>
     </view>

@@ -138,8 +138,6 @@ Page({
   },
   onShow: function () {
     // 页面显示 
-    console.log("页面显示");
-    // this.executeAction();
   },
   onHide: function () {
     // 页面隐藏
@@ -180,20 +178,31 @@ Page({
        that.setData({
           imgUrl:that.data.imgs[that.data.currentIndex]
         })
-        that.executeAction();
-        setTimeout(function(){
-            that.setData({
-              currentIndex:that.data.currentIndex+1,
-              animationData:{}
-            })
-            that.prepareAction();
-        },that.data.refreshInterval*2+1000)
+        // that.executeAction();
+        // setTimeout(function(){
+        //     that.setData({
+        //       currentIndex:that.data.currentIndex+1,
+        //       animationData:{}
+        //     })
+        //     that.prepareAction();
+        // },that.data.refreshInterval*2+500)
      }else{
         console.log("没有图片了了！");
         that.setData({
           reloadHidden:false
         })
       }
+  },
+  loadPic:function(){
+    let that=this;
+    that.executeAction();
+    setTimeout(function(){
+        that.setData({
+          currentIndex:that.data.currentIndex+1,
+          animationData:{}
+        })
+        that.prepareAction();
+    },that.data.refreshInterval*2+500)
   },
   executeAction:function(){
     let that=this;
@@ -222,10 +231,13 @@ Page({
     })
   },
   reloadPlay:function(){
+    let that=this;
     this.setData({
       reloadHidden:true,
       currentIndex:0
     })
-    this.prepareAction();
+    setTimeout(function(){
+      that.prepareAction();
+    },500)
   }
 })
