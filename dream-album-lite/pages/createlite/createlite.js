@@ -17,12 +17,14 @@ let pageData = {
     pageFullWidth: 0,
 
     content_hegiht: 0, // content 部分高度
+    content_width: 0,
     icon_top: 0,   // 完成按钮的top和left值
     icon_left: 0,
     created: false,
     hiddenGrid: false, // 是否显示预览(四宫格)图 true 显示四宫格,false显示创建预览页
-    currentPage: 0, // 创建面板上, 当前处理的页面 起始为0
-    photoCount: 0   // 当前相册所有的照片的数量
+    // currentPage: 0, // 创建面板上, 当前处理的页面 起始为0
+    photoCount: 0,   // 当前相册所有的照片的数量
+    scrollLeft: 0,
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -45,7 +47,7 @@ let pageData = {
 
     this.setData({
       pageList: pageList,
-      photoList: this.getPhotoList(),
+      photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount
     })
@@ -70,6 +72,7 @@ let pageData = {
       templateTextSize: templateHeight - (templateWidth * 0.8),
       templateFontSize: (templateHeight - (templateWidth * 0.9)) * 0.7,
       content_hegiht: content_hegiht,
+      content_width: app.globalData.windowWidth,
       pageFullHeight: content_hegiht *0.8,
       pageFullWidth: app.globalData.windowWidth *0.8,
 
@@ -97,8 +100,8 @@ let pageData = {
       return
     }
     wx.request({
-      // url: app.globalData.serverHost + 'dream/album/common/listalbums.json',
-      url: 'http://10.1.1.135:8080/DynamicWebTest/hehe.txt',
+      url: app.globalData.serverHost + 'dream/album/common/listalbums.json',
+      // url: 'http://10.1.1.135:8080/DynamicWebTest/hehe.txt',
       data: {
         size: that.data.size,
         start: that.data.start,
@@ -264,20 +267,23 @@ let pageData = {
     }
   },
   createAlbum: function(e){
-    // 照片样式调整完成后上传
-    wx.showToast({
-      title: '正在上传照片...',
-      icon: 'loading',
-      duration: 10000
+    this.setData({
+      scrollLeft: this.data.scrollLeft+10
     })
-    // 将所有photolist 提取出来
-    this.tmpPhotoList = []
-    for(let i=0; i<this.data.pageList.length; i++){
-      let tmpplist = this.data.pageList[i]
-      this.tmpPhotoList.concat(tmpplist.photoInfos)
-    }
-    // uploadimg
-    this.uploadImage(0)
+    // // 照片样式调整完成后上传
+    // wx.showToast({
+    //   title: '正在上传照片...',
+    //   icon: 'loading',
+    //   duration: 10000
+    // })
+    // // 将所有photolist 提取出来
+    // this.tmpPhotoList = []
+    // for(let i=0; i<this.data.pageList.length; i++){
+    //   let tmpplist = this.data.pageList[i]
+    //   this.tmpPhotoList.concat(tmpplist.photoInfos)
+    // }
+    // // uploadimg
+    // this.uploadImage(0)
   },
   chooseImageList: function(e){
     let that = this;
@@ -316,14 +322,21 @@ let pageData = {
         page.photoInfos[j].elesrc = tempFilePaths[idx]
       }
     }
-    this.gotoPage(0)
+    for(let i =0; i< this.getPageList().length; i++){
+        this.initPageData(i)
+    }
+    console.log(this.getPageList())
+    this.setData({
+      pageList : this.getPageList()
+    })
+
   },
-  gotoPage: function(index){
+  initPageData: function(index){
 
     // 0<=index <length
     let page = this.getPageList()[index]
-    page.currentPage = index
-    let photoList = this.getPhotoList()
+    // page.currentPage = index
+    let photoList = this.getPhotoList(index)
 
     // 根据page wh 和 photo wh 计算 显示到屏幕上的width height, css x,y,rotate
     let pageOriHeight = page.imgWidth
@@ -345,63 +358,82 @@ let pageData = {
       photo.transformImg = transformData;   // 后端图片部分的动画
     }
 
-    this.setData({
-      currentPage: index,
-      photoList: photoList
-    })
+    // this.setData({
+    //   currentPage: index,
+    //   photoList: photoList
+    // })
 
     // index <0: 返回到不该返回的位置?
 
     // index >=length 制作
   },
   nextPage: function(e){
-    this.gotoPage(this.data.currentPage +1)
+    // this.gotoPage(this.data.currentPage +1)
   },
   backPage: function(e){
-    this.gotoPage(this.data.currentPage -1)
+    // this.gotoPage(this.data.currentPage -1)
   },
   chooseImage: function (e) {
-    let index = e.target.dataset.index
-    let photo = this.getPhotoList()[index]
-    let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        // let tmppaths = res.tempFilePaths;
-        photo.elesrc = res.tempFilePaths[0]
-        that.setData({
-          photoList: that.getPhotoList()
-        })
-      }
-    })
+    // let index = e.target.dataset.index
+    // let photo = this.getPhotoList()[index]
+    // let that = this
+    // wx.chooseImage({
+    //   count: 1,
+    //   sizeType: ['original', 'compressed'],
+    //   sourceType: ['album', 'camera'],
+    //   success: function (res) {
+    //     // let tmppaths = res.tempFilePaths;
+    //     photo.elesrc = res.tempFilePaths[0]
+    //     that.setData({
+    //       photoList: that.getPhotoList()
+    //     })
+    //   }
+    // })
+  },
+  touchstart: function(e){
+    this.touches = e.touches
+
+  },
+  touchmove: function(e){
+    let touches = e.touches
+    console.log(e)
+  },
+  touchend: function(e){
+
   },
   getPageList: function(){
     return this.data.albumList[this.data.choosed].albumItemList
   },
-  getPhotoList: function(){
+  getPhotoList: function(currentPage){
     let pageList = this.data.albumList[this.data.choosed].albumItemList
-    return pageList[this.data.currentPage].photoInfos
+    return pageList[currentPage].photoInfos
+  },
+  setPhotoList: function(currentPage, photos){
+    let pageList = this.data.albumList[this.data.choosed].albumItemList
+    pageList[currentPage].photoInfos = photos
+    this.data.albumList[this.data.choosed].albumItemList = pageList
   },
   refreshData: function(){
     // 根据choosed 和 currentpage 刷新 pagelist 和 photolist
-    let pageList = this.data.albumList[this.data.choosed].albumItemList
-    this.setData({
-      pageList: pageList,
-      photoList: pageList[this.data.currentPage].photoInfos
-    })
+    // let pageList = this.data.albumList[this.data.choosed].albumItemList
+    // this.setData({
+    //   pageList: pageList,
+    //   photoList: pageList[this.data.currentPage].photoInfos
+    // })
   },
   refreshPage: function(){
-    this.setData({
-      pageList: this.data.albumList[this.data.choosed].albumItemList
-    })
+    // this.setData({
+    //   pageList: this.data.albumList[this.data.choosed].albumItemList
+    // })
   },
   refreshPhoto: function(){
-    let pageList = this.data.albumList[this.data.choosed].albumItemList
-    this.setData({
-      photoList: pageList[this.data.currentPage].photoInfos
-    })
+    // let pageList = this.data.albumList[this.data.choosed].albumItemList
+    // this.setData({
+    //   photoList: pageList[this.data.currentPage].photoInfos
+    // })
+  },
+  scrollPage: function(e){
+    console.log(e)
   }
 }
 Page(pageData)
