@@ -31,8 +31,12 @@
 </view>
 <!--模版列表-->
 <scroll-view scroll-x="true" class="scrollViewTop" hidden="{{!picLoadFinish}}">
-    <view class="imageTop" wx:for="{{items}}" wx:key="items" style="height:{{winHeight-230}}px;">
-        <image class="imagesScrollView" bindload="picLoad" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}" src="{{item.cover}}" style="margin-left: {{marginLeft}}rpx;"/>
+    <view class="imageTop"  wx:for="{{items}}" wx:key="items" style="height:{{winHeight-230}}px;margin-left: {{marginLeft}}rpx;margin-right:{{(index+1)==items.length?marginLeft:0}}rpx;">
+         <view class="album_page background-one"></view>
+        <view class="album_page background-two"></view>
+        <view class="album_page background-three"></view>
+        <image class="imagesScrollView" bindload="picLoad" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}" src="{{item.cover}}" />
+        <view class="album_page album_cover_bindline"></view>
     </view>
 </scroll-view>
 <image class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList"/>

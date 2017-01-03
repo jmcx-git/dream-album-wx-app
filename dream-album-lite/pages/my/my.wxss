@@ -91,9 +91,41 @@ page{
 }
 .imageTop{
      display: inline-block;
+     position: relative;
 }
 .imagesScrollView{
-    border-radius: 8px;
     width:460rpx;
     height:100%;
+    position: relative;
+    z-index: 4;
+    top:20rpx;
+}
+.album_page{
+    position: absolute;
+    height: 600rpx;
+    top:24rpx;
+    transform-origin: 0%;
+}
+.background-one{
+    background-color:rgb(254,254,254);
+    transform: skewY(-3deg);
+    width:430rpx;
+    z-index:1;
+}
+.background-two{
+    background-color:rgb(137,137,137);
+    transform: skewY(-2deg);
+    width:440rpx;
+    z-index:2;
+}
+.background-three{
+    background-color:rgb(254,254,254);
+    transform: skewY(-1deg);
+    width:450rpx;
+    z-index:3;
+}
+.album_cover_bindline{
+  width: 40rpx;
+  z-index:4;
+  background:linear-gradient(to right,rgba(240,240,240,0) 60%,rgba(180,180,180,0.4) 100%);
 }
