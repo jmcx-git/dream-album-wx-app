@@ -36,7 +36,7 @@ let pageData = {
     // 读取传入和本地数据
     this.anim = wx.createAnimation({
       transformOrigin:"0 0 0",
-      duration: 10,
+      duration: 0,
     })
     this.animP= wx.createAnimation({duration:0});
     this.init()
@@ -496,7 +496,7 @@ let pageData = {
 
   },
   scrollPage: function(e){
-
+    console.log(e)
     let scrollLeft = e.detail.scrollLeft
     let currentPage = Math.floor(scrollLeft/this.data.content_width)
     let rltMovx = scrollLeft - currentPage * this.data.content_width;
