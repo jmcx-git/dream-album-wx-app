@@ -12,10 +12,10 @@ page{
 /* + */
 .insertClass{
     position: absolute;
-    width:50px;
-    height:50px;
+    width:100rpx;
+    height:100rpx;
     z-index: 10;
-    right:20px;
+    right:30rpx;
 }
 .userinfo-avatar {
   position: absolute;
@@ -28,9 +28,9 @@ page{
 /*no pic*/
 .nopicClass{
     position: absolute;
-    padding-top:215px;
-    padding-left:calc(50% - 45px);
-    width:90px;
+    top:230px;
+    left:calc(50% - 60px);
+    width:120px;
     height:130px;
 }
 /*模版列表*/
@@ -73,4 +73,27 @@ page{
     color:#353535;
     margin-top:4px;
     background-color: rgba(222,222,222,0.5);
+}
+
+/*新的样式列表scrollview-x*/
+.insertClassScroll{
+    position: absolute;
+    width:100rpx;
+    height:120rpx;
+    left: calc(50% - 50rpx);
+    top:calc(100% - 65px);
+    z-index: 10;
+}
+.scrollViewTop{
+    padding-top:155px;
+    white-space: nowrap; 
+    display: flex;
+}
+.imageTop{
+     display: inline-block;
+}
+.imagesScrollView{
+    border-radius: 8px;
+    width:460rpx;
+    height:100%;
 }
