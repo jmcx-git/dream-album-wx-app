@@ -18,6 +18,7 @@ let pageData = {
 
     content_hegiht: 0, // content 部分高度
     content_width: 0,
+    scrollViewWidth: 0,
     icon_top: 0,   // 完成按钮的top和left值
     icon_left: 0,
     created: false,
@@ -25,6 +26,7 @@ let pageData = {
     // currentPage: 0, // 创建面板上, 当前处理的页面 起始为0
     photoCount: 0,   // 当前相册所有的照片的数量
     scrollLeft: 0,
+    pageAnim: {}
   },
   onLoad: function (option) {
     // 读取传入和本地数据
@@ -45,11 +47,13 @@ let pageData = {
       photoCount += page.photoInfos.length;
     }
 
+    let scrollViewWidth = this.data.content_width * pageList.length
     this.setData({
       pageList: pageList,
       photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
-      photoCount: photoCount
+      photoCount: photoCount,
+      scrollViewWidth: scrollViewWidth
     })
   },
   init: function () {
@@ -73,6 +77,7 @@ let pageData = {
       templateFontSize: (templateHeight - (templateWidth * 0.9)) * 0.7,
       content_hegiht: content_hegiht,
       content_width: app.globalData.windowWidth,
+      // scrollViewWidth: app.globalData.windowWidth *4,
       pageFullHeight: content_hegiht *0.8,
       pageFullWidth: app.globalData.windowWidth *0.8,
 
@@ -432,8 +437,35 @@ let pageData = {
     //   photoList: pageList[this.data.currentPage].photoInfos
     // })
   },
+  scrollStart: function(e){
+    this.scrollPage = e.touches[0]
+    this.tmpScrollLeft = this.data.scrollLeft
+  },
+  scrollMove: function(e){
+    // console.log(e)
+    let p0 = e.touches[0]
+    let tmpLeft = this.scrollPage.pageX - p0.pageX
+    let scrollLeft = this.tmpScrollLeft + tmpLeft
+    if(scrollLeft < 0){
+      scrollLeft = 0
+    }else if(scrollLeft > this.data.scrollViewWidth - this.data.content_width){
+      scrollLeft = this.data.scrollViewWidth - this.data.content_width
+    }
+    this.setData({
+      scrollLeft: scrollLeft
+    })
+  },
+  scrollEnd: function(e){
+    console.log(e)
+  },
   scrollPage: function(e){
     console.log(e)
+    let scrollLeft = e.detail.scrollLeft
+    let scale = 1- scrollLeft / 1500
+    this.anim.translate(0, 0).scale(scale).rotate(0).step();
+    this.setData({
+      pageAnim: this.anim.export()
+    })
   }
 }
 Page(pageData)

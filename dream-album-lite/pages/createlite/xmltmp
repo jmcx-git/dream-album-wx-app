@@ -8,9 +8,9 @@
 </scroll-view>
 </view>
 <view class="content" hidden="{{!hiddenGrid}}" >
-  <scroll-view scroll-x="true" style="width:{{content_width}}px; height:{{content_hegiht+sy_top}}px; white-space: nowrap;" bindscroll="scrollPage" scroll-left="{{scrollLeft}}">
+  <view style="width:{{scrollViewWidth}}px; height:{{content_hegiht+sy_top}}px; white-space: nowrap; margin-left:-{{scrollLeft}}px" bindscroll="scrollPage" bindtouchstart="scrollStart" bindtouchmove="scrollMove" bindtouchend="scrollEnd">
     <block wx:for="{{pageList}}" wx:key="id">
-      <view id="{{item.id}}" style="display:inline-block; width: {{content_width}}px; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 0; position:relative" animation="{{pageAnim}}">
+      <view id="{{item.id}}" style="display:inline-block; width: {{content_width}}px; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 0; position:relative">
         <view style="border-radius: 8px; width:{{pageFullWidth}}px; height:{{pageFullHeight}}px;margin: {{(content_hegiht-pageFullHeight)/2}}px 0 0 {{(item_width-pageFullWidth)/2}}px; position:relative" >
           <image class="bg_img" style="width:100%; height:100%" src="{{item.editImgUrl}}"/>
           <block wx:for="{{item.photoInfos}}" wx:for-item="photoItem" wx:key="{{id}}">
@@ -22,7 +22,7 @@
         </view>
       </view>
     </block>
-  </scroll-view>
+  </view>
 </view>
 <image class="createbtn" hidden="{{hiddenGrid}}" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/create_icon.png" bindtap="chooseImageList"/>
 <image class="createbtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top}}px;left:{{2*icon_left}}px" src="../../image/create_icon.png" bindtap="createAlbum"/>
