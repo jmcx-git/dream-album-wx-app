@@ -234,7 +234,8 @@ Page({
     let that=this;
     this.setData({
       reloadHidden:true,
-      currentIndex:0
+      currentIndex:0,
+      imgUrl:''
     })
     setTimeout(function(){
       that.prepareAction();
