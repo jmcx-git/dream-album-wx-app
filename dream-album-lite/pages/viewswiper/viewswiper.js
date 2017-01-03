@@ -21,9 +21,10 @@ Page({
     animationData: {},
     // animationDataPre: {},
     currentIndex:0,
-    picHeight:260,
-    picWidth:150,
+    picHeight:520,
+    picWidth:300,
     reloadHidden:true,
+    refreshInterval:4000,
     shareAnimationDatas:[]
   },
   onLoad: function (options) {
@@ -87,7 +88,9 @@ Page({
             loopPreImgs: res.data.loopPreImgs,
             imgs:res.data.loopPreImgs
           })
-          that.prepareAction();
+          setTimeout(function(){
+              that.prepareAction();
+          },500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -174,18 +177,17 @@ Page({
   prepareAction:function(){
     let that=this;
     if(that.data.currentIndex<that.data.imgs.length){
-      console.log("图片总数:"+this.data.imgs.length);
-      console.log("当前图片索引:"+this.data.currentIndex);
        that.setData({
           imgUrl:that.data.imgs[that.data.currentIndex]
         })
         that.executeAction();
         setTimeout(function(){
             that.setData({
-              currentIndex:that.data.currentIndex+1
+              currentIndex:that.data.currentIndex+1,
+              animationData:{}
             })
             that.prepareAction();
-        },11000)
+        },that.data.refreshInterval*2+1000)
      }else{
         console.log("没有图片了了！");
         that.setData({
@@ -194,8 +196,9 @@ Page({
       }
   },
   executeAction:function(){
-    let animations=wx.createAnimation({
-      duration: 5000,
+    let that=this;
+    var animations=wx.createAnimation({
+      duration:that.data.refreshInterval,
       timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
       delay: 0,
       transformOrigin: '50% 50%',
@@ -204,7 +207,6 @@ Page({
       }
     })
     this.animation=animations;
-    // this.removePositionToMiddle();
     this.toMiddleScale();
   },
    //放到屏幕中心位置,放大缩小
@@ -212,10 +214,9 @@ Page({
     let that=this;
     var x=this.data.winWidth/2-this.data.picWidth/2;
     var y=this.data.winHeight/2-this.data.picHeight/2;
-    this.animation.translate(x,y).scale(2,2).step();
+    // this.animation.translate(x,y).scale(2,2).step();
+    this.animation.scale(2,2).step();
     this.animation.scale(0,0).step();
-    console.log("当前动画参数：");
-    console.log(this.animation);
     this.setData({
       animationData:that.animation.export()
     })
