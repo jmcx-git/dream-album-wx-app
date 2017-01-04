@@ -44,11 +44,6 @@ let pageData = {
       transformOrigin:"0 0 0",
       duration: 0,
     })
-    this.animPhoto = wx.createAnimation({
-      transformOrigin: "0 0 0",
-      duration: 500,
-    })
-    this.animP= wx.createAnimation({duration:0});
     this.init()
   },
   initAlbumDetail: function (index) {
@@ -429,123 +424,6 @@ let pageData = {
           pageList: that.getPageList()
         })
       }
-    })
-  },
-  touchstart: function(e){
-
-    this.touchindex = e.target.dataset.index
-    this.touchidx = e.target.dataset.idx // page idx
-
-    this.touches = e.touches
-    this.setData({
-      pagescallable: false
-    })
-    this.tmpx = 0;
-    this.tmpy = 0;
-    this.scalex = 1;
-    this.scaley = 1;
-
-    this.threshold = 30;
-    this.animEx = {};
-  },
-  touchmove: function(e){
-    let pageWidth = this.convertPx(this.data.pageFullWidth)
-    let pageHeight = this.convertPx(this.data.pageFullHeight)
-    let that = this
-    let touches = e.touches
-    let photo = this.getPhotoList(this.touchidx)[this.touchindex]
-    this.tmpx = photo.cssShowX
-    this.tmpy = photo.cssShowY
-    this.tmpShowWidth = photo.cssShowWidth
-    this.tmpShowHeight = photo.cssShowHeight
-
-    let borders = photo.borders;
-    let photoW = photo.cssShowWidth
-    let photoH = photo.cssShowHeight
-    let photoX = photo.cssShowX
-    let photoY = photo.cssShowY
-    if(touches.length <=1){
-      // move
-      this.tmpx = touches[0].pageX - this.touches[0].pageX +photo.cssShowX
-      this.tmpy = touches[0].pageY - this.touches[0].pageY +photo.cssShowY
-
-      // 判断移动后的边界, 确保不会移出框
-      let photoLeft = this.tmpx
-      let photoTop = this.tmpy
-      let photoRight = this.tmpx + photoW
-      let photoBottom = this.tmpy + photoH
-
-      if(photoLeft > borders.left){
-        if(photoLeft > borders.left +this.threshold){
-          this.tmpx = borders.left +this.threshold
-        }
-        this.finalx = borders.left
-      }else{
-        this.finalx = this.tmpx
-      }
-
-      if(photoTop > borders.top){
-        if(photoTop > borders.top +this.threshold){
-          this.tmpy = borders.top +this.threshold
-        }
-        this.finaly = borders.top
-      }else{
-        this.finaly = this.tmpy
-      }
-
-      if(this.finalx == this.tmpx && photoRight < borders.right){
-        if(photoRight < borders.right-this.threshold){
-          this.tmpx = borders.right - photoW -this.threshold
-        }
-        this.finalx = borders.right - photoW
-      }
-
-      if(this.finaly == this.tmpy &&photoBottom <borders.bottom){
-        if(photoBottom < borders.bottom -this.threshold){
-          this.tmpy = borders.bottom - photoH-this.threshold
-        }
-        this.finaly = borders.bottom - photoH
-      }
-
-    }else{
-      this.scalex = (touches[0].pageX - touches[1].pageX)/ (this.touches[0].pageX - this.touches[1].pageX) * 0.5
-      this.scaley = (touches[0].pageY - touches[1].pageY)/ (this.touches[0].pageY - this.touches[1].pageY) * 0.5
-      this.tmpShowWidth = photo.cssShowWidth *(0.5 + this.scalex * 0.5)
-      this.tmpShowHeight = photo.cssShowHeight *(0.5 + this.scaley * 0.5)
-
-      // 确保缩放比例大于1
-      if(this.tmpShowWidth < photo.cssShowWidth){
-        this.tmpShowWidth = photo.cssShowWidth
-      }
-      if(this.tmpShowHeight < photo.cssShowHeight){
-        this.tmpShowHeight = photo.cssShowHeight
-      }
-    }
-
-    this.anim.translate(this.tmpx,this.tmpy).
-      scale(this.tmpShowWidth/100, this.tmpShowHeight/100).step();
-    photo.transformImg = this.anim.export();
-    this.setData({
-      pageList: that.getPageList()
-    })
-  },
-  touchend: function(e){
-    let photo = this.getPhotoList(this.touchidx)[this.touchindex]
-    if(e.touches.length <=1){
-      photo.cssShowX = this.finalx
-      photo.cssShowY = this.finaly
-    }else{
-      photo.cssShowWidth = this.tmpShowWidth
-      photo.cssShowHeight = this.tmpShowWidth
-    }
-    if(this.tmpx != this.finalx || this.tmpy != this.finaly){
-      this.anim.translate(this.finalx, this.finaly).scale(this.tmpShowWidth/100, this.tmpShowHeight /100).step();
-      photo.transformImg = this.anim.export();
-    }
-
-    this.setData({
-      pagescallable: true,
-      pageList: this.getPageList()
     })
   },
   getPageList: function(){
