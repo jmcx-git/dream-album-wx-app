@@ -103,7 +103,7 @@ page{
 }
 .album_page{
     position: absolute;
-    height: 600rpx;
+    height: 100%;
     top:22rpx;
     transform-origin: 0%;
 }
