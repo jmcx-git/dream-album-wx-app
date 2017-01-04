@@ -2,7 +2,7 @@
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
   <view class="content_detail">
     <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;">
-      <image class="bg_img" style="border-radius: 16rpx; width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.previewImgUrl}}"/>
+      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.previewImgUrl}}"/>
     </view>
   </view>
 </scroll-view>
@@ -17,7 +17,7 @@
             <view style="position:absolute; width:100px; height:100px;" animation="{{photoItem.transformImg}}">
               <image src="{{photoItem.elesrc != undefined?photoItem.elesrc: photoItem.editImgUrl}}" style="width:100%; height:100%"/>
             </view>
-            <view style="position:absolute; width:100px; height:100px; z-index:2;  background:rgba(0, 0, 0, 0.4);" animation="{{photoItem.transformShadow}}" bindtap="chooseImage" data-index="{{index}}" data-idx='{{idx}}' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtouchcancel="touchend" />
+            <view style="position:absolute; width:100px; height:100px; z-index:2;" animation="{{photoItem.transformShadow}}" bindtap="chooseImage" data-index="{{index}}" data-idx='{{idx}}' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtouchcancel="touchend" />
           </block>
         </view>
       </view>
