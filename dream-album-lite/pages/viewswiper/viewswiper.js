@@ -224,7 +224,7 @@ Page({
     var x=this.data.winWidth/2-this.data.picWidth/2;
     var y=this.data.winHeight/2-this.data.picHeight/2;
     // this.animation.translate(x,y).scale(2,2).step();
-    this.animation.scale(2,2).step();
+    this.animation.scale(2.6,2.4).step();
     this.animation.scale(0,0).step();
     this.setData({
       animationData:that.animation.export()
