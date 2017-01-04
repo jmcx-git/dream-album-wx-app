@@ -32,7 +32,7 @@ let pageData = {
     pagescallable: true
   },
   onLoad: function (option) {
-    wx.setStorageSync('userId', 19)
+    // wx.setStorageSync('userId', 19)
     // 读取传入和本地数据
     this.anim = wx.createAnimation({
       transformOrigin:"0 0 0",

@@ -8,24 +8,24 @@
 </scroll-view>
 </view>
 <view class="content" hidden="{{!hiddenGrid}}" >
-  <view style="width:{{scrollViewWidth}}px; height:{{content_hegiht+sy_top}}px; white-space: nowrap; margin-left:-{{scrollLeft}}px" bindscroll="scrollPage" bindtouchstart="scrollStart" bindtouchmove="scrollMove" bindtouchend="scrollEnd">
-    <block wx:for="{{pageList}}" wx:key="id">
-      <view id="{{item.id}}" style="display:inline-block; width: {{content_width}}px; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 0; position:relative">
+  <scroll-view scroll-x="{{pagescallable}}" style="width:{{content_width}}px; height:{{content_hegiht+sy_top}}px; white-space: nowrap;" bindscroll="scrollPage" scroll-left="{{scrollLeft}}">
+    <block wx:for="{{pageList}}" wx:key="id" wx:for-index="idx">
+      <view id="{{item.id}}" style="display:inline-block; width: {{content_width}}px; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 0; position:relative" animation="{{idx == currentPage? pageAnimCur: (idx == currentPage +1? pageAnimR: (idx == currentPage -1? pageAnimL:''))}}" >
         <view style="border-radius: 8px; width:{{pageFullWidth}}px; height:{{pageFullHeight}}px;margin: {{(content_hegiht-pageFullHeight)/2}}px 0 0 {{(item_width-pageFullWidth)/2}}px; position:relative" >
           <image class="bg_img" style="width:100%; height:100%" src="{{item.editImgUrl}}"/>
           <block wx:for="{{item.photoInfos}}" wx:for-item="photoItem" wx:key="{{id}}">
             <view style="position:absolute; width:100px; height:100px;" animation="{{photoItem.transformImg}}">
               <image src="{{photoItem.elesrc != undefined?photoItem.elesrc: photoItem.editImgUrl}}" style="width:100%; height:100%"/>
             </view>
-            <view style="position:absolute; width:100px; height:100px; z-index:2;  background:rgba(0, 0, 0, 0.4);" animation="{{photoItem.transformShadow}}" catchtap="chooseImage" data-index="{{index}}" catchtouchstart="touchstart" catchtouchmove="touchmove" catchtouchend="touchend" catchtouchcancel="touchend"/>
+            <view style="position:absolute; width:100px; height:100px; z-index:2;  background:rgba(0, 0, 0, 0.4);" animation="{{photoItem.transformShadow}}" bindtap="chooseImage" data-index="{{index}}" data-idx='{{idx}}' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" bindtouchcancel="touchend" />
           </block>
         </view>
       </view>
     </block>
-  </view>
+  </scroll-view>
 </view>
-<image class="createbtn" hidden="{{hiddenGrid}}" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/create_icon.png" bindtap="chooseImageList"/>
-<image class="createbtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top}}px;left:{{2*icon_left}}px" src="../../image/create_icon.png" bindtap="createAlbum"/>
+<image class="chooseimgbtn" hidden="{{hiddenGrid}}" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
+<image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top -40}}px;left:{{2*icon_left}}px" src="../../image/savealbum.png" bindtap="createAlbum"/>
 <view class="item">
   <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}px" bindscrolltolower="loadMoreTmplate">
     <view class="item_detail" style="height:{{templateHeight}}px;">
