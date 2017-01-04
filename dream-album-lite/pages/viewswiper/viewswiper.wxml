@@ -23,6 +23,7 @@
     <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
     <view hidden="{{reloadHidden}}">
         <button type="primary" bindtap="reloadPlay" class="replayButton">重播</button>
+        <button wx:if="{{extraPic!= undefined}}" type="primary" bindtap="showIndex" class="reDirectButton">我也来创建一个相册</button>
     </view>
 </view>
 
