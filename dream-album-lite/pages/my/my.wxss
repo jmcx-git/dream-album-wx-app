@@ -99,11 +99,12 @@ page{
     position: relative;
     z-index: 4;
     top:20rpx;
+    box-shadow:2px 0px 3px #aaaaaa;
 }
 .album_page{
     position: absolute;
     height: 600rpx;
-    top:24rpx;
+    top:22rpx;
     transform-origin: 0%;
 }
 .background-one{
