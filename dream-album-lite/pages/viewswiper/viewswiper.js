@@ -25,15 +25,19 @@ Page({
     picWidth:300,
     reloadHidden:true,
     refreshInterval:4000,
-    shareAnimationDatas:[]
+    shareAnimationDatas:[],
+    avatarUrl:''
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight,
+      picWidth: app.globalData.windowWidth,
+      picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
-      shareUserAlbumId: options.userAlbumId
+      shareUserAlbumId: options.userAlbumId,
+      avatarUrl: wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.albumId = options.albumId;
@@ -80,17 +84,17 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
-          if(that.data.extraPic!=undefined){
-            res.data.loopPreImgs.push(that.data.extraPic);
-          }
+          // if(that.data.extraPic!=undefined){
+          //   res.data.loopPreImgs.push(that.data.extraPic);
+          // }
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
             imgs:res.data.loopPreImgs
           })
-          // setTimeout(function(){
-          //     that.prepareAction();
-          // },500)
+          setTimeout(function(){
+              that.prepareAction();
+          },500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -216,7 +220,8 @@ Page({
       }
     })
     this.animation=animations;
-    this.toMiddleScale();
+    // this.toMiddleScale();
+    this.linerStartEnd();
   },
    //放到屏幕中心位置,放大缩小
   toMiddleScale:function(){
@@ -226,6 +231,19 @@ Page({
     // this.animation.translate(x,y).scale(2,2).step();
     this.animation.scale(2.6,2.4).step();
     this.animation.scale(0,0).step();
+    this.setData({
+      animationData:that.animation.export()
+    })
+  },
+  //放到屏幕中心位置,渐变出现消失
+  linerStartEnd:function(){
+    let that=this;
+    this.animation.opacity(1).step();
+    if(this.data.currentIndex!=this.data.imgs.length-1){
+      this.animation.opacity(0).step();
+    }else{
+      this.animation.opacity(0.2).step();
+    }
     this.setData({
       animationData:that.animation.export()
     })
