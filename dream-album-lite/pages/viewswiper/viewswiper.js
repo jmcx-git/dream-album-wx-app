@@ -15,7 +15,7 @@ Page({
     refreshtip: '',
     extraPic:undefined,
     clickCount:0,
-    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg',
+    currentLink:'',
     imgUrl:'',
     imgs:[],
     animationData: {},
@@ -25,15 +25,21 @@ Page({
     picWidth:300,
     reloadHidden:true,
     refreshInterval:4000,
-    shareAnimationDatas:[]
+    shareAnimationDatas:[],
+    avatarUrl:'',
+    replayHidden:false
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight,
+      picWidth: app.globalData.windowWidth,
+      picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
-      shareUserAlbumId: options.userAlbumId
+      shareUserAlbumId: options.userAlbumId,
+      avatarUrl: wx.getStorageSync('avatarUrl'),
+      currentLink:wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.albumId = options.albumId;
@@ -80,9 +86,9 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
-          if(that.data.extraPic!=undefined){
-            res.data.loopPreImgs.push(that.data.extraPic);
-          }
+          // if(that.data.extraPic!=undefined){
+          //   res.data.loopPreImgs.push(that.data.extraPic);
+          // }
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
@@ -216,7 +222,8 @@ Page({
       }
     })
     this.animation=animations;
-    this.toMiddleScale();
+    // this.toMiddleScale();
+    this.linerStartEnd();
   },
    //放到屏幕中心位置,放大缩小
   toMiddleScale:function(){
@@ -224,8 +231,21 @@ Page({
     var x=this.data.winWidth/2-this.data.picWidth/2;
     var y=this.data.winHeight/2-this.data.picHeight/2;
     // this.animation.translate(x,y).scale(2,2).step();
-    this.animation.scale(2,2).step();
+    this.animation.scale(2.6,2.4).step();
     this.animation.scale(0,0).step();
+    this.setData({
+      animationData:that.animation.export()
+    })
+  },
+  //放到屏幕中心位置,渐变出现消失
+  linerStartEnd:function(){
+    let that=this;
+    this.animation.opacity(1).step();
+    if(this.data.currentIndex!=this.data.imgs.length-1){
+      this.animation.opacity(0).step();
+    }else{
+      this.animation.opacity(0.2).step();
+    }
     this.setData({
       animationData:that.animation.export()
     })
@@ -235,9 +255,13 @@ Page({
     this.setData({
       reloadHidden:true,
       currentIndex:0,
-      imgUrl:''
+      imgUrl:'',
+      replayHidden:true
     })
     setTimeout(function(){
+      that.setData({
+        replayHidden:false
+      })
       that.prepareAction();
     },500)
   }
