@@ -507,7 +507,7 @@ let pageData = {
     this.animP.translate(-anc.tranx, 0).scale(anc.scale).step();
     this.setData({
       currentPage: currentPage,
-      pageAnimR: this.animP.export()
+      // pageAnimR: this.animP.export()
     })
 
   }
