@@ -4,7 +4,7 @@
         <text class="loading_text">{{refreshtip}}</text>
     </view>
 </view>
-<!--<view wx:else>
+<view wx:else>
     <view hidden="{{pptHidden}}">
         <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
@@ -16,8 +16,8 @@
             </block>
         </swiper>
     </view>
-</view>-->
-<view wx:else>
+</view>
+<!--<view wx:else>
     <image wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
     <image wx:elif="{{imgUrl==currentLink}}" src="{{imgUrl}}" animation="{{animationData}}" bindtap="showIndex" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
     <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
@@ -25,7 +25,7 @@
         <button type="primary" bindtap="reloadPlay" class="replayButton">重播</button>
         <button wx:if="{{extraPic!= undefined}}" type="primary" bindtap="showIndex" class="reDirectButton">我也来创建一个相册</button>
     </view>
-</view>
+</view>-->
 
 
 

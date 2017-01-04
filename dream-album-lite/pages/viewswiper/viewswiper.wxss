@@ -18,11 +18,11 @@ page{
     width: 200rpx;
     text-align: center;
 }
-image{
+/*image{
     position: absolute;
     top:350rpx;
     left:220rpx;
-}
+}*/
 .replayButton{
     top:500rpx;
     width:80%;

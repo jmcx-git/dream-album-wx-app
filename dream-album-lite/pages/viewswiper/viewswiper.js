@@ -88,9 +88,9 @@ Page({
             loopPreImgs: res.data.loopPreImgs,
             imgs:res.data.loopPreImgs
           })
-          setTimeout(function(){
-              that.prepareAction();
-          },500)
+          // setTimeout(function(){
+          //     that.prepareAction();
+          // },500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
