@@ -39,7 +39,6 @@ let pageData = {
   },
   onLoad: function (option) {
     this.convertTimes = 750 / app.globalData.windowWidth;
-    wx.setStorageSync('userId', 19)
     // 读取传入和本地数据
     this.anim = wx.createAnimation({
       transformOrigin:"0 0 0",
@@ -235,7 +234,7 @@ let pageData = {
           })
         },
         success: function (res) {
-
+          console.log(res)
           let jsdata = JSON.parse(res.data);
           if (jsdata.status != 0) {
             wx.hideToast()
@@ -273,7 +272,7 @@ let pageData = {
           })
         },
         success: function (res) {
-
+          console.log(res)
           if (res.data.status != 0) {
             wx.hideToast()
             wx.showModal({
@@ -351,7 +350,7 @@ let pageData = {
       let page = that.getPageList()[i]
       for(let j =0 ;j< page.photoInfos.length && idx < tempFilePaths.length; j++, idx++){
         page.photoInfos[j].elesrc = tempFilePaths[idx]
-        
+
       }
     }
     for(let i =0; i< this.getPageList().length; i++){
