@@ -12,10 +12,10 @@ page{
 /* + */
 .insertClass{
     position: absolute;
-    width:50px;
-    height:50px;
+    width:100rpx;
+    height:100rpx;
     z-index: 10;
-    right:20px;
+    right:30rpx;
 }
 .userinfo-avatar {
   position: absolute;
@@ -28,9 +28,9 @@ page{
 /*no pic*/
 .nopicClass{
     position: absolute;
-    padding-top:215px;
-    padding-left:calc(50% - 45px);
-    width:90px;
+    top:230px;
+    left:calc(50% - 60px);
+    width:120px;
     height:130px;
 }
 /*模版列表*/
@@ -73,4 +73,61 @@ page{
     color:#353535;
     margin-top:4px;
     background-color: rgba(222,222,222,0.5);
+}
+
+/*新的样式列表scrollview-x*/
+.insertClassScroll{
+    position: absolute;
+    width:100rpx;
+    height:120rpx;
+    left: calc(50% - 50rpx);
+    top:calc(100% - 65px);
+    z-index: 10;
+}
+.scrollViewTop{
+    padding-top:155px;
+    white-space: nowrap; 
+    display: flex;
+}
+.imageTop{
+     display: inline-block;
+     position: relative;
+}
+.imagesScrollView{
+    width:460rpx;
+    height:100%;
+    position: relative;
+    z-index: 4;
+    top:20rpx;
+    box-shadow:2px 0px 3px #aaaaaa;
+}
+.album_page{
+    position: absolute;
+    height: 100%;
+    top:22rpx;
+    transform-origin: 0%;
+}
+.background-one{
+    background-color:rgb(254,254,254);
+    transform: skewY(-3deg);
+    width:430rpx;
+    z-index:1;
+}
+.background-two{
+    background-color:rgb(137,137,137);
+    transform: skewY(-2deg);
+    width:440rpx;
+    z-index:2;
+}
+.background-three{
+    background-color:rgb(254,254,254);
+    transform: skewY(-1deg);
+    width:450rpx;
+    z-index:3;
+}
+.album_cover_bindline{
+    top:20rpx;
+    width: 40rpx;
+    z-index:4;
+    background:linear-gradient(to right,rgba(240,240,240,0) 60%,rgba(180,180,180,0.4) 100%);
 }

@@ -18,7 +18,6 @@ let pageData = {
 
     content_hegiht: 0, // content 部分高度
     content_width: 0,
-    scrollViewWidth: 0,
     icon_top: 0,   // 完成按钮的top和left值
     icon_left: 0,
     created: false,
@@ -26,13 +25,21 @@ let pageData = {
     currentPage: 0, // 创建面板上, 当前处理的页面 起始为0
     photoCount: 0,   // 当前相册所有的照片的数量
     scrollLeft: 0,
+    scrollLeftValues: [],
     pageAnimCur: {},
     pageAnimR:{},
     pageAnimL:{},
     pagescallable: true
   },
+  convertRpx: function(px){
+    return this.convertTimes * px
+  },
+  convertPx: function(rpx){
+    return rpx /this.convertTimes
+  },
   onLoad: function (option) {
-    // wx.setStorageSync('userId', 19)
+    this.convertTimes = 750 / app.globalData.windowWidth;
+    wx.setStorageSync('userId', 19)
     // 读取传入和本地数据
     this.anim = wx.createAnimation({
       transformOrigin:"0 0 0",
@@ -52,13 +59,12 @@ let pageData = {
       photoCount += page.photoInfos.length;
     }
 
-    let scrollViewWidth = this.data.content_width * pageList.length
     this.setData({
       pageList: pageList,
       photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
-      scrollViewWidth: scrollViewWidth
+      scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
     })
   },
   init: function () {
@@ -69,28 +75,33 @@ let pageData = {
       duration: 10000
     })
 
-    let templateHeight = (app.globalData.windowHeight - 20) / 5 - 20
-    let templateWidth = (app.globalData.windowWidth - 80) / 3.3
-    let content_hegiht = (app.globalData.windowHeight - 20) / 5 * 4
+    let templateHeight = (app.globalData.windowHeight - 20) / 5 - 30
+    let templateWidth = (app.globalData.windowWidth - 40) / 4.2
+    let content_hegiht = (app.globalData.windowHeight - 20) * 0.82
+    let pageFullHeight = content_hegiht *0.95
+    let pageFullWidth = pageFullHeight / 920 * 574
+    if(pageFullWidth > app.globalData.windowWidth *0.8){
+      pageFullWidth = app.globalData.windowWidth *0.8
+      pageFullHeight = pageFullWidth / 574 * 920
+    }
     this.setData({
-      moduleWidth: (app.globalData.windowWidth - 60) / 2,
-      moduleHeight: ((app.globalData.windowHeight - 20) / 5 * 4 - 30) / 2,
-      templateWidth: templateWidth,
-      templateHeight: templateHeight,
-      templateIconSize: templateWidth * 0.8, // 宽度的0.8
-      templateTextSize: templateHeight - (templateWidth * 0.8),
-      templateFontSize: (templateHeight - (templateWidth * 0.9)) * 0.7,
-      content_hegiht: content_hegiht,
-      content_width: app.globalData.windowWidth,
-      // scrollViewWidth: app.globalData.windowWidth *4,
-      pageFullHeight: content_hegiht *0.8,
-      pageFullWidth: app.globalData.windowWidth *0.8,
+      moduleWidth: this.convertRpx((app.globalData.windowWidth - 100) / 2),
+      moduleHeight: this.convertRpx(((app.globalData.windowHeight - 20) / 5 * 4 - 30) / 2),
+      templateWidth: this.convertRpx(templateWidth),
+      templateHeight: this.convertRpx(templateHeight),
+      templateIconSize: this.convertRpx(templateWidth * 0.8), // 宽度的0.8
+      templateTextSize: this.convertRpx(templateHeight - (templateWidth * 0.8)),
+      templateFontSize: this.convertRpx((templateHeight - (templateWidth * 0.9)) * 0.7),
+      content_hegiht: this.convertRpx(content_hegiht),
+      content_width: this.convertRpx(app.globalData.windowWidth),
+      pageFullHeight: this.convertRpx(pageFullHeight),
+      pageFullWidth: this.convertRpx(pageFullWidth),
 
-      item_width: app.globalData.windowWidth,
-      icon_top: ((app.globalData.windowHeight - 20) / 5 * 4 - 80 + 20) / 2,
-      icon_left: (app.globalData.windowWidth - 80) / 2,
-      sy_top: 20,
-      sy_left: 20
+      item_width: this.convertRpx(app.globalData.windowWidth),
+      icon_top: this.convertRpx(((app.globalData.windowHeight - 20) / 5 * 4 - 80 + 20) / 2),
+      icon_left: this.convertRpx((app.globalData.windowWidth - 70) / 2),
+      sy_top: this.convertRpx(10),
+      sy_left: this.convertRpx(45)
     })
 
     that.loadMoreTmplate(0)
@@ -111,7 +122,6 @@ let pageData = {
     }
     wx.request({
       url: app.globalData.serverHost + 'dream/album/common/listalbums.json',
-      // url: 'http://10.1.1.135:8080/DynamicWebTest/hehe.txt',
       data: {
         size: that.data.size,
         start: that.data.start,
@@ -126,6 +136,7 @@ let pageData = {
           albumList: alist,
           start: that.data.start + res.data.length
         });
+        that.data.scrollLeftValues [alist.length-1] = 0
         if (res.data.length < that.data.size) {
           that.data.nomore = true
         }
@@ -138,6 +149,7 @@ let pageData = {
     })
   },
   chooseTemplate: function (e) {
+    this.data.scrollLeftValues[this.data.choosed] = this.data.scrollLeft
     this.setData({
       choosed: e.target.dataset.albumindex
     })
@@ -162,7 +174,7 @@ let pageData = {
           if (res.confirm) {
             let userId = wx.getStorageSync("userId");
             wx.redirectTo({
-              url: '../viewswiper/viewswiper?userId=' + userId + '&albumId=' + albumId + '&userAlbumId=' + that.userAlbumId + "&from=1"
+              url: '../viewswiper/viewswiper?userId=' + userId + '&userAlbumId=' + that.userAlbumId + "&from=1"
             })
           } else {
             wx.navigateBack({
@@ -219,6 +231,7 @@ let pageData = {
           })
         },
         success: function (res) {
+          console.log(res)
           let jsdata = JSON.parse(res.data);
           if (jsdata.status != 0) {
             wx.hideToast()
@@ -339,7 +352,8 @@ let pageData = {
         this.initPageData(i)
     }
     this.setData({
-      pageList : this.getPageList()
+      pageList : this.getPageList(),
+      scrollLeft: this.data.scrollLeftValues[this.data.choosed] == undefined? 0: this.data.scrollLeftValues[this.data.choosed]
     })
 
   },
@@ -353,9 +367,9 @@ let pageData = {
     // 根据page wh 和 photo wh 计算 显示到屏幕上的width height, css x,y,rotate
     let pageOriHeight = page.imgHeight
     let pageOriWidth = page.imgWidth
-    let rateWidth = this.data.pageFullWidth / pageOriWidth
-    let rateHeight = this.data.pageFullHeight / pageOriHeight
-    // console.log("pageOriHeight",pageOriHeight, "pageOriWidth",pageOriWidth, "rateWidth",rateWidth,"rateHeight",rateHeight,"pageFullWidth",this.data.pageFullWidth, "pageFullHeight", this.data.pageFullHeight)
+    let rateWidth = this.convertPx(this.data.pageFullWidth) / pageOriWidth
+    let rateHeight = this.convertPx(this.data.pageFullHeight) / pageOriHeight
+
     for(let i = 0; i<photoList.length; i++){
       let photo = photoList[i]
       photo.rateWidth = rateWidth
@@ -483,11 +497,7 @@ let pageData = {
     let p0 = e.touches[0]
     let tmpLeft = this.scrollPage.pageX - p0.pageX
     let scrollLeft = this.tmpScrollLeft + tmpLeft
-    if(scrollLeft < 0){
-      scrollLeft = 0
-    }else if(scrollLeft > this.data.scrollViewWidth - this.data.content_width){
-      scrollLeft = this.data.scrollViewWidth - this.data.content_width
-    }
+
     this.setData({
       scrollLeft: scrollLeft
     })
@@ -496,18 +506,12 @@ let pageData = {
 
   },
   scrollPage: function(e){
-    console.log(e)
-    let scrollLeft = e.detail.scrollLeft
-    let currentPage = Math.floor(scrollLeft/this.data.content_width)
-    let rltMovx = scrollLeft - currentPage * this.data.content_width;
-    let anc = {}
-    anc.tranx = 100- rltMovx /this.data.content_width * 100
-    anc.scale = 0.7+ 0.3*(rltMovx/this.data.content_width)
 
-    this.animP.translate(-anc.tranx, 0).scale(anc.scale).step();
+    let scrollLeft = e.detail.scrollLeft
+    this.data.scrollLeft = scrollLeft
+    let currentPage = Math.floor(scrollLeft/this.convertPx(this.data.content_width))
     this.setData({
-      currentPage: currentPage,
-      // pageAnimR: this.animP.export()
+      currentPage: currentPage
     })
 
   }

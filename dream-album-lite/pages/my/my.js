@@ -10,7 +10,12 @@ Page({
     authorizeTitle: "请确认授权以下信息",
     authorizeContent: ". 获得你的公开信息(昵称、头像等)",
     picLoadFinish: false,
-    picLoadCount: 0
+    picLoadCount: 0,
+    indicatorDots:false,
+    autoplay:false,
+    interval:3000,
+    duration:500,
+    marginLeft:50
   },
   onLoad: function () {
     let that = this;
@@ -186,7 +191,8 @@ Page({
             that.setData({
               items: res.data,
               nopichidden: 'none',
-              viewtap: true
+              viewtap: true,
+              marginLeft:res.data.length==1?150:50
             })
           }
           // wx.hideToast();
@@ -254,6 +260,7 @@ Page({
           let itemx = that.data.items[index];
           if (!res.confirm) {
             itemx.title = orititle;
+            
             that.setData({
               items: that.data.items
             })
@@ -277,6 +284,12 @@ Page({
           }
         }
       })
+    }
+  },onShareAppMessage: function () {
+    return {
+      title: '分享一个相册工具',
+      desc: '亲爱的，相信我，你会爱上她的，点击查看！',
+      path: '/pages/my/my'
     }
   }
 })
