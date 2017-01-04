@@ -229,18 +229,18 @@ let pageData = {
         fail: function (res) {
           wx.hideToast()
           wx.showModal({
-            title: "提示1",
+            title: "提示",
             content: "上传文件错误，请从新上传",
             showCancel: false
           })
         },
         success: function (res) {
-          console.log(res)
+
           let jsdata = JSON.parse(res.data);
           if (jsdata.status != 0) {
             wx.hideToast()
             wx.showModal({
-              title: "提示2",
+              title: "提示",
               content: "上传文件错误，请从新上传",
               showCancel: false
             })
@@ -267,7 +267,7 @@ let pageData = {
         fail: function (res) {
           wx.hideToast()
           wx.showModal({
-            title: "提示3",
+            title: "提示",
             content: "上传文件错误，请从新上传",
             showCancel: false
           })
@@ -277,7 +277,7 @@ let pageData = {
           if (res.data.status != 0) {
             wx.hideToast()
             wx.showModal({
-              title: "提示4",
+              title: "提示",
               content: "上传文件错误，请从新上传",
               showCancel: false
             })
@@ -342,7 +342,7 @@ let pageData = {
     this.setData({
       hiddenGrid: hiddenGrid
     })
-    console.log(tempFilePaths)
+
     this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
     // 设置每个photo对应的选中的照片
     let that = this
@@ -351,7 +351,7 @@ let pageData = {
       let page = that.getPageList()[i]
       for(let j =0 ;j< page.photoInfos.length && idx < tempFilePaths.length; j++, idx++){
         page.photoInfos[j].elesrc = tempFilePaths[idx]
-        console.log(page.photoInfos[j].elesrc)
+        
       }
     }
     for(let i =0; i< this.getPageList().length; i++){
@@ -475,7 +475,7 @@ let pageData = {
       let photoTop = this.tmpy
       let photoRight = this.tmpx + photoW
       let photoBottom = this.tmpy + photoH
-      console.log(borders, photoLeft,photoTop,photoRight,photoBottom)
+
       if(photoLeft > borders.left){
         if(photoLeft > borders.left +this.threshold){
           this.tmpx = borders.left +this.threshold
@@ -540,7 +540,6 @@ let pageData = {
       photo.cssShowHeight = this.tmpShowWidth
     }
     if(this.tmpx != this.finalx || this.tmpy != this.finaly){
-      console.log(this.tmpx ,this.finalx , this.tmpy, this.finaly)
       this.anim.translate(this.finalx, this.finaly).scale(this.tmpShowWidth/100, this.tmpShowHeight /100).step();
       photo.transformImg = this.anim.export();
     }
