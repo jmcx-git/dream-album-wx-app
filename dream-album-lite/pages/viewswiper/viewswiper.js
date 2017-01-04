@@ -15,7 +15,7 @@ Page({
     refreshtip: '',
     extraPic:undefined,
     clickCount:0,
-    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg',
+    currentLink:'',
     imgUrl:'',
     imgs:[],
     animationData: {},
@@ -38,7 +38,8 @@ Page({
       picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
       shareUserAlbumId: options.userAlbumId,
-      avatarUrl: wx.getStorageSync('avatarUrl')
+      avatarUrl: wx.getStorageSync('avatarUrl'),
+      currentLink:wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.albumId = options.albumId;
