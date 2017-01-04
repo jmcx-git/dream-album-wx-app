@@ -126,7 +126,8 @@ page{
     z-index:3;
 }
 .album_cover_bindline{
-  width: 40rpx;
-  z-index:4;
-  background:linear-gradient(to right,rgba(240,240,240,0) 60%,rgba(180,180,180,0.4) 100%);
+    top:20rpx;
+    width: 40rpx;
+    z-index:4;
+    background:linear-gradient(to right,rgba(240,240,240,0) 60%,rgba(180,180,180,0.4) 100%);
 }
