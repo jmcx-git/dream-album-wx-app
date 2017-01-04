@@ -26,7 +26,8 @@ Page({
     reloadHidden:true,
     refreshInterval:4000,
     shareAnimationDatas:[],
-    avatarUrl:''
+    avatarUrl:'',
+    replayHidden:false
   },
   onLoad: function (options) {
     let that = this;
@@ -253,9 +254,13 @@ Page({
     this.setData({
       reloadHidden:true,
       currentIndex:0,
-      imgUrl:''
+      imgUrl:'',
+      replayHidden:true
     })
     setTimeout(function(){
+      that.setData({
+        replayHidden:false
+      })
       that.prepareAction();
     },500)
   }
