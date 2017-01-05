@@ -1,30 +1,43 @@
-<view class="content">
-<scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht}}px; padding: {{sy_top}}px 0 0 {{sy_left}}px;">
+<view class="content" hidden="{{hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
+<scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
   <view class="content_detail">
-    <view class="content_item" wx:for="{{submodules}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}px; height:{{moduleHeight}}px;">
-      <image wx-if= "{{item.elesrc == ''}}" class="bg_img" style="border-radius: 8px; width:{{moduleWidth}}px; height:{{moduleHeight}}px;" src="{{item.bgsrc}}"/>
-      <image wx-if= "{{item.elesrc != ''}}" class="bg_img" style="border-radius: 8px; width:{{moduleWidth}}px; height:{{moduleHeight}}px;" src="{{item.editsrc}}"/>
-      <view style ="position:absolute;width:{{item.shadowImgWidth}}px;height:{{item.shadowImgHeight}}px;top:{{item.shadowImgTop}}px;left:{{item.shadowImgLeft}}px;">
-        <image src="{{item.elesrc}}" style="width:100%;height:100%;"/>
-      </view>
-      <view style ="z-index:2; position:absolute;width:{{item.shadowImgWidth}}px;height:{{item.shadowImgHeight}}px;top:{{item.shadowImgTop}}px;left:{{item.shadowImgLeft}}px;"  bindtap="chooseImage" data-index="{{index}}"/>
+    <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;">
+      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.previewImgUrl}}"/>
     </view>
   </view>
 </scroll-view>
 </view>
-<image class="createbtn" style="top:{{icon_top}}px;left:{{icon_left}}px" src="../../image/create_icon.png" bindtap="createAlbum"/>
-<view class="item">
-  <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}px" bindscrolltolower="loadMoreTmplate">
-    <view class="item_detail" style="height:{{templateHeight}}px;">
-      <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}"  style="width:{{templateWidth}}px;height:{{templateHeight}}px;">
-        <view style="display: inline-block; margin:0 {{(templateWidth-templateIconSize)/2}}px; width:{{templateIconSize}}px;height:{{templateIconSize}}px;">
-          <image class="{{index === choosed?'border_choosed':''}}" src="{{item.cover}}" style="border-radius: 5px; width:100%;height:100%;" bindtap="chooseTemplate" data-albumIndex="{{index}}"/>
+<view class="content" hidden="{{!hiddenGrid}}">
+  <scroll-view scroll-x="{{pagescallable}}" style="width:100%; height:{{content_hegiht+sy_top}}rpx; white-space: nowrap;" bindscroll="scrollPage" scroll-left="{{scrollLeft}}">
+    <block wx:for="{{pageList}}" wx:key="id" wx:for-index="idx">
+      <view id="{{item.id}}" style="display:inline-block; width: {{content_width *0.87}}rpx; height:{{content_hegiht}}rpx; padding: 0 0 0 0; position:relative" >
+        <view style="border-radius: 16rpx; width:{{pageFullWidth}}rpx; height:{{pageFullHeight}}rpx;margin: 40rpx 0 0 80rpx; position:relative" >
+          <image class="bg_img" style="border-radius: 16rpx; width:100%; height:100%" src="{{item.editImgUrl}}"/>
+          <block wx:for="{{item.photoInfos}}" wx:for-item="photoItem" wx:key="{{id}}">
+            <view style="position:absolute; width:100px; height:100px;" animation="{{photoItem.transformImg}}">
+              <image src="{{photoItem.elesrc != undefined?photoItem.elesrc: photoItem.editImgUrl}}" style="width:100%; height:100%"/>
+            </view>
+            <view style="position:absolute; width:100px; height:100px; z-index:2;" animation="{{photoItem.transformShadow}}" bindtap="chooseImage" data-index="{{index}}" data-idx='{{idx}}' />
+          </block>
         </view>
-
-        <view style="color:{{index === choosed?'#00adef':'#888888'}}; text-align: center; font-size: {{templateFontSize}}px; display: inline-block; width:100%; position:absolute; top:{{templateIconSize}}px;left:0px; height:{{templateTextSize}}px">
+      </view>
+    </block>
+    <view style="width:80rpx; display:inline-block"/>
+  </scroll-view>
+</view>
+<image class="chooseimgbtn" hidden="{{hiddenGrid}}" style="top:{{icon_top}}rpx;left:{{icon_left}}rpx" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
+<image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top-65}}rpx;left:{{2*icon_left-45}}rpx" src="../../image/savealbum.png" bindtap="createAlbum"/>
+<view class="splitline"/>
+<view class="item">
+  <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}rpx;height:{{templateHeight+15}}rpx;" bindscrolltolower="loadMoreTmplate">
+    <view class="item_detail" style="height:{{templateHeight}}rpx;">
+      <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}"  style="width:{{templateWidth}}rpx;height:{{templateHeight}}rpx;">
+        <view style="display: inline-block; margin:0 {{(templateWidth-templateIconSize)/2}}rpx; width:{{templateIconSize}}rpx;height:{{templateIconSize}}rpx;">
+          <image class="{{index === choosed?'border_choosed':''}}" src="{{item.cover}}" style="border-radius: 28rpx; width:100%;height:100%;" bindtap="chooseTemplate" data-albumIndex="{{index}}"/>
+        </view>
+        <view style="color:{{index === choosed?'#00adef':'#888888'}}; text-align: center; font-size: {{templateFontSize}}rpx; display: inline-block; width:100%; position:absolute; top:{{templateIconSize+10}}rpx;left:0rpx; height:{{templateTextSize}}rpx">
           {{item.title}}
         </view>
-
       </view>
     </view>
   </scroll-view>

@@ -13,24 +13,58 @@ Page({
     shareUserAlbumId: '',
     refresh: true,
     refreshtip: '',
-    extraPic:undefined,
     clickCount:0,
-    currentLink:'https://cdn.mokous.com/album/user/item/preview/2016-12-28/album_item_pre_1482906765813.jpg'
+<<<<<<< HEAD
+=======
+    currentLink:'',
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
+    imgUrl:'',
+    imgs:[],
+    animationData: {},
+    currentIndex:0,
+    picHeight:520,
+    picWidth:300,
+    reloadHidden:true,
+    refreshInterval:4000,
+    shareAnimationDatas:[],
+<<<<<<< HEAD
+    showLayer: false,
+    showNav: false,
+    avatarUrl: "",
+    nickName: ""
+=======
+    avatarUrl:'',
+    replayHidden:false
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight,
+      picWidth: app.globalData.windowWidth,
+      picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
-      shareUserAlbumId: options.userAlbumId
+      shareUserAlbumId: options.userAlbumId,
+      avatarUrl: wx.getStorageSync('avatarUrl'),
+      currentLink:wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
-    this.setData({
-      extraPic:options.lastId
-    })
+    //if from share
+    if(typeof options.shared !== "undefined"){
+      //get data from server
+      this.setData({
+        showNav: true
+      });
+    }else{
+      this.setData({
+        avatarUrl: wx.getStorageSync('avatarUrl'),
+        nickName: wx.getStorageSync('nickName'),
+        showNav: false
+      })
+    }
     that.init()
   },
   init: function (e) {
@@ -60,23 +94,31 @@ Page({
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
     wx.request({
-      url: app.globalData.serverHost + 'dream/album/common/getpreview.json?',
+      url: app.globalData.serverHost + 'dream/album/lite/common/getpreview.json?',
       data: {
         albumId: albumId == undefined ? '' : albumId,
         userAlbumId: userAlbumId == undefined ? '' : userAlbumId,
-        appId: app.globalData.appId
+        appId: app.globalData.appId,
+        openId: app.globalData.openId
       },
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
-          if(that.data.extraPic!=undefined){
-            res.data.loopPreImgs.push(that.data.extraPic);
-          }
+<<<<<<< HEAD
+=======
+          // if(that.data.extraPic!=undefined){
+          //   res.data.loopPreImgs.push(that.data.extraPic);
+          // }
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
           that.setData({
             refresh: false,
-            loopPreImgs: res.data.loopPreImgs
+            loopPreImgs: res.data.loopPreImgs,
+            imgs:res.data.loopPreImgs
           })
+          setTimeout(function(){
+              that.prepareAction();
+          },500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -86,11 +128,9 @@ Page({
     })
   },
   showIndex:function(){
-    this.setData({
-      extraPic:undefined
-    })
+    var url = '../my/my?from=share&shareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
-      url: '../my/my'
+      'url': url
     })
   },
   showAlbum:function(e){
@@ -129,6 +169,12 @@ Page({
     // 页面隐藏
   },
   onUnload: function () {
+    let that=this;
+    this.setData({
+      currentIndex:0,
+      imgs:[],
+      animationData:{}
+    })
     if (app.globalData.finishCreateFlag) {
       wx.redirectTo({
         url: "../my/my"
@@ -136,19 +182,128 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    let that = this;
-    let queryStr = "appId=" + app.globalData.appId
-    if(typeof this.data.shareAlbumId !== "undefined"){
-        queryStr = queryStr + "&albumId=" + this.data.shareAlbumId;
+    let queryStr = "shared=1&appId=" + app.globalData.appId + "&openId=" + app.globalData.openId + "&userAlbumId=" + this.data.shareUserAlbumId;
+    var title="";
+    if(typeof app.globalData.nickName !== "undefined"){
+      title = "分享" + app.globalData.nickName + "的相册";
+    }else{
+      title = "分享给我的亲密好友的相册";
     }
-    if(typeof this.data.shareUserAlbumId !== "undefined"){
-        queryStr = queryStr + "&userAlbumId=" + this.data.shareUserAlbumId;
-    }
-    queryStr=queryStr+"&lastId="+that.data.currentLink;
+    
+    let desc = "这里记录了我的精彩照片和故事，快来看看吧！";
     return {
-      title: '分享我的相册',
-      desc: '欢迎来参观我的相册，这里有我给你最好的时光！',
+      title: title,
+      desc: desc,
       path: '/pages/viewswiper/viewswiper?' +  queryStr
     }
+  },
+  // 动画效果
+  prepareAction:function(){
+    let that=this;
+    if(that.data.currentIndex<that.data.imgs.length){
+       that.setData({
+          imgUrl:that.data.imgs[that.data.currentIndex]
+        })
+        // that.executeAction();
+        // setTimeout(function(){
+        //     that.setData({
+        //       currentIndex:that.data.currentIndex+1,
+        //       animationData:{}
+        //     })
+        //     that.prepareAction();
+        // },that.data.refreshInterval*2+500)
+     }else{
+        console.log("没有图片了了！");
+        that.setData({
+          reloadHidden:false
+        })
+      }
+  },
+  loadPic:function(){
+    let that=this;
+    that.executeAction();
+    setTimeout(function(){
+        that.setData({
+          currentIndex:that.data.currentIndex+1,
+          animationData:{}
+        })
+        that.prepareAction();
+    },that.data.refreshInterval*2+500)
+  },
+  executeAction:function(){
+    let that=this;
+    var animations=wx.createAnimation({
+      duration:that.data.refreshInterval,
+      timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
+      delay: 0,
+      transformOrigin: '50% 50%',
+      success: function(res) {
+        console.log(res);
+      }
+    })
+    this.animation=animations;
+    // this.toMiddleScale();
+    this.linerStartEnd();
+  },
+   //放到屏幕中心位置,放大缩小
+  toMiddleScale:function(){
+    let that=this;
+    var x=this.data.winWidth/2-this.data.picWidth/2;
+    var y=this.data.winHeight/2-this.data.picHeight/2;
+    // this.animation.translate(x,y).scale(2,2).step();
+    this.animation.scale(2.6,2.4).step();
+    this.animation.scale(0,0).step();
+    this.setData({
+      animationData:that.animation.export()
+    })
+  },
+  //放到屏幕中心位置,渐变出现消失
+  linerStartEnd:function(){
+    let that=this;
+    this.animation.opacity(1).step();
+    if(this.data.currentIndex!=this.data.imgs.length-1){
+      this.animation.opacity(0).step();
+    }else{
+      this.animation.opacity(0.2).step();
+    }
+    this.setData({
+      animationData:that.animation.export()
+    })
+  },
+  reloadPlay:function(){
+    this.setData({
+<<<<<<< HEAD
+      autoplay: true,
+      showLayer: false,
+      interval: 500
+    })
+  },
+  swiperChange: function(event){
+    var that = this;
+    if(event.detail.current + 1 == this.data.loopPreImgs.length){
+      setTimeout(function(){
+        that.setData({          
+          autoplay: false,
+          showLayer: true
+        }); 
+      }, 2500);
+    }else{
+      this.setData({
+        interval: 3000
+      });
+    }
+=======
+      reloadHidden:true,
+      currentIndex:0,
+      imgUrl:'',
+      replayHidden:true
+    })
+    setTimeout(function(){
+      that.setData({
+        replayHidden:false
+      })
+      that.prepareAction();
+    },500)
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   }
 })

@@ -10,7 +10,12 @@ Page({
     authorizeTitle: "请确认授权以下信息",
     authorizeContent: ". 获得你的公开信息(昵称、头像等)",
     picLoadFinish: false,
-    picLoadCount: 0
+    picLoadCount: 0,
+    indicatorDots:false,
+    autoplay:false,
+    interval:3000,
+    duration:500,
+    marginLeft:50
   },
   onLoad: function () {
     let that = this;
@@ -112,28 +117,28 @@ Page({
     })
   },
   viewTemplateList: function (e) {
-    // wx.navigateTo({
-    //   url: '../index/index'
-    // })
-    let that = this
-    wx.chooseImage({
-      count: app.globalData.albumPageCount,
-      success: function (res) {
-        if (res.tempFilePaths.length < app.globalData.albumPageCount) {
-          wx.showModal({
-            title: "提示",
-            content: "该相册可以上传" + app.globalData.albumPageCount + "张照片，您选中" + res.tempFilePaths.length + "张 确认是否制作",
-            success: function (rescfm) {
-              if (rescfm.confirm) {
-                that.createAlbum(e, res.tempFilePaths)
-              }
-            }
-          })
-        } else {
-          that.createAlbum(e, res.tempFilePaths)
-        }
-      }
+    wx.navigateTo({
+      url: "../createlite/createlite"
     })
+    // let that = this
+    // wx.chooseImage({
+    //   count: app.globalData.albumPageCount,
+    //   success: function (res) {
+    //     if (res.tempFilePaths.length < app.globalData.albumPageCount) {
+    //       wx.showModal({
+    //         title: "提示",
+    //         content: "该相册可以上传" + app.globalData.albumPageCount + "张照片，您选中" + res.tempFilePaths.length + "张 确认是否制作",
+    //         success: function (rescfm) {
+    //           if (rescfm.confirm) {
+    //             that.createAlbum(e, res.tempFilePaths)
+    //           }
+    //         }
+    //       })
+    //     } else {
+    //       that.createAlbum(e, res.tempFilePaths)
+    //     }
+    //   }
+    // })
   },
   refreshData: function () {
     this.setData({
@@ -186,7 +191,8 @@ Page({
             that.setData({
               items: res.data,
               nopichidden: 'none',
-              viewtap: true
+              viewtap: true,
+              marginLeft:res.data.length==1?150:50
             })
           }
           // wx.hideToast();
@@ -202,8 +208,10 @@ Page({
     this.setData({
       picLoadCount: that.data.picLoadCount + 1
     })
-    if (this.data.picLoadCount == this.data.items.length) {
+    if (this.data.picLoadCount == this.data.items.length ||
+      this.data.picLoadCount >= 3) {
       wx.hideToast();
+      console.log("Pic load");
       that.setData({
         picLoadFinish: true
       })

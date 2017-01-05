@@ -1,5 +1,6 @@
-.page{
+page{
     background-color: #efeff4;
+    font-size: 32rpx !important;
 }
 
 .loading_page{
@@ -18,3 +19,107 @@
     width: 200rpx;
     text-align: center;
 }
+.viewImage{
+    opacity: 0;
+    width:100%;
+    height:100%;
+}
+/*设置最后一页*/
+.userinfo-avatar {
+  position: absolute;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  top:200rpx;
+  left: calc(50% - 30px);
+  border:1px solid #00adef;
+}
+.userinfo-text{
+    position: absolute;
+<<<<<<< HEAD
+}
+
+.img-sharenav{
+    margin-left:150px !important;
+    width:400rpx !important;
+    height:170rpx !important;
+    position:relative !important;
+    display: block;
+}
+.view-btn{
+    display:flex;
+    margin:auto;    
+    margin-top:15px;
+    width:80%;
+}
+.view-btn button{
+    width:45%;
+    border-radius:50rpx;
+    font-size: 32rpx !important;
+} 
+.replayButton{
+    background-color:#00adef !important;
+    /**margin-right:5px;**/
+    /**margin-left:0px;**/
+}
+.createButton{
+    background-color: #efae00 !important;
+    /**margin-right:0px;**/
+    /**margin-left:5px;**/
+}
+
+.img-navavator{
+    position:relative !important;
+    width:180rpx;
+    height:180rpx;
+    border:2px solid #00adef;
+    border-radius:50%;
+    margin-top:25px;
+}
+.nav-view-main{
+    text-align:center;
+    color: white;
+}
+
+.label-nickname{
+    display:block;
+    position:relative !important;
+    color:white;
+}
+.nav-view{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.7); 
+}
+=======
+    top:340rpx;
+    left:calc(50% - 50px);
+    color: #fff;
+    font-size: 14px;
+}
+.replay{
+    position: absolute;
+    top:450rpx;
+    background-color:#FFD700;
+    line-height:18px;
+    padding:8px 20px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 35px;
+}
+.mycreate{
+    position: absolute;
+    top:450rpx;
+    left:50%;
+    background-color:#00adef;
+    line-height:18px;
+    padding:8px 20px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 35px;
+}
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
