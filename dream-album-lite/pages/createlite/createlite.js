@@ -271,7 +271,7 @@ let pageData = {
   },
   changepreview: function(e){
     // console.log(e)
-    this.preview = (this.preview+1) %3
+    this.preview = (this.preview+1) %2
     this.initpreview()
   },
   initpreview: function(){
@@ -281,13 +281,10 @@ let pageData = {
       let page = pagelist[i]
       switch (this.preview) {
         case 0:
-          page.preview = page.previewImgUrl
+          page.preview = page.editImgUrl
           break;
         case 1:
-          page.preview = page.shadowImgUrl
-          break
-        case 2:
-          page.preview = page.editImgUrl
+          page.preview = page.previewImgUrl
           break
         default:
       }

@@ -52,3 +52,4 @@
 
     </view>
 </view>
+<image wx:if="{{showNav}}" bindtap="showIndex" src="../../image/createmy.png" class="createmy" />
