@@ -24,7 +24,7 @@ page{
 .splitline{
   width: 100%;
   height: 2rpx;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
   background:#888888;
 }
 .item{
@@ -73,6 +73,9 @@ page{
 
 .border_choosed{
   border: 2rpx solid rgb(0,170,243);
+}
+.border_unchoosed{
+  border: 2rpx solid rgba(0,0,0,0);
 }
 
 .footer{
