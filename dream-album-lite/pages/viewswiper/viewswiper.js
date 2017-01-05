@@ -15,9 +15,7 @@ Page({
     shareUserAlbumId: '',
     refresh: true,
     refreshtip: '',
-    extraPic: undefined,
     clickCount: 0,
-    currentLink: '',
     imgUrl: '',
     imgs: [],
     animationData: {},
@@ -26,8 +24,7 @@ Page({
     picHeight: 520,
     picWidth: 300,
     reloadHidden: true,
-    refreshInterval: 4000,
-    shareAnimationDatas: [],
+    refreshInterval: 2000,
     avatarUrl: '',
     replayHidden: false,
 
@@ -39,7 +36,7 @@ Page({
     fromShareUserOpenId: '',
     musicStatus: 'running',
     bgMusic: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
-    hiddenMusicBtn:true
+    hiddenMusicBtn: true
   },
   onLoad: function (options) {
     let that = this;
@@ -50,8 +47,7 @@ Page({
       picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
       shareUserAlbumId: options.userAlbumId,
-      avatarUrl: wx.getStorageSync('avatarUrl'),
-      currentLink: wx.getStorageSync('avatarUrl')
+      avatarUrl: wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.userAlbumId = options.userAlbumId;
@@ -68,7 +64,7 @@ Page({
         url: app.globalData.serverHost + 'album/user/getShareUserInfo.json?',
         data: {
           appId: app.globalData.appId,
-          fromShareUserOpenId: fromShareUserOpenId
+          openId: fromShareUserOpenId
         },
         method: 'GET',
         success: function (res) {
@@ -91,9 +87,6 @@ Page({
         showNav: false
       })
     }
-    this.setData({
-      extraPic: options.lastId,
-    })
     that.init()
   },
   init: function (e) {
@@ -147,7 +140,7 @@ Page({
             that.audioCtx = wx.createAudioContext('music');
             that.audioCtx.play();
             that.setData({
-              hiddenMusicBtn:false
+              hiddenMusicBtn: false
             })
           }
           setTimeout(function () {
@@ -161,10 +154,7 @@ Page({
       }
     })
   },
-  showIndex: function () {
-    this.setData({
-      extraPic: undefined
-    })
+  showIndex:function(){
     var url = '../my/my?from=share&fromShareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
       'url': url
@@ -228,20 +218,12 @@ Page({
 
     var title = "";
     let desc = "";
-    if (this.data.fromShare) {
-      if (typeof app.globalData.nickName !== "undefined") {
-        title = app.globalData.nickName + "请你来看看你们共同好友" + this.data.nickName + "的相册";
-      } else {
-        title = "你的好友分享给你你们共同好友" + this.data.nickName + "的相册";
-      }
-    } else {
-      if (typeof app.globalData.nickName !== "undefined") {
-        title = app.globalData.nickName + "请你来看看她(他)的相册";
-      } else {
-        title = "你的好友分享给你他的相册";
-      }
-      desc = "这里记录了我的精彩照片和故事，快来看看吧！";
+    if(this.data.fromShare){
+      title = "分享"+ this.data.nickName +"的相册";
+    }else{
+      title="分享我的相册";
     }
+    desc = "这里记录了" + this.data.nickName + "的精彩照片和故事，快来看看吧！";
     return {
       title: title,
       desc: desc,
