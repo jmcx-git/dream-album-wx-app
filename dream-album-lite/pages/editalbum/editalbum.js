@@ -72,7 +72,7 @@ let pageData = {
     this.setData({
       pageList: pageList,
       photoList: this.getPhotoList(index),
-      hiddenGrid: hiddenGrid == true? true: false,
+      hiddenGrid: true,
       photoCount: photoCount,
       scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
     })
@@ -92,7 +92,7 @@ let pageData = {
     }
 
     let content_hegiht = (app.globalData.windowHeight - 20) * 0.82
-    let pageFullHeight = content_hegiht *0.95
+    let pageFullHeight = content_hegiht *0.90
     let pageFullWidth = pageFullHeight / 920 * 574
     if(pageFullWidth > app.globalData.windowWidth *0.8){
       pageFullWidth = app.globalData.windowWidth *0.8
@@ -638,6 +638,9 @@ let pageData = {
     this.setData({
       currentPage: currentPage
     })
+
+  },
+  scrolltoupper: function(e){
 
   }
 }

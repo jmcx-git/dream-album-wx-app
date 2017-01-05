@@ -72,6 +72,9 @@ page{
 .border_choosed{
   border: 2rpx solid rgb(0,170,243);
 }
+.border_unchoosed{
+  border: 2rpx solid rgba(0,0,0,0);
+}
 
 .footer{
   position: fixed;
