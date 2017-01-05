@@ -97,8 +97,7 @@ let pageData = {
       return
     }
     wx.request({
-      // url: app.globalData.serverHost + 'dream/album/common/listalbums.json',
-      url: 'http://10.1.0.131:8080/dream-album/dream/album/common/listalbums.json',
+      url: app.globalData.serverHost + 'dream/album/common/listalbums.json',
       data: {
         size: that.data.size,
         start: that.data.start,

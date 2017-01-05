@@ -208,8 +208,10 @@ Page({
     this.setData({
       picLoadCount: that.data.picLoadCount + 1
     })
-    if (this.data.picLoadCount == this.data.items.length) {
+    if (this.data.picLoadCount == this.data.items.length ||
+      this.data.picLoadCount >= 3) {
       wx.hideToast();
+      console.log("Pic load");
       that.setData({
         picLoadFinish: true
       })

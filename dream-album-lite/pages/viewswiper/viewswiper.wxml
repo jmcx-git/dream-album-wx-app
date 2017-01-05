@@ -4,27 +4,26 @@
         <text class="loading_text">{{refreshtip}}</text>
     </view>
 </view>
-<!--<view wx:else>
+<view wx:else>
     <view hidden="{{pptHidden}}">
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="height:{{winHeight}}px;">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="true" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
-                    <image wx:if="{{extraPic==undefined}}" data-img="{{item}}" src="{{item}}" class="slide-image" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
-                    <image wx:elif="{{item==currentLink}}" src="{{item}}" class="slide-image" bindtap="showIndex" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
-                    <image wx:else src="{{item}}" class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
+                    <image src="{{item}}" class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                 </swiper-item>
             </block>
         </swiper>
     </view>
-</view>-->
-<view wx:else>
-    <image wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
-    <image wx:elif="{{imgUrl==currentLink}}" src="{{imgUrl}}" animation="{{animationData}}" bindtap="showIndex" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
-    <image wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic" style="height:{{picHeight}}rpx;width:{{picWidth}}rpx;"/>
-    <view hidden="{{reloadHidden}}">
-        <button type="primary" bindtap="reloadPlay" class="replayButton">重播</button>
+</view>
+<view wx-if="{{showLayer}}" class="nav-view">
+    <view class="nav-view-main">
+        <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
+        <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
+        </view>
+        <view><label class="label-nickname">{{nickName}}</label></view>        
+        <view class="view-btn">        
+            <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
+            <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
+        </view>
     </view>
 </view>
-
-
-
