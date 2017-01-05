@@ -52,7 +52,8 @@ let pageData = {
     this.animP= wx.createAnimation({duration:0});
     this.setData({
       tempFilePaths: option.tempFilePaths.split(","),
-      albumId: option.albumId
+      albumId: option.albumId,
+      needInitPhoto: true
     })
     this.init()
     // this.initCreatePanel(this.data.tempFilePaths);
@@ -158,7 +159,13 @@ let pageData = {
         }
         that.initAlbumDetail(that.data.choosed)
         wx.hideToast()
-        that.initCreatePanel(that.data.tempFilePaths)
+        if(that.data.needInitPhoto){
+          that.setData({
+            needInitPhoto: false
+          })
+          that.initCreatePanel(that.data.tempFilePaths)
+        }
+
       },
       fail: function (res) {
         that.requestFailed(res)
@@ -171,8 +178,8 @@ let pageData = {
       choosed: e.target.dataset.albumindex
     })
     this.initAlbumDetail(this.data.choosed)
-    if(this.data.albumList[this.data.choosed].hiddenGrid != true){
-        this.initCreatePanel(this.data.tempFilePaths)
+    if(this.data.albumList[this.data.choosed].initPhoto != true){
+      this.initCreatePanel(this.data.tempFilePaths)
     }
 
   },
@@ -360,7 +367,8 @@ let pageData = {
     })
 
     this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
-    this.data.albumList[this.data.choosed].initPhotos = true
+
+    this.data.albumList[this.data.choosed].initPhoto = true
     // 设置每个photo对应的选中的照片
     let that = this
     let idx = 0

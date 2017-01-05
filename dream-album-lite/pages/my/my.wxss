@@ -1,12 +1,13 @@
 page{
-    background-color: #efeff4;
+    background-color: #fff;
 }
 .allTop{
     position: relative;
+    height:204rpx;
 }
 .titleClass{
     position: absolute;
-    height:150px;
+    height:204rpx;
     width:100%;
 }
 /* + */
@@ -22,8 +23,9 @@ page{
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  margin-top:55px;
-  margin-left: calc(50% - 30px);
+  top:40rpx;
+  margin-left: calc(50% - 60rpx);
+  border:1px solid #99def9;
 }
 /*no pic*/
 .nopicClass{
@@ -78,56 +80,69 @@ page{
 /*新的样式列表scrollview-x*/
 .insertClassScroll{
     position: absolute;
-    width:100rpx;
-    height:120rpx;
-    left: calc(50% - 50rpx);
-    top:calc(100% - 65px);
+    width:152rpx;
+    height:184rpx;
+    left: calc(50% - 76rpx);
+    top:calc(100% - 204rpx);
     z-index: 10;
 }
+.scrollTops{
+    position: relative;
+    top:20rpx;
+}
 .scrollViewTop{
-    padding-top:155px;
     white-space: nowrap; 
     display: flex;
 }
 .imageTop{
      display: inline-block;
      position: relative;
+     height:760rpx;
+     width:434rpx;
 }
 .imagesScrollView{
-    width:460rpx;
-    height:100%;
-    position: relative;
-    z-index: 4;
-    top:20rpx;
-    box-shadow:2px 0px 3px #aaaaaa;
-}
-.album_page{
+    width:434rpx;
+    height:700rpx;
     position: absolute;
-    height: 100%;
-    top:22rpx;
-    transform-origin: 0%;
+    z-index: 4;
+    top:0rpx;
+    left:0rpx;
+    /*box-shadow:2px 0px 2px red;*/
+    box-sizing: border-box;
+    margin-top:60rpx;
 }
-.background-one{
-    background-color:rgb(254,254,254);
-    transform: skewY(-3deg);
-    width:430rpx;
-    z-index:1;
+.imageTopPic{
+    width:434rpx;
+    height:716rpx;
+    position: absolute;
+    z-index: 5;
+    top:0px;
+    left:0px;
+    margin-top:44rpx;
 }
-.background-two{
-    background-color:rgb(137,137,137);
-    transform: skewY(-2deg);
-    width:440rpx;
-    z-index:2;
+.imageScrollTitle{
+    position: absolute;
+    top:0rpx;
+    left:0px;
+    width:434rpx;
+    height:28rpx;
+    font-size: 28rpx;
+    color: #00adef;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 28rpx;
 }
-.background-three{
-    background-color:rgb(254,254,254);
-    transform: skewY(-1deg);
-    width:450rpx;
-    z-index:3;
-}
-.album_cover_bindline{
-    top:20rpx;
-    width: 40rpx;
-    z-index:4;
-    background:linear-gradient(to right,rgba(240,240,240,0) 60%,rgba(180,180,180,0.4) 100%);
+.imageScrollInput{
+    background-color: rgba(222,222,222,0.5);
+    position: absolute;
+    top:0rpx;
+    left:0px;
+    width:434rpx;
+    height:48rpx;
+    font-size: 28rpx;
+    color: #00adef;
+    text-align: center;
+    line-height: 28rpx;
 }
