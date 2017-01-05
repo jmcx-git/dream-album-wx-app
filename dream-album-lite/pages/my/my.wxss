@@ -112,12 +112,12 @@ page{
 }
 .imageTopPic{
     width:434rpx;
-    height:714rpx;
+    height:716rpx;
     position: absolute;
     z-index: 5;
     top:0px;
     left:0px;
-    margin-top:46rpx;
+    margin-top:44rpx;
 }
 .imageScrollTitle{
     position: absolute;
