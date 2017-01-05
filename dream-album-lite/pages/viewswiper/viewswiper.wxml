@@ -31,10 +31,10 @@
         </view>
     </view>
     <view>
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  bindchange="{{swiperChange}}" style="height:{{winHeight}}px;">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  bindchange="swiperChange" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
-                    <image class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
+                    <image class="slide-image" src="{{item}}" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                 </swiper-item>
             </block>
         </swiper>
