@@ -7,19 +7,17 @@ page{
   flex-wrap: wrap;
 }
 .scroll-view_content{
-  background-image:url("https://cdn.mokous.com/static/album/image/albumbook.png");
-  background-repeat:no-repeat;
-  background-size: 100% 100%;
+
 }
 .content_detail{
   display:flex;
   flex-wrap: wrap;
-
+  padding-top: 19rpx
 }
 .content_item{
   position: relative;
   display:block;
-  margin: 10rpx 0 0 10rpx;
+  margin: 5rpx 0 0 5rpx;
 }
 .splitline{
   width: 100%;
@@ -55,7 +53,7 @@ page{
 .chooseimgbtn{
   position: absolute;
   width:160rpx;
-  height:200rpx;
+  height:160rpx;
   z-index: 10;
   right:40rpx;
 }

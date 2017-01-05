@@ -1,9 +1,10 @@
 <view class="content" wx:if="{{!hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
-<scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
+<scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: 0 0 0 {{sy_left}}rpx;">
   <view class="content_detail" bindtap="changepreview" hidden="{{!picLoadFinished}}">
-    <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;">
+    <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" >
       <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}" bindload="loadPagePic"/>
     </view>
+    <image src="../../image/imgtop.png" style="position:absolute; top:0rpx; left: 5rpx; width:{{moduleWidth*2 +10}}rpx; height:{{moduleHeight*2 +10}}rpx; z-index: 5"/>
   </view>
 </scroll-view>
 </view>
