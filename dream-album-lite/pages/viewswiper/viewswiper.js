@@ -34,7 +34,9 @@ Page({
     showLayer: false,
     showNav: false,
     avatarUrl: "",
-    nickName: ""
+    nickName: "",
+    fromShare: false,
+    fromShareUserOpenId: ''
   },
   onLoad: function (options) {
     let that = this;
@@ -52,9 +54,31 @@ Page({
     that.userAlbumId = options.userAlbumId;
     //if from share
     if(typeof options.shared !== "undefined"){
-      //get data from server
-      this.setData({
-        showNav: true
+        //get data from server
+        var fromShareUserOpenId = options.fromShareUserOpenId
+        this.setData({
+          fromShare: true,
+          fromShareUserOpenId: fromShareUserOpenId
+        })
+        wx.request({
+          url: app.globalData.serverHost + 'album/user/getShareUserInfo.json?',
+          data: {
+            appId: app.globalData.appId,
+            fromShareUserOpenId: fromShareUserOpenId
+          },
+          method: 'GET',
+          success: function (res) {
+            wx.hideToast();
+            if (res.statusCode == 200 && res.data.status == 0) {          
+              that.setData({
+                avatarUrl: res.data.data.avatarUrl,
+                nickName: res.data.data.nickName
+              })
+          }
+        },
+        fail: function(res){
+          app.serverFailedToast();
+        }
       });
     }else{
       this.setData({
@@ -92,15 +116,19 @@ Page({
   },
   requestData: function (e) {
     let that = this
-    let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
+    var openId = ""
+    if(this.data.fromShare){
+      openId = this.data.fromShareUserOpenId
+    }else{
+      openId = app.globalData.openId
+    }
     wx.request({
       url: app.globalData.serverHost + 'dream/album/lite/common/getpreview.json?',
       data: {
-        albumId: albumId == undefined ? '' : albumId,
         userAlbumId: userAlbumId == undefined ? '' : userAlbumId,
         appId: app.globalData.appId,
-        openId: app.globalData.openId
+        openId: openId
       },
       method: 'GET',
       success: function (res) {
@@ -126,7 +154,7 @@ Page({
     this.setData({
       extraPic:undefined
     })
-    var url = '../my/my?from=share&shareUserOpenId=' + app.globalData.openId;
+    var url = '../my/my?from=share&fromShareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
       'url': url
     })
@@ -180,15 +208,29 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    let queryStr = "shared=1&appId=" + app.globalData.appId + "&openId=" + app.globalData.openId + "&userAlbumId=" + this.data.shareUserAlbumId;
-    var title="";
-    if(typeof app.globalData.nickName !== "undefined"){
-      title = app.globalData.nickName + "请你来看看她(他)的相册";
+    var queryStr = "";
+    if(this.data.fromShare){
+      queryStr = "shared=1&appId=" + app.globalData.appId + "&fromShareUserOpenId=" + this.data.fromShareUserOpenId + "&userAlbumId=" + this.data.shareUserAlbumId;
     }else{
-      title = "你的好友分享给你他的相册";
+      queryStr = "shared=1&appId=" + app.globalData.appId + "&fromShareUserOpenId=" + app.globalData.openId + "&userAlbumId=" + this.data.shareUserAlbumId;
     }
     
-    let desc = "这里记录了我的精彩照片和故事，快来看看吧！";
+    var title="";
+    let desc = "";
+    if(this.data.fromShare){
+      if(typeof app.globalData.nickName !== "undefined"){
+        title = app.globalData.nickName + "请你来看看你们共同好友" + this.data.nickName + "的相册";
+      }else{
+        title = "你的好友分享给你你们共同好友"+ this.data.nickName +"的相册";
+      }
+    }else{
+      if(typeof app.globalData.nickName !== "undefined"){
+        title = app.globalData.nickName + "请你来看看她(他)的相册";
+      }else{
+        title = "你的好友分享给你他的相册";
+      }
+      desc = "这里记录了我的精彩照片和故事，快来看看吧！";
+    }
     return {
       title: title,
       desc: desc,
@@ -282,6 +324,15 @@ Page({
       })
       that.prepareAction();
     },500)
+  },
+
+  reloadSwiperPlay:function(){
+    let that=this;
+    this.setData({
+      autoplay: true,
+      showLayer: false,
+      interval: 500
+    })
   },
   swiperChange: function(event){
     var that = this;
