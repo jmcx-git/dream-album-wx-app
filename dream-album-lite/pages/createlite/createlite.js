@@ -175,9 +175,8 @@ let pageData = {
         confirmText: "预览相册",
         success: function (res) {
           if (res.confirm) {
-            let userId = wx.getStorageSync("userId");
             wx.redirectTo({
-              url: '../viewswiper/viewswiper?userId=' + userId + '&userAlbumId=' + that.userAlbumId + "&from=1"
+              url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId + "&from=1"
             })
           } else {
             wx.navigateBack({
@@ -213,7 +212,7 @@ let pageData = {
         filePath: photo.elesrc,
         name: 'image',
         formData: {
-          'userId': wx.getStorageSync('userId') + "",
+          'openId': app.globalData.openId,
           'albumItemId': photo.albumItemId + "",
           'albumId': albumId + "",
           'index':(photo.rank)+"",
@@ -256,7 +255,7 @@ let pageData = {
       wx.request({
         url: app.globalData.serverHost + "dream/album/lite/common/uploadnotuserimg.json",
         data: {
-          'userId': wx.getStorageSync('userId') + "",
+          'openId': app.globalData.openId,
           'albumItemId': photo.albumItemId + "",
           'albumId': albumId + "",
           'index':photo.rank,
