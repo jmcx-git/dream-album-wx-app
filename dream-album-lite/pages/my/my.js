@@ -23,83 +23,8 @@ Page({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight
     })
-    if (!wx.getStorageSync('userId')) {
-      wx.showModal({
-        title: that.data.authorizeTitle,
-        content: that.data.authorizeContent,
-        showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            //用户点击确定
-            wx.login({
-              success: function (resl) {
-                //获取code
-                wx.request({
-                  url: app.globalData.serverHost + 'dream/user/login/getSession.json',
-                  data: {
-                    code: resl.code,
-                    appId: app.globalData.appId
-                  },
-                  method: 'GET',
-                  success: function (ress) {
-                    //缓存第三方key
-                    wx.setStorageSync('threeSessionKey', ress.data);
-                    wx.getUserInfo({
-                      success: function (resinfo) {
-                        wx.request({
-                          url: app.globalData.serverHost + 'dream/user/login/getUserInfo.json',
-                          data: {
-                            threeSessionKey: ress.data,
-                            encryptedData: resinfo.encryptedData,
-                            iv: resinfo.iv,
-                            appId: app.globalData.appId
-                          },
-                          method: 'GET',
-                          success: function (resuser) {
-                            var ss = ('' + resuser.data).split("#");
-                            //缓存用户id
-                            wx.setStorageSync('userId', ss[0]);
-                            wx.setStorageSync('avatarUrl', ss[1]);
-                            that.getData();
-                          }
-                        })
-                      },
-                      fail: function () {
-                        console.log("获取用户信息出错！");
-                      }
-                    })
-                  },
-                  fail: function (trd) {
-                    console.log("缓存第三方key出错！");
-                    console.log(trd);
-                  }
-                })
-              },
-              fail: function (ee) {
-                console.log("登录出错了！");
-                console.log(ee);
-              }
-            })
-          } else {
-            //用户点击取消
-            wx.request({
-              url: app.globalData.serverHost + 'dream/user/login/addUser.json',
-              data: {
-                appId: app.globalData.appId
-              },
-              method: 'GET',
-              success: function (res) {
-                wx.setStorageSync('userId', res.data);
-                that.search('', res.data);
-              },
-              fail: function (e) {
-                console.log("新增用户失败！");
-                console.log(e);
-              }
-            })
-          }
-        }
-      })
+    if (!wx.getStorageSync('openId')) {
+      this.confirmGetData()
     } else {
       that.getData();
     }
@@ -109,9 +34,7 @@ Page({
     wx.stopPullDownRefresh();
   },
   createAlbum: function (e, tempFilePaths) {
-    // tempFilePaths.push(tempFilePaths[0])
-    let url = "../createlite/createlite?tmpfilepaths=" + tempFilePaths.join(",")
-    // console.log(url, tempFilePaths)
+    let url = "../createlite/createlite"
     wx.navigateTo({
       url: url
     })
@@ -120,25 +43,6 @@ Page({
     wx.navigateTo({
       url: "../createlite/createlite"
     })
-    // let that = this
-    // wx.chooseImage({
-    //   count: app.globalData.albumPageCount,
-    //   success: function (res) {
-    //     if (res.tempFilePaths.length < app.globalData.albumPageCount) {
-    //       wx.showModal({
-    //         title: "提示",
-    //         content: "该相册可以上传" + app.globalData.albumPageCount + "张照片，您选中" + res.tempFilePaths.length + "张 确认是否制作",
-    //         success: function (rescfm) {
-    //           if (rescfm.confirm) {
-    //             that.createAlbum(e, res.tempFilePaths)
-    //           }
-    //         }
-    //       })
-    //     } else {
-    //       that.createAlbum(e, res.tempFilePaths)
-    //     }
-    //   }
-    // })
   },
   refreshData: function () {
     this.setData({
@@ -159,10 +63,82 @@ Page({
       url: '../viewswiper/viewswiper?userAlbumId=' + e.currentTarget.dataset.useralbumid
     })
   },
+  confirmGetData: function(){
+    var that = this
+    wx.showModal({
+      title: that.data.authorizeTitle,
+      content: that.data.authorizeContent,
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          //用户点击确定
+          wx.login({
+            success: function (wxLoginRes) {
+              //获取code
+              wx.request({
+                url: app.globalData.serverHost + 'album/user/getSession.json',
+                data: {
+                  code: wxLoginRes.code,
+                  appId: app.globalData.appId
+                },
+                method: 'GET',
+                success: function (sessionResp) {
+                  //缓存第三方key
+                  var openId = sessionResp.data
+                  wx.setStorageSync('openId', openId);
+                  wx.getUserInfo({
+                    success: function (wxUserInfoResp) {
+                      wx.request({
+                        url: app.globalData.serverHost + 'album/user/getUserInfo.json',
+                        data: {
+                          openId: openId,
+                          encryptedData: wxUserInfoResp.encryptedData,
+                          iv: wxUserInfoResp.iv,
+                          appId: app.globalData.appId
+                        },
+                        method: 'GET',
+                        success: function (serverUserInfoResp) {
+                          if(serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0){
+                            wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
+                            wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
+                            wx.setStorageSync('openId', openId);
+                            app.globalData.openId = openId;
+                            app.globalData.nickName = serverUserInfoResp.data.data.nickName;
+                            app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
+                            that.getData();
+                          }else{
+                            app.serverFailedToast();
+                          }
+                        }
+                      })
+                    },
+                    fail: function () {
+                      app.weixinServerFailedToast();
+                    }
+                  })
+                },
+                fail: function (trd) {
+                  console.log("缓存第三方key出错！");
+                  console.log(trd);
+                }
+              })
+            },
+            fail: function (ee) {
+              console.log("登录出错了！");
+              console.log(ee);
+            }
+          })
+        } else {
+          //TODO 用户取消 无法使用
+        }
+      }
+    })
+  },
   getData() {
     let that = this;
     this.setData({
-      avatarUrl: wx.getStorageSync('avatarUrl')
+      avatarUrl: wx.getStorageSync('avatarUrl'),
+      nickName: wx.getStorageSync("nickName")
     })
     wx.showToast({
       title: '加载中...',
@@ -170,12 +146,11 @@ Page({
       duration: 10000
     })
     that.consoleImage();
-    var userId = wx.getStorageSync('userId');
-    var url = app.globalData.serverHost + 'dream/album/common/myalbum.json';
+    var url = app.globalData.serverHost + 'album/getMyAlbum.json';
     wx.request({
       url: url,
       data: {
-        userId: userId,
+        openId: app.globalData.openId,
         appId: app.globalData.appId
       },
       method: 'GET',
@@ -199,7 +174,7 @@ Page({
         }
       },
       fail: function () {
-        console.log("获取数据失败！");
+        wx.serverFailedToast()
       }
     })
   },
@@ -208,8 +183,10 @@ Page({
     this.setData({
       picLoadCount: that.data.picLoadCount + 1
     })
-    if (this.data.picLoadCount == this.data.items.length) {
+    if (this.data.picLoadCount == this.data.items.length ||
+      this.data.picLoadCount >= 3) {
       wx.hideToast();
+      console.log("Pic load");
       that.setData({
         picLoadFinish: true
       })
@@ -265,11 +242,12 @@ Page({
               items: that.data.items
             })
           } else {
-            let url = app.globalData.serverHost + 'dream/album/common/modifyuseralbuminfotitle.json';
+            let url = app.globalData.serverHost + 'album/modifyuseralbuminfotitle.json';
             wx.request({
               url: url,
               data: {
-                userAlbumId: itemx.userAlbumId,
+                openId: app.globalData.openId + '',
+                userAlbumId: itemx.userAlbumId + '',
                 title: title,
                 appId: app.globalData.appId
               },
@@ -285,7 +263,8 @@ Page({
         }
       })
     }
-  },onShareAppMessage: function () {
+  },
+  onShareAppMessage: function () {
     return {
       title: '分享一个相册工具',
       desc: '亲爱的，相信我，你会爱上她的，点击查看！',
