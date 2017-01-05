@@ -25,6 +25,7 @@ page{
   border-radius: 50%;
   top:40rpx;
   margin-left: calc(50% - 60rpx);
+  border:1px solid #99def9;
 }
 /*no pic*/
 .nopicClass{
