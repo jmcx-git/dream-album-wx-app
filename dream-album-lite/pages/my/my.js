@@ -174,7 +174,7 @@ Page({
         }
       },
       fail: function () {
-        wx.serverFailedToast()
+        app.serverFailedToast()
       }
     })
   },
