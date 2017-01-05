@@ -1,8 +1,8 @@
-<view class="content" hidden="{{hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
+<view class="content" wx:if="{{!hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
-  <view class="content_detail" bindtap="changepreview">
+  <view class="content_detail" bindtap="changepreview" hidden="{{!picLoadFinished}}">
     <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;">
-      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}"/>
+      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}" bindload="loadPagePic"/>
     </view>
   </view>
 </scroll-view>
@@ -25,7 +25,7 @@
     <view style="width:80rpx; display:inline-block"/>
   </scroll-view>
 </view>
-<image class="chooseimgbtn" hidden="{{hiddenGrid}}" style="top:{{icon_top}}rpx;left:{{icon_left}}rpx" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
+<image class="chooseimgbtn" hidden="{{hiddenGrid}}" wx:if="{{picLoadFinished}}" style="top:{{icon_top}}rpx;left:{{icon_left}}rpx" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
 <image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top-65}}rpx;left:{{2*icon_left-45}}rpx" src="../../image/savealbum.png" bindtap="createAlbum"/>
 <view class="splitline"/>
 <view class="item">

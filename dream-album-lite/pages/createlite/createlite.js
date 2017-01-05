@@ -29,7 +29,9 @@ let pageData = {
     pageAnimCur: {},
     pageAnimR:{},
     pageAnimL:{},
-    pagescallable: true
+    pagescallable: true,
+    picLoadCount: 0,
+    picLoadFinished: false
   },
   convertRpx: function(px){
     return this.convertTimes * px
@@ -139,7 +141,7 @@ let pageData = {
           that.data.nomore = true
         }
         that.initAlbumDetail(that.data.choosed)
-        wx.hideToast()
+        // wx.hideToast()
       },
       fail: function (res) {
         that.requestFailed(res)
@@ -149,7 +151,14 @@ let pageData = {
   chooseTemplate: function (e) {
     this.data.scrollLeftValues[this.data.choosed] = this.data.scrollLeft
     this.setData({
-      choosed: e.target.dataset.albumindex
+      choosed: e.target.dataset.albumindex,
+      picLoadFinished: false,
+      picLoadCount: 0
+    })
+    wx.showToast({
+      title: '加载中...',
+      icon: 'loading',
+      duration: 10000
     })
     this.initAlbumDetail(this.data.choosed)
   },
@@ -286,6 +295,19 @@ let pageData = {
     this.setData({
       pageList: pagelist
     })
+  },
+  loadPagePic: function(e){
+    console.log(e)
+    this.setData({
+      picLoadCount: this.data.picLoadCount +1
+    })
+
+    if(this.data.picLoadCount > this.getPageList().length -2){
+      this.setData({
+        picLoadFinished: true
+      })
+      wx.hideToast()
+    }
   }
 }
 Page(pageData)
