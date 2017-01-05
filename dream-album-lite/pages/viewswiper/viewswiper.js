@@ -1,7 +1,7 @@
 var app = getApp();
 Page({
   data: {
-    userAnimation: true,
+    userAnimation: false,
 
     indicatorDots: true,
     autoplay: true,
@@ -183,9 +183,9 @@ Page({
     let queryStr = "shared=1&appId=" + app.globalData.appId + "&openId=" + app.globalData.openId + "&userAlbumId=" + this.data.shareUserAlbumId;
     var title="";
     if(typeof app.globalData.nickName !== "undefined"){
-      title = "分享" + app.globalData.nickName + "的相册";
+      title = app.globalData.nickName + "请你来看看她(他)的相册";
     }else{
-      title = "分享给我的亲密好友的相册";
+      title = "你的好友分享给你他的相册";
     }
     
     let desc = "这里记录了我的精彩照片和故事，快来看看吧！";
