@@ -32,9 +32,9 @@ page{
 .insertClassScroll{
     position: absolute;
     width:20%;
-    height:15%;
+    height:16%;
     left: calc(50% - 76rpx);
-    top:83%;
+    top:82%;
     z-index: 10;
 }
 .scrollTops{
@@ -52,7 +52,7 @@ page{
 }
 .imagesScrollView{
     width:434rpx;
-    height:100%;
+    height:90%;
     position: absolute;
     z-index: 4;
     top:0rpx;
@@ -63,7 +63,7 @@ page{
 }
 .imageTopPic{
     width:434rpx;
-    height:100%;
+    height:90%;
     position: absolute;
     z-index: 5;
     top:0px;
