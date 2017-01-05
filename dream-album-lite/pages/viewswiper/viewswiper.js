@@ -61,7 +61,7 @@ Page({
           url: app.globalData.serverHost + 'album/user/getShareUserInfo.json?',
           data: {
             appId: app.globalData.appId,
-            fromShareUserOpenId: fromShareUserOpenId
+            openId: fromShareUserOpenId
           },
           method: 'GET',
           success: function (res) {
@@ -85,7 +85,6 @@ Page({
       })
     }
     that.init()
-    console.log("showNav="+this.data.showNav);
   },
   init: function (e) {
     let that = this;
@@ -210,19 +209,11 @@ Page({
     var title="";
     let desc = "";
     if(this.data.fromShare){
-      if(typeof app.globalData.nickName !== "undefined"){
-        title = app.globalData.nickName + "请你来看看你们共同好友" + this.data.nickName + "的相册";
-      }else{
-        title = "你的好友分享给你你们共同好友"+ this.data.nickName +"的相册";
-      }
+      title = "分享"+ this.data.nickName +"的相册";
     }else{
-      if(typeof app.globalData.nickName !== "undefined"){
-        title = app.globalData.nickName + "请你来看看她(他)的相册";
-      }else{
-        title = "你的好友分享给你他的相册";
-      }
-      desc = "这里记录了我的精彩照片和故事，快来看看吧！";
+      title="分享我的相册";
     }
+    desc = "这里记录了"+this.data.nickName+"的精彩照片和故事，快来看看吧！";
     return {
       title: title,
       desc: desc,
