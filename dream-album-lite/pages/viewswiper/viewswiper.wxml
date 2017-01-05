@@ -40,14 +40,15 @@
         </swiper>
     </view>
     <view wx-if="{{showLayer}}" class="nav-view">
-    <view class="nav-view-main">
-        <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
-        <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
-        </view>
-        <view><label class="label-nickname">{{nickName}}</label></view>        
-        <view class="view-btn">        
-            <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
-            <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
-        </view>
+      <view class="nav-view-main">
+          <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
+          <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
+          </view>
+          <view><label class="label-nickname">{{nickName}}</label></view>
+          <view class="view-btn">
+              <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
+              <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
+          </view>
+      </view>
     </view>
 </view>
