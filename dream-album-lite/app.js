@@ -27,8 +27,8 @@ App({
     windowHeight: 625,
     // serverHost: "https://developer.mokous.com/wx/",
     // serverHost: "http://10.1.0.131:8080/dream-album/",
-    // serverHost: "https://developer.mokous.com/wx/",
-    serverHost: "https://api.mokous.com/wx/",
+    serverHost: "https://developer.mokous.com/wx/",
+    // serverHost: "https://api.mokous.com/wx/",
 
     finishCreateFlag:false,
     albumPageCount: 4,
