@@ -58,6 +58,7 @@ Page({
         var fromShareUserOpenId = options.fromShareUserOpenId
         this.setData({
           fromShare: true,
+          showNav: true
           fromShareUserOpenId: fromShareUserOpenId
         })
         wx.request({
