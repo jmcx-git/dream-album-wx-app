@@ -1,7 +1,7 @@
 var app = getApp();
 Page({
   data: {
-    userAnimation: false,
+    userAnimation: true,
 
     indicatorDots: true,
     autoplay: true,
@@ -15,9 +15,7 @@ Page({
     shareUserAlbumId: '',
     refresh: true,
     refreshtip: '',
-    extraPic:undefined,
     clickCount:0,
-    currentLink:'',
     imgUrl:'',
     imgs:[],
     animationData: {},
@@ -26,8 +24,7 @@ Page({
     picHeight:520,
     picWidth:300,
     reloadHidden:true,
-    refreshInterval:4000,
-    shareAnimationDatas:[],
+    refreshInterval:2000,
     avatarUrl:'',
     replayHidden:false,
 
@@ -47,8 +44,7 @@ Page({
       picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
       shareUserAlbumId: options.userAlbumId,
-      avatarUrl: wx.getStorageSync('avatarUrl'),
-      currentLink:wx.getStorageSync('avatarUrl')
+      avatarUrl: wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.userAlbumId = options.userAlbumId;
@@ -88,10 +84,8 @@ Page({
         showNav: false
       })
     }
-    this.setData({
-      extraPic:options.lastId,
-    })
     that.init()
+    console.log("showNav="+this.data.showNav);
   },
   init: function (e) {
     let that = this;
@@ -152,9 +146,6 @@ Page({
     })
   },
   showIndex:function(){
-    this.setData({
-      extraPic:undefined
-    })
     var url = '../my/my?from=share&fromShareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
       'url': url
