@@ -74,16 +74,24 @@ page{
 .imageScrollTitle{
     position: absolute;
     top:0rpx;
-    left:0px;
-    width:434rpx;
+    left:45rpx;
+    /*width:434rpx;*/
+    width:389rpx;
     height:28rpx;
     font-size: 28rpx;
     color: #00adef;
-    text-align: center;
+    text-align: left;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     line-height: 28rpx;
+}
+.editImage{
+    position: absolute;
+    top:0rpx;
+    left:5rpx;
+    height:30rpx;
+    width:30rpx;
 }
 .imageScrollInput{
     background-color: rgba(222,222,222,0.5);

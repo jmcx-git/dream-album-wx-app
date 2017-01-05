@@ -35,7 +35,7 @@ page{
 }
 .item_detail{
   white-space: nowrap;
-  padding-left: 40rpx
+  padding-left: 40rpx;
 }
 .item_item{
   display:inline-block;

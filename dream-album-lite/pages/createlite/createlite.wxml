@@ -4,7 +4,7 @@
     <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" >
       <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}" bindload="loadPagePic"/>
     </view>
-    <image src="../../image/imgtop.png" style="position:absolute; top:0rpx; left: 5rpx; width:{{moduleWidth*2 +10}}rpx; height:{{moduleHeight*2 +10}}rpx; z-index: 5"/>
+    <image src="../../image/imgtop.png" style="position:absolute; top:0rpx; left: 5rpx; width:{{moduleWidth*2 +27}}rpx; height:{{moduleHeight*2 +46}}rpx; z-index: 5"/>
   </view>
 </scroll-view>
 </view>
