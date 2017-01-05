@@ -15,7 +15,7 @@ Page({
     autoplay:false,
     interval:3000,
     duration:500,
-    marginLeft:50
+    marginLeft:110
   },
   onLoad: function () {
     let that = this;
