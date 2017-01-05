@@ -1,6 +1,7 @@
 {
   "backgroundTextStyle":"dark",
   "navigationBarTitleText": "相册模板",  
-  "navigationBarTextStyle":"dark",
+  "navigationBarTextStyle":"#353535",
+  "navigationBarBackgroundColor": "#ffffff",
   "enablePullDownRefresh":false
 }

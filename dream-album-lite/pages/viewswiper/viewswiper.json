@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "相册预览"
+    "navigationBarTitleText": "相册预览",
+    "navigationBarTextStyle":"#353535",
+    "navigationBarBackgroundColor": "#ffffff"
 }

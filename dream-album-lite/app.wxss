@@ -9,3 +9,9 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.top_split_line{
+  width: 100%;
+  height: 0.5rpx;
+  background-color: #888888;
+}

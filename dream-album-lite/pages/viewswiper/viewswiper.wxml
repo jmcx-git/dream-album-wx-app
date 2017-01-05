@@ -1,3 +1,4 @@
+<view class="top_split_line"></view>
 <view wx:if="{{userAnimation}}">
     <view wx:if="{{refresh}}">
         <view catchtap="init" style="padding-bottom:{{winHeight*750/winWidth-748}}rpx" class="loading_page">

@@ -1,3 +1,4 @@
+<view class="top_split_line"></view>
 <view class="content" hidden="{{hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
   <view class="content_detail">
