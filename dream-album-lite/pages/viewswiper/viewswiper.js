@@ -1,7 +1,7 @@
 var app = getApp();
 Page({
   data: {
-    userAnimation: false,
+    userAnimation: true,
 
     indicatorDots: true,
     autoplay: true,

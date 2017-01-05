@@ -10,17 +10,17 @@
         <image class="viewImage" wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic"/>
     </view>
 
-    <view hidden="{{reloadHidden}}">
-        <image class="userinfo-avatar" src="{{(avatarUrl==''|| avatarUrl==undefined)?extraPic:avatarUrl}}" background-size="cover"></image>
-        <view class="userinfo-text">
-            <text>微信昵称 / 作品</text>
+    <view hidden="{{reloadHidden}}" class="nav-view">
+        <view class="nav-view-main">
+        <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
+        <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
         </view>
-        <view class="replay" bindtap="reloadPlay" style="left:{{extraPic==undefined?270:160}}rpx;">
-            <text>再看一遍</text>
+        <view><label class="label-nickname">{{nickName}}</label></view>        
+        <view class="view-btn">        
+            <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
+            <button wx:if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
         </view>
-        <view wx:if="{{extraPic!=undefined}}" class="mycreate" bindtap="showIndex">
-            <text>我也制作</text>
-        </view>
+    </view>
     </view>
 </view>
 <view wx:if="{{!userAnimation}}">
@@ -39,7 +39,7 @@
             </block>
         </swiper>
     </view>
-    <view wx-if="{{showLayer}}" class="nav-view">
+    <view wx:if="{{showLayer}}" class="nav-view">
     <view class="nav-view-main">
         <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
         <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
@@ -47,7 +47,8 @@
         <view><label class="label-nickname">{{nickName}}</label></view>        
         <view class="view-btn">        
             <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
-            <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
+            <button wx:if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
         </view>
+    </view>
     </view>
 </view>
