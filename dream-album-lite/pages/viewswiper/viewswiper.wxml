@@ -31,7 +31,7 @@
         </view>
     </view>
     <view>
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  bindchange="swiperChange" style="height:{{winHeight}}px;">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="true" interval="{{interval}}" duration="{{duration}}"  bindchange="swiperChange" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
                     <image class="slide-image" src="{{item}}" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
@@ -39,15 +39,16 @@
             </block>
         </swiper>
     </view>
-    <view wx-if="{{showLayer}}" class="nav-view">
-    <view class="nav-view-main">
-        <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
-        <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
-        </view>
-        <view><label class="label-nickname">{{nickName}}</label></view>        
-        <view class="view-btn">        
-            <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
-            <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
+    <view wx:if="{{showLayer}}" class="nav-view">
+        <view class="nav-view-main">
+            <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
+            <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
+            </view>
+            <view><label class="label-nickname">{{nickName}}</label></view>        
+            <view class="view-btn">        
+                <button type="primary" bindtap="reloadSwiperPlay" class="replayButton">再看一遍</button>
+                <button wx:if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
+            </view>
         </view>
     </view>
 </view>
