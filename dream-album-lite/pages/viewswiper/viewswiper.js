@@ -74,11 +74,10 @@ Page({
                 avatarUrl: res.data.data.avatarUrl,
                 nickName: res.data.data.nickName
               })
-          },
-          fail: function(res){
-            app.serverFailedToast();
           }
-
+        },
+        fail: function(res){
+          app.serverFailedToast();
         }
       });
     }else{
@@ -119,8 +118,8 @@ Page({
     let that = this
     let userAlbumId = that.userAlbumId;
     var openId = ""
-    if(app.data.fromShare){
-      openId = app.data.shareUserOpenId
+    if(this.data.fromShare){
+      openId = this.data.fromShareUserOpenId
     }else{
       openId = app.globalData.openId
     }
@@ -155,7 +154,7 @@ Page({
     this.setData({
       extraPic:undefined
     })
-    var url = '../my/my?from=share&shareUserOpenId=' + app.globalData.openId;
+    var url = '../my/my?from=share&fromShareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
       'url': url
     })
