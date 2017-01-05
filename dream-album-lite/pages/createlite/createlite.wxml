@@ -26,7 +26,7 @@
     <view style="width:80rpx; display:inline-block"/>
   </scroll-view>
 </view>
-<image class="chooseimgbtn" hidden="{{hiddenGrid}}" wx:if="{{picLoadFinished}}" style="top:{{icon_top}}rpx;left:{{icon_left}}rpx" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
+<image class="chooseimgbtn" hidden="{{hiddenGrid}}" wx:if="{{picLoadFinished}}" style="top:{{icon_top -16}}rpx;left:{{icon_left -10}}rpx" src="../../image/chooseimages.png" bindtap="chooseImageList"/>
 <image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top-65}}rpx;left:{{2*icon_left-45}}rpx" src="../../image/savealbum.png" bindtap="createAlbum"/>
 <view class="splitline"/>
 <view class="item">
