@@ -2,7 +2,7 @@
   "pages":[
     "pages/my/my",
     "pages/createlite/createlite",
-    "pages/createpannel/createpannel",
+    "pages/editalbum/editalbum",
     "pages/viewswiper/viewswiper"
   ],
   "window":{
