@@ -7,7 +7,7 @@
 <!--模版列表-->
 <view class="scrollTops">
     <scroll-view scroll-x="true" class="scrollViewTop" hidden="{{!picLoadFinish}}">
-        <view class="imageTop"  wx:for="{{items}}" wx:key="items" style="margin-left: {{marginLeft}}rpx;margin-right:{{(index+1)==items.length?marginLeft:0}}rpx;">
+        <view class="imageTop"  wx:for="{{items}}" wx:key="items" style="margin-left: {{marginLeft}}rpx;margin-right:{{(index+1)==items.length?marginLeft:0}}rpx;height:{{winHeight/2+winHeight/10}}px;">
             <view bindtap="toEdit" id="{{index}}" hidden="{{item.isEditTitle}}" class="imageScrollTitle">{{item.title}}</view>
             <view class="imageScrollInput" hidden="{{!item.isEditTitle}}">
                 <input id="{{index}}"  type="text" value="{{item.title}}" bindblur="editTitle" focus="{{item.focus}}"/>
@@ -17,5 +17,7 @@
         </view>
     </scroll-view>
 </view>
-<image class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList"/>
+<view class="createImageSquare" style="width:{{winWidth}}px;height:{{winHeight/6}}px;">
+    <image  class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList"/>
+</view>
 <!--scroll-view-x  end-->
