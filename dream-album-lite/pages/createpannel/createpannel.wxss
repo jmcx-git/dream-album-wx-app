@@ -1,0 +1,130 @@
+page{
+  background-color: #ffffff;
+}
+.content{
+  background-color: #fffff;
+  display:flex;
+  flex-wrap: wrap;
+}
+.scroll-view_content{
+  background-image:url("https://cdn.mokous.com/static/album/image/albumbook.png");
+  background-repeat:no-repeat;
+  background-size: 100% 100%;
+}
+.content_detail{
+  display:flex;
+  flex-wrap: wrap;
+
+}
+.content_item{
+  position: relative;
+  display:block;
+  margin: 10rpx 0 0 10rpx;
+}
+.splitline{
+  width: 100%;
+  height: 0.5rpx;
+  margin-top: 20rpx;
+  background:#888888;
+}
+.item{
+  position: absolute;
+  margin-top :20rpx;
+  background-image:url("https://cdn.mokous.com/static/album/image/bottomline.png");
+  background-repeat:no-repeat;
+  background-size: 42rpx 80%;
+  background-position: bottom left;
+}
+.item_detail{
+  white-space: nowrap;
+  padding-left: 40rpx
+}
+.item_item{
+  display:inline-block;
+  margin: 0 0 0 6rpx;
+  position: relative;
+}
+.choosed{
+  display:inline-block;
+  position:absolute;
+  top:0;
+  background:rgba(0, 0, 0, 0.4);
+  width:100%;
+  height:100%;
+}
+.chooseimgbtn{
+  position: absolute;
+  width:160rpx;
+  height:200rpx;
+  z-index: 10;
+  right:40rpx;
+}
+.savebtn{
+  position: absolute;
+  width:160rpx;
+  height:200rpx;
+  z-index: 10;
+  right:40rpx;
+}
+.bg_img{
+  position: absolute;
+  z-index: 1;
+}
+
+.border_choosed{
+  border: 2rpx solid rgb(0,170,243);
+}
+
+.footer{
+  position: fixed;
+  bottom: 0rpx;
+  width: 750rpx;
+  color: #1aad19;
+  z-index:10;
+  display: flex;
+  height: 100rpx;
+}
+
+.footer_item{
+  background-color: #ff5956;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.footer_item .back{
+  position: relative;
+  top: 25rpx;
+  left: 50rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.footer_item .add{
+  position: relative;
+  top: 25rpx;
+  left: 100rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.footer_item .next{
+  position: relative;
+  top: 25rpx;
+  left: 150rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+
+.scroll-view_H{
+  white-space: nowrap;
+}
+.scroll-view-item{
+  height: 400rpx;
+}
+.scroll-view-item_H{
+  display: inline-block;
+  width: 100%;
+  height: 400rpx;
+}
