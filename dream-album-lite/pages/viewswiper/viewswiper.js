@@ -14,6 +14,10 @@ Page({
     refresh: true,
     refreshtip: '',
     clickCount:0,
+<<<<<<< HEAD
+=======
+    currentLink:'',
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
     imgUrl:'',
     imgs:[],
     animationData: {},
@@ -23,18 +27,27 @@ Page({
     reloadHidden:true,
     refreshInterval:4000,
     shareAnimationDatas:[],
+<<<<<<< HEAD
     showLayer: false,
     showNav: false,
     avatarUrl: "",
     nickName: ""
+=======
+    avatarUrl:'',
+    replayHidden:false
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
       winWidth: app.globalData.windowWidth,
       winHeight: app.globalData.windowHeight,
+      picWidth: app.globalData.windowWidth,
+      picHeight: app.globalData.windowHeight,
       shareAlbumId: options.albumId,
-      shareUserAlbumId: options.userAlbumId
+      shareUserAlbumId: options.userAlbumId,
+      avatarUrl: wx.getStorageSync('avatarUrl'),
+      currentLink:wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
     that.albumId = options.albumId;
@@ -81,7 +94,7 @@ Page({
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
     wx.request({
-      url: app.globalData.serverHost + 'dream/album/common/getpreview.json?',
+      url: app.globalData.serverHost + 'dream/album/lite/common/getpreview.json?',
       data: {
         albumId: albumId == undefined ? '' : albumId,
         userAlbumId: userAlbumId == undefined ? '' : userAlbumId,
@@ -92,6 +105,12 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
+<<<<<<< HEAD
+=======
+          // if(that.data.extraPic!=undefined){
+          //   res.data.loopPreImgs.push(that.data.extraPic);
+          // }
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
@@ -144,7 +163,7 @@ Page({
     // 页面渲染完成
   },
   onShow: function () {
-    // 页面显示 
+    // 页面显示
   },
   onHide: function () {
     // 页面隐藏
@@ -223,7 +242,8 @@ Page({
       }
     })
     this.animation=animations;
-    this.toMiddleScale();
+    // this.toMiddleScale();
+    this.linerStartEnd();
   },
    //放到屏幕中心位置,放大缩小
   toMiddleScale:function(){
@@ -231,14 +251,28 @@ Page({
     var x=this.data.winWidth/2-this.data.picWidth/2;
     var y=this.data.winHeight/2-this.data.picHeight/2;
     // this.animation.translate(x,y).scale(2,2).step();
-    this.animation.scale(2,2).step();
+    this.animation.scale(2.6,2.4).step();
     this.animation.scale(0,0).step();
+    this.setData({
+      animationData:that.animation.export()
+    })
+  },
+  //放到屏幕中心位置,渐变出现消失
+  linerStartEnd:function(){
+    let that=this;
+    this.animation.opacity(1).step();
+    if(this.data.currentIndex!=this.data.imgs.length-1){
+      this.animation.opacity(0).step();
+    }else{
+      this.animation.opacity(0.2).step();
+    }
     this.setData({
       animationData:that.animation.export()
     })
   },
   reloadPlay:function(){
     this.setData({
+<<<<<<< HEAD
       autoplay: true,
       showLayer: false,
       interval: 500
@@ -258,5 +292,18 @@ Page({
         interval: 3000
       });
     }
+=======
+      reloadHidden:true,
+      currentIndex:0,
+      imgUrl:'',
+      replayHidden:true
+    })
+    setTimeout(function(){
+      that.setData({
+        replayHidden:false
+      })
+      that.prepareAction();
+    },500)
+>>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   }
 })
