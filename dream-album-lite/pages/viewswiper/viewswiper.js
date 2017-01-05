@@ -249,8 +249,10 @@ Page({
     } else {
       console.log("没有图片了了！");
       that.setData({
-        reloadHidden: false
+        reloadHidden: false,
+        musicStatus: 'paused'
       })
+      that.audioCtx.pause();
     }
   },
   loadPic: function () {

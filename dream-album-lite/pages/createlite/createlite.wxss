@@ -6,9 +6,6 @@ page{
   display:flex;
   flex-wrap: wrap;
 }
-.scroll-view_content{
-
-}
 .content_detail{
   display:flex;
   flex-wrap: wrap;
