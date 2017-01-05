@@ -77,6 +77,10 @@ let pageData = {
 
     let templateHeight = (app.globalData.windowHeight - 20) / 5 - 30
     let templateWidth = (app.globalData.windowWidth - 40) / 4.2
+    if(templateHeight < templateWidth){
+      templateHeight += 14
+    }
+
     let content_hegiht = (app.globalData.windowHeight - 20) * 0.82
     let pageFullHeight = content_hegiht *0.95
     let pageFullWidth = pageFullHeight / 920 * 574
@@ -90,8 +94,10 @@ let pageData = {
       templateWidth: this.convertRpx(templateWidth),
       templateHeight: this.convertRpx(templateHeight),
       templateIconSize: this.convertRpx(templateWidth * 0.8), // 宽度的0.8
-      templateTextSize: this.convertRpx(templateHeight - (templateWidth * 0.8)),
-      templateFontSize: this.convertRpx((templateHeight - (templateWidth * 0.9)) * 0.7),
+      // templateTextSize: this.convertRpx(templateHeight - (templateWidth * 0.8)),
+      // templateFontSize: this.convertRpx((templateHeight - (templateWidth * 0.9)) * 0.8),
+      templateTextSize: this.convertRpx(templateWidth * 0.8 * 0.3),
+      templateFontSize: this.convertRpx(templateWidth * 0.8 * 0.25),
       content_hegiht: this.convertRpx(content_hegiht),
       content_width: this.convertRpx(app.globalData.windowWidth),
       pageFullHeight: this.convertRpx(pageFullHeight),
