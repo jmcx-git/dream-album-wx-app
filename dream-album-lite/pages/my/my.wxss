@@ -38,8 +38,8 @@ page{
     z-index: 10;
 }
 .scrollTops{
-    position: relative;
-    top:20rpx;
+    position: fixed;
+    padding-top:20rpx;
 }
 .scrollViewTop{
     white-space: nowrap; 
@@ -57,7 +57,6 @@ page{
     z-index: 4;
     top:0rpx;
     left:0rpx;
-    /*box-shadow:2px 0px 2px red;*/
     box-sizing: border-box;
     margin-top:60rpx;
     box-shadow:2px 2px 3px #eeeeee;

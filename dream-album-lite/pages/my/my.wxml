@@ -13,7 +13,7 @@
             <view class="imageScrollInput" hidden="{{!item.isEditTitle}}">
                 <input id="{{index}}"  type="text" value="{{item.title}}" bindblur="editTitle" focus="{{item.focus}}"/>
             </view>
-            <image class="imageTopPic" src="../../image/imgtop.png" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}"/>
+            <image class="imageTopPic" src="../../image/imagetopt.png" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}"/>
             <image class="imagesScrollView" bindload="picLoad"  src="{{item.cover}}" />
         </view>
     </scroll-view>
