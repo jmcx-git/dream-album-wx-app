@@ -250,6 +250,7 @@ let pageData = {
           'isComplete': (index == this.tmpPhotoList.length-1 ? 1: 0)+""
         },
         fail: function (res) {
+          console.log(res)
           wx.hideToast()
           wx.showModal({
             title: "提示",
@@ -259,8 +260,23 @@ let pageData = {
         },
         success: function (res) {
           console.log(res)
-          let jsdata = JSON.parse(res.data);
-          if (jsdata.status != 0) {
+          if(res.statusCode == 200){
+            let jsdata = JSON.parse(res.data);
+            if (jsdata.status != 0) {
+              wx.hideToast()
+              wx.showModal({
+                title: "提示",
+                content: "上传文件错误，请从新上传",
+                showCancel: false
+              })
+              that.setData({
+                created: false
+              })
+              return;
+            }
+            that.userAlbumId = jsdata.data;
+            that.uploadImage(index + 1);
+          }else{
             wx.hideToast()
             wx.showModal({
               title: "提示",
@@ -270,10 +286,9 @@ let pageData = {
             that.setData({
               created: false
             })
-            return;
+
           }
-          that.userAlbumId = jsdata.data;
-          that.uploadImage(index + 1);
+
         }
       })
     } else {
@@ -367,6 +382,7 @@ let pageData = {
     })
 
     this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
+
     this.data.albumList[this.data.choosed].initPhoto = true
     // 设置每个photo对应的选中的照片
     let that = this
