@@ -1,6 +1,8 @@
 var app = getApp();
 Page({
   data: {
+    userAnimation: true,
+
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -13,29 +15,26 @@ Page({
     shareUserAlbumId: '',
     refresh: true,
     refreshtip: '',
+    extraPic:undefined,
     clickCount:0,
-<<<<<<< HEAD
-=======
     currentLink:'',
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
     imgUrl:'',
     imgs:[],
     animationData: {},
+    // animationDataPre: {},
     currentIndex:0,
     picHeight:520,
     picWidth:300,
     reloadHidden:true,
     refreshInterval:4000,
     shareAnimationDatas:[],
-<<<<<<< HEAD
+    avatarUrl:'',
+    replayHidden:false,
+
     showLayer: false,
     showNav: false,
     avatarUrl: "",
     nickName: ""
-=======
-    avatarUrl:'',
-    replayHidden:false
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   },
   onLoad: function (options) {
     let that = this;
@@ -50,7 +49,6 @@ Page({
       currentLink:wx.getStorageSync('avatarUrl')
     })
     that.from = options.from;
-    that.albumId = options.albumId;
     that.userAlbumId = options.userAlbumId;
     //if from share
     if(typeof options.shared !== "undefined"){
@@ -65,6 +63,9 @@ Page({
         showNav: false
       })
     }
+    this.setData({
+      extraPic:options.lastId,
+    })
     that.init()
   },
   init: function (e) {
@@ -105,12 +106,6 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
-<<<<<<< HEAD
-=======
-          // if(that.data.extraPic!=undefined){
-          //   res.data.loopPreImgs.push(that.data.extraPic);
-          // }
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
@@ -128,6 +123,9 @@ Page({
     })
   },
   showIndex:function(){
+    this.setData({
+      extraPic:undefined
+    })
     var url = '../my/my?from=share&shareUserOpenId=' + app.globalData.openId;
     wx.redirectTo({
       'url': url
@@ -271,12 +269,19 @@ Page({
     })
   },
   reloadPlay:function(){
+    let that=this;
     this.setData({
-<<<<<<< HEAD
-      autoplay: true,
-      showLayer: false,
-      interval: 500
+      reloadHidden:true,
+      currentIndex:0,
+      imgUrl:'',
+      replayHidden:true
     })
+    setTimeout(function(){
+      that.setData({
+        replayHidden:false
+      })
+      that.prepareAction();
+    },500)
   },
   swiperChange: function(event){
     var that = this;
@@ -292,18 +297,5 @@ Page({
         interval: 3000
       });
     }
-=======
-      reloadHidden:true,
-      currentIndex:0,
-      imgUrl:'',
-      replayHidden:true
-    })
-    setTimeout(function(){
-      that.setData({
-        replayHidden:false
-      })
-      that.prepareAction();
-    },500)
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
   }
 })

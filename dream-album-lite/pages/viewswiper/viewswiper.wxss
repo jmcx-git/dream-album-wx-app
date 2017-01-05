@@ -36,7 +36,31 @@ page{
 }
 .userinfo-text{
     position: absolute;
-<<<<<<< HEAD
+    top:340rpx;
+    left:calc(50% - 50px);
+    color: #fff;
+    font-size: 14px;
+}
+.replay{
+    position: absolute;
+    top:450rpx;
+    background-color:#FFD700;
+    line-height:18px;
+    padding:8px 20px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 35px;
+}
+.mycreate{
+    position: absolute;
+    top:450rpx;
+    left:50%;
+    background-color:#00adef;
+    line-height:18px;
+    padding:8px 20px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 35px;
 }
 
 .img-sharenav{
@@ -95,31 +119,3 @@ page{
     z-index: 10;
     background-color: rgba(0,0,0,0.7); 
 }
-=======
-    top:340rpx;
-    left:calc(50% - 50px);
-    color: #fff;
-    font-size: 14px;
-}
-.replay{
-    position: absolute;
-    top:450rpx;
-    background-color:#FFD700;
-    line-height:18px;
-    padding:8px 20px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 35px;
-}
-.mycreate{
-    position: absolute;
-    top:450rpx;
-    left:50%;
-    background-color:#00adef;
-    line-height:18px;
-    padding:8px 20px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 35px;
-}
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484

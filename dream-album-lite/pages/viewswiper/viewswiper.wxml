@@ -1,41 +1,45 @@
-<view wx:if="{{refresh}}">
-    <view catchtap="init" style="padding-bottom:{{winHeight*750/winWidth-748}}rpx" class="loading_page">
-        <image class="loading_pic" src="../../image/makeloading.png" />
-        <text class="loading_text">{{refreshtip}}</text>
+<view wx:if="{{userAnimation}}">
+    <view wx:if="{{refresh}}">
+        <view catchtap="init" style="padding-bottom:{{winHeight*750/winWidth-748}}rpx" class="loading_page">
+            <image class="loading_pic" src="../../image/makeloading.png" />
+            <text class="loading_text">{{refreshtip}}</text>
+        </view>
+    </view>
+    <view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
+        <image class="viewImage" wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>
+        <image class="viewImage" wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic"/>
+    </view>
+
+    <view hidden="{{reloadHidden}}">
+        <image class="userinfo-avatar" src="{{(avatarUrl==''|| avatarUrl==undefined)?extraPic:avatarUrl}}" background-size="cover"></image>
+        <view class="userinfo-text">
+            <text>微信昵称 / 作品</text>
+        </view>
+        <view class="replay" bindtap="reloadPlay" style="left:{{extraPic==undefined?270:160}}rpx;">
+            <text>再看一遍</text>
+        </view>
+        <view wx:if="{{extraPic!=undefined}}" class="mycreate" bindtap="showIndex">
+            <text>我也制作</text>
+        </view>
     </view>
 </view>
-<view wx:else>
-    <view hidden="{{pptHidden}}">
-        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="true" interval="{{interval}}" duration="{{duration}}" bindchange="swiperChange" style="height:{{winHeight}}px;">
+<view wx:if="{{!userAnimation}}">
+    <view wx:if="{{refresh}}">
+        <view catchtap="init" style="padding-bottom:{{winHeight*750/winWidth-748}}rpx" class="loading_page">
+            <image class="loading_pic" src="../../image/makeloading.png" />
+            <text class="loading_text">{{refreshtip}}</text>
+        </view>
+    </view>
+    <view>
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"  bindchange="{{swiperChange}}" style="height:{{winHeight}}px;">
             <block wx:for="{{loopPreImgs}}" wx:key="imgs">
                 <swiper-item>
-                    <image src="{{item}}" class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
+                    <image class="slide-image" data-img="{{item}}" bindtap="showAlbum" style="width:{{winWidth}}px;height:{{winHeight}}px;"/>
                 </swiper-item>
             </block>
         </swiper>
     </view>
-<<<<<<< HEAD
-=======
-</view>-->
-<view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
-    <image class="viewImage" wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>
-    <image class="viewImage" wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic"/>
-</view>
-
-<view hidden="{{reloadHidden}}">
-    <image class="userinfo-avatar" src="{{(avatarUrl==''|| avatarUrl==undefined)?extraPic:avatarUrl}}" background-size="cover"></image>
-    <view class="userinfo-text">
-        <text>微信昵称 / 作品</text>
-    </view>
-    <view class="replay" bindtap="reloadPlay" style="left:{{extraPic==undefined?270:160}}rpx;">
-        <text>再看一遍</text>
-    </view>
-    <view wx:if="{{extraPic!=undefined}}" class="mycreate" bindtap="showIndex">
-        <text>我也制作</text>
-    </view>
->>>>>>> 09443d24f103377f4ce639ca958b0e0af98d4484
-</view>
-<view wx-if="{{showLayer}}" class="nav-view">
+    <view wx-if="{{showLayer}}" class="nav-view">
     <view class="nav-view-main">
         <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
         <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
