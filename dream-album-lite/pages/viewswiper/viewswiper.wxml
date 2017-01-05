@@ -6,6 +6,8 @@
         </view>
     </view>
     <view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
+        <audio src="{{bgMusic}}" style="display:none" id="music" loop/>
+        <image hidden="{{hiddenMusicBtn}}" class="music_btn" style="animation-play-state:{{musicStatus}};-webkit-animation-play-state:{{musicStatus}};" src="../../image/music.png" bindtap="audioPause"/>
         <image class="viewImage" wx:if="{{extraPic==undefined}}" src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>
         <image class="viewImage" wx:else src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}" bindtap="showAlbum" bindload="loadPic"/>
     </view>

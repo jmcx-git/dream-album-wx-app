@@ -119,3 +119,21 @@ page{
     z-index: 10;
     background-color: rgba(0,0,0,0.7); 
 }
+.music_btn{
+    position: fixed;
+    z-index: 10;
+    top: 30rpx;
+    right: 30rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    animation: rotate 10s linear infinite; 
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
