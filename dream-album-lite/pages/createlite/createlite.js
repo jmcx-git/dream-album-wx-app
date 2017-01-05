@@ -44,6 +44,7 @@ let pageData = {
       transformOrigin:"0 0 0",
       duration: 0,
     })
+    this.preview = 0;
     this.init()
   },
   initAlbumDetail: function (index) {
@@ -56,9 +57,8 @@ let pageData = {
       let page = pageList[i]
       photoCount += page.photoInfos.length;
     }
-
+    this.initpreview()
     this.setData({
-      pageList: pageList,
       photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
@@ -474,6 +474,33 @@ let pageData = {
       currentPage: currentPage
     })
 
+  },
+  changepreview: function(e){
+    console.log(e)
+    this.preview = (this.preview+1) %3
+    this.initpreview()
+  },
+  initpreview: function(){
+    console.log(this.preview)
+    let pagelist = this.getPageList();
+    for(let i =0; i<pagelist.length; i++){
+      let page = pagelist[i]
+      switch (this.preview) {
+        case 0:
+          page.preview = page.previewImgUrl
+          break;
+        case 1:
+          page.preview = page.shadowImgUrl
+          break
+        case 2:
+          page.preview = page.editImgUrl
+          break
+        default:
+      }
+    }
+    this.setData({
+      pageList: pagelist
+    })
   }
 }
 Page(pageData)

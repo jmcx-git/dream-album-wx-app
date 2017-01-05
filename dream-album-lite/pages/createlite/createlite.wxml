@@ -1,8 +1,8 @@
 <view class="content" hidden="{{hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: {{sy_top}}rpx 0 0 {{sy_left}}rpx;">
-  <view class="content_detail">
+  <view class="content_detail" bindtap="changepreview">
     <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;">
-      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.previewImgUrl}}"/>
+      <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}"/>
     </view>
   </view>
 </scroll-view>
