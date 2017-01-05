@@ -239,22 +239,15 @@ Page({
       that.setData({
         imgUrl: that.data.imgs[that.data.currentIndex]
       })
-      // that.executeAction();
-      // setTimeout(function(){
-      //     that.setData({
-      //       currentIndex:that.data.currentIndex+1,
-      //       animationData:{}
-      //     })
-      //     that.prepareAction();
-      // },that.data.refreshInterval*2+500)
     } else {
-      console.log("没有图片了了！");
       that.setData({
         reloadHidden: false,
         musicStatus: 'paused',
         stopMusic: 'true'
       })
-      that.audioCtx.pause();
+      if(typeof that.audioCtx !=="undefined"){
+        that.audioCtx.pause();
+      }
     }
   },
   loadPic: function () {
