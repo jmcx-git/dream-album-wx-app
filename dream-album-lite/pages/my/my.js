@@ -167,7 +167,7 @@ Page({
               items: res.data,
               nopichidden: 'none',
               viewtap: true,
-              marginLeft:res.data.length==1?150:50
+              marginLeft:res.data.length==1?160:110
             })
           }
           // wx.hideToast();
