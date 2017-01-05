@@ -46,7 +46,7 @@
         </view>
         <view><label class="label-nickname">{{nickName}}</label></view>        
         <view class="view-btn">        
-            <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
+            <button type="primary" bindtap="reloadSwiperPlay" class="replayButton">再看一遍</button>
             <button wx-if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
         </view>
     </view>
