@@ -21,7 +21,7 @@ let pageData = {
     icon_top: 0,   // 完成按钮的top和left值
     icon_left: 0,
     created: false,
-    hiddenGrid: false, // 是否显示预览(四宫格)图 true 显示四宫格,false显示创建预览页
+    hiddenGrid: true, // 是否显示预览(四宫格)图 true 显示四宫格,false显示创建预览页
     currentPage: 0, // 创建面板上, 当前处理的页面 起始为0
     photoCount: 0,   // 当前相册所有的照片的数量
     scrollLeft: 0,
@@ -29,7 +29,8 @@ let pageData = {
     pageAnimCur: {},
     pageAnimR:{},
     pageAnimL:{},
-    pagescallable: true
+    pagescallable: true,
+    albumId: 0
   },
   convertRpx: function(px){
     return this.convertTimes * px
@@ -49,7 +50,12 @@ let pageData = {
       duration: 500,
     })
     this.animP= wx.createAnimation({duration:0});
+    this.setData({
+      tempFilePaths: option.tempFilePaths.split(","),
+      albumId: option.albumId
+    })
     this.init()
+    // this.initCreatePanel(this.data.tempFilePaths);
   },
   initAlbumDetail: function (index) {
     // 加载指定的模板的详细数据
@@ -143,8 +149,16 @@ let pageData = {
         if (res.data.length < that.data.size) {
           that.data.nomore = true
         }
+        for(var i = 0; i < alist.length; i++){
+          if(alist[i].id == that.data.albumId){
+            that.setData({
+              choosed: i
+            })
+          }
+        }
         that.initAlbumDetail(that.data.choosed)
         wx.hideToast()
+        that.initCreatePanel(that.data.tempFilePaths)
       },
       fail: function (res) {
         that.requestFailed(res)
@@ -157,6 +171,7 @@ let pageData = {
       choosed: e.target.dataset.albumindex
     })
     this.initAlbumDetail(this.data.choosed)
+    this.initCreatePanel(this.data.tempFilePaths)
   },
   uploadImage: function (index) {
     // 上传图片， index：图片在 that.data.submodules 的下表
@@ -335,34 +350,29 @@ let pageData = {
     })
   },
   initCreatePanel: function(tempFilePaths){
-    //goto editalbum
-    this.data.albumList[this.data.choosed].id
-    wx.navigateTo({
-      url: '../editalbum/editalbum?albumId=' + this.data.albumList[this.data.choosed].id + '&tempFilePaths=' + tempFilePaths.join(",")
-    })    
-    // // 选择图片之后,进入化创建面板
-    // let hiddenGrid = true;
-    // this.setData({
-    //   hiddenGrid: hiddenGrid
-    // })
+    // 选择图片之后,进入化创建面板
+    let hiddenGrid = true;
+    this.setData({
+      hiddenGrid: hiddenGrid
+    })
 
-    // this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
-    // // 设置每个photo对应的选中的照片
-    // let that = this
-    // let idx = 0
-    // for(let i=0; i< that.data.pageList.length && idx < tempFilePaths.length; i++){
-    //   let page = that.getPageList()[i]
-    //   for(let j =0 ;j< page.photoInfos.length && idx < tempFilePaths.length; j++, idx++){
-    //     page.photoInfos[j].elesrc = tempFilePaths[idx]
-    //   }
-    // }
-    // for(let i =0; i< this.getPageList().length; i++){
-    //     this.initPageData(i)
-    // }
-    // this.setData({
-    //   pageList : this.getPageList(),
-    //   scrollLeft: this.data.scrollLeftValues[this.data.choosed] == undefined? 0: this.data.scrollLeftValues[this.data.choosed]
-    // })
+    this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
+    // 设置每个photo对应的选中的照片
+    let that = this
+    let idx = 0
+    for(let i=0; i< that.data.pageList.length && idx < tempFilePaths.length; i++){
+      let page = that.getPageList()[i]
+      for(let j =0 ;j< page.photoInfos.length && idx < tempFilePaths.length; j++, idx++){
+        page.photoInfos[j].elesrc = tempFilePaths[idx]
+      }
+    }
+    for(let i =0; i< this.getPageList().length; i++){
+        this.initPageData(i)
+    }
+    this.setData({
+      pageList : this.getPageList(),
+      scrollLeft: this.data.scrollLeftValues[this.data.choosed] == undefined? 0: this.data.scrollLeftValues[this.data.choosed]
+    })
 
   },
   initPageData: function(index){
