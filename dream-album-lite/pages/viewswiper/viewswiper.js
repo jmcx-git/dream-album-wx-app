@@ -35,6 +35,7 @@ Page({
     fromShare: false,
     fromShareUserOpenId: '',
     musicStatus: 'running',
+    stopMusic: false,
     bgMusic: '',
     hiddenMusicBtn: true
   },
@@ -250,7 +251,8 @@ Page({
       console.log("没有图片了了！");
       that.setData({
         reloadHidden: false,
-        musicStatus: 'paused'
+        musicStatus: 'paused',
+        stopMusic: 'true'
       })
       that.audioCtx.pause();
     }
@@ -348,12 +350,14 @@ Page({
   audioPause: function () {
     if (this.data.musicStatus == 'running') {
       this.setData({
-        musicStatus: 'paused'
+        musicStatus: 'paused',
+        stopMusic: true
       })
       this.audioCtx.pause();
     } else {
       this.setData({
-        musicStatus: 'running'
+        musicStatus: 'running',
+        stopMusic: false
       })
       this.audioCtx.play();
     }

@@ -130,6 +130,16 @@ page{
     border-radius: 50%;
     animation: rotate 10s linear infinite; 
 }
+.music_btn-on{
+    animation-play-state: running !important;
+    -webkit-animation-play-state: running !important;
+    -moz-animation-play-state: running !important;    
+}
+.music_btn-off{
+    animation-play-state: paused !important;
+    -webkit-animation-play-state:paused !important;
+    -moz-animation-play-state: none !important;   
+}
 @keyframes rotate {
     from {
         transform: rotate(0);
