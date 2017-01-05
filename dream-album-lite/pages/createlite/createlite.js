@@ -78,7 +78,7 @@ let pageData = {
     let templateHeight = (app.globalData.windowHeight - 20) / 5 - 30
     let templateWidth = (app.globalData.windowWidth - 40) / 4.2
     if(templateHeight < templateWidth){
-      templateHeight += 15
+      templateHeight += 14
     }
 
     let content_hegiht = (app.globalData.windowHeight - 20) * 0.82
