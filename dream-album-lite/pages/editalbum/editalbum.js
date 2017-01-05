@@ -171,7 +171,10 @@ let pageData = {
       choosed: e.target.dataset.albumindex
     })
     this.initAlbumDetail(this.data.choosed)
-    this.initCreatePanel(this.data.tempFilePaths)
+    if(this.data.albumList[this.data.choosed].initPhoto != true){
+      this.initCreatePanel(this.data.tempFilePaths)  
+    }
+
   },
   uploadImage: function (index) {
     // 上传图片， index：图片在 that.data.submodules 的下表
@@ -357,6 +360,7 @@ let pageData = {
     })
 
     this.data.albumList[this.data.choosed].hiddenGrid = hiddenGrid
+    this.data.albumList[this.data.choosed].initPhoto = true
     // 设置每个photo对应的选中的照片
     let that = this
     let idx = 0
