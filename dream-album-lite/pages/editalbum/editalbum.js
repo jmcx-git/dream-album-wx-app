@@ -71,7 +71,7 @@ let pageData = {
 
     this.setData({
       pageList: pageList,
-      photoList: this.getPhotoList(index),
+      // photoList: this.getPhotoList(index),
       hiddenGrid: true,
       photoCount: photoCount,
       scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]

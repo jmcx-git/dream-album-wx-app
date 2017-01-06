@@ -61,7 +61,7 @@ let pageData = {
     }
     this.initpreview()
     this.setData({
-      photoList: this.getPhotoList(index),
+      // photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
       scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
