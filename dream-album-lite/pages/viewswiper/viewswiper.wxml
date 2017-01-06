@@ -8,8 +8,7 @@
     </view>
     <view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
         <audio src="{{bgMusic}}" style="display:none" id="music" loop/>
-        <image hidden="{{hiddenMusicBtn || stopMusic}}" class="music_btn music_btn-on" src="../../image/music.png" bindtap="audioPause"/>
-         <image hidden="{{hiddenMusicBtn || !stopMusic}}" class="music_btn music_btn-off" src="../../image/music.png" bindtap="audioPause"/>
+        <image hidden="{{hiddenMusicBtn}}" class="{{stopMusic?'music_btn music_btn-off':'music_btn music_btn-on'}}" src="../../image/music.png" bindtap="audioPause"/>
         <image class="viewImage"  src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>
     </view>
 

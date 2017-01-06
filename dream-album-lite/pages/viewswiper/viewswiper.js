@@ -34,7 +34,6 @@ Page({
     nickName: "",
     fromShare: false,
     fromShareUserOpenId: '',
-    musicStatus: 'running',
     stopMusic: false,
     bgMusic: '',
     hiddenMusicBtn: true
@@ -242,8 +241,7 @@ Page({
     } else {
       that.setData({
         reloadHidden: false,
-        musicStatus: 'paused',
-        stopMusic: 'true'
+        stopMusic: true
       })
       if(typeof that.audioCtx !=="undefined"){
         that.audioCtx.pause();
@@ -307,7 +305,8 @@ Page({
       reloadHidden: true,
       currentIndex: 0,
       imgUrl: '',
-      replayHidden: true
+      replayHidden: true,
+      stopMusic: false
     })
     setTimeout(function () {
       that.setData({
@@ -341,15 +340,13 @@ Page({
     }
   },
   audioPause: function () {
-    if (this.data.musicStatus == 'running') {
+    if (!this.data.stopMusic) {
       this.setData({
-        musicStatus: 'paused',
         stopMusic: true
       })
       this.audioCtx.pause();
     } else {
       this.setData({
-        musicStatus: 'running',
         stopMusic: false
       })
       this.audioCtx.play();
