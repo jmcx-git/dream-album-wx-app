@@ -107,9 +107,13 @@ Page({
         that.requestData()
       }, 5000)
     } else {
+      //若出现网络状况未能等到接口的makeComplete状态可能会出现
+      //用户从首页跳转预览页时会出现正在制作中的图片提示
+      that.setData({
+        refresh:false
+      })
       that.requestData()
     }
-
   },
   requestData: function (e) {
     let that = this
