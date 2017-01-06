@@ -14,7 +14,8 @@
 
 <view class="splitline"/>
 <view class="item">
-  <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}rpx;height:{{templateHeight+15}}rpx;" bindscrolltolower="loadMoreTmplate">
+  <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}rpx;height:{{templateHeight+20}}rpx;" bindscrolltolower="loadMoreTmplate">
+    <image class="item_img_bg" src="../../image/bottomline.png" style="width: 40rpx; height: {{(templateHeight) * 0.7}}rpx; margin-top:{{(templateHeight) * 0.3}}rpx"/>
     <view class="item_detail" style="height:{{templateHeight}}rpx;">
       <view class="item_item" wx:for="{{albumList}}" wx:key="{{id}}"  style="width:{{templateWidth}}rpx;height:{{templateHeight}}rpx;">
         <view style="display: inline-block; margin:0 {{(templateWidth-templateIconSize)/2}}rpx; width:{{templateIconSize}}rpx;height:{{templateIconSize}}rpx;">

@@ -92,10 +92,8 @@ let pageData = {
       templateWidth: this.convertRpx(templateWidth),
       templateHeight: this.convertRpx(templateHeight),
       templateIconSize: this.convertRpx(templateWidth * 0.8), // 宽度的0.8
-      // templateTextSize: this.convertRpx(templateHeight - (templateWidth * 0.8)),
-      // templateFontSize: this.convertRpx((templateHeight - (templateWidth * 0.9)) * 0.8),
       templateTextSize: this.convertRpx(templateWidth * 0.8 * 0.3),
-      templateFontSize: this.convertRpx(templateWidth * 0.8 * 0.25),
+      templateFontSize: this.convertRpx(templateWidth * 0.8 * 0.2),
       content_hegiht: this.convertRpx(content_hegiht),
       content_width: this.convertRpx(app.globalData.windowWidth),
       pageFullHeight: this.convertRpx(pageFullHeight),
@@ -153,6 +151,10 @@ let pageData = {
     })
   },
   chooseTemplate: function (e) {
+
+    if(this.data.choosed == e.target.dataset.albumindex){
+      return
+    }
     this.data.scrollLeftValues[this.data.choosed] = this.data.scrollLeft
     this.setData({
       choosed: e.target.dataset.albumindex,

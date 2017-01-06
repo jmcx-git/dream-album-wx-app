@@ -25,14 +25,17 @@ page{
 .item{
   position: absolute;
   margin-top :20rpx;
-  background-image:url("https://cdn.mokous.com/static/album/image/bottomline.png");
+}
+.item_img_bg{
   background-repeat:no-repeat;
-  background-size: 42rpx 80%;
+  background-size: 40rpx 40%;
   background-position: bottom left;
 }
 .item_detail{
+  position: absolute;
   white-space: nowrap;
-  padding-left: 40rpx;
+  left: 40rpx;
+  top: 0rpx
 }
 .item_item{
   display:inline-block;
