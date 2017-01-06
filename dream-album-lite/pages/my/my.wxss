@@ -56,17 +56,17 @@ page{
     top:0rpx;
     left:0rpx;
     box-sizing: border-box;
-    margin-top:60rpx;
-    box-shadow:2px 2px 3px #eeeeee;
+    margin-top:62rpx;
+    box-shadow:2px 2px 1px #ececec;
 }
 .imageTopPic{
     width:434rpx;
-    height:90%;
+    height:93%;
     position: absolute;
     z-index: 5;
     top:0px;
     left:0px;
-    margin-top:44rpx;
+    margin-top:40rpx;
 }
 .imageScrollTitle{
     position: absolute;
