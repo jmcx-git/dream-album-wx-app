@@ -188,85 +188,146 @@ let pageData = {
 
   },
   uploadImage: function (index) {
-    // 上传图片， index：图片在 that.data.submodules 的下表
-    let that = this
-    wx.hideToast()
+    try{
+      // 上传图片， index：图片在 that.data.submodules 的下表
+      let that = this
+      wx.hideToast()
 
-    // 一些必要的数据
-    let albumId = that.data.albumList[that.data.choosed].id
+      // 一些必要的数据
+      let albumId = that.data.albumList[that.data.choosed].id
 
-    // 判断index = length：应该停止，跳转下一页
-    if (index == this.tmpPhotoList.length) {
-      app.globalData.finishCreateFlag = true;
-      wx.showModal({
-        title: "创建完成",
-        cancelText: "返回首页",
-        confirmText: "预览相册",
-        success: function (res) {
-          if (res.confirm) {
-            wx.redirectTo({
-              url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId + "&from=1"
+      // 判断index = length：应该停止，跳转下一页
+      if (index == this.tmpPhotoList.length) {
+        app.globalData.finishCreateFlag = true;
+        // that.iscreating = false
+        wx.showModal({
+          title: "创建完成",
+          cancelText: "返回首页",
+          confirmText: "预览相册",
+          success: function (res) {
+            if (res.confirm) {
+              wx.redirectTo({
+                url: '../viewswiper/viewswiper?userAlbumId=' + that.userAlbumId + "&from=1"
+              })
+            } else {
+              wx.navigateBack({
+                delta: getCurrentPages().length
+              });
+            }
+          },
+          complete: function () {
+            that.setData({
+              created: false
             })
-          } else {
-            wx.navigateBack({
-              delta: getCurrentPages().length
-            });
           }
-        },
-        complete: function () {
-          that.setData({
-            created: false
-          })
-        }
+        })
+
+        return
+      }
+      // 显示，正在生成第index+1张模板照片
+      wx.showToast({
+        title: '正在上传第' + (index + 1) + '张照片',
+        icon: 'loading',
+        duration: 10000
       })
+      // 根据是否有elesrc判断使用的接口
+      // 接口回调 fail 走失败路径，显示上传错误提示
+      // 接口回调success 走成功路径，继续上传下一张
 
-      return
-    }
-    // 显示，正在生成第index+1张模板照片
-    wx.showToast({
-      title: '正在上传第' + (index + 1) + '张照片',
-      icon: 'loading',
-      duration: 10000
-    })
-    // 根据是否有elesrc判断使用的接口
-    // 接口回调 fail 走失败路径，显示上传错误提示
-    // 接口回调success 走成功路径，继续上传下一张
+      let photo = this.tmpPhotoList[index]
 
-    let photo = this.tmpPhotoList[index]
+      if (photo.elesrc != "" && photo.elesrc != undefined) {
 
-    if (photo.elesrc != "" && photo.elesrc != undefined) {
+        wx.uploadFile({
+          url: app.globalData.serverHost + "/dream/album/lite/common/uploaduserimg.json",
+          filePath: photo.elesrc,
+          name: 'image',
+          formData: {
+            'openId': app.globalData.openId,
+            'albumItemId': photo.albumItemId + "",
+            'albumId': albumId + "",
+            'index':(photo.rank)+"",
+            'appId': app.globalData.appId + "",
+            'cssElmMoveX': Math.round(photo.cssShowX/photo.rateWidth)+"",
+            'cssElmMoveY': Math.round(photo.cssShowY/photo.rateHeight)+"",
+            'cssElmWidth': Math.round(photo.cssShowWidth/photo.rateWidth)+"",
+            'cssElmHeight': Math.round(photo.cssShowHeight/photo.rateHeight)+"",
+            'cssElmRotate': Math.round(photo.cssElmRotate)+"",
+            'isComplete': (index == this.tmpPhotoList.length-1 ? 1: 0)+""
+          },
+          fail: function (res) {
+            console.log(res)
+            that.iscreating = false
+            wx.hideToast()
+            wx.showModal({
+              title: "提示",
+              content: "上传文件错误，请从新上传",
+              showCancel: false
+            })
+          },
+          success: function (res) {
+            try{
+            console.log(res)
+            if(res.statusCode == 200){
+              let jsdata = JSON.parse(res.data);
+              if (jsdata.status != 0) {
+                that.iscreating = false
+                wx.hideToast()
+                wx.showModal({
+                  title: "提示",
+                  content: "上传文件错误，请从新上传",
+                  showCancel: false
+                })
+                that.setData({
+                  created: false
+                })
+                return;
+              }
+              that.userAlbumId = jsdata.data;
+              that.uploadImage(index + 1);
+            }else{
+              that.iscreating = false
+              wx.hideToast()
+              wx.showModal({
+                title: "提示",
+                content: "上传文件错误，请从新上传",
+                showCancel: false
+              })
+              that.setData({
+                created: false
+              })
+            }
+          }catch(e){
+            that.iscreating = false
+          }
 
-      wx.uploadFile({
-        url: app.globalData.serverHost + "/dream/album/lite/common/uploaduserimg.json",
-        filePath: photo.elesrc,
-        name: 'image',
-        formData: {
-          'openId': app.globalData.openId,
-          'albumItemId': photo.albumItemId + "",
-          'albumId': albumId + "",
-          'index':(photo.rank)+"",
-          'appId': app.globalData.appId + "",
-          'cssElmMoveX': Math.round(photo.cssShowX/photo.rateWidth)+"",
-          'cssElmMoveY': Math.round(photo.cssShowY/photo.rateHeight)+"",
-          'cssElmWidth': Math.round(photo.cssShowWidth/photo.rateWidth)+"",
-          'cssElmHeight': Math.round(photo.cssShowHeight/photo.rateHeight)+"",
-          'cssElmRotate': Math.round(photo.cssElmRotate)+"",
-          'isComplete': (index == this.tmpPhotoList.length-1 ? 1: 0)+""
-        },
-        fail: function (res) {
-          console.log(res)
-          wx.hideToast()
-          wx.showModal({
-            title: "提示",
-            content: "上传文件错误，请从新上传",
-            showCancel: false
-          })
-        },
-        success: function (res) {
-          console.log(res)
-          if(res.statusCode == 200){
-            let jsdata = JSON.parse(res.data);
-            if (jsdata.status != 0) {
+          }
+        })
+      } else {
+        wx.request({
+          url: app.globalData.serverHost + "dream/album/lite/common/uploadnotuserimg.json",
+          data: {
+            'openId': app.globalData.openId,
+            'albumItemId': photo.albumItemId + "",
+            'albumId': albumId + "",
+            'index':photo.rank,
+            'appId': app.globalData.appId + "",
+            'isComplete': (index == this.tmpPhotoList.length-1 ? 1: 0)+""
+          },
+          fail: function (res) {
+            that.iscreating = false
+            wx.hideToast()
+            wx.showModal({
+              title: "提示",
+              content: "上传文件错误，请从新上传",
+              showCancel: false
+            })
+          },
+          success: function (res) {
+            try{
+            console.log(res)
+            if (res.data.status != 0) {
+              that.iscreating = false
               wx.hideToast()
               wx.showModal({
                 title: "提示",
@@ -278,84 +339,48 @@ let pageData = {
               })
               return;
             }
-            that.userAlbumId = jsdata.data;
-            that.uploadImage(index + 1);
-          }else{
-            wx.hideToast()
-            wx.showModal({
-              title: "提示",
-              content: "上传文件错误，请从新上传",
-              showCancel: false
-            })
-            that.setData({
-              created: false
-            })
-
+            let usrAlbId = res.data.data
+            that.userAlbumId = usrAlbId
+            that.uploadImage(index + 1)
+          }catch(e){
+            that.iscreating = false
           }
-
         }
-      })
-    } else {
-      wx.request({
-        url: app.globalData.serverHost + "dream/album/lite/common/uploadnotuserimg.json",
-        data: {
-          'openId': app.globalData.openId,
-          'albumItemId': photo.albumItemId + "",
-          'albumId': albumId + "",
-          'index':photo.rank,
-          'appId': app.globalData.appId + "",
-          'isComplete': (index == this.tmpPhotoList.length-1 ? 1: 0)+""
-        },
-        fail: function (res) {
-          wx.hideToast()
-          wx.showModal({
-            title: "提示",
-            content: "上传文件错误，请从新上传",
-            showCancel: false
-          })
-        },
-        success: function (res) {
-          console.log(res)
-          if (res.data.status != 0) {
-            wx.hideToast()
-            wx.showModal({
-              title: "提示",
-              content: "上传文件错误，请从新上传",
-              showCancel: false
-            })
-            that.setData({
-              created: false
-            })
-            return;
-          }
-          let usrAlbId = res.data.data
-          that.userAlbumId = usrAlbId
-          that.uploadImage(index + 1)
-        }
-      })
+        })
+      }
+    }catch(e){
+      that.iscreating = false
     }
+
   },
   createAlbum: function(e){
-    // this.setData({
-    //   scrollLeft: this.data.scrollLeft+10
-    // })
-    // 照片样式调整完成后上传
-    wx.showToast({
-      title: '正在上传照片...',
-      icon: 'loading',
-      duration: 10000
-    })
-    // 将所有photolist 提取出来
-    this.tmpPhotoList = []
-    let pagelist = this.getPageList()
+    console.log("creating", this.iscreating )
+    if(this.iscreating == true){
+      return
+    }
+    this.iscreating = true;
+    try{
+      // 照片样式调整完成后上传
+      wx.showToast({
+        title: '正在上传照片...',
+        icon: 'loading',
+        duration: 10000
+      })
+      // 将所有photolist 提取出来
+      this.tmpPhotoList = []
+      let pagelist = this.getPageList()
 
-    for(let i=0; i<pagelist.length; i++){
-      let tmpplist = pagelist[i]
-      this.tmpPhotoList = this.tmpPhotoList.concat(tmpplist.photoInfos)
+      for(let i=0; i<pagelist.length; i++){
+        let tmpplist = pagelist[i]
+        this.tmpPhotoList = this.tmpPhotoList.concat(tmpplist.photoInfos)
+      }
+
+      // uploadimg
+      this.uploadImage(0)
+    }catch(er){
+      this.iscreating = false
     }
 
-    // uploadimg
-    this.uploadImage(0)
   },
   initCreatePanel: function(tempFilePaths){
     // 选择图片之后,进入化创建面板

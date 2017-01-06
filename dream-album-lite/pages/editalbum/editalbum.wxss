@@ -53,14 +53,14 @@ page{
 .chooseimgbtn{
   position: absolute;
   width:160rpx;
-  height:200rpx;
+  height:160rpx;
   z-index: 10;
   right:40rpx;
 }
 .savebtn{
   position: absolute;
   width:160rpx;
-  height:200rpx;
+  height:160rpx;
   z-index: 10;
   right:40rpx;
 }

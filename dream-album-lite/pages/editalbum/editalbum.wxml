@@ -17,7 +17,7 @@
     <view style="width:80rpx; display:inline-block"/>
   </scroll-view>
 </view>
-<image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top-65}}rpx;left:{{2*icon_left-45}}rpx" src="../../image/savealbum.png" bindtap="createAlbum"/>
+<image class="savebtn" hidden="{{hiddenGrid}}" hidden="{{!hiddenGrid}}" style="top:{{2*icon_top-40}}rpx;left:{{2*icon_left-60}}rpx" src="../../image/savealbum.png" bindtap="createAlbum"/>
 <view class="splitline"/>
 <view class="item">
   <scroll-view class="scroll-view_item" scroll-x="true" style="width: {{item_width}}rpx;height:{{templateHeight+20}}rpx;" bindscrolltolower="loadMoreTmplate">

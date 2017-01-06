@@ -204,8 +204,11 @@ Page({
       animationData: {}
     })
     if (app.globalData.finishCreateFlag) {
-      wx.redirectTo({
-        url: "../my/my"
+      // wx.redirectTo({
+      //   url: "../my/my"
+      // })
+      wx.navigateBack({
+        delta: getCurrentPages().length
       })
     }
   },
