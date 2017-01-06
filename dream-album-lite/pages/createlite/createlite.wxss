@@ -2,12 +2,9 @@ page{
   background-color: #ffffff;
 }
 .content{
-  background-color: #fffff;
+  background-color: #ffffff;
   display:flex;
   flex-wrap: wrap;
-}
-.scroll-view_content{
-
 }
 .content_detail{
   display:flex;
@@ -21,7 +18,7 @@ page{
 }
 .splitline{
   width: 100%;
-  height: 0.5rpx;
+  height: 2rpx;
   margin-top: 20rpx;
   background:#888888;
 }

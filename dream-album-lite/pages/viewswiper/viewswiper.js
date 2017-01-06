@@ -34,7 +34,7 @@ Page({
     nickName: "",
     fromShare: false,
     fromShareUserOpenId: '',
-    musicStatus: 'running',
+    stopMusic: false,
     bgMusic: '',
     hiddenMusicBtn: true
   },
@@ -238,19 +238,14 @@ Page({
       that.setData({
         imgUrl: that.data.imgs[that.data.currentIndex]
       })
-      // that.executeAction();
-      // setTimeout(function(){
-      //     that.setData({
-      //       currentIndex:that.data.currentIndex+1,
-      //       animationData:{}
-      //     })
-      //     that.prepareAction();
-      // },that.data.refreshInterval*2+500)
     } else {
-      console.log("没有图片了了！");
       that.setData({
-        reloadHidden: false
+        reloadHidden: false,
+        stopMusic: true
       })
+      if(typeof that.audioCtx !=="undefined"){
+        that.audioCtx.pause();
+      }
     }
   },
   loadPic: function () {
@@ -310,7 +305,8 @@ Page({
       reloadHidden: true,
       currentIndex: 0,
       imgUrl: '',
-      replayHidden: true
+      replayHidden: true,
+      stopMusic: false
     })
     setTimeout(function () {
       that.setData({
@@ -344,14 +340,14 @@ Page({
     }
   },
   audioPause: function () {
-    if (this.data.musicStatus == 'running') {
+    if (!this.data.stopMusic) {
       this.setData({
-        musicStatus: 'paused'
+        stopMusic: true
       })
       this.audioCtx.pause();
     } else {
       this.setData({
-        musicStatus: 'running'
+        stopMusic: false
       })
       this.audioCtx.play();
     }

@@ -1,6 +1,7 @@
 {
   "backgroundTextStyle":"dark",
   "navigationBarTitleText": "修改相册",  
-  "navigationBarTextStyle":"dark",
+  "navigationBarTextStyle":"black",
+  "navigationBarBackgroundColor": "#ffffff",
   "enablePullDownRefresh":false
 }

@@ -359,27 +359,6 @@ let pageData = {
     // uploadimg
     this.uploadImage(0)
   },
-  chooseImageList: function(e){
-    let that = this;
-    wx.chooseImage({
-      count: that.data.photoCount,
-      success: function (res) {
-        if (res.tempFilePaths.length < that.data.photoCount) {
-          wx.showModal({
-            title: "提示",
-            content: "该相册可以上传" + that.data.photoCount + "张照片，您选中" + res.tempFilePaths.length + "张 确认是否制作",
-            success: function (rescfm) {
-              if (rescfm.confirm) {
-                that.initCreatePanel(res.tempFilePaths)
-              }
-            }
-          })
-        } else {
-          that.initCreatePanel(res.tempFilePaths)
-        }
-      }
-    })
-  },
   initCreatePanel: function(tempFilePaths){
     // 选择图片之后,进入化创建面板
     let hiddenGrid = true;

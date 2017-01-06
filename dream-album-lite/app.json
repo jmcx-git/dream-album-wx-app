@@ -8,7 +8,6 @@
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#00adef",
-    "navigationBarTitleText": "萌娃相册",
-    "navigationBarTextStyle":"white"
+    "navigationBarTitleText": "萌娃相册"
   }
 }

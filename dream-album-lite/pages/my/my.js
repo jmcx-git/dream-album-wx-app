@@ -13,7 +13,7 @@ Page({
     picLoadCount: 0,
     indicatorDots:false,
     autoplay:false,
-    interval:3000,
+    a:3000,
     duration:500,
     marginLeft:110
   },

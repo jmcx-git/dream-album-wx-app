@@ -7,7 +7,6 @@ let pageData = {
     tempFilePaths: [],  // 用户选中的图片
     albumList: [],  // 模板列表
     pageList: [], // 页面列表 每个模板中页面为多个
-    photoList: [], // 照片列表  每个页面中的照片为多个
 
     moduleWidth: 0,  // 四宫格部分，每个背景图图片的宽高
     moduleHeight: 0,
@@ -61,7 +60,6 @@ let pageData = {
     }
     this.initpreview()
     this.setData({
-      // photoList: this.getPhotoList(index),
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
       scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
@@ -196,77 +194,14 @@ let pageData = {
       url: '../editalbum/editalbum?albumId=' + this.data.albumList[this.data.choosed].id + '&tempFilePaths=' + tempFilePaths.join(",")
     })
   },
-  initPageData: function(index){
-
-    // 0<=index <length
-    let page = this.getPageList()[index]
-    // page.currentPage = index
-    let photoList = this.getPhotoList(index)
-
-    // 根据page wh 和 photo wh 计算 显示到屏幕上的width height, css x,y,rotate
-    let pageOriHeight = page.imgHeight
-    let pageOriWidth = page.imgWidth
-    let rateWidth = this.convertPx(this.data.pageFullWidth) / pageOriWidth
-    let rateHeight = this.convertPx(this.data.pageFullHeight) / pageOriHeight
-
-    for(let i = 0; i<photoList.length; i++){
-      let photo = photoList[i]
-      photo.rateWidth = rateWidth
-      photo.rateHeight = rateHeight
-      photo.cssShowWidth = photo.cssElmWidth * rateWidth
-      photo.cssShowHeight = photo.cssElmHeight * rateHeight
-      photo.cssShowX = photo.cssElmMoveX * rateWidth
-      photo.cssShowY = photo.cssElmMoveY * rateHeight
-      this.anim.translate(photo.cssShowX, photo.cssShowY).scale(photo.cssShowWidth/100,photo.cssShowHeight/100).rotate(0).step()
-      let transformData = this.anim.export()
-      photo.transformShadow = transformData;  // 前面阴影部分的动画
-      photo.transformImg = transformData;   // 后端图片部分的动画
-      let borders = {}
-      borders.left = photo.cssShowX
-      borders.top = photo.cssShowY
-      borders.right = photo.cssShowX +photo.cssShowWidth
-      borders.bottom = photo.cssShowY + photo.cssShowHeight
-      photo.borders = borders
-    }
-  },
   nextPage: function(e){
     // this.gotoPage(this.data.currentPage +1)
   },
   backPage: function(e){
     // this.gotoPage(this.data.currentPage -1)
   },
-  chooseImage: function (e) {
-
-    let index = e.target.dataset.index
-    let idx = e.target.dataset.idx // page idx
-
-    let photoList = this.getPhotoList(idx)
-    let photo = photoList[index]
-    let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        // let tmppaths = res.tempFilePaths;
-        photo.elesrc = res.tempFilePaths[0]
-        that.setData({
-          pageList: that.getPageList()
-        })
-      }
-    })
-  },
   getPageList: function(){
     return this.data.albumList[this.data.choosed].albumItemList
-  },
-  getPhotoList: function(currentPage){
-    let pageList = this.data.albumList[this.data.choosed].albumItemList
-    return pageList[currentPage].photoInfos
-  },
-  setPhotoList: function(currentPage, photos){
-    let pageList = this.data.albumList[this.data.choosed].albumItemList
-    pageList[currentPage].photoInfos = photos
-    this.data.albumList[this.data.choosed].albumItemList = pageList
   },
   refreshData: function(){
   },
