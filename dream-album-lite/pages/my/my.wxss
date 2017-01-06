@@ -31,8 +31,6 @@ page{
 /*新的样式列表scrollview-x*/
 .insertClassScroll{
     position: absolute;
-    width:20%;
-    height:16%;
     left: calc(50% - 76rpx);
     top:82%;
     z-index: 10;
