@@ -30,14 +30,12 @@ page{
 .item{
   position: absolute;
   margin-top :20rpx;
-  background-image:url("https://cdn.mokous.com/static/album/image/bottomline.png");
-  background-repeat:no-repeat;
-  background-size: 42rpx 80%;
-  background-position: bottom left;
 }
 .item_detail{
+  position: absolute;
   white-space: nowrap;
-  padding-left: 40rpx
+  left: 40rpx;
+  top: 0rpx
 }
 .item_item{
   display:inline-block;
