@@ -21,6 +21,7 @@ page{
 }
 .viewImage{
     opacity: 0;
+    position: fixed;
     width:100%;
     height:100%;
 }
@@ -118,4 +119,39 @@ page{
     height: 100%;
     z-index: 10;
     background-color: rgba(0,0,0,0.7); 
+}
+.music_btn{
+    position: fixed;
+    z-index: 10;
+    top: 30rpx;
+    right: 30rpx;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    animation: rotate 10s linear infinite; 
+}
+.music_btn-on{
+    animation-play-state: running !important;
+    -webkit-animation-play-state: running !important;
+    -moz-animation-play-state: running !important;    
+}
+.music_btn-off{
+    animation-play-state: paused !important;
+    -webkit-animation-play-state:paused !important;
+    -moz-animation-play-state: none !important;   
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.createmy{
+    position: fixed;
+    width:210rpx;
+    height:80rpx;
+    top:calc(100% - 100rpx);
+    right:20rpx;
 }

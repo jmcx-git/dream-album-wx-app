@@ -13,9 +13,9 @@ Page({
     picLoadCount: 0,
     indicatorDots:false,
     autoplay:false,
-    interval:3000,
+    a:3000,
     duration:500,
-    marginLeft:50
+    marginLeft:110
   },
   onLoad: function () {
     let that = this;
@@ -85,6 +85,12 @@ Page({
                 success: function (sessionResp) {
                   //缓存第三方key
                   var openId = sessionResp.data
+                  if(openId == ""){
+                    console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
+                      );
+                    app.weixinServerFailedToast();
+                    return
+                  }
                   wx.setStorageSync('openId', openId);
                   wx.getUserInfo({
                     success: function (wxUserInfoResp) {
@@ -134,11 +140,19 @@ Page({
       }
     })
   },
-  getData() {
+  getData: function() {
     let that = this;
+    let nickName = wx.getStorageSync("nickName");
+    let avatarUrl = wx.getStorageSync("avatarUrl");
+
+    if(typeof nickName === "undefined" || typeof avatarUrl === "undefined" || (nickName == "" && avatarUrl == "")
+      || nickName == "undefined" || avatarUrl == "undefined"){
+      that.confirmGetData();
+      return;
+    }
     this.setData({
-      avatarUrl: wx.getStorageSync('avatarUrl'),
-      nickName: wx.getStorageSync("nickName")
+      nickName: nickName,
+      avatarUrl: avatarUrl
     })
     wx.showToast({
       title: '加载中...',
@@ -167,14 +181,14 @@ Page({
               items: res.data,
               nopichidden: 'none',
               viewtap: true,
-              marginLeft:res.data.length==1?150:50
+              marginLeft:res.data.length==1?160:110
             })
           }
           // wx.hideToast();
         }
       },
       fail: function () {
-        wx.serverFailedToast()
+        app.serverFailedToast()
       }
     })
   },

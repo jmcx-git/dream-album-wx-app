@@ -2,12 +2,12 @@
   "pages":[
     "pages/my/my",
     "pages/createlite/createlite",
+    "pages/editalbum/editalbum",
     "pages/viewswiper/viewswiper"
   ],
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#00adef",
-    "navigationBarTitleText": "萌娃相册",
-    "navigationBarTextStyle":"white"
+    "navigationBarTitleText": "萌娃相册"
   }
 }

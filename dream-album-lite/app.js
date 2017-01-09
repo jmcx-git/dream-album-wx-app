@@ -27,10 +27,12 @@ App({
     windowHeight: 625,
     serverHost: "https://developer.mokous.com/wx/",
     // serverHost: "http://10.1.0.131:8080/dream-album/",
-    serverHost: "https://developer.mokous.com/wx/",
+    // serverHost: "https://developer.mokous.com/wx/",
+    // serverHost: "https://api.mokous.com/wx/",
+
     finishCreateFlag:false,
     albumPageCount: 4,
-    appId: "wxdfbe82261831dda7",
+    appId: "wx0ddc8673b8df3827",
     nickName: "",
     avatarUrl: "",
     openId: ""
