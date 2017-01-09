@@ -32,7 +32,7 @@ App({
 
     finishCreateFlag:false,
     albumPageCount: 4,
-    appId: "wx0ddc8673b8df3827",
+    appId: "wxdfbe82261831dda7",
     nickName: "",
     avatarUrl: "",
     openId: ""
