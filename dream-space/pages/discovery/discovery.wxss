@@ -8,7 +8,11 @@ page{
 
 }
 .item_root{
-  padding: 0 30rpx
+  padding: 0 30rpx;
+  border-bottom: solid 1rpx #eeeeee;
+}
+.item_hover{
+  background-color: #eeeeee
 }
 .info_root{
   margin:30rpx 0;

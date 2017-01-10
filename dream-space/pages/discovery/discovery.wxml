@@ -1,6 +1,6 @@
 <view class="all_views">
     <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
-      <view class="item_root" bindtap="showdetail">
+      <view class="item_root" bindtap="showdetail" hover="true" hover-class="item_hover">
         <image class="img" mode="aspectFill" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
 
         <view class="info_root">
@@ -17,5 +17,6 @@
             <view class="description">{{item.description}}</view>
         </view>
       </view>
+      
     </block>
 </view>

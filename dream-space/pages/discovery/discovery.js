@@ -13,9 +13,16 @@ let pageData = {
         })
     },
     showdetail: function(e){
-        wx.navigateTo({
-          url: '../activitydetail/activitydetail'
-        })
+      let that = this
+      if(this.showdetailtouched != true){
+          this.showdetailtouched = true
+          wx.navigateTo({
+            url: '../activitydetail/activitydetail',
+            complete: function(e){
+              that.showdetailtouched = false
+            }
+          })
+      }
     },
     icontap :function(e){
       console.log(e)
