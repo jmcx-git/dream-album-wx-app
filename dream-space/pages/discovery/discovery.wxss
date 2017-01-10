@@ -27,12 +27,18 @@ page{
   height: 450rpx;
 }
 .numbox{
-  display: inline-block;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
   background-color: rgba(0,0,0,0.4);
   width: 40rpx;
   height: 40rpx;
-
+  align-items: center;
+  justify-content: center;
   border-radius: 6rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: #ffffff;
 }
 .txt{
   font-size: 26rpx;
@@ -49,10 +55,10 @@ page{
   margin-top: 7rpx;
 }
 .icon{
- margin:0 20rpx;
- width: 50rpx;
- height: 50rpx;
- margin-top: -5rpx;
+  margin:0 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: -5rpx;
 }
 .title{
   margin-top: 5rpx;
