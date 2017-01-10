@@ -1,0 +1,13 @@
+<view class="year">
+    <text>2017</text>
+</view>
+<view class="recordsTop" wx:for="{{recordsList}}" wx:key="recordsList" bindtap="showRecordList">
+    <image src="{{item.backgroundUrl}}" class="recordsImage" />
+    <view class="recordsText">
+        <text class="recordsTextMonth">{{item.month}}月</text>
+        <text class="recordsTextCount">共{{item.recordCount}}条记录</text>
+    </view>
+    <view class="navigator" bindtap="showDetail">
+        <text>></text>
+    </view>
+</view>
