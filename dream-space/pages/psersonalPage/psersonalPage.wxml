@@ -1,0 +1,23 @@
+<image class="personalImage" src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0" />
+<view class="personalText">
+    <text>刚刚来过，共来过28次</text>
+</view>
+
+<view class="recordArea">
+    <text class="leftArea">记录</text>
+    <text class="rightArea">3</text>
+</view>
+<view class="recordArea">
+    <text class="leftArea">点赞</text>
+    <text class="rightArea">0</text>
+</view>
+<view class="recordArea">
+    <text class="leftArea">评论</text>
+    <text class="rightArea">5</text>
+</view>
+
+<view class="friendsNickName" bindtap="modifyNickName">
+    <text class="leftArea">亲友昵称</text>
+    <text class="rightArea">于先生 ></text>
+</view>
+<button type="warn" class="exitFriendsButton" bindtap="exitFriends">退出亲友团</button>

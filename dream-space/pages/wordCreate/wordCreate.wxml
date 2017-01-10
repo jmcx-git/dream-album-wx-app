@@ -1,0 +1,4 @@
+<view class="inputText">
+    <textarea class="textArea"  placeholder="宝宝又有了什么新变化..."></textarea>
+</view>
+<button type="default" class="send" bindtap="sendMessage">发送</button>

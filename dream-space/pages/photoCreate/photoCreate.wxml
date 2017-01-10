@@ -1,0 +1,7 @@
+<view class="photoCreateArea" wx:if="{{imgUrls.length>0}}">
+    <view class="photoCreateTop" wx:for="{{imgUrls}}" wx:key="imgUrls">
+        <image src="{{item.imgPath}}"  class="photoCreateImage"/>
+        <textarea class="photoCreateImageDesc" data-index="{{index}}" bindblur="gainDesc" placeholder="照片描述"  />
+    </view>
+</view>
+<button type="default" wx:if="{{imgUrls.length>0}}" class="send" bindtap="sendMessage">发送</button>

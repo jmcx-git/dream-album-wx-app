@@ -1,0 +1,44 @@
+page{
+    background-color: #f5f5f5;
+}
+.year{
+    line-height: 28rpx;
+    font-size:28rpx; 
+    padding:20rpx;
+}
+.recordsTop{
+    height:150rpx;
+    width:100%;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    background-color: #fff;
+}
+.recordsImage{
+    width: 120rpx;
+    height: 120rpx;
+    border: 1px solid #fff;
+    margin:15rpx;
+}
+.recordsText{
+    display: flex;
+    flex-direction: column;
+    margin-top:30rpx;
+    margin-left: 20rpx;
+}
+.recordsTextMonth{
+    font-size: 36rpx;
+    line-height: 36rpx;
+}
+.recordsTextCount{
+    font-size: 28rpx;
+    margin-top:20rpx;
+    color: #aaa;
+    width:200rpx;
+}
+.navigator{
+    line-height: 150rpx;
+    color: #aaa;
+    text-align: right;
+    width:500rpx;
+    padding-right: 50rpx;
+}
