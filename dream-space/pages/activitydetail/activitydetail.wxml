@@ -1,7 +1,7 @@
 <view class="all_views">
+    <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="title">{{title}}</view>
-    <image src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image>
     <view class="content">{{content}}</view>
-    <button bindtap="joinin">参加</button>
-    <button bindtap="vote">投票</button>
+    <button type="primary" bindtap="joinin">参加</button>
+    <button bindtap="vote" style="margin-top: 20rpx">投票</button>
 </view>

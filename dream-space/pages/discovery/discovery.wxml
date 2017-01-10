@@ -1,11 +1,19 @@
 <view class="all_views">
     <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
-      <view bindtap="showdetail">
-        <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image>
-        <view class="pimg">
-          <view class="icon">icon1</view>
-          <view class="icon">icon2</view>
-          <view class="title">{{item.title}}</view>
+      <view class="item_root" bindtap="showdetail">
+        <image class="img" mode="aspectFill" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
+
+        <view class="info_root">
+          <view class="title_root">
+            <view class="numbox"><text class="txt">24</text></view>
+            <view class="colonsplit">:</view>
+            <view class="numbox"><text class="txt">12</text></view>
+            <view class="colonsplit">:</view>
+            <view class="numbox"><text class="txt">01</text></view>
+            <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
+
+            <view class="title">{{item.title}}</view>
+          </view>
           <view class="description">{{item.description}}</view>
         </view>
       </view>

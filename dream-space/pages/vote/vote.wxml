@@ -1,9 +1,11 @@
 <!--pages/vote/vote.wxml-->
 <view class="all_views">
     <block class="listview" wx:for="{{entries}}" wx:key="{{id}}">
-        <view><image src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image></view>
-        <view>{{item.title}}</view>
-        <view>{{item.description}}</view>
+      <view class="item_root">
+        <view><image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image></view>
+        <view class="title">{{item.title}}</view>
+        <view class="description">{{item.description}}</view>
         <button>投票</button>
+      </view>
     </block>
 </view>

@@ -2,11 +2,22 @@
 Page({
   data:{
     entries:[
-      {id:0},{id:1},{id:2},{id:3},{id:4},{id:5}
+      {id:0},{id:1},{id:2}
     ]
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+  },
+  joinin: function(e){
+    wx.showModal({
+      title:"提示",
+      content:" 确定参加活动",
+      success:function(res){
+        wx.navigateBack({
+          delta:1
+        })
+      }
+    })
   },
   onReady:function(){
     // 页面渲染完成

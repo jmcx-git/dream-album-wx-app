@@ -2,12 +2,13 @@
 <view class="all_views">
 <checkbox-grop>
   <label class="label" wx:for="{{entries}}" wx:key="{{id}}">
-    <checkbox value="{{item.id}}"></checkbox>
+    <checkbox class="checkbox" value="{{item.id}}"></checkbox>
+    <image class="img" src="https//raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="content">
-    <view><image src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image></view>
-    <view>标题</view>
-    <view>描述</view>
+    <view class ="title">标题</view>
+    <view class ="description">描述</view>
     </view>
   </label>
 </checkbox-grop>
+<button type="primary" bindtap="joinin">参加</button>
 </view>

@@ -16,6 +16,9 @@ let pageData = {
         wx.navigateTo({
           url: '../activitydetail/activitydetail'
         })
+    },
+    icontap :function(e){
+      console.log(e)
     }
 }
 Page(pageData)
