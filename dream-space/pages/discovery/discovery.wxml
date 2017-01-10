@@ -5,17 +5,16 @@
 
         <view class="info_root">
           <view class="title_root">
-            <view class="numbox"><text class="txt">24</text></view>
+            <view class="title">{{item.title}}</view>
+            <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
+            <view class="numbox"><text class="txt">01</text></view>
             <view class="colonsplit">:</view>
             <view class="numbox"><text class="txt">12</text></view>
             <view class="colonsplit">:</view>
-            <view class="numbox"><text class="txt">01</text></view>
-            <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
+            <view class="numbox"><text class="txt">24</text></view>
 
-            <view class="title">{{item.title}}</view>
-            <view class="description">{{item.description}}</view>
           </view>
-
+            <view class="description">{{item.description}}</view>
         </view>
       </view>
     </block>
