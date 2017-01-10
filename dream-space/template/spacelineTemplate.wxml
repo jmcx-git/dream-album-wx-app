@@ -1,0 +1,36 @@
+<!--头像头像，昵称昵称，操作区域-->
+<template name="spacetimeline">
+    <view class="spacetimeline" wx:for="{{spacetimelineList}}" wx:key="spacetimelineList">
+        <view class="userInfoArea">
+            <image src="{{item.avatarUrl}}" class="avatarUrl"/>
+            <view class="nickName">
+            <text>{{item.nickName}}</text>
+            </view>
+        </view>
+        <!--内容主体-->
+        <view class="spacetimelinebody">
+            <view wx:if="{{item.squareTag=='图片'}}" class="spacetimelineImageTop">
+                <image class="spacetimelineImage" src="{{item.squareImageUrl}}"/>
+                <text class="spacetimelineImageDesc">{{item.squareImageDesc}}</text>
+            </view>
+            <view wx:elif="{{item.squareTag=='文字'}}" class="spacetimelineContentText">
+                <text>{{item.squareContentText}}</text>
+            </view>
+        </view>
+        <!--几分钟前,关注，评论按钮-->
+        <view class="timeline">
+            <text class="timebefore">9分钟前</text>
+            <image class="collect" src="../../image/collect.png" />
+            <image class="replay" bindtap="toreplay" src="../../image/replay.png" />
+        </view>
+        <!--头像集合-->
+        <view class="avatarCollectTop">
+            <image wx:for="{{item.avatarUrls}}" src="{{item}}" wx:key="avatarUrls"  class="avatarCollectImage"/>
+        </view>
+        <!--回复列表-->
+        <view wx:for="{{item.replayList}}" wx:key="replayList" class="replayTop">
+            <text class="replayNickName">{{item.nickName}}</text>
+            <text>:{{item.content}}</text>
+        </view>
+    </view>
+</template>
