@@ -3,7 +3,7 @@
 <checkbox-grop>
   <label class="label" wx:for="{{entries}}" wx:key="{{id}}">
     <checkbox class="checkbox" value="{{item.id}}"></checkbox>
-    <image class="img" src="https//raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
+    <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="content">
     <view class ="title">标题</view>
     <view class ="description">描述</view>

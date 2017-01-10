@@ -13,8 +13,9 @@
             <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
 
             <view class="title">{{item.title}}</view>
+            <view class="description">{{item.description}}</view>
           </view>
-          <view class="description">{{item.description}}</view>
+
         </view>
       </view>
     </block>

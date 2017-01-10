@@ -54,8 +54,11 @@ page{
  margin-top: -5rpx;
 }
 .title{
-  font-size: 40rpx;
-  margin:5rpx;
+  font-size: 35rpx;
+  height: 40rpx;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
 }
 
 .title_item{
@@ -65,7 +68,10 @@ page{
 }
 
 .description{
-  font-size: 30rpx;
+  font-size: 28rpx;
+  height: 120rpx;
+  line-height:40rpx;
   margin-top:30rpx;
   color:#888888;
+  overflow:hidden;
 }
