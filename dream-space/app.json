@@ -1,5 +1,9 @@
 {
   "pages":[
+    "pages/discovery/discovery",
+    "pages/activitydetail/activitydetail",
+    "pages/joinin/joinin",
+    "pages/vote/vote",
     "pages/index/index",
     "pages/logs/logs"
   ],

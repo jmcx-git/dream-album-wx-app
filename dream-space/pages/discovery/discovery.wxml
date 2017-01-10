@@ -1,0 +1,13 @@
+<view class="all_views">
+    <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
+      <view bindtap="showdetail">
+        <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image>
+        <view class="pimg">
+          <view class="icon">icon1</view>
+          <view class="icon">icon2</view>
+          <view class="title">{{item.title}}</view>
+          <view class="description">{{item.description}}</view>
+        </view>
+      </view>
+    </block>
+</view>
