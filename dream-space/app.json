@@ -2,9 +2,14 @@
   "pages":[
     "pages/index/index",
     "pages/addspace/addspace",
-    "pages/myRecordList/myRecordList",
     "pages/spacetimeline/spacetimeline",
-    "pages/logs/logs"
+    "pages/friends/friends",
+    "pages/psersonalPage/psersonalPage",
+    "pages/modifyNickName/modifyNickName",
+    "pages/wordCreate/wordCreate",
+    "pages/photoCreate/photoCreate",
+    "pages/myrecord/myrecord",
+    "pages/myRecordList/myRecordList"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -17,10 +22,10 @@
       "pagePath": "pages/index/index",
       "text": "首页"
     }, {
-      "pagePath": "pages/myRecordList/myRecordList",
+      "pagePath": "",
       "text": "发现"
     },{
-      "pagePath": "pages/spacetimeline/spacetimeline",
+      "pagePath": "",
       "text": "我的"
     }],
     "borderStyle" : "white",
