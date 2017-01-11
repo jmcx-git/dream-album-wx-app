@@ -1,27 +1,27 @@
 <import src="../../template/spacelineTemplate.wxml" />
-<view hidden="{{!createHidden}}">
+<view hidden="{{!createHidden}}" bindtouchmove="hideCommentWindow">
 <!--顶部-->
 <view class="spacetimelineTop">
     <view class="spacetimelineBackground"></view>
     <view class="spaceRecord" bindtap="showMyRecord">
-      <text>8</text>
-      <text>记录</text>
+      <text>{{topData.records}}</text>
+      <text class="grayColor">记录</text>
     </view>
-    <view class="spaceImage">
-        <image class="iconImage" src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0" />
-        <text>1个月16天</text>
+    <image class="iconImage" bindtap="showSpaceDetail" src="{{topData.avatarUrl}}" />
+    <view class="spaceInfo" bindtap="showSpaceDetail">
+        <text class="spaceInfoText">{{topData.info}}</text>
     </view>
-    <view class="spaceFriend" bindtap="showAllFriends">
-      <text>10</text>
-      <text>亲友</text>
+    <view class="spaceFriend" bindtap="showAllFriends" data-openid="{{topData.authorOpenId}}">
+      <text>{{topData.occupants}}</text>
+      <text class="grayColor">亲友</text>
     </view>
 </view>
 <!--亲友团-->
 <view class="friends">
     <view class="friends-left">
-        <image class="friends-left-avatarUrl" wx:for="{{avatarUrlsTop}}" wx:key="{{avatarUrlsTop}}" src="{{item}}" />
+        <image class="friends-left-avatarUrl" bindtap="showPersonalPage" wx:for="{{topData.occupantInfos}}" data-openid="{{item.openId}}" wx:key="occupantInfos" src="{{item.avatarUrl}}" />
     </view>
-    <view class="friends-right" bindtap="showAllFriends">
+    <view class="friends-right"  bindtap="showAllFriends" data-openid="{{topData.authorOpenId}}">
       <text>全部亲友团 ></text>
     </view>
 </view>
@@ -36,7 +36,7 @@
 <image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden}}"/>
 <view class="comment" hidden="{{commentHidden}}">
     <input bindblur="hideComment" class="commentText" focus="{{commentFocus}}" type="text" placeholder="评论" />
-    <view class="commentSend">
+    <view class="commentSend" data-openid="{{topData.authorOpenId}}" data-feedid="{{topData.id}}" bindtap="saveComment">
          <image class="commentSendImage" src="../../image/create.png" />
     </view>
 </view>
@@ -47,11 +47,11 @@
         <text>记录宝宝成长每一天!</text>
     </view>
     <view class="controlArea">
-        <view class="picArea" bindtap="tocratePhoto">
+        <view class="picArea" bindtap="tocratePhoto" data-type="0">
             <image src="../../image/pic.png"  class="picAreaImage"/>
             <text class="picAreaText">照片</text>
         </view>
-        <view class="textArea" bindtap="toCreateWord">
+        <view class="textArea" bindtap="toCreateWord" data-type="1">
             <image src="../../image/pic.png"  class="textAreaImage"/>
             <text class="textAreaText">文字</text>
         </view>

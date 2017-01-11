@@ -1,10 +1,24 @@
-<view class="friendsTop" wx:for="{{avatarUrlsTop}}">
-    <image src="{{item}}" class="friends-avatarUrl" />
-    <view class="friends-nickName">
-        <text class="nickNameText">{{nickName}}</text>
-        <text class="historyText">刚刚来过，共来过10次</text>
+<!--重置邀请码-->
+<view class="resetNumber">
+    <view class="resetYqm">
+        邀请码
     </view>
-    <view class="navigator" bindtap="showDetail">
+    <view class="resetText">
+        0877888
+    </view>
+    <view class="resetButton">
+        <image class="resetButtonImage" src="../../image/create.png" />
+    </view>
+</view>
+
+<!--浏览记录-->
+<view bindtap="showDetail" data-openid="{{item.openId}}" class="friendsTop" wx:for="{{occupantList}}" wx:key="avatarUrlsTop">
+    <image src="{{item.avatarUrl}}" class="friends-avatarUrl" />
+    <view class="friends-nickName">
+        <text class="nickNameText">{{item.nickname}}</text>
+        <text class="historyText">{{item.info}}</text>
+    </view>
+    <view class="navigator" >
         <text>></text>
     </view>
 </view>

@@ -1,15 +1,47 @@
 var app=getApp();
 Page({
-  data:{},
+  data:{
+    spaceId:0,
+    version:0,
+    content:''
+  },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+    let that=this;
+    this.setData({
+      spaceId:options.spaceId,
+      version:options.version,
+      content:''
+    })
   },
   onReady:function(){
     // 页面渲染完成
   },
+  saveContent:function(e){
+    this.setData({
+      content:e.detail.value
+    })
+  },
   sendMessage:function(e){
-    wx.navigateBack({
-      delta: 1 // 回退前 delta(默认为1) 页面
+    console.log("文章内容:"+that.data.content);
+    wx.request({
+      url: 'https://developer.mokolus.com/space/feed/add.json',
+      data: {
+        'openId':wx.getStorageInfoSync("openId")+'',
+        'spaceId':that.data.spaceId+'',
+        'version':that.data.version+'',
+        'type':1,
+        'content':that.data.content
+      },
+      method: 'post',
+      success: function(res){
+        wx.navigateBack({
+          delta: 1
+        })
+      },
+      fail: function(ron) {
+        console.log("添加文字失败失败 ！");
+        console.log(ron);
+      }
     })
   },
   onShow:function(){
