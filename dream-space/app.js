@@ -27,5 +27,8 @@ App({
   globalData:{
     userInfo:null,
     appId: "wx0ddc8673b8df3827",
+    createFinishFlag:false,
+    serverHost: "https://developer.mokolus.com/space/",
+    openId: "abcdef"
   }
 })

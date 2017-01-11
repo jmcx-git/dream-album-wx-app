@@ -1,0 +1,60 @@
+<import src="../../template/spacelineTemplate.wxml" />
+<view hidden="{{!createHidden}}">
+<!--顶部-->
+<view class="spacetimelineTop">
+    <view class="spacetimelineBackground"></view>
+    <view class="spaceRecord" bindtap="showMyRecord">
+      <text>8</text>
+      <text>记录</text>
+    </view>
+    <view class="spaceImage">
+        <image class="iconImage" src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0" />
+        <text>1个月16天</text>
+    </view>
+    <view class="spaceFriend" bindtap="showAllFriends">
+      <text>10</text>
+      <text>亲友</text>
+    </view>
+</view>
+<!--亲友团-->
+<view class="friends">
+    <view class="friends-left">
+        <image class="friends-left-avatarUrl" wx:for="{{avatarUrlsTop}}" wx:key="{{avatarUrlsTop}}" src="{{item}}" />
+    </view>
+    <view class="friends-right" bindtap="showAllFriends">
+      <text>全部亲友团 ></text>
+    </view>
+</view>
+<!--模版-->
+<template is="spacetimeline" data="{{spacetimelineList,winWidth}}"/>
+<!--底部-->
+<view class="bottom">
+    <view class="bottomArea">
+        <text>已经到底，没有更多啦～</text>
+    </view>
+</view>
+<image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden}}"/>
+<view class="comment" hidden="{{commentHidden}}">
+    <input bindblur="hideComment" class="commentText" focus="{{commentFocus}}" type="text" placeholder="评论" />
+    <view class="commentSend">
+         <image class="commentSendImage" src="../../image/create.png" />
+    </view>
+</view>
+</view>
+<!--点击创建之后的-->
+<view hidden="{{createHidden}}">
+    <view class="backgroundText">
+        <text>记录宝宝成长每一天!</text>
+    </view>
+    <view class="controlArea">
+        <view class="picArea" bindtap="tocratePhoto">
+            <image src="../../image/pic.png"  class="picAreaImage"/>
+            <text class="picAreaText">照片</text>
+        </view>
+        <view class="textArea" bindtap="toCreateWord">
+            <image src="../../image/pic.png"  class="textAreaImage"/>
+            <text class="textAreaText">文字</text>
+        </view>
+    </view>
+    <image src="../../image/del.png"  class="del" bindtap="closeCreatePage"/>
+</view>

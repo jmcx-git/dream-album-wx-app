@@ -1,0 +1,10 @@
+<view class="friendsTop" wx:for="{{avatarUrlsTop}}">
+    <image src="{{item}}" class="friends-avatarUrl" />
+    <view class="friends-nickName">
+        <text class="nickNameText">{{nickName}}</text>
+        <text class="historyText">刚刚来过，共来过10次</text>
+    </view>
+    <view class="navigator" bindtap="showDetail">
+        <text>></text>
+    </view>
+</view>
