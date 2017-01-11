@@ -1,21 +1,23 @@
 <view class="all_views">
+  <scroll-view scroll-y="true" bindscrolltolower="scrolltolower" style="height:{{scrollHeight}}px" lower-threshold="10">
     <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
-      <view class="item_root" bindtap="showdetail" hover="true" hover-class="item_hover">
-        <image class="img" mode="aspectFill" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
+      <view class="item_root" bindtap="showdetail" hover="true" hover-class="item_hover" data-id="{{item.id}}">
+        <image class="img" mode="aspectFill" src="{{item.cover}}"></image>
 
         <view class="info_root">
           <view class="title_root">
             <view class="title">{{item.title}}</view>
             <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
-            <view class="numbox">01</view>
+            <view class="numbox">{{item.day}}</view>
             <view class="colonsplit">:</view>
-            <view class="numbox">12</view>
+            <view class="numbox">{{item.hour}}</view>
             <view class="colonsplit">:</view>
-            <view class="numbox">24</view>
+            <view class="numbox">{{item.minute}}</view>
           </view>
-            <view class="description">{{item.description}}</view>
+            <view class="description">{{item.intr}}</view>
         </view>
       </view>
 
     </block>
+  </scroll-view>
 </view>

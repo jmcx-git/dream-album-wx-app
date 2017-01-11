@@ -1,14 +1,14 @@
 <!--pages/joinin/joinin.wxml-->
 <view class="all_views">
-<checkbox-grop>
+<radio-group>
   <label class="label" wx:for="{{entries}}" wx:key="{{id}}">
-    <checkbox class="checkbox" value="{{item.id}}"></checkbox>
+    <radio class="checkbox" value="{{item.id}}"></radio>
     <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="content">
     <view class ="title">标题</view>
     <view class ="description">描述</view>
     </view>
   </label>
-</checkbox-grop>
+</radio-group>
 <button type="primary" bindtap="joinin">参加</button>
 </view>

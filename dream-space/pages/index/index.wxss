@@ -1,21 +1,83 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/*模版列表*/
+page{
+    background-color: gainsboro;
+}
+.space_container{
+    padding-bottom: 50rpx;
+    background-color: white;
+}
+.main{
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+
+.sub_main_left{
+    width: 330rpx;
+    height: 430rpx;
+    padding: 5% 2% 0% 4%;
+}
+.sub_main_right{
+    width: 330rpx;
+    height: 430rpx;
+    padding: 5% 4% 0% 2%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+
+.sub_main_image{
+    width:100%;
+    height:330rpx;
+}
+.image{
+    border-radius: 10rpx;
+    width:100%;
+    height:100%;
 }
 
-.usermotto {
-  margin-top: 200px;
+
+.sub_main_info{
+    display: inline-flex;
+    width: 100%;
+    height: 28rpx;
+    margin-top: 30rpx;
+}
+.sub_main_info .name{
+    text-align: left;
+    font-size: 28rpx;
+    color:#353535;
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+.sub_main_info .recordnum{
+    text-align: right;
+    font-size: 25rpx;
+    color: rgb(150, 150, 150);
+    width: 40%;
+}
+.sub_main_desc{
+    text-align: left;
+    font-size: 25rpx;
+    color:rgb(150, 150, 150);
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    margin-top: 15rpx;
+}
+
+
+.add_btn{
+    position: fixed;
+    bottom: 25rpx;
+    right: 25rpx;
+    width: 110rpx;
+    height:110rpx;
+}
+.add_btn image{
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
 }

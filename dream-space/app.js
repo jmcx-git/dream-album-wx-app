@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    let that = this;
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -27,5 +28,8 @@ App({
   globalData:{
     userInfo:null,
     appId: "wx0ddc8673b8df3827",
+    createFinishFlag:false,
+    serverHost: "https://developer.mokolus.com/space/",
+    openId: "oRi3q0BCtgkXsj7OZV5A7Ind9sD4"
   }
 })
