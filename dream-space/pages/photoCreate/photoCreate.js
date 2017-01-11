@@ -1,10 +1,17 @@
 var app=getApp()
 Page({
   data:{
-    imgUrls:[]
+    imgUrls:[],
+    spaceId:0,
+    version:0,
+    uploadFileCount:0
   },
   onLoad:function(options){
     let that=this;
+    this.setData({
+      spaceId:options.spaceId,
+      version:options.version
+    })
     wx.chooseImage({
       count: 9, // 最多可以选择的图片张数，默认9
       sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
@@ -22,16 +29,48 @@ Page({
         })
       },
       fail: function() {
-        console.log("上传图片错误！");
+        console.log("没有选择图片！");
+        wx.navigateBack({
+          delta: 1
+        })
       }
     })
   },
-  onReady:function(){
-    // 页面渲染完成
-  },
   sendMessage:function(e){
-    wx.navigateBack({
-      delta: 1 // 回退前 delta(默认为1) 页面
+    let that=this;
+    for(var i=0;i<that.data.imgUrls.length;i++){
+      that.uploadFile((that.data.imgUrls)[i]);
+    }
+  },
+  uploadFile:function(uploadData){
+    let that=this;
+    wx.uploadFile({
+      url: 'https://developer.mokolus.com/space/feed/add.json',
+      filePath:uploadData.imgPath,
+      name:'file',
+      formData:{
+        'openId':wx.getStorageInfoSync("openId")+'',
+        'spaceId':that.data.spaceId+'',
+        'version':that.data.version+'',
+        'type':0,
+        'content':uploadData.desc
+      },
+      success: function(res){
+        if(that.data.uploadFileCount==that.data.imgUrls.length-1){
+            that.setData({
+              uploadFileCount:0
+            })
+            wx.navigateBack({
+              delta: 1 // 回退前 delta(默认为1) 页面
+            })
+        }else{
+          that.data.uploadFileCount+=1;
+        }
+      },
+      fail: function(ron) {
+        console.log("上传图片失败!");
+        console.log(ron);
+      }
     })
   },
   gainDesc:function(e){
