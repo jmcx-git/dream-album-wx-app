@@ -1,7 +1,14 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/spacetimeline/spacetimeline",
+    "pages/friends/friends",
+    "pages/psersonalPage/psersonalPage",
+    "pages/modifyNickName/modifyNickName",
+    "pages/wordCreate/wordCreate",
+    "pages/photoCreate/photoCreate",
+    "pages/myrecord/myrecord",
+    "pages/myRecordList/myRecordList"
   ],
   "window":{
     "backgroundTextStyle":"light",
