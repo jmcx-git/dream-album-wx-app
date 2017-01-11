@@ -41,5 +41,10 @@ Page({
     wx.navigateTo({
       url: '../addspace/addspace'
     })
+  },
+  toSpace:function(){
+    wx.navigateTo({
+      url: '../spacetimeline/spacetimeline'
+    })
   }
 })

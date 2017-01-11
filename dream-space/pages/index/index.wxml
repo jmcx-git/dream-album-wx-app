@@ -1,7 +1,7 @@
 <view style="width:100%;height:{{windowHeight}}px;">
     <view class="space_container">
         <view class="main">
-            <view wx:for="{{items}}" wx:for-index="idx" class="{{idx%2==0?'sub_main_left':'sub_main_right'}}">
+            <view wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="{{idx%2==0?'sub_main_left':'sub_main_right'}}">
                 <view class="sub_main_image">
                     <image class="image" src="{{item.cover}}"/>
                 </view>
