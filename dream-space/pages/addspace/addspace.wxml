@@ -52,6 +52,7 @@
 
   <!--邀请码模版-->
   <form wx:elif="{{addWay==2}}" bindsubmit="inviteSubmit">
+    <view style="height:60rpx;"></view>
     <view class="invite_input_area">
       <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
         <view class="input_cell">

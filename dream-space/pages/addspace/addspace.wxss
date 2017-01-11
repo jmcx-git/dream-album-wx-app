@@ -85,7 +85,6 @@ page{
 .invite_input_area{
     width: 100%;
     height: 7.5%;
-    margin-top: 60rpx;
     background-color: white;
 }
 .invite_tips_area{

@@ -9,6 +9,7 @@ Page({
     nopics: false,
     start: 0,
     size: 10,
+    more: true,
     isProcess: false,//线程锁
     isOpen: false,//判断进展
     animationData1: {},
@@ -29,14 +30,22 @@ Page({
         })
       }
     })
-  },
-  onShow: function () {
-    let that = this;
-    that.reInit();
     if (!wx.getStorageSync('openId')) {
       that.confirmGetData()
     } else {
       that.getData();
+    }
+  },
+  onShow: function () {
+    let that = this;
+    if (app.globalData.indexRefreshStatus) {
+      app.globalData.indexRefreshStatus = false;
+      that.reInit();
+      if (!wx.getStorageSync('openId')) {
+        that.confirmGetData()
+      } else {
+        that.getData();
+      }
     }
   },
   onHide: function () {
@@ -123,6 +132,10 @@ Page({
     setTimeout(function () {
       wx.hideToast();
     }, 5000)
+    that.requestData();
+  },
+  requestData: function () {
+    let that = this;
     var url = app.globalData.serverHost + 'list.json';
     wx.request({
       url: url,
@@ -148,7 +161,8 @@ Page({
             that.setData({
               items: newItems,
               loadStatus: true,
-              start: newStart
+              start: newStart,
+              more: res.data.data.more
             })
           }
           wx.hideToast();
@@ -166,6 +180,8 @@ Page({
       loadStatus: false,
       nopics: false,
       start: 0,
+      size: 10,
+      more: true,
       isProcess: false,//线程锁
       isOpen: false,//判断进展
       animationData1: {},
@@ -180,15 +196,23 @@ Page({
     that.getData();
     wx.stopPullDownRefresh();
   },
+  onReachBottom: function () {
+    let that = this;
+    if (that.data.more) {
+      that.getData();
+    }
+  },
   addSpace: function (e) {
     let way = e.currentTarget.dataset.way;
     wx.navigateTo({
       url: '../addspace/addspace?way=' + way
     })
   },
-  toSpace: function () {
+  toSpace: function (e) {
+    let index = e.currentTarget.id;
+    let spaceId = this.data.items[index].id;
     wx.navigateTo({
-      url: '../spacetimeline/spacetimeline'
+      url: '../spacetimeline/spacetimeline?spaceId=' + spaceId
     })
   },
   bindViewTap: function () {
