@@ -22,10 +22,10 @@ let pageData = {
       })
 
       let activitylist = [
-          {id:0,title:"标题1标题1标题1标题1标题1标题1标题1",description:"在分析前，我们要确认下这个游戏能不能汉化，安装游戏，在pak文件中搜索相关的游戏文本，然后修改掉，然后进到游戏中查看，如果不能正常显示，那么我们还要考虑下字体问题",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1234567890, participates: 10},
-          {id:1,title:"标题2",intr:"活动2描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1234567890, participates: 10},
-          {id:2,title:"标题3",intr:"活动3描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1234567890, participates: 10},
-          {id:3,title:"标题4",intr:"活动4描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1234567890, participates: 10}]
+          {id:0,title:"邀请宝宝上电视1",intr:"",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
+          {id:1,title:"邀请宝宝上电视2",intr:"活动2描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
+          {id:2,title:"邀请宝宝上电视3",intr:"活动3描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
+          {id:3,title:"邀请宝宝上电视4",intr:"活动4描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10}]
       this.resetDate(activitylist);
       this.setData({
           activitylist:activitylist
@@ -59,9 +59,53 @@ let pageData = {
         item.hour = d.getHours()
         item.minute = d.getMinutes()
         item.second = d.getSeconds()
+        item.endtime = item.day +" "+this.getEndtimeMonth(item.month)+" "+item.year
+
+        item.deadline = Math.floor((item.endTimeMillis - Date.now())/24/60/60/1000)
       }
-    }
-    ,
+    },
+    getEndtimeMonth: function(month){
+      switch (month) {
+        case 1:
+          return "Jan."
+          break;
+        case 2:
+          return "Feb."
+          break;
+        case 3:
+          return "Mar."
+          break;
+        case 4:
+          return "Apr."
+          break;
+        case 5:
+          return "May."
+          break;
+        case 6:
+          return "Jun."
+          break;
+        case 7:
+          return "Jul."
+          break;
+        case 8:
+          return "Aug."
+          break;
+        case 9:
+          return "Sep."
+          break;
+        case 10:
+          return "Oct."
+          break;
+        case 11:
+          return "Nov."
+          break;
+        case 12:
+          return "Dec."
+          break;
+        default:
+          return "Mar."
+      }
+    },
     loadMore: function(e){
       if(this.data.noMoreList){
         return;

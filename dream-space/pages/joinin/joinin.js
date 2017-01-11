@@ -13,9 +13,12 @@ Page({
       title:"提示",
       content:" 确定参加活动",
       success:function(res){
-        wx.navigateBack({
-          delta:1
-        })
+        if(res.confirm){
+          wx.navigateBack({
+            delta:1
+          })  
+        }
+
       }
     })
   },

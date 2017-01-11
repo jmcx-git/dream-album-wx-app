@@ -1,5 +1,5 @@
 page{
-  background-color:#ffffff;
+  background-color: #eeeeee;
 }
 .all_views{
 
@@ -8,14 +8,18 @@ page{
 
 }
 .item_root{
-  padding: 0 30rpx;
-  border-bottom: solid 1rpx #eeeeee;
+  height: 650rpx;
+  /*border-bottom: solid 1rpx #eeeeee;*/
 }
 .item_hover{
-  background-color: #eeeeee
+  background-color: #dddddd;
 }
 .info_root{
-  margin:30rpx 0;
+  position: relative;
+  background-color: #ffffff;
+  margin: 0 30rpx;
+  top: -60rpx;
+  padding: 20rpx 0;
 }
 .title_root{
   display: -webkit-box;
@@ -41,10 +45,7 @@ page{
   color: #ffffff;
 }
 .txt{
-  font-size: 26rpx;
   text-align: center;
-  color: #ffffff;
-  margin-left: 7rpx
 }
 .colonsplit{
   display: inline-block;
@@ -55,10 +56,8 @@ page{
   margin-top: 7rpx;
 }
 .icon{
-  margin:0 20rpx;
-  width: 50rpx;
-  height: 50rpx;
-  margin-top: -5rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .title{
   margin-top: 5rpx;
@@ -85,4 +84,59 @@ page{
   margin-top:30rpx;
   color:#888888;
   overflow:hidden;
+}
+
+.infoitem{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  padding:5rpx 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.endtimeline{
+  display:inline-block;
+  background-color: #888888;
+  width: 100rpx;
+  height: 2rpx;
+}
+.txtendtime{
+  font-size: 30rpx;
+  color: #333333;
+  margin: 0 30rpx;
+}
+.txttitle{
+  font-size: 40rpx;
+  color: #333333;
+  white-space:nowrap;
+  text-overflow:clip;
+  overflow:hidden;
+  margin:0 50rpx;
+}
+.deadline{
+  font-size: 30rpx;
+  color: #ffffff;
+  background-color: #000000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rpx;
+}
+
+.bottom{
+  height:150rpx;
+  width:calc(100% - 40rpx);
+  padding:50rpx 20rpx;
+}
+.bottomArea{
+  text-align: center;
+  font-size: 28rpx;
+  width:100%;
+  height:28rpx;
+  color: #aaa;
 }

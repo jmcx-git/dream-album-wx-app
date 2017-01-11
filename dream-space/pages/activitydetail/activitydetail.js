@@ -5,13 +5,35 @@ let pageData = {
         title:"",
         intr:"",
         content:"",
-        prize: ""
+        prize: "",
+        buttonstop: 560,
+        isshowjoinin: false,
+        windowHeight:600,
+        joinmargintop: 500
+    },
+    convert2rpx: function(px){
+      return px * this.convertrate
+    },
+    convert2px: function(rpx){
+      return rpx / this.convertrate
     },
     onLoad:function(option){
       // option parms
       let activityId = option.id;
 
       let that = this;
+      wx.getSystemInfo({
+       success: function(res){
+         that.convertrate = 750/res.windowWidth;
+         that.setData({
+           windowHeight: res.windowHeight,
+           buttonstop: res.windowHeight - that.convert2px(100),
+           joinmargintop: res.windowHeight- that.convert2px(300)
+         })
+        }
+      })
+
+
       wx.getSystemInfo({
        success: function(res){
           that.setData({
@@ -49,12 +71,22 @@ let pageData = {
     handleFail: function(msg){
 
     },
+    takein: function(e){
+      this.setData({
+        isshowjoinin: true
+      })
+    },
+    cancel: function(e){
+      this.setData({
+        isshowjoinin: false
+      })
+    },
     joinin: function(e){
         wx.navigateTo({
           url: '../joinin/joinin'
         })
     },
-    vote: function(e){
+    govote: function(e){
         wx.navigateTo({
           url: '../vote/vote'
         })

@@ -2,6 +2,7 @@
   "pages":[
 
     "pages/discovery/discovery",
+    "pages/test/test",
     "pages/activitydetail/activitydetail",
     "pages/joinin/joinin",
     "pages/vote/vote",
@@ -32,7 +33,7 @@
       "iconPath": "image/icon.png",
       "selectedIconPath": "image/icon.png"
     }, {
-      "pagePath": "",
+      "pagePath": "pages/test/test",
       "text": "我的"
     }],
     "borderStyle" : "white",

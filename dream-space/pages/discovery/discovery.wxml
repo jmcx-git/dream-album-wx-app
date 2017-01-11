@@ -1,23 +1,34 @@
 <view class="all_views">
   <scroll-view scroll-y="true" bindscrolltolower="scrolltolower" style="height:{{scrollHeight}}px" lower-threshold="10">
     <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
-      <view class="item_root" bindtap="showdetail" hover="true" hover-class="item_hover" data-id="{{item.id}}">
+      <view class="item_root" bindtap="showdetail" hover hover-class="item_hover" data-id="{{item.id}}">
         <image class="img" mode="aspectFill" src="{{item.cover}}"></image>
-
         <view class="info_root">
-          <view class="title_root">
-            <view class="title">{{item.title}}</view>
-            <image src="/image/icon.png" class="icon" catchtap="icontap"></image>
-            <view class="numbox">{{item.day}}</view>
-            <view class="colonsplit">:</view>
-            <view class="numbox">{{item.hour}}</view>
-            <view class="colonsplit">:</view>
-            <view class="numbox">{{item.minute}}</view>
+          <view class="infoitem">
+            <view class="endtimeline"/>
+            <view class="txtendtime"> {{item.endtime}} </view>
+            <view class="endtimeline"/>
           </view>
-            <view class="description">{{item.intr}}</view>
+          <view class="infoitem">
+            <view class="txttitle"> {{item.title}}</view>
+          </view>
+          <view class="infoitem">
+            <view class="txtendtime"> {{item.participates}}人参加 </view>
+          </view>
+          <view class="infoitem">
+            <view class='deadline'>
+              <image src="/image/icon.png" class="icon"></image>
+              <view class="txt"> 距离结束{{item.deadline}}天 </view>
+            </view>
+          </view>
         </view>
       </view>
 
     </block>
+    <view class="bottom">
+        <view class="bottomArea">
+            <text>已经到底，没有更多啦～</text>
+        </view>
+    </view>
   </scroll-view>
 </view>

@@ -24,3 +24,88 @@ page{
   margin-top:20rpx;
   color:#888888;
 }
+
+.buttonviews{
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100rpx;
+
+  border-top: 1rpx solid #eeeeee;
+}
+.btnview{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  width: 100%;
+  height:100%;
+
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn_hover{
+  background-color: #dddddd;
+}
+.buttonviews .split{
+  display:inline;
+  width: 2rpx;
+  height: 100%;
+  background-color: #eeeeee;
+}
+
+.joinallviews{
+  position:fixed;
+  top:0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.joininpart{
+  height: 300rpx;
+  background-color: #ffffff;
+  padding: 40rpx;
+}
+.btnlocal{
+  height: 100rpx;
+  margin: 0 50rpx;
+  background-color: #0000ff;
+  /*border: 1rpx solid #0000ff;*/
+  border-radius:10px;
+  color: white;
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnlocal2{
+  height: 100rpx;
+  margin: 0 50rpx;
+  margin-top: 15rpx;
+  border-radius:10px;
+  color: #888888;
+  border-radius:10px;
+
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.local_hover1{
+  background-color: #0000ee;
+}
+
+.local_hover2{
+  background-color: #eeeeee;
+}
