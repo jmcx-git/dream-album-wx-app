@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/addspace/addspace",
     "pages/spacetimeline/spacetimeline",
     "pages/friends/friends",
     "pages/psersonalPage/psersonalPage",
@@ -15,5 +16,21 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "pagePath": "",
+      "text": "发现"
+    },{
+      "pagePath": "",
+      "text": "我的"
+    }],
+    "borderStyle" : "white",
+    "selectedColor":"black",
+    "color" : "rgb(99,198,241)",
+    "backgroundColor" : "rgba(254,254,254,0.9)"
   }
 }

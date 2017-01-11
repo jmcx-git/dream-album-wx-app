@@ -1,10 +1,19 @@
-<!--index.wxml-->
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view style="width:100%;height:{{windowHeight}}px;">
+    <view class="space_container">
+        <view class="main">
+            <view wx:for="{{items}}" wx:for-index="idx" class="{{idx%2==0?'sub_main_left':'sub_main_right'}}">
+                <view class="sub_main_image">
+                    <image class="image" src="{{item.cover}}"/>
+                </view>
+                <view class="sub_main_info">
+                    <view class="name">{{item.title}}</view>
+                    <view class="recordnum">{{item.record}}条记录</view>
+                </view>
+                <view class="sub_main_desc">{{item.desc}}</view>
+            </view>
+        </view>
+    </view>
+    <view catchtap="addSpace" class="add_btn">
+        <image src="../../image/add.png"/>
+    </view>
 </view>

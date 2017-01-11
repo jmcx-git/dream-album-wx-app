@@ -1,21 +1,193 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/*模版列表*/
+page{
+    background-color: gainsboro;
 }
 
-.userinfo-avatar {
+.handle_info{
+    width: 100%;
+    height: 250rpx;
+    background-color: white;
+    display: flex;
+}
+
+.handle_sub_info{
+    flex: 1;
+    padding: 25rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.handle_icon {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.handle_text {
+  color: black;
+  font-size: 0.8em;
+  font-weight: lighter;
+}
+/*
+.space_container{
+    margin-top: 20rpx;
+    background-color: white;
+}
+.main{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-wrap: wrap;
+}
+.sub_main_left{
+    width: 330rpx;
+    height: 40%;
+    padding: 5% 2% 5% 4%;
+}
+.sub_main_right{
+    width: 330rpx;
+    height: 40%;
+    padding: 5% 4% 5% 2%;
+}
+.sub_main_image{
+    height:80%;
+    width:100%;
+}
+.images{
+    border-radius: 6rpx;
+    width:100%;
+    height:100%;
+}
+.sub_main_text{
+    text-align: left;
+    font-size: 28rpx;
+    color:#353535;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    margin-top: 30rpx;
+}
+.sub_main_time{
+    text-align: left;
+    font-size: 22rpx;
+    color:gainsboro;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    margin-top: 30rpx;
+}
+.add_btn{
+    position: fixed;
+    bottom: 40rpx;
+    right: 40rpx;
+    width: 100rpx;
+    height:100rpx;
+}
+.add_btn image{
+    width: 100%;
+    height: 100%;
+}*/
+.space_container{
+    padding-bottom: 50rpx;
+    background-color: white;
+}
+.main{
+    width: 100%;
+    display:flex;
+    flex-wrap: wrap;
 }
 
-.usermotto {
-  margin-top: 200px;
+
+.sub_main_left{
+    width: 330rpx;
+    height: 430rpx;
+    padding: 5% 2% 0% 4%;
 }
+.sub_main_right{
+    width: 330rpx;
+    height: 430rpx;
+    padding: 5% 4% 0% 2%;
+}
+
+
+.sub_main_image{
+    width:100%;
+    height:330rpx;
+}
+.image{
+    border-radius: 10rpx;
+    width:100%;
+    height:100%;
+}
+
+
+.sub_main_info{
+    display: inline-flex;
+    width: 100%;
+    height: 28rpx;
+    margin-top: 30rpx;
+}
+.sub_main_info .name{
+    text-align: left;
+    font-size: 28rpx;
+    color:#353535;
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+.sub_main_info .recordnum{
+    text-align: right;
+    font-size: 25rpx;
+    color: rgb(150, 150, 150);
+    width: 40%;
+}
+.sub_main_desc{
+    text-align: left;
+    font-size: 25rpx;
+    color:rgb(150, 150, 150);
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    margin-top: 15rpx;
+}
+
+
+.add_btn{
+    position: fixed;
+    bottom: 25rpx;
+    right: 25rpx;
+    width: 110rpx;
+    height:110rpx;
+}
+.add_btn image{
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
+}
+/*----->tarbar*/
+/*.tarbar_view{
+    position: fixed;
+    width: 100%;
+    height: 120rpx;
+    bottom: 0rpx;
+    display: flex;
+    background-color: rgba(254, 254, 254, 0.97);
+}
+.tarbar_subview{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.tarbar_subview image{
+    margin: 20rpx;
+    width: 40rpx;
+    height: 40rpx;
+}*/
+/*<-----tarbar*/
