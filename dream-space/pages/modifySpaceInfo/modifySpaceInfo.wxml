@@ -1,0 +1,52 @@
+<view style="width:100%;height:{{windowHeight}}px;">
+
+  <!--新建模版-->
+  <form bindsubmit="formSubmit">
+    <view class="image_area">
+      <view catchtap="choosenImage" class="image_select_view" style="top:{{windowHeight*convertTimes*0.35/2-114}}rpx;">
+        <image class="image_select_image" src="{{avatarImg==''?'../../image/avatar3.jpg':avatarImg}}" />
+        <image class="image_select_camera" src="../../image/camera.png" />
+      </view>
+    </view>
+    <view class="input_area">
+      <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
+        <view class="input_cell">
+          <view class="input_cell_hd">空间类型</view>
+          <view class="input_cell_bd">
+            <picker name="type" disabled="true" bindchange="bindPickerChange" value="{{typeIndex}}" range="{{typeArray}}">
+              <view>
+                {{typeArray[typeIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">宝宝昵称</view>
+          <view class="input_cell_bd">
+            <input name="nickname" class="input" placeholder-style="color:gray;" placeholder="宝宝小名" bindblur="checkData" bindinput="checkData"/>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">宝宝生日</view>
+          <view class="input_cell_bd">
+            <picker name="birthday" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
+              <view>{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">宝宝性别</view>
+          <view class="input_cell_bd">
+            <radio-group bindchange="radioChange" name="gender">
+              <radio disabled="true" checked="{{gender==1?true:false}}" value="1" />男
+              <radio disabled="true" value="{{gender==2?true:false}}" />女
+            </radio-group>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn_area">
+      <button class="submit_btn" disabled="{{btnDisabled}}" form-type="submit" type="primary">保存宝宝信息</button>
+    </view>
+  </form>
+</view>

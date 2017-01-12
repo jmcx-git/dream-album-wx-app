@@ -7,7 +7,7 @@
       <text>{{topData.records}}</text>
       <text class="grayColor">记录</text>
     </view>
-    <image class="iconImage" bindtap="showSpaceDetail" src="{{topData.avatarUrl}}" />
+    <image class="iconImage" bindtap="showSpaceDetail" src="{{topData.avatarUrl==null?'http://static.yingyonghui.com/article/1484189453675_a.jpg':topData.avatarUrl}}" />
     <view class="spaceInfo" bindtap="showSpaceDetail">
         <text class="spaceInfoText">{{topData.info==null?'':topData.info}}</text>
     </view>

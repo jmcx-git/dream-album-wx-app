@@ -6,7 +6,7 @@ Page({
   onLoad:function(options){
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/user/interaction/info.json',
+      url: app.globalData.serverHost+'user/interaction/info.json',
       data: {
         openId:options.openId,
         spaceId:options.spaceId,
@@ -43,11 +43,6 @@ Page({
   exitFriends:function(e){
     wx.navigateBack({
       delta: getCurrentPages().length // 回退前 delta(默认为1) 页面
-    })
-  },
-  modifyNickName:function(e){
-    wx.navigateTo({
-      url: '../modifyNickName/modifyNickName'
     })
   },
   onUnload:function(){

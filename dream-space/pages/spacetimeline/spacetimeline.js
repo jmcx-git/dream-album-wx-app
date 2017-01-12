@@ -40,9 +40,9 @@ Page({
   getSpaceTopData:function(){
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/detail.json',
+      url: app.globalData.serverHost+'detail.json',
       data: {
-        openId:wx.getStorageSync('openId')+'',
+        openId:wx.getStorageSync('openId'),
         spaceId:that.data.spaceId,
         version:that.data.version
       },
@@ -53,6 +53,7 @@ Page({
         that.setData({
           topData:res.data.data
         })
+        app.globalData.modifySpaceInfoFlag=false;
       },
       fail: function(rns) {
         console.log("获取顶部数据失败！");
@@ -63,7 +64,7 @@ Page({
   getSpaceListData:function(){
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/feed/list.json',
+      url: app.globalData.serverHost+'feed/list.json',
       data: {
         openId:wx.getStorageSync('openId')+'',
         spaceId:that.data.spaceId,
@@ -139,7 +140,7 @@ Page({
   saveComment:function(e){
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/feed/comment/add.json',
+      url: app.globalData.serverHost+'feed/comment/add.json',
       data: {
         openId:wx.getStorageSync("openId"),
         feedId:that.data.commentFeedId,
@@ -171,9 +172,10 @@ Page({
       commentContent:e.detail.value
     })
   },
-  showSpaceDetail:function(){
+  showSpaceDetail:function(e){
+    let that=this;
     wx.navigateTo({
-      url: '../addspace/addspace'
+      url: "../modifySpaceInfo/modifySpaceInfo?spaceId="+that.data.spaceId+"&version="+that.data.version
     })
   },
   showPersonalPage:function(e){
@@ -213,7 +215,7 @@ Page({
         success:function(ron){
           if(ron.confirm){
             wx.request({
-              url: 'https://developer.mokous.com/space/feed/comment/delete.json',
+              url: app.globalData.serverHost+'feed/comment/delete.json',
               data: {
                 openId:wx.getStorageSync("openId"),
                 feedId:feedid,
@@ -252,7 +254,7 @@ Page({
               if(ron.confirm){
                 //做删除操作
                 wx.request({
-                  url: 'https://developer.mokous.com/space/feed/del.json',
+                  url: app.globalData.serverHost+'feed/del.json',
                   data: {
                     openId:wx.getStorageSync('openId'),
                     feedId:e.currentTarget.dataset.feedid,
@@ -301,12 +303,17 @@ Page({
           that.getSpaceListData();
         },500)
     }
+    if(app.globalData.modifySpaceInfoFlag){
+        setTimeout(function(){
+          that.getSpaceTopData();
+        },500)
+    }
     },
     toCollect:function(e){
       let that=this;
       var status=(e.currentTarget.dataset.ilike==-1)?0:-1;
       wx.request({
-        url: 'https://developer.mokous.com/space/feed/like.json',
+        url: app.globalData.serverHost+'feed/like.json',
         data: {
           openId:wx.getStorageSync("openId"),
           feedId:e.currentTarget.dataset.feedid,

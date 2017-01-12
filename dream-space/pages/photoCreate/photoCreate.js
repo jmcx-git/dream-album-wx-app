@@ -37,16 +37,18 @@ Page({
     })
   },
   sendMessage:function(e){
-    let that=this;
-    for(var i=0;i<that.data.imgUrls.length;i++){
-      that.uploadFile((that.data.imgUrls)[i]);
-    }
+    setTimeout(function(){
+      let that=this;
+      for(var i=0;i<that.data.imgUrls.length;i++){
+        that.uploadFile((that.data.imgUrls)[i]);
+      }
+    },500)
   },
   uploadFile:function(uploadData){
     console.log(uploadData);
     let that=this;
     wx.uploadFile({
-      url: 'https://developer.mokous.com/space/feed/add.json',
+      url: app.globalData.serverHost+'feed/add.json',
       filePath:uploadData.imgPath,
       name:'file',
       formData:{
@@ -57,13 +59,11 @@ Page({
         'content':uploadData.desc
       },
       success: function(res){
-        console.log("0909");
-        console.log(res);
         if(that.data.uploadFileCount==that.data.imgUrls.length-1){
             that.setData({
               uploadFileCount:0
             })
-            console.log("上传图片成功成功!");
+            console.log("上传图片成功!");
             wx.navigateBack({
               delta: 1 // 回退前 delta(默认为1) 页面
             })

@@ -14,7 +14,7 @@ Page({
       version:options.version
     })
     wx.request({
-      url: 'https://developer.mokous.com/space/occupant/list.json',
+      url: app.globalData.serverHost+'occupant/list.json',
       data: {
         openId:options.openId,
         spaceId:options.spaceId,
@@ -39,7 +39,7 @@ Page({
   resetYqm:function(){
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/secert/reset.json',
+      url: app.globalData.serverHost+'secert/reset.json',
       data: {
           openId:wx.getStorageSync('openId'),
           spaceId:that.data.spaceId,

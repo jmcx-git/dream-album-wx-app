@@ -1,7 +1,0 @@
-<view class="friendsNickNameArea">
-    <input class="inputText" type="text" placeholder="亲友昵称" />
-</view>
-<view class="desc">
-    <text>亲友昵称指日常生活中宝宝对该亲友的称呼</text>
-</view>
-<button type="default" class="save" bindtap="saveNickName">保存修改</button>
