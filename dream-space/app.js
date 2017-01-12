@@ -24,6 +24,7 @@ App({
     avatarUrl: "",
     openId: "",
     createFinishFlag:false,
+    modifySpaceInfoFlag:false,
     indexRefreshStatus: false
   },
   serverFailedToast() {
