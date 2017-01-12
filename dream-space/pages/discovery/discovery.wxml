@@ -6,7 +6,7 @@
         <view class="info_root">
           <view class="infoitem">
             <view class="endtimeline"/>
-            <view class="txtendtime"> {{item.endtime}} </view>
+            <view class="txtendtime"> {{item.startTimeDesc}} </view>
             <view class="endtimeline"/>
           </view>
           <view class="infoitem">
@@ -18,7 +18,7 @@
           <view class="infoitem">
             <view class='deadline'>
               <image src="/image/icon.png" class="icon"></image>
-              <view class="txt"> 距离结束{{item.deadline}}天 </view>
+              <view class="txt">{{item.stepDesc}}</view>
             </view>
           </view>
         </view>

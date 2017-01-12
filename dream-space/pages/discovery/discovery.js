@@ -4,7 +4,7 @@ let pageData = {
         activitylist: [],
         start: 0,
         size: 10,
-        noMoreList: true,
+        noMoreList: false,
         scrollHeight: 0
     },
     onLoad:function(option){
@@ -18,20 +18,9 @@ let pageData = {
          })
         }
       })
-
-      let activitylist = [
-          {id:0,title:"邀请宝宝上电视1",intr:"",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
-          {id:1,title:"邀请宝宝上电视2",intr:"活动2描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
-          {id:2,title:"邀请宝宝上电视3",intr:"活动3描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10},
-          {id:3,title:"邀请宝宝上电视4",intr:"活动4描述",cover:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png",endTimeMillis:1484435987076, participates: 10}]
-      this.resetDate(activitylist);
-      this.setData({
-          activitylist:activitylist
-      })
       this.loadMore()
     },
     showdetail: function(e){
-      console.log(e)
       let that = this
       if(this.showdetailtouched != true){
           this.showdetailtouched = true
@@ -44,70 +33,13 @@ let pageData = {
       }
     },
     icontap :function(e){
-      console.log(e)
-    },
-    resetDate: function(list){
-      for(let i=0;i<list.length; i++){
-        let item = list[i];
-        let d = new Date(item.endTimeMillis)
-        item.year = d.getFullYear()
-        item.month = d.getMonth() + 1
-        item.day = d.getDate()
 
-        item.hour = d.getHours()
-        item.minute = d.getMinutes()
-        item.second = d.getSeconds()
-        item.endtime = item.day +" "+this.getEndtimeMonth(item.month)+" "+item.year
-
-        item.deadline = Math.floor((item.endTimeMillis - Date.now())/24/60/60/1000)
-      }
-    },
-    getEndtimeMonth: function(month){
-      switch (month) {
-        case 1:
-          return "Jan."
-          break;
-        case 2:
-          return "Feb."
-          break;
-        case 3:
-          return "Mar."
-          break;
-        case 4:
-          return "Apr."
-          break;
-        case 5:
-          return "May."
-          break;
-        case 6:
-          return "Jun."
-          break;
-        case 7:
-          return "Jul."
-          break;
-        case 8:
-          return "Aug."
-          break;
-        case 9:
-          return "Sep."
-          break;
-        case 10:
-          return "Oct."
-          break;
-        case 11:
-          return "Nov."
-          break;
-        case 12:
-          return "Dec."
-          break;
-        default:
-          return "Mar."
-      }
     },
     loadMore: function(e){
       if(this.data.noMoreList){
         return;
       }
+      let that = this
       wx.request({
         url: app.globalData.serverHost + "discovery/list.json",
         data:{
@@ -117,13 +49,17 @@ let pageData = {
         },
         method: "GET",
         success: function(res){
-
-          let list = that.data.activitylist.concat(res.data);
-          that.setData({
-            activitylist: list,
-            start: that.data.start + res.data.length,
-            noMoreList: res.data.length < this.data.size
-          })
+          if(res.statusCode == 200){
+            let list = that.data.activitylist.concat(res.data.data.resultList);
+            that.setData({
+              activitylist: list,
+              start: that.data.start + res.data.data.resultList.length,
+              noMoreList: res.data.data.resultList.length < that.data.size
+            })
+          }else{
+            let msg = "服务器返回出错"
+            that.handleFail(msg)
+          }
         },
         fail: function(res){
           let msg = "网络出错,请稍后再试!"
@@ -135,7 +71,11 @@ let pageData = {
       this.loadMore()
     },
     handleFail: function(msg){
-
+      wx.showToast({
+        title: msg,
+        icon: 'loading',
+        duration: 2000
+      })
     }
 }
 Page(pageData)
