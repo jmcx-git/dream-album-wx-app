@@ -1,7 +1,32 @@
 <view class="all_views">
+    <image class="img" mode="aspectFill" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="title">{{title}}</view>
-    <image src="https://raw.githubusercontent.com/yanchunlei/res/master/ele/start0.png"></image>
+    <view class="description">本文档将带你一步步创建完成一个微信小程序，并可以在手机上体验该小程序的实际效果。</view>
+    <view class="actinfos">
+      <view class='deadline'>
+        <image src="/image/icon.png" class="icon_inner"></image>
+        <view class="txt_label"> 距离结束7天 </view>
+      </view>
+      <view class="actwidth"/>
+      <view class="participate txt_label">1069人参加</view>
+    </view>
     <view class="content">{{content}}</view>
-    <button bindtap="joinin">参加</button>
-    <button bindtap="vote">投票</button>
+
+    <view class="bottom">
+        <view class="bottomArea">
+            <text>已经到底，没有更多啦～</text>
+        </view>
+    </view>
+
+    <view class="buttonviews" style="top:{{buttonstop}}px">
+      <view class="btnview" hover hover-class="btn_hover" bindtap="takein">去参加</view>
+      <view class="split"/>
+      <view class="btnview" hover hover-class="btn_hover" bindtap="govote">投票</view>
+    </view>
+    <view class="joinallviews" hidden="{{!isshowjoinin}}" style="height:{{windowHeight}}px" bindtap="cancel">
+      <view class= "joininpart" style="margin-top:{{joinmargintop}}px">
+        <view class="btnlocal" hover hover-class="local_hover1">添加照片</view>
+        <view class="btnlocal2" hover hover-class="local_hover2">选择已有照片</view>
+      </view>
+    </view>
 </view>

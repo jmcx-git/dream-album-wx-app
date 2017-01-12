@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+
     let openId = wx.getStorageSync("openId");
     if (typeof openId !== 'undefined' && openId != '') {
       this.globalData.openId = openId;
