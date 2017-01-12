@@ -5,11 +5,9 @@
     "pages/spacetimeline/spacetimeline",
     "pages/friends/friends",
     "pages/psersonalPage/psersonalPage",
-    "pages/modifyNickName/modifyNickName",
     "pages/wordCreate/wordCreate",
     "pages/photoCreate/photoCreate",
-    "pages/myrecord/myrecord",
-    "pages/myRecordList/myRecordList"
+    "pages/modifySpaceInfo/modifySpaceInfo"
   ],
   "window":{
     "backgroundTextStyle":"light",
