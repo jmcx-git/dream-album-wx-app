@@ -50,13 +50,15 @@ Page({
       filePath:uploadData.imgPath,
       name:'file',
       formData:{
-        'openId':wx.getStorageInfoSync("openId")+'',
+        'openId':wx.getStorageSync("openId")+'',
         'spaceId':that.data.spaceId,
         'version':that.data.version,
         'type':0,
         'content':uploadData.desc
       },
       success: function(res){
+        console.log("0909");
+        console.log(res);
         if(that.data.uploadFileCount==that.data.imgUrls.length-1){
             that.setData({
               uploadFileCount:0
