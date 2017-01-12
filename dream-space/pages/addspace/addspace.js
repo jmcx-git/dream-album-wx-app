@@ -9,13 +9,11 @@ Page({
     typeIndex: 0,
     typeArray: ['亲子空间', '恋爱空间'],
     addWay: 1,
-    page: 0,
     btnDisabled: true
   },
   onLoad: function (options) {
     let that = this;
     let way = options.way;
-    let page = getCurrentPages().length;
     wx.getSystemInfo({
       success: function (res) {
         let convertTimes = 750 / res.windowWidth;
@@ -23,7 +21,6 @@ Page({
           windowWidth: res.windowWidth,
           windowHeight: res.windowHeight,
           convertTimes: convertTimes,
-          page: page,
           addWay: way
         })
       }
@@ -51,15 +48,16 @@ Page({
         name: 'image',
         formData: data,
         success: function (res) {
-          let data=JSON.parse(res.data);
+          let data = JSON.parse(res.data);
           console.log(data);
           if (res.statusCode == 200 && data.status == 0) {
             wx.showToast({
               icon: 'success',
               title: '添加成功'
             })
-            wx.navigateBack({
-              delta: that.data.page
+            app.globalData.indexRefreshStatus = true;
+            wx.switchTab({
+              url: "/pages/index/index"
             })
           } else {
             app.uploadFileFailedToast()
@@ -81,8 +79,9 @@ Page({
               icon: 'success',
               title: '添加成功'
             })
-            wx.navigateBack({
-              delta: that.data.page
+            app.globalData.indexRefreshStatus = true;
+            wx.switchTab({
+              url: "/pages/index/index"
             })
           } else {
             app.failedToast()
@@ -103,18 +102,20 @@ Page({
       url: url,
       data: {
         'openId': app.globalData.openId,
-        'nsecertame': para.secert,
+        'secert': para.secert,
         'version': app.globalData.varsion
       },
       method: 'GET',
       success: function (res) {
+        console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           wx.showToast({
             icon: 'success',
             title: '验证成功'
           })
-          wx.navigateBack({
-            delta: that.data.page
+          app.globalData.indexRefreshStatus = true;
+          wx.switchTab({
+            url: "/pages/index/index"
           })
         } else {
           app.failedToast()

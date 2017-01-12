@@ -1,3 +1,6 @@
 {
-    "navigationBarBackgroundColor": "lightseagreen"
+    "navigationBarBackgroundColor": "black",
+    "backgroundColor": "black",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "加入空间"
 }
