@@ -19,10 +19,11 @@ App({
     serverHost: "https://developer.mokous.com/space/",
     // serverHost: "https://api.mokous.com/space/",
     appId: "wx0ddc8673b8df3827",
-    appVersion:'1.0.0',
+    version:'1.0.0',
     nickName: "",
     avatarUrl: "",
-    openId: ""
+    openId: "",
+    createFinishFlag:false
   },
   serverFailedToast() {
     wx.showToast({
