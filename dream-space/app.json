@@ -1,27 +1,26 @@
 {
-  "pages":[
-
+  "pages": [
+    "pages/index/index",
     "pages/discovery/discovery",
     "pages/test/test",
     "pages/activitydetail/activitydetail",
     "pages/joinin/joinin",
     "pages/vote/vote",
-    "pages/index/index",
+    "pages/my/my",
     "pages/addspace/addspace",
+    "pages/notice/notice",
     "pages/spacetimeline/spacetimeline",
     "pages/friends/friends",
     "pages/psersonalPage/psersonalPage",
-    "pages/modifyNickName/modifyNickName",
     "pages/wordCreate/wordCreate",
     "pages/photoCreate/photoCreate",
-    "pages/myrecord/myrecord",
-    "pages/myRecordList/myRecordList"
+    "pages/modifySpaceInfo/modifySpaceInfo"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [{
@@ -33,7 +32,7 @@
       "iconPath": "image/icon.png",
       "selectedIconPath": "image/icon.png"
     }, {
-      "pagePath": "pages/test/test",
+      "pagePath": "pages/my/my",
       "text": "我的"
     }],
     "borderStyle" : "white",

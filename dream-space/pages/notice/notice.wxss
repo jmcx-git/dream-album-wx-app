@@ -1,0 +1,100 @@
+page {
+  background-color: gainsboro;
+}
+
+.default_area_image {
+  position: absolute;
+  width: 300rpx;
+  height: 300rpx;
+  left: 225rpx;
+}
+
+image {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  background-color: white;
+  width: 712rpx;
+  padding-left: 38rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.msg_view {
+  width: 712rpx;
+  height: 160rpx;
+  border-bottom: 2rpx solid #d9d9d9;
+  display: flex;
+  padding: 30rpx 30rpx 30rpx 0;
+}
+
+.msg_sub_view {
+  width: 522rpx;
+  height: 160rpx;
+}
+
+.user_info_area {
+  width: 100%;
+  height: 40rpx;
+  display: inline-flex;
+}
+
+.user_info_icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.user_info_name {
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  line-height: 40rpx;
+}
+
+.office_marker{
+  width: 46rpx;
+  height: 24rpx;
+  border-radius: 4rpx;
+  background-color: rgb(20, 157, 236);
+  color: white;
+  line-height: 24rpx;
+  font-size:18rpx;
+  text-align: center;
+  margin: 6rpx;
+}
+
+.msg_area {
+  width: 472rpx;
+  margin-left: 50rpx;
+  height: 120rpx;
+}
+
+.comment_view {
+  font-size: 30rpx;
+  line-height: 2;
+  color: #353535;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.time_view{
+  font-size:24rpx;
+  margin-top: 20rpx;
+  color: grey;
+}
+
+.msg_view_commentpic {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.nomoretips{
+  padding: 80rpx 50rpx 40rpx;
+  width: 650rpx;
+  line-height: 1;
+  font-size: 30rpx;
+  text-align: center;
+  color: gray;
+}

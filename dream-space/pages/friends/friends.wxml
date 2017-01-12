@@ -1,10 +1,10 @@
 <!--重置邀请码-->
-<view class="resetNumber">
+<view wx:if="{{secert!='undefined' &&  secert!='null'}}" bindtap="resetYqm" class="resetNumber">
     <view class="resetYqm">
         邀请码
     </view>
     <view class="resetText">
-        0877888
+        {{secert}}
     </view>
     <view class="resetButton">
         <image class="resetButtonImage" src="../../image/create.png" />
@@ -14,10 +14,8 @@
 <!--浏览记录-->
 <view bindtap="showDetail" data-openid="{{item.openId}}" class="friendsTop" wx:for="{{occupantList}}" wx:key="avatarUrlsTop">
     <image src="{{item.avatarUrl}}" class="friends-avatarUrl" />
-    <view class="friends-nickName">
-        <text class="nickNameText">{{item.nickname}}</text>
-        <text class="historyText">{{item.info}}</text>
-    </view>
+    <text class="nickNameText" style="top:{{item.nickname.length>13?30:50}}rpx;">{{item.nickname}}</text>
+    <text class="historyText">{{item.info}}</text>
     <view class="navigator" >
         <text>></text>
     </view>

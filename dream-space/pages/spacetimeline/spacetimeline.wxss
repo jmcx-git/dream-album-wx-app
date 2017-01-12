@@ -175,7 +175,7 @@ page{
 }
 .avatarCollectTop{
   margin-top:20rpx;
-  padding-left:20rpx;
+  padding-left:10rpx;
   display: flex;
   flex-wrap: wrap;
 }

@@ -20,11 +20,12 @@ App({
     serverHost: "https://developer.mokous.com/space/",
     // serverHost: "https://api.mokous.com/space/",
     appId: "wx0ddc8673b8df3827",
-    version:'1.0.0',
+    version: '1.0.0',
     nickName: "",
     avatarUrl: "",
     openId: "",
     createFinishFlag:false,
+    modifySpaceInfoFlag:false,
     indexRefreshStatus: false
   },
   serverFailedToast() {
@@ -36,7 +37,14 @@ App({
   },
   failedToast() {
     wx.showToast({
-      title: '网络请求异常!请稍后再试~',
+      title: '请求异常!请稍后再试~',
+      icon: 'success',
+      duration: 2000
+    });
+  },
+  errorToast(errMsg) {
+    wx.showToast({
+      title: errMsg,
       icon: 'success',
       duration: 2000
     });

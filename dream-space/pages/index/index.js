@@ -38,6 +38,7 @@ Page({
   },
   onShow: function () {
     let that = this;
+    //强制刷新
     if (app.globalData.indexRefreshStatus) {
       app.globalData.indexRefreshStatus = false;
       that.reInit();
@@ -72,7 +73,7 @@ Page({
             if (openId == "") {
               console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
               );
-              app.weixinServerFailedToast();
+              app.failedToast();
               return
             }
             wx.setStorageSync('openId', openId);
@@ -97,7 +98,7 @@ Page({
                       app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
                       that.getData();
                     } else {
-                      app.serverFailedToast();
+                      app.failedToast();
                     }
                   }
                 })
@@ -123,7 +124,6 @@ Page({
   },
   getData: function () {
     let that = this;
-    let items = []
     wx.showToast({
       title: '加载中...',
       icon: 'loading',
@@ -169,7 +169,7 @@ Page({
         }
       },
       fail: function () {
-        app.serverFailedToast()
+        app.failedToast()
       }
     })
   },
@@ -212,7 +212,7 @@ Page({
     let index = e.currentTarget.id;
     let spaceId = this.data.items[index].id;
     wx.navigateTo({
-      url: '../spacetimeline/spacetimeline?spaceId=' + spaceId+"&version="+app.globalData.version
+      url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
     })
   },
   bindViewTap: function () {
