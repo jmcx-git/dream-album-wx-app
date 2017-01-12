@@ -94,16 +94,29 @@ let pageData = {
     },
     govote: function(e){
         wx.navigateTo({
-          url: '../vote/vote'
+          url: '../vote/vote?activityId='+this.data.id
         })
     },
     addphoto: function(e){
-      console.log("添加照片")
+      let that = this
+      wx.chooseImage({
+        count:1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+          if(res.tempFilePaths.length >0){
+              let photopath = res.tempFilePaths[0]
+              wx.navigateTo({
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath
+              })
+          }
+        }
+      })
     },
     selectalbum :function(e){
       console.log("选择已有照片")
       wx.navigateTo({
-        url: '../joinin/joinin'
+        url: '../joinin/joinin?id='+this.data.id
       })
     }
 }

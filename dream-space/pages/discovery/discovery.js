@@ -50,16 +50,20 @@ let pageData = {
         method: "GET",
         success: function(res){
           if(res.statusCode == 200){
-            let list = that.data.activitylist.concat(res.data.data.resultList);
-            that.setData({
-              activitylist: list,
-              start: that.data.start + res.data.data.resultList.length,
-              noMoreList: res.data.data.resultList.length < that.data.size
-            })
-          }else{
-            let msg = "服务器返回出错"
-            that.handleFail(msg)
+            if(res.data.status ==0){
+              let list = that.data.activitylist.concat(res.data.data.resultList);
+              that.setData({
+                activitylist: list,
+                start: that.data.start + res.data.data.resultList.length,
+                noMoreList: res.data.data.resultList.length < that.data.size
+              })
+              return
+            }
           }
+
+          let msg = "服务器返回出错"
+          that.handleFail(msg)
+
         },
         fail: function(res){
           let msg = "网络出错,请稍后再试!"

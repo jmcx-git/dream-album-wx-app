@@ -6,19 +6,19 @@
         <view class="info_root">
           <view class="infoitem">
             <view class="endtimeline"/>
-            <view class="txtendtime"> {{item.startTimeDesc}} </view>
+            <text class="txtendtime"> {{item.startTimeDesc}} </text>
             <view class="endtimeline"/>
           </view>
           <view class="infoitem">
-            <view class="txttitle"> {{item.title}}</view>
+            <text class="txttitle"> {{item.title}}</text>
           </view>
           <view class="infoitem">
-            <view class="txtendtime"> {{item.participates}}人参加 </view>
+            <text class="txtendtime"> {{item.participates}}人参加 </text>
           </view>
           <view class="infoitem">
             <view class='deadline'>
               <image src="/image/icon.png" class="icon"></image>
-              <view class="txt">{{item.stepDesc}}</view>
+              <text class="txt">{{item.stepDesc}}</text>
             </view>
           </view>
         </view>
