@@ -11,7 +11,8 @@ Page({
     btnDisabled: true,
     spaceId:0,
     version:0,
-    gender:1
+    gender:1,
+    spaceInfo:{}
   },
   onLoad: function (options) {
     let that = this;
@@ -29,10 +30,33 @@ Page({
       spaceId:options.spaceId,
       version:options.version
     })
+    wx.request({
+      url: app.globalData.serverHost+"info.json",
+      data: {
+        openId:wx.getStorageSync('openId'),
+        spaceId:options.spaceId,
+        version:options.version
+      },
+      method: 'GET',
+      success: function(res){
+        console.log("获取空间信息成功");
+        console.log(res);
+        that.setData({
+          spaceInfo:res.data.data,
+          date:res.data.data.bornDate==null?that.data.date:res.data.data.bornDate
+        })
+      },
+      fail: function(ron) {
+        console.log("获取空间信息出错!");
+        console.log(ron);
+      }
+    })
   },
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
+    console.log("iiiiiiii");
+    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
@@ -51,11 +75,13 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
+          console.log("修改成功");
+          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
-            wx.showToast({
-              icon: 'success',
-              title: '修改成功'
-            })
+            // wx.showToast({
+            //   icon: 'success',
+            //   title: '修改成功'
+            // })
             app.globalData.modifySpaceInfoFlag=true;
             wx.navigateBack({
               delta: 1
