@@ -1,5 +1,5 @@
 <!--重置邀请码-->
-<view wx:if="{{secert!=undefined && secert!=null}}" bindtap="resetYqm" class="resetNumber">
+<view wx:if="{{secert!='undefined' &&  secert!='null'}}" bindtap="resetYqm" class="resetNumber">
     <view class="resetYqm">
         邀请码
     </view>

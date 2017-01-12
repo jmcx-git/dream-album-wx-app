@@ -175,7 +175,7 @@ Page({
   showSpaceDetail:function(e){
     let that=this;
     wx.navigateTo({
-      url: "../modifySpaceInfo/modifySpaceInfo?spaceId="+that.data.spaceId+"&version="+that.data.version
+      url: "../modifySpaceInfo/modifySpaceInfo?spaceId="+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert
     })
   },
   showPersonalPage:function(e){

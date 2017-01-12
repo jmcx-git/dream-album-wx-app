@@ -12,7 +12,8 @@ Page({
     spaceId:0,
     version:0,
     gender:1,
-    spaceInfo:{}
+    spaceInfo:{},
+    secert:''
   },
   onLoad: function (options) {
     let that = this;
@@ -28,7 +29,8 @@ Page({
     })
     that.setData({
       spaceId:options.spaceId,
-      version:options.version
+      version:options.version,
+      secert:options.secert
     })
     wx.request({
       url: app.globalData.serverHost+"info.json",

@@ -23,13 +23,13 @@
         <view class="input_cell">
           <view class="input_cell_hd">宝宝昵称</view>
           <view class="input_cell_bd">
-            <input name="nickname" class="input" value="{{spaceInfo.name}}" placeholder-style="color:gray;" placeholder="宝宝小名" bindblur="checkData" bindinput="checkData"/>
+            <input name="nickname" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" class="input" value="{{spaceInfo.name}}" placeholder-style="color:gray;" placeholder="宝宝小名" bindblur="checkData" bindinput="checkData"/>
           </view>
         </view>
         <view class="input_cell">
           <view class="input_cell_hd">宝宝生日</view>
           <view class="input_cell_bd">
-            <picker name="birthday" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
+            <picker name="birthday" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
               <view>{{date}}</view>
             </picker>
           </view>
@@ -45,7 +45,7 @@
         </view>
       </view>
     </view>
-    <view class="btn_area">
+    <view class="btn_area" wx:if="{{secert!='null' && secert!='' && secert!='undefined'}}">
       <button class="submit_btn" form-type="submit" type="primary">保存宝宝信息</button>
     </view>
   </form>
