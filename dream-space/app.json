@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/my/my",
     "pages/index/index",
+    "pages/my/my",
     "pages/addspace/addspace",
-    "pages/notice/notice"
+    "pages/notice/notice",
     "pages/spacetimeline/spacetimeline",
     "pages/friends/friends",
     "pages/psersonalPage/psersonalPage",
