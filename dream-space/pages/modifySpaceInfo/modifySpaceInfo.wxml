@@ -4,7 +4,7 @@
   <form bindsubmit="formSubmit">
     <view class="image_area">
       <view catchtap="choosenImage" class="image_select_view" style="top:{{windowHeight*convertTimes*0.35/2-114}}rpx;">
-        <image class="image_select_image" src="{{avatarImg==''?'../../image/avatar3.jpg':avatarImg}}" />
+        <image class="image_select_image" src="{{(spaceInfo.icon=='' || spaceInfo.icon==null)?'../../image/avatar3.jpg':spaceInfo.icon}}" />
         <image class="image_select_camera" src="../../image/camera.png" />
       </view>
     </view>

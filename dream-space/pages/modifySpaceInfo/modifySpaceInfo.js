@@ -43,7 +43,7 @@ Page({
         console.log(res);
         that.setData({
           spaceInfo:res.data.data,
-          date:res.data.data.bornDate==null?that.data.date:res.data.data.bornDate
+          date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0]
         })
       },
       fail: function(ron) {
@@ -55,8 +55,6 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    console.log("iiiiiiii");
-    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
@@ -78,10 +76,6 @@ Page({
           console.log("修改成功");
           console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
-            // wx.showToast({
-            //   icon: 'success',
-            //   title: '修改成功'
-            // })
             app.globalData.modifySpaceInfoFlag=true;
             wx.navigateBack({
               delta: 1
