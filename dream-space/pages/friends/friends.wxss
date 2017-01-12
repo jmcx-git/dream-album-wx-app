@@ -13,8 +13,6 @@ page{
     height:120rpx;
     text-align: center;
     line-height: 120rpx;
-}
-.resetYqm{
     flex: 1;
 }
 .resetText{
@@ -67,4 +65,5 @@ page{
     color: #aaa;
     text-align: right;
     width:250rpx;
+    padding-left:20rpx;
 }

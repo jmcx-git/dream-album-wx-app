@@ -12,11 +12,15 @@ page{
 .personalText{
     line-height: 28rpx;
     font-size: 28rpx;
-    width:100%;
+    width:90%;
+    padding-left:5%;
     text-align: center;
     margin-top:50rpx;
     color: #aaa;
     margin-bottom: 50rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .recordArea{
     display: flex;
@@ -40,9 +44,26 @@ page{
     display: flex;
     background: #fff;
     height:150rpx;
+    margin-top:20rpx;
+    padding-left: 50rpx;
+    padding-right: 0rpx; 
+    width:calc(100% - 50rpx);
+}
+.nickLeft{
+    width:150rpx;
+    line-height:150rpx;
+    font-size: 36rpx;
+}
+.nickRight{
     line-height: 150rpx;
     font-size: 36rpx;
-    margin-top:20rpx;
+    width:calc(100% - 220rpx);
+    margin-left: 20rpx;
+    text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #aaa;
 }
 .exitFriendsButton{
     width:90%;

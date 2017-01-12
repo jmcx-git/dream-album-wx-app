@@ -1,15 +1,34 @@
-// pages/psersonalPage/psersonalPage.js
+var app=getApp();
 Page({
   data:{
-    openId:0,
-    spaceId:0,
-    version:0
+    personalInfo:{}
   },
   onLoad:function(options){
-    this.setData({
-      openId:optoins.openId,
-      spaceId:options.spaceId,
-      version:app.globalData.version
+    let that=this;
+    wx.request({
+      url: 'https://developer.mokous.com/space/user/interaction/info.json',
+      data: {
+        openId:options.openId,
+        spaceId:options.spaceId,
+        version:options.version
+      },
+      method: 'GET',
+      success: function(res){
+        that.setData({
+            personalInfo:res.data.data
+        })
+      },
+      fail: function(ron) {
+        console.log("获取个人信息失败!");
+        console.log(ron);
+      }
+    })
+  },
+  showPreview:function(e){
+    var urls=[];
+    urls.push(e.currentTarget.dataset.src);
+    wx.previewImage({
+      urls:urls
     })
   },
   onReady:function(){

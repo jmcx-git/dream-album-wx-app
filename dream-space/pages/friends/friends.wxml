@@ -1,10 +1,10 @@
 <!--重置邀请码-->
-<view class="resetNumber">
+<view wx:if="{{secert!=undefined && secert!=null}}" bindtap="resetYqm" class="resetNumber">
     <view class="resetYqm">
         邀请码
     </view>
     <view class="resetText">
-        0877888
+        {{secert}}
     </view>
     <view class="resetButton">
         <image class="resetButtonImage" src="../../image/create.png" />

@@ -1,5 +1,7 @@
 {
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "聚梦",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "dark"
 }

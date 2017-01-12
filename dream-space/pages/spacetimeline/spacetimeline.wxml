@@ -33,7 +33,7 @@
         <text>已经到底，没有更多啦～</text>
     </view>
 </view>
-<image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden}}"/>
+<image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden && (topData.secert!=null)}}"/>
 <view class="comment" hidden="{{commentHidden}}">
     <input bindblur="hideComment" class="commentText" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" placeholder="评论" />
     <view class="commentSend" bindtap="saveComment">

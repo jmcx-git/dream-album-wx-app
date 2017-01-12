@@ -15,7 +15,8 @@ Page({
     commentFeedId:0,
     commentDefaultValue:'',
     topData:{},
-    spacetimelineList:[]
+    spacetimelineList:[],
+    noMoreData:false
   },
   onLoad: function (options) {
     let that=this;
@@ -38,7 +39,6 @@ Page({
   },
   getSpaceTopData:function(){
     let that=this;
-    console.log(that.data.spaceId);
     wx.request({
       url: 'https://developer.mokous.com/space/detail.json',
       data: {
@@ -48,6 +48,8 @@ Page({
       },
       method: 'GET',
       success: function(res){
+        console.log("获取顶部数据");
+        console.log(res);
         that.setData({
           topData:res.data.data
         })
@@ -74,6 +76,11 @@ Page({
         console.log("数据列表啦");
         console.log(res);
         if(res.data.status==0){
+          if(res.data.data.resultList.length<that.data.size){
+            that.setData({
+              noMoreData:true
+            })
+          }
             that.setData({
               spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
               start:that.data.start+res.data.data.totalCount
@@ -91,7 +98,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?openId='+wx.getStorageSync("openId")+"&spaceId="+that.data.spaceId+"&version="+that.data.version
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert
     })
   },
   showMyRecord:function(){
@@ -143,7 +150,7 @@ Page({
       success: function(res){
         var obj=new Object();
         obj.openId=wx.getStorageSync("openId");
-        obj.nickname=wx.getStorageSync("nickname");
+        obj.nickname=wx.getStorageSync("nickName");
         obj.comment=that.data.commentContent;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
@@ -170,7 +177,6 @@ Page({
     })
   },
   showPersonalPage:function(e){
-    console.log("openId="+e.currentTarget.dataset.openid);
     let that=this;
     wx.navigateTo({
       url: '../psersonalPage/psersonalPage?openId='+e.currentTarget.dataset.openid+"&spaceId="+that.data.spaceId+"&version="+that.data.version
@@ -313,7 +319,7 @@ Page({
           if(likeIconsList.length==0 || status==0){
             var obj=new Object();
             obj.openId=wx.getStorageSync("openId");
-            obj.nickname=wx.getStorageSync("nickname");
+            obj.nickname=wx.getStorageSync("nickName");
             obj.avatarUrl=wx.getStorageSync('avatarUrl');
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
@@ -346,10 +352,19 @@ Page({
       that.setData({
         start:0,
         topData:{},
-        spacetimelineList:[]
+        spacetimelineList:[],
+        noMoreData:false
       })
       app.globalData.createFinishFlag=false;
       that.getSpaceTopData();
       that.getSpaceListData();
+    },
+    onReachBottom:function(){
+      console.log("下拉了");
+      let that=this;
+      console.log(that.data.noMoreData);
+      if(!that.data.noMoreData){
+        that.getSpaceListData();
+      }
     }
 })
