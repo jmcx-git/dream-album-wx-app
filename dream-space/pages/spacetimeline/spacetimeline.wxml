@@ -3,15 +3,15 @@
 <!--顶部-->
 <view class="spacetimelineTop">
     <view class="spacetimelineBackground"></view>
-    <view class="spaceRecord" bindtap="showMyRecord">
+    <view class="spaceRecord">
       <text>{{topData.records}}</text>
       <text class="grayColor">记录</text>
     </view>
     <image class="iconImage" bindtap="showSpaceDetail" src="{{topData.avatarUrl}}" />
     <view class="spaceInfo" bindtap="showSpaceDetail">
-        <text class="spaceInfoText">{{topData.info}}</text>
+        <text class="spaceInfoText">{{topData.info==null?'':topData.info}}</text>
     </view>
-    <view class="spaceFriend" bindtap="showAllFriends" data-openid="{{topData.authorOpenId}}">
+    <view class="spaceFriend">
       <text>{{topData.occupants}}</text>
       <text class="grayColor">亲友</text>
     </view>
@@ -21,7 +21,7 @@
     <view class="friends-left">
         <image class="friends-left-avatarUrl" bindtap="showPersonalPage" wx:for="{{topData.occupantInfos}}" data-openid="{{item.openId}}" wx:key="occupantInfos" src="{{item.avatarUrl}}" />
     </view>
-    <view class="friends-right"  bindtap="showAllFriends" data-openid="{{topData.authorOpenId}}">
+    <view class="friends-right"  bindtap="showAllFriends">
       <text>全部亲友团 ></text>
     </view>
 </view>

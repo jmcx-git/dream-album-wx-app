@@ -11,167 +11,169 @@ Page({
     commentFocus:false,
     commentContent:'',
     commentFeedIndex:0,
-    topData:{
-      records:10,
-      occupants:8,
-      avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-      info:'这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧',
-      occupantInfos:[
-        {
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },
-        {
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },{
-          avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-          openId:1
-        },
-          ],
-    },
-    spacetimelineList:[{
-        avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        nickname:'12dfffffffffffff34',
-        type:0,
-        authorOpenId:12,
-        resourceUrl:'http://static.yingyonghui.com/article/1483498347160_a.jpg',
-        content:'这个机器人还不错吧！怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧',
-        timeDesc:'9分钟前',
-        dateDesc:'03-19',
-          likeIcons:[
-            {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-    ],
-       comments:[{
-      nickname:'1234',comment:'你说的太对啦！',openId:1
-    },{
-      nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    },{
-      nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    },{
-      nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    }],
-    },{
-        avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        nickname:'1234',
-        type:'1',
-        authorOpenId:10,
-        content:'今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀！',
-        timeDesc:'9分钟前',
-        dateDesc:'06-18',
-          likeIcons:[
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-          ,
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-          ,
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-          ,
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-          ,
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-    ],
-       comments:[{
-      nickname:'1234',comment:'你说的太对啦！',openId:1
-    },{
-      nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    },{
-      nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂，你瘦啦哈哈哈',openId:1
-    },{
-      nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    }],
-    },{
-        avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        nickname:'1234',
-        type:0,
-        authorOpenId:19,
-        resourceUrl:'http://static.yingyonghui.com/article/1482898206726_a.jpg',
-        content:'怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧！',
-        timeDesc:'9分钟前',
-        dateDesc:'02-23',
-          likeIcons:[
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          },
-          {
-            avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-            openId:1
-          }
-    ],
-       comments:[{
-      nickname:'1234',comment:'你说的太对啦！',openId:1
-    },{
-      nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    },{
-      nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    },{
-      nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    }],
-    }]
+    topData:{},
+    // topData:{
+    //   records:10,
+    //   occupants:8,
+    //   avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //   info:'这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧',
+    //   occupantInfos:[
+    //     {
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },
+    //     {
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },{
+    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //       openId:1
+    //     },
+    //       ],
+    // },
+    // spacetimelineList:[{
+    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //     nickname:'12dfffffffffffff34',
+    //     type:0,
+    //     authorOpenId:12,
+    //     resourceUrl:'http://static.yingyonghui.com/article/1483498347160_a.jpg',
+    //     content:'这个机器人还不错吧！怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧',
+    //     timeDesc:'9分钟前',
+    //     dateDesc:'03-19',
+    //       likeIcons:[
+    //         {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    // ],
+    //    comments:[{
+    //   nickname:'1234',comment:'你说的太对啦！',openId:1
+    // },{
+    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
+    // },{
+    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
+    // },{
+    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
+    // }],
+    // },{
+    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //     nickname:'1234',
+    //     type:'1',
+    //     authorOpenId:10,
+    //     content:'今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀！',
+    //     timeDesc:'9分钟前',
+    //     dateDesc:'06-18',
+    //       likeIcons:[
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    //       ,
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    //       ,
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    //       ,
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    //       ,
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    // ],
+    //    comments:[{
+    //   nickname:'1234',comment:'你说的太对啦！',openId:1
+    // },{
+    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
+    // },{
+    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂，你瘦啦哈哈哈',openId:1
+    // },{
+    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
+    // }],
+    // },{
+    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //     nickname:'1234',
+    //     type:0,
+    //     authorOpenId:19,
+    //     resourceUrl:'http://static.yingyonghui.com/article/1482898206726_a.jpg',
+    //     content:'怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧！',
+    //     timeDesc:'9分钟前',
+    //     dateDesc:'02-23',
+    //       likeIcons:[
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       },
+    //       {
+    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
+    //         openId:1
+    //       }
+    // ],
+    //    comments:[{
+    //   nickname:'1234',comment:'你说的太对啦！',openId:1
+    // },{
+    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
+    // },{
+    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
+    // },{
+    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
+    // }],
+    // }]
+    spacetimelineList:[]
   },
   onLoad: function (options) {
     let that=this;
@@ -186,20 +188,27 @@ Page({
       spaceId:options.spaceId,
       version:options.version
     })
-    this.getSpaceTopData();
-    this.getSpaceListData();
+    setTimeout(function(){
+      that.getSpaceTopData();
+      that.getSpaceListData();
+    },500)
   },
   getSpaceTopData:function(){
+    console.log("9999");
     let that=this;
+    console.log(that.data.spaceId);
+    console.log(wx.getStorageSync('openId'));
     wx.request({
       url: 'https://developer.mokous.com/space/detail.json',
       data: {
-        openId:wx.getStorageSync('openId'),
+        openId:wx.getStorageSync('openId')+'',
         spaceId:that.data.spaceId,
         version:that.data.version
       },
       method: 'GET',
       success: function(res){
+        console.log("数据顶部啦");
+        console.log(res);
         that.setData({
           topData:res.data.data
         })
@@ -211,22 +220,24 @@ Page({
     })
   },
   getSpaceListData:function(){
+    console.log("666");
     let that=this;
     wx.request({
       url: 'https://developer.mokous.com/space/feed/list.json',
       data: {
-        openId:wx.getStorageSync('openId'),
+        openId:wx.getStorageSync('openId')+'',
         spaceId:that.data.spaceId,
         start:that.data.start,
         size:that.data.size,
-        version:''
+        version:that.data.version
       },
       method: 'GET',
       success: function(res){
+        console.log("数据列表啦");
         console.log(res);
         that.setData({
-            spacetimelineList:that.data.spacetimelineList.concat(res.data.data),
-            start:that.data.start+res.data.data.length
+            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+            start:that.data.start
         })
       },
       fail:function(rns){
@@ -238,7 +249,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?openId='+wx.getStorageInfoSync("openId")+"&spaceId="+that.data.spaceId+"&version="+that.data.version
+      url: '../friends/friends?openId='+wx.getStorageSync("openId")+"&spaceId="+that.data.spaceId+"&version="+that.data.version
     })
   },
   showMyRecord:function(){
@@ -282,7 +293,7 @@ Page({
     wx.request({
       url: 'https://developer.mokous.com/space/feed/comment/add.json',
       data: {
-        openId:wx.getStorageInfoSync("openId"),
+        openId:wx.getStorageSync("openId"),
         feedId:e.currentTarget.dataset.feedid,
         version:that.data.version,
         comment:that.data.commentContent
@@ -290,8 +301,8 @@ Page({
       method: 'GET',
       success: function(res){
         var obj=new Object();
-        obj.openId=wx.getStorageInfoSync("openId");
-        obj.nickname=wx.getStorageInfoSync("nickname");
+        obj.openId=wx.getStorageSync("openId");
+        obj.nickname=wx.getStorageSync("nickname");
         obj.comment=that.data.commentContent;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
@@ -331,7 +342,7 @@ Page({
   },
   delComment:function(e){
     let that=this;
-    if(e.currentTarget.dataset.openid!=wx.getStorageInfoSync("openId")){
+    if(e.currentTarget.dataset.openid!=wx.getStorageSync("openId")){
       return;
     }
     console.log(e);
@@ -356,7 +367,7 @@ Page({
             wx.request({
               url: 'https://developer.mokous.com/space/feed/comment/delete.json',
               data: {
-                openId:wx.getStorageInfoSync("openId"),
+                openId:wx.getStorageSync("openId"),
                 feedId:feedid,
                 commentId:commentid,
                 version:that.data.version
@@ -414,12 +425,19 @@ Page({
   onShow:function(){
     console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
-      this.setData({
-        createHidden:(app.globalData.createFinishFlag=='true')?false:true
-      })
-      if(app.globalData.createFinishFlag=='true'){
-          that.getSpaceListData();
-      }
+    // this.setData({
+    //   createHidden:(app.globalData.createFinishFlag)?true:false
+    // })
+    if(app.globalData.createFinishFlag){
+      console.log("999");
+        that.setData({
+          start:0,
+          createHidden:true
+        })
+        setTimeout(function(){
+           that.getSpaceListData();
+        },500)
+    }
     },
     toCollect:function(e){
       let that=this;
@@ -427,7 +445,7 @@ Page({
       wx.request({
         url: 'https://developer.mokous.com/feed/like.json',
         data: {
-          openId:wx.getStorageInfoSync("openId"),
+          openId:wx.getStorageSync("openId"),
           feedId:e.currentTarget.dataset.feedid,
           status:status,
           version:that.data.version
@@ -436,13 +454,13 @@ Page({
         success: function(res){
           var likeIconsList=that.data.spacetimelineList.likeIcons;
           for(var i=0;i<likeIconsList.length;i++){
-            if(likeIconsList[i].openId == wx.getStorageInfoSync("openId")){
+            if(likeIconsList[i].openId == wx.getStorageSync("openId")){
                 if(status==-1){
                   that.data.spacetimelineList.likeIcons.splice(i,1);
                 }else{
                   var obj=new Object();
-                  obj.openId=wx.getStorageInfoSync("openId");
-                  obj.nickname=wx.getStorageInfoSync("nickname");
+                  obj.openId=wx.getStorageSync("openId");wx.getsto
+                  obj.nickname=wx.getStorageSync("nickname");
                   obj.ilike=-1;
                   that.data.spacetimelineList.likeIcons.unshift(obj);
                 }

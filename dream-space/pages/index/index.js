@@ -188,7 +188,7 @@ Page({
   },
   toSpace: function () {
     wx.navigateTo({
-      url: '../spacetimeline/spacetimeline'
+      url: '../spacetimeline/spacetimeline?spaceId='+20+"&version="+app.globalData.version
     })
   },
   bindViewTap: function () {

@@ -22,27 +22,33 @@ Page({
     })
   },
   sendMessage:function(e){
-    console.log("文章内容:"+that.data.content);
-    wx.request({
-      url: 'https://developer.mokolus.com/space/feed/add.json',
-      data: {
-        'openId':wx.getStorageInfoSync("openId")+'',
-        'spaceId':that.data.spaceId+'',
-        'version':that.data.version+'',
-        'type':1,
-        'content':that.data.content
-      },
-      method: 'post',
-      success: function(res){
-        wx.navigateBack({
-          delta: 1
+    let that=this;
+    setTimeout(function(){
+        console.log("文章内容:"+that.data.content);
+        wx.request({
+          url: 'https://developer.mokous.com/space/feed/add.json',
+          data: {
+            'openId':wx.getStorageSync("openId")+'',
+            'spaceId':that.data.spaceId,
+            'version':that.data.version,
+            'type':1,
+            'content':that.data.content
+          },
+          method: 'get',
+          success: function(res){
+            console.log("在这呢");
+            console.log(res);
+            wx.navigateBack({
+              delta: 1
+            })
+          },
+          fail: function(ron) {
+            console.log("添加文字失败失败 ！");
+            console.log(ron);
+          }
         })
-      },
-      fail: function(ron) {
-        console.log("添加文字失败失败 ！");
-        console.log(ron);
-      }
-    })
+    },500)
+    
   },
   onShow:function(){
     // 页面显示

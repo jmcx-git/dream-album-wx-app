@@ -43,15 +43,16 @@ Page({
     }
   },
   uploadFile:function(uploadData){
+    console.log(uploadData);
     let that=this;
     wx.uploadFile({
-      url: 'https://developer.mokolus.com/space/feed/add.json',
+      url: 'https://developer.mokous.com/space/feed/add.json',
       filePath:uploadData.imgPath,
       name:'file',
       formData:{
         'openId':wx.getStorageInfoSync("openId")+'',
-        'spaceId':that.data.spaceId+'',
-        'version':that.data.version+'',
+        'spaceId':that.data.spaceId,
+        'version':that.data.version,
         'type':0,
         'content':uploadData.desc
       },
@@ -60,6 +61,7 @@ Page({
             that.setData({
               uploadFileCount:0
             })
+            console.log("上传图片成功成功!");
             wx.navigateBack({
               delta: 1 // 回退前 delta(默认为1) 页面
             })
