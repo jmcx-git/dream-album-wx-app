@@ -6,11 +6,14 @@ Page({
     size:10,
     spaceId:0,
     version:0,
+    myOpenId:'',
     createHidden:true,
     commentHidden:true,
     commentFocus:false,
     commentContent:'',
     commentFeedIndex:0,
+    commentFeedId:0,
+    commentDefaultValue:'',
     topData:{},
     spacetimelineList:[]
   },
@@ -25,7 +28,8 @@ Page({
     })
     this.setData({
       spaceId:options.spaceId,
-      version:options.version
+      version:options.version,
+      myOpenId:wx.getStorageSync('openId')      
     })
     setTimeout(function(){
       that.getSpaceTopData();
@@ -121,18 +125,17 @@ Page({
     this.setData({
       commentHidden:false,
       commentFocus:true,
-      commentFeedIndex:e.currentTarget.dataset.feedindex
+      commentFeedIndex:e.currentTarget.dataset.feedindex,
+      commentFeedId:e.currentTarget.dataset.feedid,
     })
   },
   saveComment:function(e){
     let that=this;
-    console.log("保存评论");
-    console.log("评论内容内容："+that.data.commentContent);
     wx.request({
       url: 'https://developer.mokous.com/space/feed/comment/add.json',
       data: {
         openId:wx.getStorageSync("openId"),
-        feedId:e.currentTarget.dataset.feedid,
+        feedId:that.data.commentFeedId,
         version:that.data.version,
         comment:that.data.commentContent
       },
@@ -144,7 +147,9 @@ Page({
         obj.comment=that.data.commentContent;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
-          spacetimelineList:that.data.spacetimelineList
+          spacetimelineList:that.data.spacetimelineList,
+          commentHidden:true,
+          commentDefaultValue:''
         })
       },
       fail: function(ron) {
@@ -201,7 +206,6 @@ Page({
         showCancel:true,
         success:function(ron){
           if(ron.confirm){
-            console.log("删除成功！");
             wx.request({
               url: 'https://developer.mokous.com/space/feed/comment/delete.json',
               data: {
@@ -212,6 +216,8 @@ Page({
               },
               method: 'GET',
               success: function(res){
+                console.log("删除成功！");
+                console.log(res);
                 ((that.data.spacetimelineList)[feedindex].comments).splice(commentindex,1);
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
@@ -239,10 +245,24 @@ Page({
             success:function(ron){
               if(ron.confirm){
                 //做删除操作
-                console.log("删除成功！");
-                that.data.spacetimelineList.splice(e.currentTarget.dataset.index,1);
-                that.setData({
-                  spacetimelineList:that.data.spacetimelineList
+                wx.request({
+                  url: 'https://developer.mokous.com/space/feed/del.json',
+                  data: {
+                    openId:wx.getStorageSync('openId'),
+                    feedId:e.currentTarget.dataset.feedid,
+                    version:that.data.version
+                  },
+                  method: 'GET',
+                  success: function(res){
+                    that.data.spacetimelineList.splice(e.currentTarget.dataset.index,1);
+                    that.setData({
+                      spacetimelineList:that.data.spacetimelineList
+                    })
+                  },
+                  fail: function(ron) {
+                    console.log("删除失败");
+                    console.log(ron);
+                  }
                 })
               }
             }
@@ -256,7 +276,8 @@ Page({
     setTimeout(function(){
         that.setData({
           commentHidden:true,
-          commentFocus:false   
+          commentFocus:false,
+          commentDefaultValue:''
         })
     },500)
   },
@@ -270,7 +291,8 @@ Page({
           spacetimelineList:[]
         })
         setTimeout(function(){
-           that.getSpaceListData();
+          that.getSpaceTopData();
+          that.getSpaceListData();
         },500)
     }
     },
@@ -278,7 +300,7 @@ Page({
       let that=this;
       var status=(e.currentTarget.dataset.ilike==-1)?0:-1;
       wx.request({
-        url: 'https://developer.mokous.com/feed/like.json',
+        url: 'https://developer.mokous.com/space/feed/like.json',
         data: {
           openId:wx.getStorageSync("openId"),
           feedId:e.currentTarget.dataset.feedid,
@@ -287,23 +309,29 @@ Page({
         },
         method: 'GET',
         success: function(res){
-          var likeIconsList=that.data.spacetimelineList.likeIcons;
-          for(var i=0;i<likeIconsList.length;i++){
-            if(likeIconsList[i].openId == wx.getStorageSync("openId")){
-                if(status==-1){
-                  that.data.spacetimelineList.likeIcons.splice(i,1);
-                }else{
-                  var obj=new Object();
-                  obj.openId=wx.getStorageSync("openId");wx.getsto
-                  obj.nickname=wx.getStorageSync("nickname");
-                  obj.ilike=-1;
-                  that.data.spacetimelineList.likeIcons.unshift(obj);
-                }
-                setTimeout(function(){
-                    that.setData({
-                      spacetimelineList:that.data.spacetimelineList
-                    })
-                },500)
+          var likeIconsList=((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons;
+          if(likeIconsList.length==0 || status==0){
+            var obj=new Object();
+            obj.openId=wx.getStorageSync("openId");
+            obj.nickname=wx.getStorageSync("nickname");
+            obj.avatarUrl=wx.getStorageSync('avatarUrl');
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
+            setTimeout(function(){
+                that.setData({
+                  spacetimelineList:that.data.spacetimelineList
+                })
+            },500)
+          }else{
+            for(var i=0;i<likeIconsList.length;i++){
+              if(likeIconsList[i].openId == wx.getStorageSync("openId")){
+                  ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.splice(i,1);
+                  setTimeout(function(){
+                      that.setData({
+                        spacetimelineList:that.data.spacetimelineList
+                      })
+                  },500)
+              }
             }
           }
         },

@@ -26,7 +26,7 @@
     </view>
 </view>
 <!--模版-->
-<template is="spacetimeline" data="{{spacetimelineList,winWidth}}"/>
+<template is="spacetimeline" data="{{spacetimelineList,winWidth,myOpenId}}"/>
 <!--底部-->
 <view class="bottom">
     <view class="bottomArea">
@@ -35,8 +35,8 @@
 </view>
 <image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden}}"/>
 <view class="comment" hidden="{{commentHidden}}">
-    <input bindblur="hideComment" class="commentText" focus="{{commentFocus}}" type="text" placeholder="评论" />
-    <view class="commentSend" data-openid="{{topData.authorOpenId}}" data-feedid="{{topData.id}}" bindtap="saveComment">
+    <input bindblur="hideComment" class="commentText" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" placeholder="评论" />
+    <view class="commentSend" bindtap="saveComment">
          <image class="commentSendImage" src="../../image/create.png" />
     </view>
 </view>
