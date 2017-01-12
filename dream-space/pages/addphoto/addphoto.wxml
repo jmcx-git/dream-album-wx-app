@@ -1,0 +1,9 @@
+<!--pages/addphoto/addphoto.wxml-->
+<view>
+<image src="{{localphoto}}"/>
+<view >口号</view>
+<input placeholder="输入参数口号" auto-focus bindinput="getsolgan"/>
+<view >描述</view>
+<textarea placeholder="输入照片描述" auto-focus bindinput="getdesc"/>
+<button bindtap="submit">提交</button>
+</view>

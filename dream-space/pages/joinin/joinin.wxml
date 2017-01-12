@@ -1,14 +1,16 @@
 <!--pages/joinin/joinin.wxml-->
 <view class="all_views">
-<radio-group>
-  <label class="label" wx:for="{{entries}}" wx:key="{{id}}">
-    <radio class="checkbox" value="{{item.id}}"></radio>
-    <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
-    <view class="content">
-    <view class ="title">标题</view>
-    <view class ="description">描述</view>
-    </view>
-  </label>
-</radio-group>
-<button type="primary" bindtap="joinin">参加</button>
+<scroll-view scroll-y="true" bindscrolltolower="scrolltolower" style="height:{{scrollHeight}}px" lower-threshold="10">
+  <radio-group bindchange="radioChange">
+    <label class="label" wx:for="{{entries}}" wx:key="{{id}}">
+      <radio class="checkbox" value="{{item.id}}"></radio>
+      <image class="img" src="{{item.cover}}"></image>
+      <view class="content">
+      <view class ="title">{{item.nickname}}</view>
+      <view class ="description">{{item.content}}</view>
+      </view>
+    </label>
+  </radio-group>
+  <button type="primary" bindtap="joinin">参加</button>
+</scroll-view>
 </view>

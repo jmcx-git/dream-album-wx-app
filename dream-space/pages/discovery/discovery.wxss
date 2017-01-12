@@ -107,6 +107,7 @@ page{
   font-size: 30rpx;
   color: #333333;
   margin: 0 30rpx;
+  font-weight:lighter;
 }
 .txttitle{
   font-size: 40rpx;

@@ -1,11 +1,32 @@
 <!--pages/vote/vote.wxml-->
 <view class="all_views">
-    <block class="listview" wx:for="{{entries}}" wx:key="{{id}}">
+  <scroll-view scroll-y="true" bindscrolltolower="scrolltolower" style="height:{{scrollHeight}}px" lower-threshold="10">
+  <radio-group class="radio-group" bindchange="radioChange">
+    <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
+    <radio value="{{item.id}}" hidden="true"/>
       <view class="item_root">
-        <view><image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image></view>
-        <view class="title">{{item.title}}</view>
-        <view class="description">{{item.description}}</view>
-        <button>投票</button>
+        <view class='titlepart'>
+          <text class="txtItem">NO.{{item.rank}} {{item.solgan}}</text>
+          <view class="whitespace"/>
+          <text class="txtItem">序号: {{item.id}}</text>
+        </view>
+        <view class="imgbox">
+          <view class="boxitm">
+            <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"/>
+            <image class="icon" src="/image/icon.png"/>
+          </view>
+        </view>
+        <view class="itembottom">
+          <view class="votecount"> <view class="dot"/> 得票{{item.votes}} </view>
+        </view>
       </view>
-    </block>
+    </label>
+    </radio-group>
+    <view class="bottom">
+        <view class="bottomArea">
+            <text>已经到底，没有更多啦～</text>
+        </view>
+    </view>
+  </scroll-view>
+  <view class="bottom_btn" hover hover-class="hover_class" style="top:{{bottom_top}}px">投票</view>
 </view>

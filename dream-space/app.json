@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/discovery/discovery",
+    "pages/addphoto/addphoto",
     "pages/test/test",
     "pages/activitydetail/activitydetail",
     "pages/joinin/joinin",

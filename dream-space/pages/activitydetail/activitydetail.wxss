@@ -38,7 +38,7 @@ page{
   font-size: 35rpx;
   color:#888888;
   line-height:40rpx;
-
+  text-indent : 40rpx;
 }
 
 .buttonviews{
@@ -206,4 +206,59 @@ page{
   width:100%;
   height:28rpx;
   color: #aaa;
+}
+
+.activityIntrTitle{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 80rpx;
+  margin: 10rpx 0;
+  align-items: center;
+  justify-content: center;
+}
+.activityIntr{
+
+}
+
+.dashedline{
+  border-bottom: 1rpx dashed #888888;
+}
+
+.innerLine{
+  display:inline-block;
+  background-color: #888888;
+  width: 100rpx;
+  height: 2rpx;
+}
+.intrTxt{
+  font-size: 40rpx;
+  color: #333333;
+  margin: 0 30rpx;
+}
+
+.prizeTitle{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  margin:20rpx 60rpx;
+  font-size: 35rpx;
+  color:#888888;
+  line-height:40rpx;
+}
+.prizeImg{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 60rpx;
+}
+.prizeImgItem{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 400rpx;
 }
