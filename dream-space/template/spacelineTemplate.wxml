@@ -14,7 +14,7 @@
         <!--内容主体-->
         <view class="spacetimelinebody">
             <view wx:if="{{globaldata.type=='0'}}" class="spacetimelineImageTop">
-                <image bindtap="previewImage" data-src="{{globaldata.resourceUrl}}" class="spacetimelineImage" src="{{globaldata.resourceUrl}}"/>
+                <image bindtap="previewImage" data-src="{{globaldata.resourceUrl==null?globaldata.cover:globaldata.resourceUrl}}" class="spacetimelineImage" src="{{globaldata.resourceUrl==null?globaldata.cover:globaldata.resourceUrl}}"/>
                 <text class="spacetimelineImageDesc">{{globaldata.content}}</text>
             </view>
             <view wx:elif="{{globaldata.type=='1'}}" class="spacetimelineContentText">
