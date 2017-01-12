@@ -1,34 +1,51 @@
 //app.js
 App({
   onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-  },
-  getUserInfo:function(cb){
-    var that = this
-    if(this.globalData.userInfo){
-      typeof cb == "function" && cb(this.globalData.userInfo)
-    }else{
-      //调用登录接口
-      wx.login({
-        success: function () {
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
-        }
-      })
+    let openId = wx.getStorageSync("openId");
+    if (typeof openId !== 'undefined' && openId != '') {
+      this.globalData.openId = openId;
+    }
+    let nickName = wx.getStorageSync("nickName");
+    if (typeof nickName !== 'undefined' && nickName != '') {
+      this.globalData.nickName = nickName;
+    }
+    let avatarUrl = wx.getStorageSync("avatarUrl");
+    if (typeof avatarUrl !== 'undefined' && avatarUrl != '') {
+      this.globalData.avatarUrl = avatarUrl;
     }
   },
-  globalData:{
-    userInfo:null,
+  globalData: {
+    // serverHost: "http://10.1.0.131:8080/dream-family/space/",
+    serverHost: "https://developer.mokous.com/space/",
+    // serverHost: "https://api.mokous.com/space/",
     appId: "wx0ddc8673b8df3827",
+    version:'1.0.0',
+    nickName: "",
+    avatarUrl: "",
+    openId: "",
     createFinishFlag:false,
-    serverHost: "https://developer.mokolus.com/space/",
-    openId: "abcdef"
+    indexRefreshStatus: false
+  },
+  serverFailedToast() {
+    wx.showToast({
+      title: '远程应用服务器忙，请下拉刷新重试。',
+      icon: 'success',
+      duration: 2000
+    });
+  },
+  failedToast() {
+    wx.showToast({
+      title: '网络请求异常!请稍后再试~',
+      icon: 'success',
+      duration: 2000
+    });
+  },
+  uploadFileFailedToast() {
+    wx.showModal({
+      title: "提示",
+      content: '上传文件网络异常，请稍后重试。',
+      icon: 'success',
+      showCancel: false
+    });
   }
 })

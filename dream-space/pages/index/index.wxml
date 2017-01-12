@@ -1,19 +1,27 @@
 <view style="width:100%;height:{{windowHeight}}px;">
-    <view class="space_container">
-        <view class="main">
-            <view wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="{{idx%2==0?'sub_main_left':'sub_main_right'}}">
-                <view class="sub_main_image">
-                    <image class="image" src="{{item.cover}}"/>
-                </view>
-                <view class="sub_main_info">
-                    <view class="name">{{item.title}}</view>
-                    <view class="recordnum">{{item.record}}条记录</view>
-                </view>
-                <view class="sub_main_desc">{{item.desc}}</view>
-            </view>
-        </view>
+  <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
+    <image hidden="{{!nopics}}" style="top:{{windowHeight*convertTimes/2-150}}rpx;" src="../../image/nopicdefault.png" />
+  </view>
+
+  <!--空间列表列表-->
+  <view wx:else class="main">
+    <view id="{{idx}}" wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="{{idx%2==0?'sub_main_left':'sub_main_right'}}">
+      <view class="sub_main_image">
+        <image class="image" src="{{item.cover==null?'../../image/avatar3.jpg':item.cover}}" />
+      </view>
+      <view class="sub_main_info">
+        <view class="name">{{item.name}}</view>
+        <view class="recordnum">{{item.records}}条记录</view>
+      </view>
+      <view class="sub_main_desc">{{item.info==null?'主人没有什么介绍耶耶~':item.info}}</view>
     </view>
-    <view catchtap="addSpace" class="add_btn">
-        <image src="../../image/add.png"/>
-    </view>
+  </view>
+  <view hidden="{{more}}" class="nomoretips">
+    <text>已经脱到底了...</text>
+  </view>
+  <view class="add_btn">
+    <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
+    <image bindtap="addSpace" data-way="1" src="../../image/add.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;"/>
+    <image bindtap="addSpace" data-way="2" src="../../image/add.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;"/>
+  </view>
 </view>

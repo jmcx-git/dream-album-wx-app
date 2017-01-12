@@ -1,4 +1,5 @@
 {
-    "navigationBarBackgroundColor": "#40E0D0",
-    "navigationBarTitleText": "聚梦"
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "聚梦",
+    "enablePullDownRefresh": true
 }
