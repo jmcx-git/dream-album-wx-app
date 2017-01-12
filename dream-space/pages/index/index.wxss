@@ -3,7 +3,7 @@ page {
   background-color: white;
 }
 
-.default_area image {
+.default_area_image {
   position: absolute;
   width: 300rpx;
   height: 300rpx;

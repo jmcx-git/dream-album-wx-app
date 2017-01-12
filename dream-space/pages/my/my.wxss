@@ -1,0 +1,78 @@
+/* pages/my/my.wxss */
+page {
+  background-color: gainsboro;
+}
+
+.user_info_area {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 300rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 60rpx 0 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.select_area {
+  width: 95%;
+  height: 26%;
+  background-color: white;
+  padding-left: 5%;
+}
+
+.select_cells {
+  font-size: 40rpx;
+}
+
+.select_cell {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #d9d9d9;
+}
+
+.select_cell_icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 10rpx;
+}
+
+.select_cell_arrow {
+  position: absolute;
+  right: 0;
+  width: 60rpx;
+  height: 13%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding-right: 30rpx;
+}
+
+.select_cell_arrow .redpoint {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 10rpx;
+}
+
+.customer{
+    position: fixed;
+    right: 50rpx;
+    bottom: 50rpx;
+}

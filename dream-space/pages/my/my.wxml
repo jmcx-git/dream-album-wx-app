@@ -1,0 +1,34 @@
+<!--pages/my/my.wxml-->
+<view style="width:100%;height:{{windowHeight}}px;">
+  <view class="user_info_area">
+    <view class="userinfo">
+      <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"/>
+      <text class="userinfo-nickname">{{nickName}}</text>
+    </view>
+  </view>
+  <view style="height:12rpx;"></view>
+  <view class="select_area">
+    <view class="select_cells" style="line-height:{{windowHeight*0.13}}px;">
+      <view bindtap="toNoticePage" class="select_cell">
+        <image class="select_cell_icon" src="../../image/add.png" />
+        <text>通知消息</text>
+        <view class="select_cell_arrow">
+          <view>></view>
+          <view hidden="{{!newmsg}}" class="redpoint"></view>
+        </view>
+      </view>
+      <view class="select_cell">
+        <image class="select_cell_icon" src="../../image/add.png" />
+        <text>关于我们</text>
+        <view class="select_cell_arrow">
+          <view>></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="customer">
+    <contact-button type="default-light" size="27" session-from="dreamspace">
+    </contact-button>
+    <view style="font-size:30rpx;">客服</view>
+  </view>
+</view>

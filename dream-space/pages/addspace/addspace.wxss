@@ -17,6 +17,7 @@ page{
     height: 220rpx;
     border-radius: 50%;
     border: 4rpx solid white;
+    background-color: white;
 }
 .image_select_camera{
     position: relative;
@@ -34,17 +35,6 @@ page{
 }
 .input_cells{
     font-size: 30rpx;
-}
-.input_cells:before,
-.input_cells:after{
-    content:" ";
-    position:absolute;
-    left:0;
-    bottom:0;
-    right:0;
-    height:2rpx;
-    border-bottom:2rpx solid #D9D9D9;
-    color:#D9D9D9;
 }
 .input_cell{
     display: flex;

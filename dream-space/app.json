@@ -1,36 +1,34 @@
 {
-  "pages":[
+  "pages": [
+    "pages/my/my",
     "pages/index/index",
     "pages/addspace/addspace",
-    "pages/spacetimeline/spacetimeline",
-    "pages/friends/friends",
-    "pages/psersonalPage/psersonalPage",
-    "pages/modifyNickName/modifyNickName",
-    "pages/wordCreate/wordCreate",
-    "pages/photoCreate/photoCreate",
-    "pages/myrecord/myrecord",
-    "pages/myRecordList/myRecordList"
+    "pages/notice/notice"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "首页"
-    }, {
-      "pagePath": "",
-      "text": "发现"
-    },{
-      "pagePath": "",
-      "text": "我的"
-    }],
-    "borderStyle" : "white",
-    "selectedColor":"black",
-    "color" : "rgb(99,198,241)",
-    "backgroundColor" : "rgba(254,254,254,0.9)"
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ],
+    "borderStyle": "white",
+    "selectedColor": "black",
+    "color": "rgb(99,198,241)",
+    "backgroundColor": "rgba(254,254,254,0.9)"
   }
 }
