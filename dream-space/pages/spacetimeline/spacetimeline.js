@@ -12,167 +12,6 @@ Page({
     commentContent:'',
     commentFeedIndex:0,
     topData:{},
-    // topData:{
-    //   records:10,
-    //   occupants:8,
-    //   avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //   info:'这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧',
-    //   occupantInfos:[
-    //     {
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },
-    //     {
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },
-    //       ],
-    // },
-    // spacetimelineList:[{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'12dfffffffffffff34',
-    //     type:0,
-    //     authorOpenId:12,
-    //     resourceUrl:'http://static.yingyonghui.com/article/1483498347160_a.jpg',
-    //     content:'这个机器人还不错吧！怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'03-19',
-    //       likeIcons:[
-    //         {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // },{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'1234',
-    //     type:'1',
-    //     authorOpenId:10,
-    //     content:'今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀！',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'06-18',
-    //       likeIcons:[
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂，你瘦啦哈哈哈',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // },{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'1234',
-    //     type:0,
-    //     authorOpenId:19,
-    //     resourceUrl:'http://static.yingyonghui.com/article/1482898206726_a.jpg',
-    //     content:'怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧！',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'02-23',
-    //       likeIcons:[
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // }]
     spacetimelineList:[]
   },
   onLoad: function (options) {
@@ -194,10 +33,8 @@ Page({
     },500)
   },
   getSpaceTopData:function(){
-    console.log("9999");
     let that=this;
     console.log(that.data.spaceId);
-    console.log(wx.getStorageSync('openId'));
     wx.request({
       url: 'https://developer.mokous.com/space/detail.json',
       data: {
@@ -207,8 +44,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("数据顶部啦");
-        console.log(res);
         that.setData({
           topData:res.data.data
         })
@@ -220,7 +55,6 @@ Page({
     })
   },
   getSpaceListData:function(){
-    console.log("666");
     let that=this;
     wx.request({
       url: 'https://developer.mokous.com/space/feed/list.json',
@@ -235,10 +69,14 @@ Page({
       success: function(res){
         console.log("数据列表啦");
         console.log(res);
-        that.setData({
-            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
-            start:that.data.start
-        })
+        if(res.data.status==0){
+            that.setData({
+              spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+              start:that.data.start+res.data.data.totalCount
+          })
+          wx.stopPullDownRefresh();
+          app.globalData.createFinishFlag=false;
+        }
       },
       fail:function(rns){
         console.log("获取列表数据失败！");
@@ -425,14 +263,11 @@ Page({
   onShow:function(){
     console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
-    // this.setData({
-    //   createHidden:(app.globalData.createFinishFlag)?true:false
-    // })
     if(app.globalData.createFinishFlag){
-      console.log("999");
         that.setData({
           start:0,
-          createHidden:true
+          createHidden:true,
+          spacetimelineList:[]
         })
         setTimeout(function(){
            that.getSpaceListData();
@@ -477,5 +312,16 @@ Page({
           console.log(ron);
         }
       })
+    },
+    onPullDownRefresh:function(){
+      let that=this;
+      that.setData({
+        start:0,
+        topData:{},
+        spacetimelineList:[]
+      })
+      app.globalData.createFinishFlag=false;
+      that.getSpaceTopData();
+      that.getSpaceListData();
     }
 })
