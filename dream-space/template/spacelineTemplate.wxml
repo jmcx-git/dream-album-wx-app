@@ -9,12 +9,12 @@
             <view class="date">
                 <text>{{globaldata.dateDesc}}</text>
             </view>
-            <image bindtap="showHandle" data-index="{{globalindex}}" data-feedid="{{globaldata.id}}" src="../../image/handle.png"  class="handle"/>
+            <image wx:if="{{myOpenId == globaldata.authorOpenId}}" bindtap="showHandle"  data-index="{{globalindex}}" data-feedid="{{globaldata.id}}" src="../../image/handle.png"  class="handle"/>
         </view>
         <!--内容主体-->
         <view class="spacetimelinebody">
             <view wx:if="{{globaldata.type=='0'}}" class="spacetimelineImageTop">
-                <image bindtap="previewImage" data-src="{{globaldata.resourceUrl}}" class="spacetimelineImage" src="{{globaldata.resourceUrl}}"/>
+                <image bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImage" src="{{globaldata.illustration}}"/>
                 <text class="spacetimelineImageDesc">{{globaldata.content}}</text>
             </view>
             <view wx:elif="{{globaldata.type=='1'}}" class="spacetimelineContentText">
@@ -24,8 +24,8 @@
         <!--几分钟前,关注，评论按钮-->
         <view class="timeline">
             <text class="timebefore">{{globaldata.timeDesc}}</text>
-            <image bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedid="{{globaldata.id}}" class="collect" src="../../image/collect.png" />
-            <image class="replay" data-feedindex="{{globalindex}}" bindtap="toreplay" src="../../image/replay.png" />
+            <image bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" class="collect" src="../../image/collect.png" />
+            <image class="replay" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" bindtap="toreplay" src="../../image/replay.png" />
         </view>
         <!--头像集合-->
         <view class="avatarCollectTop">

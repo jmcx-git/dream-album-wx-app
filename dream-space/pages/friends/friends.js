@@ -1,61 +1,61 @@
-// pages/friends/friends.js
+var app=getApp();
 Page({
   data:{
-    nickName:'1234',
+    occupantList:[],
+    secert:'',
     spaceId:0,
-    occupantList:[
-      {
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      },
-     {
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      },{
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      },{
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      },{
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      },{
-        nickname:'189',
-        avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-        info:'9分钟前来过n次'
-      }
-    ],
+    version:0
   },
   onLoad:function(options){
     let that=this;
-    this.setData({
-      spaceId:options.spaceId
+    that.setData({
+      secert:options.secert,
+      spaceId:options.spaceId,
+      version:options.version
     })
-    // wx.request({
-    //   url: 'https://developer.mokolus.com/space/occupant/list.json',
-    //   data: {
-    //     openId:options.openId,
-    //     spaceId:options.spaceId,
-    //     version:options.version
-    //   },
-    //   method: 'GET',
-    //   success: function(res){
-    //     that.setData({
-    //       occupantList:res.data.data
-    //     })
+    wx.request({
+      url: app.globalData.serverHost+'occupant/list.json',
+      data: {
+        openId:options.openId,
+        spaceId:options.spaceId,
+        version:options.version
+      },
+      method: 'GET',
+      success: function(res){
+        console.log(res);
+        var nickname=((res.data.data.resultList)[0]).nickname;
+        console.log(nickname.length);
+        that.setData({
+          occupantList:res.data.data.resultList
+        })
 
-    //   },
-    //   fail: function(ron) {
-    //     console.log("获取亲友团列表失败！");
-    //     console.log(ron);
-    //   }
-    // })
+      },
+      fail: function(ron) {
+        console.log("获取亲友团列表失败！");
+        console.log(ron);
+      }
+    })
+  },
+  resetYqm:function(){
+    let that=this;
+    wx.request({
+      url: app.globalData.serverHost+'secert/reset.json',
+      data: {
+          openId:wx.getStorageSync('openId'),
+          spaceId:that.data.spaceId,
+          version:that.data.version
+      },
+      method: 'GET',
+      success: function(res){
+        that.setData({
+          secert:res.data.data
+        })
+      },
+      fail: function(ron) {
+        console.log("重置邀请码失败!");
+        console.log(ron);
+      }
+    })
   },
   showDetail:function(e){
     let that=this;

@@ -4,6 +4,12 @@
     "pages/index/index",
     "pages/addspace/addspace",
     "pages/notice/notice"
+    "pages/spacetimeline/spacetimeline",
+    "pages/friends/friends",
+    "pages/psersonalPage/psersonalPage",
+    "pages/wordCreate/wordCreate",
+    "pages/photoCreate/photoCreate",
+    "pages/modifySpaceInfo/modifySpaceInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

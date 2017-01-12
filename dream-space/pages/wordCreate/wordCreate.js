@@ -24,11 +24,10 @@ Page({
   sendMessage:function(e){
     let that=this;
     setTimeout(function(){
-        console.log("文章内容:"+that.data.content);
         wx.request({
-          url: 'https://developer.mokous.com/space/feed/add.json',
+          url: app.globalData.serverHost+'feed/add.json',
           data: {
-            'openId':wx.getStorageSync("openId")+'',
+            'openId':wx.getStorageSync("openId"),
             'spaceId':that.data.spaceId,
             'version':that.data.version,
             'type':1,
@@ -36,8 +35,6 @@ Page({
           },
           method: 'get',
           success: function(res){
-            console.log("在这呢");
-            console.log(res);
             wx.navigateBack({
               delta: 1
             })

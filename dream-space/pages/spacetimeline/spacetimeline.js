@@ -6,174 +6,17 @@ Page({
     size:10,
     spaceId:0,
     version:0,
+    myOpenId:'',
     createHidden:true,
     commentHidden:true,
     commentFocus:false,
     commentContent:'',
     commentFeedIndex:0,
+    commentFeedId:0,
+    commentDefaultValue:'',
     topData:{},
-    // topData:{
-    //   records:10,
-    //   occupants:8,
-    //   avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //   info:'这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧这是我的第一个相册，快来看看吧',
-    //   occupantInfos:[
-    //     {
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },
-    //     {
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },{
-    //       avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //       openId:1
-    //     },
-    //       ],
-    // },
-    // spacetimelineList:[{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'12dfffffffffffff34',
-    //     type:0,
-    //     authorOpenId:12,
-    //     resourceUrl:'http://static.yingyonghui.com/article/1483498347160_a.jpg',
-    //     content:'这个机器人还不错吧！怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'03-19',
-    //       likeIcons:[
-    //         {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // },{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'1234',
-    //     type:'1',
-    //     authorOpenId:10,
-    //     content:'今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀今天真的是个好日子呀呀！',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'06-18',
-    //       likeIcons:[
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    //       ,
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂，你瘦啦哈哈哈',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // },{
-    //     avatarUrl:      "http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //     nickname:'1234',
-    //     type:0,
-    //     authorOpenId:19,
-    //     resourceUrl:'http://static.yingyonghui.com/article/1482898206726_a.jpg',
-    //     content:'怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧怎么样样，这个美女不错吧！',
-    //     timeDesc:'9分钟前',
-    //     dateDesc:'02-23',
-    //       likeIcons:[
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       },
-    //       {
-    //         avatarUrl:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-    //         openId:1
-    //       }
-    // ],
-    //    comments:[{
-    //   nickname:'1234',comment:'你说的太对啦！',openId:1
-    // },{
-    //   nickname:'左左',comment:'这张图片好酷呀！',openId:1
-    // },{
-    //   nickname:'机器人',comment:'我是机器人，机器人就应该这样帅的以他啊糊涂',openId:1
-    // },{
-    //   nickname:'花仙子',comment:'我是想不到你还会有哪出！',openId:1
-    // }],
-    // }]
-    spacetimelineList:[]
+    spacetimelineList:[],
+    noMoreData:false
   },
   onLoad: function (options) {
     let that=this;
@@ -186,7 +29,8 @@ Page({
     })
     this.setData({
       spaceId:options.spaceId,
-      version:options.version
+      version:options.version,
+      myOpenId:wx.getStorageSync('openId')      
     })
     setTimeout(function(){
       that.getSpaceTopData();
@@ -194,24 +38,22 @@ Page({
     },500)
   },
   getSpaceTopData:function(){
-    console.log("9999");
     let that=this;
-    console.log(that.data.spaceId);
-    console.log(wx.getStorageSync('openId'));
     wx.request({
-      url: 'https://developer.mokous.com/space/detail.json',
+      url: app.globalData.serverHost+'detail.json',
       data: {
-        openId:wx.getStorageSync('openId')+'',
+        openId:wx.getStorageSync('openId'),
         spaceId:that.data.spaceId,
         version:that.data.version
       },
       method: 'GET',
       success: function(res){
-        console.log("数据顶部啦");
+        console.log("获取顶部数据");
         console.log(res);
         that.setData({
           topData:res.data.data
         })
+        app.globalData.modifySpaceInfoFlag=false;
       },
       fail: function(rns) {
         console.log("获取顶部数据失败！");
@@ -220,10 +62,9 @@ Page({
     })
   },
   getSpaceListData:function(){
-    console.log("666");
     let that=this;
     wx.request({
-      url: 'https://developer.mokous.com/space/feed/list.json',
+      url: app.globalData.serverHost+'feed/list.json',
       data: {
         openId:wx.getStorageSync('openId')+'',
         spaceId:that.data.spaceId,
@@ -235,10 +76,19 @@ Page({
       success: function(res){
         console.log("数据列表啦");
         console.log(res);
-        that.setData({
-            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
-            start:that.data.start
-        })
+        if(res.data.status==0){
+          if(res.data.data.resultList.length<that.data.size){
+            that.setData({
+              noMoreData:true
+            })
+          }
+            that.setData({
+              spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+              start:that.data.start+res.data.data.totalCount
+          })
+          wx.stopPullDownRefresh();
+          app.globalData.createFinishFlag=false;
+        }
       },
       fail:function(rns){
         console.log("获取列表数据失败！");
@@ -249,7 +99,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?openId='+wx.getStorageSync("openId")+"&spaceId="+that.data.spaceId+"&version="+that.data.version
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert
     })
   },
   showMyRecord:function(){
@@ -283,18 +133,17 @@ Page({
     this.setData({
       commentHidden:false,
       commentFocus:true,
-      commentFeedIndex:e.currentTarget.dataset.feedindex
+      commentFeedIndex:e.currentTarget.dataset.feedindex,
+      commentFeedId:e.currentTarget.dataset.feedid,
     })
   },
   saveComment:function(e){
     let that=this;
-    console.log("保存评论");
-    console.log("评论内容内容："+that.data.commentContent);
     wx.request({
-      url: 'https://developer.mokous.com/space/feed/comment/add.json',
+      url: app.globalData.serverHost+'feed/comment/add.json',
       data: {
         openId:wx.getStorageSync("openId"),
-        feedId:e.currentTarget.dataset.feedid,
+        feedId:that.data.commentFeedId,
         version:that.data.version,
         comment:that.data.commentContent
       },
@@ -302,11 +151,13 @@ Page({
       success: function(res){
         var obj=new Object();
         obj.openId=wx.getStorageSync("openId");
-        obj.nickname=wx.getStorageSync("nickname");
+        obj.nickname=wx.getStorageSync("nickName");
         obj.comment=that.data.commentContent;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
-          spacetimelineList:that.data.spacetimelineList
+          spacetimelineList:that.data.spacetimelineList,
+          commentHidden:true,
+          commentDefaultValue:''
         })
       },
       fail: function(ron) {
@@ -321,13 +172,13 @@ Page({
       commentContent:e.detail.value
     })
   },
-  showSpaceDetail:function(){
+  showSpaceDetail:function(e){
+    let that=this;
     wx.navigateTo({
-      url: '../addspace/addspace'
+      url: "../modifySpaceInfo/modifySpaceInfo?spaceId="+that.data.spaceId+"&version="+that.data.version
     })
   },
   showPersonalPage:function(e){
-    console.log("openId="+e.currentTarget.dataset.openid);
     let that=this;
     wx.navigateTo({
       url: '../psersonalPage/psersonalPage?openId='+e.currentTarget.dataset.openid+"&spaceId="+that.data.spaceId+"&version="+that.data.version
@@ -363,9 +214,8 @@ Page({
         showCancel:true,
         success:function(ron){
           if(ron.confirm){
-            console.log("删除成功！");
             wx.request({
-              url: 'https://developer.mokous.com/space/feed/comment/delete.json',
+              url: app.globalData.serverHost+'feed/comment/delete.json',
               data: {
                 openId:wx.getStorageSync("openId"),
                 feedId:feedid,
@@ -374,6 +224,8 @@ Page({
               },
               method: 'GET',
               success: function(res){
+                console.log("删除成功！");
+                console.log(res);
                 ((that.data.spacetimelineList)[feedindex].comments).splice(commentindex,1);
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
@@ -401,10 +253,24 @@ Page({
             success:function(ron){
               if(ron.confirm){
                 //做删除操作
-                console.log("删除成功！");
-                that.data.spacetimelineList.splice(e.currentTarget.dataset.index,1);
-                that.setData({
-                  spacetimelineList:that.data.spacetimelineList
+                wx.request({
+                  url: app.globalData.serverHost+'feed/del.json',
+                  data: {
+                    openId:wx.getStorageSync('openId'),
+                    feedId:e.currentTarget.dataset.feedid,
+                    version:that.data.version
+                  },
+                  method: 'GET',
+                  success: function(res){
+                    that.data.spacetimelineList.splice(e.currentTarget.dataset.index,1);
+                    that.setData({
+                      spacetimelineList:that.data.spacetimelineList
+                    })
+                  },
+                  fail: function(ron) {
+                    console.log("删除失败");
+                    console.log(ron);
+                  }
                 })
               }
             }
@@ -418,24 +284,28 @@ Page({
     setTimeout(function(){
         that.setData({
           commentHidden:true,
-          commentFocus:false   
+          commentFocus:false,
+          commentDefaultValue:''
         })
     },500)
   },
   onShow:function(){
     console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
-    // this.setData({
-    //   createHidden:(app.globalData.createFinishFlag)?true:false
-    // })
     if(app.globalData.createFinishFlag){
-      console.log("999");
         that.setData({
           start:0,
-          createHidden:true
+          createHidden:true,
+          spacetimelineList:[]
         })
         setTimeout(function(){
-           that.getSpaceListData();
+          that.getSpaceTopData();
+          that.getSpaceListData();
+        },500)
+    }
+    if(app.globalData.modifySpaceInfoFlag){
+        setTimeout(function(){
+          that.getSpaceTopData();
         },500)
     }
     },
@@ -443,7 +313,7 @@ Page({
       let that=this;
       var status=(e.currentTarget.dataset.ilike==-1)?0:-1;
       wx.request({
-        url: 'https://developer.mokous.com/feed/like.json',
+        url: app.globalData.serverHost+'feed/like.json',
         data: {
           openId:wx.getStorageSync("openId"),
           feedId:e.currentTarget.dataset.feedid,
@@ -452,23 +322,29 @@ Page({
         },
         method: 'GET',
         success: function(res){
-          var likeIconsList=that.data.spacetimelineList.likeIcons;
-          for(var i=0;i<likeIconsList.length;i++){
-            if(likeIconsList[i].openId == wx.getStorageSync("openId")){
-                if(status==-1){
-                  that.data.spacetimelineList.likeIcons.splice(i,1);
-                }else{
-                  var obj=new Object();
-                  obj.openId=wx.getStorageSync("openId");wx.getsto
-                  obj.nickname=wx.getStorageSync("nickname");
-                  obj.ilike=-1;
-                  that.data.spacetimelineList.likeIcons.unshift(obj);
-                }
-                setTimeout(function(){
-                    that.setData({
-                      spacetimelineList:that.data.spacetimelineList
-                    })
-                },500)
+          var likeIconsList=((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons;
+          if(likeIconsList.length==0 || status==0){
+            var obj=new Object();
+            obj.openId=wx.getStorageSync("openId");
+            obj.nickname=wx.getStorageSync("nickName");
+            obj.avatarUrl=wx.getStorageSync('avatarUrl');
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
+            setTimeout(function(){
+                that.setData({
+                  spacetimelineList:that.data.spacetimelineList
+                })
+            },500)
+          }else{
+            for(var i=0;i<likeIconsList.length;i++){
+              if(likeIconsList[i].openId == wx.getStorageSync("openId")){
+                  ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.splice(i,1);
+                  setTimeout(function(){
+                      that.setData({
+                        spacetimelineList:that.data.spacetimelineList
+                      })
+                  },500)
+              }
             }
           }
         },
@@ -477,5 +353,25 @@ Page({
           console.log(ron);
         }
       })
+    },
+    onPullDownRefresh:function(){
+      let that=this;
+      that.setData({
+        start:0,
+        topData:{},
+        spacetimelineList:[],
+        noMoreData:false
+      })
+      app.globalData.createFinishFlag=false;
+      that.getSpaceTopData();
+      that.getSpaceListData();
+    },
+    onReachBottom:function(){
+      console.log("下拉了");
+      let that=this;
+      console.log(that.data.noMoreData);
+      if(!that.data.noMoreData){
+        that.getSpaceListData();
+      }
     }
 })

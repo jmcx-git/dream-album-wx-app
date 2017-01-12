@@ -23,7 +23,8 @@ App({
     nickName: "",
     avatarUrl: "",
     openId: "",
-    createFinishFlag: false,
+    createFinishFlag:false,
+    modifySpaceInfoFlag:false,
     indexRefreshStatus: false
   },
   serverFailedToast() {
