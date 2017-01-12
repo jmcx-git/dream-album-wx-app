@@ -22,6 +22,9 @@ Page({
       },
       method: 'GET',
       success: function(res){
+        console.log(res);
+        var nickname=((res.data.data.resultList)[0]).nickname;
+        console.log(nickname.length);
         that.setData({
           occupantList:res.data.data.resultList
         })

@@ -41,28 +41,31 @@ page{
     color: #aaa;
 }
 .friendsNickName{
-    display: flex;
+    position: relative;
     background: #fff;
     height:150rpx;
     margin-top:20rpx;
-    padding-left: 50rpx;
-    padding-right: 0rpx; 
-    width:calc(100% - 50rpx);
+    width:100%;
 }
 .nickLeft{
+    position: absolute;
     width:150rpx;
-    line-height:150rpx;
+    line-height:36rpx;
     font-size: 36rpx;
+    top:50rpx;
+    left:50rpx;
 }
 .nickRight{
-    line-height: 150rpx;
+    position: absolute;
+    line-height: 40rpx;
     font-size: 36rpx;
-    width:calc(100% - 220rpx);
-    margin-left: 20rpx;
+    width:calc(100% - 300rpx);
+    left: 250rpx;
+    height:80rpx;
     text-align: right;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: pre-wrap;
     color: #aaa;
 }
 .exitFriendsButton{
