@@ -41,7 +41,7 @@ let pageData = {
           })
         }
       })
-      let activityDetail = {id:0,title:"标题1",intr:"活动的描述",content:"活动1内容", prize: "活动的奖品"}
+      let activityDetail = {id:0,title:"标题1",intr:"活动的描述",content:"实现下划线方法有两种，一种是html标签实现、一种是css text-decoration实现下划线样式，大家可以灵活运用。网页中默认情况下文字字体是没有下划线样式，如果需要就通过以上两种方法实现；同时，如果文字被超链接锚文本，其默认有下划线样式，如果去掉超链接下划线呢？如何css实现链接无下划线？", prize: "活动的奖品"}
       this.setData({
           id: activityDetail.id,
           title: activityDetail.title,

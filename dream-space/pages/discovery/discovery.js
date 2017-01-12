@@ -16,8 +16,6 @@ let pageData = {
          that.setData({
            scrollHeight: res.windowHeight
          })
-        // that.globalData.windowWidth = res.windowWidth;
-        // that.globalData.windowHeight = res.windowHeight;
         }
       })
 
