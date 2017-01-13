@@ -13,7 +13,8 @@ Page({
     version:0,
     gender:1,
     spaceInfo:{},
-    secert:''
+    secert:'',
+    spaceIcon:''
   },
   onLoad: function (options) {
     let that = this;
@@ -45,6 +46,7 @@ Page({
         console.log(res);
         that.setData({
           spaceInfo:res.data.data,
+          spaceIcon:res.data.data.icon,
           date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0]
         })
       },
@@ -120,8 +122,10 @@ Page({
             version:that.data.version
           },
           success: function(rps){
+            console.log("更换成功");
+            console.log(rps);
             that.setData({
-              avatarImg: res.tempFilePaths[0],
+              spaceIcon: res.tempFilePaths[0]
             })
             app.globalData.modifySpaceInfoFlag=true;
           },

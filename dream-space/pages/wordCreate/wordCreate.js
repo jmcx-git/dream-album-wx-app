@@ -3,48 +3,42 @@ Page({
   data:{
     spaceId:0,
     version:0,
-    content:''
   },
   onLoad:function(options){
     let that=this;
     this.setData({
       spaceId:options.spaceId,
       version:options.version,
-      content:''
     })
   },
   onReady:function(){
     // 页面渲染完成
   },
-  saveContent:function(e){
-    this.setData({
-      content:e.detail.value
-    })
-  },
   sendMessage:function(e){
+    if(e.detail.value.content==''){
+      return;
+    }
     let that=this;
-    setTimeout(function(){
-        wx.request({
-          url: app.globalData.serverHost+'feed/add.json',
-          data: {
-            'openId':wx.getStorageSync("openId"),
-            'spaceId':that.data.spaceId,
-            'version':that.data.version,
-            'type':1,
-            'content':that.data.content
-          },
-          method: 'get',
-          success: function(res){
-            wx.navigateBack({
-              delta: 1
-            })
-          },
-          fail: function(ron) {
-            console.log("添加文字失败失败 ！");
-            console.log(ron);
-          }
+    wx.request({
+      url: app.globalData.serverHost+'feed/add.json',
+      data: {
+        'openId':wx.getStorageSync("openId"),
+        'spaceId':that.data.spaceId,
+        'version':that.data.version,
+        'type':1,
+        'content':e.detail.value.content
+      },
+      method: 'get',
+      success: function(res){
+        wx.navigateBack({
+          delta: 1
         })
-    },500)
+      },
+      fail: function(ron) {
+        console.log("添加文字失败失败 ！");
+        console.log(ron);
+      }
+    })
     
   },
   onShow:function(){
