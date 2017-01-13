@@ -37,12 +37,14 @@ Page({
       this.data.entries = []
       this.data.noMoreList = false;
       this.data.start = 0;
+      this.data.selectedWorksId = -1
       this.loadMore()
   },
   convert2px: function(rpx){
     return rpx / this.convertrate
   },
   onLoad:function(options){
+    console.log("id: "+options.activityId)
     // 页面初始化 options为页面跳转所带来的参数
     let that = this;
     wx.getSystemInfo({

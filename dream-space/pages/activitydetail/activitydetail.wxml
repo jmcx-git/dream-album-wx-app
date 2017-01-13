@@ -20,6 +20,16 @@
         <text class="content">{{part}}</text>
       </block>
     </view>
+    <view class="examplesair dashedline">
+      <block wx:for="{{examples}}" wx:key="{{index}}">
+        <view class="example">
+          <view class="expimg">
+            <image class="imginner" src="{{item.imgsrc}}" />
+          </view>
+          <view class='exptxt'>item.txt</view>
+        </view>
+      </block>
+    </view>
     <view class="prizeIntr dashedline">
       <view class="activityIntrTitle">
         <view class="innerLine"/>

@@ -1,9 +1,18 @@
-<!--pages/addphoto/addphoto.wxml-->
-<view>
-<image src="{{localphoto}}"/>
+<!--pages/addphoto/addphoto.wxml
+
 <view >口号</view>
-<input placeholder="输入参数口号" auto-focus bindinput="getsolgan"/>
+<input placeholder="输入参数口号" bindinput="getsolgan"/>
 <view >描述</view>
-<textarea placeholder="输入照片描述" auto-focus bindinput="getdesc"/>
-<button bindtap="submit">提交</button>
+<textarea placeholder="输入照片描述" bindinput="getdesc"/>
+
+-->
+<view class="all_views">
+  <view class="contentview">
+    <textarea class="txtinput" placeholder-class="placeholderclass" placeholder="要不要来句口号?" bindinput="getsolgan"/>
+    <image class="imgview" src="{{localphoto}}"/>
+  </view>
+
+  <view class="btnview">
+    <view class="btnsend" hover hover-class="hoverstyle" bindtap="submit">发送</view>
+  </view>
 </view>

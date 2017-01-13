@@ -11,6 +11,7 @@ Page({
     worksId: -1,
   },
   onLoad:function(options){
+    console.log(options)
     let that = this;
     wx.getSystemInfo({
      success: function(res){
@@ -20,6 +21,7 @@ Page({
        })
       }
     })
+    console.log(this.data.activityId)
     this.loadMore()
   },
   loadMore: function(){
@@ -81,13 +83,11 @@ Page({
             success:function(res) {
               console.log(res)
               if(res.statusCode == 200){
-                if(res.data.status == 0){
-                  if(res.data.data){
-                    wx.redirectTo({
-                      url: '../vote/vote?activityId ='+that.data.activityId
-                    })
-                    return
-                  }
+                if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
+                  wx.redirectTo({
+                    url: '../vote/vote?activityId='+that.data.activityId
+                  })
+                  return
                 }
               }
               let msg = "网络错误,请稍后再试!"
