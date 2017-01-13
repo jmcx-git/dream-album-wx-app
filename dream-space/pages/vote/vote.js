@@ -32,8 +32,12 @@ Page({
   },
   inputTyping: function (e) {
       this.setData({
-          inputVal: e.detail.value
+          findKey: e.detail.value
       });
+      this.data.entries = []
+      this.data.noMoreList = false;
+      this.data.start = 0;
+      this.loadMore()
   },
   convert2px: function(rpx){
     return rpx / this.convertrate
@@ -55,6 +59,7 @@ Page({
     this.loadMore()
   },
   loadMore: function(){
+    console.log(this.data.findKey)
     if(this.data.noMoreList){
       return
     }
