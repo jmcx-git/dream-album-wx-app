@@ -3,6 +3,7 @@ Page({
   data:{
     spaceId:0,
     version:0,
+    placeholderText:'为今天的记录说点什么呢？'
   },
   onLoad:function(options){
     let that=this;
