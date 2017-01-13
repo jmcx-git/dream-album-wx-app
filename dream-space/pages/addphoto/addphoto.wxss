@@ -1,26 +1,32 @@
 /* pages/addphoto/addphoto.wxss */
-page{
-  background:#eeeeee;
-}
-.all_views{
 
+page {
+  background: #eee;
 }
-.contentview{
-  background-color: #ffffff;
+
+.all_views {
+}
+
+.contentview {
+  background-color: #fff;
   padding: 30rpx;
 }
-.txtinput{
-  width: 100%
+
+.txtinput {
+  width: 100%;
   height: 280rpx;
 }
-.placeholderclass{
-  color: #888888;
+
+.placeholderclass {
+  color: #888;
 }
-.imgview{
+
+.imgview {
   width: 230rpx;
   height: 230rpx;
 }
-.btnsend{
+
+.btnsend {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -28,14 +34,16 @@ page{
   justify-content: center;
   width: 100%;
   height: 100rpx;
-  margin-top:180rpx;
+  margin-top: 180rpx;
   background: #00adef;
   border-radius: 10rpx;
-  color: #ffffff;
+  color: #fff;
 }
-.hoverstyle{
+
+.hoverstyle {
   background: #009cde;
 }
-.btnview{
+
+.btnview {
   padding: 30rpx;
 }
