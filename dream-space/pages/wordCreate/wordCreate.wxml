@@ -1,4 +1,6 @@
+<form bindsubmit="sendMessage">
 <view class="inputText">
-    <textarea class="textArea" bindblur="saveContent"  placeholder="宝宝又有了什么新变化..."></textarea>
+    <textarea class="textArea" cursor-spacing="200" name="content" placeholder="{{placeholderText}}"></textarea>
 </view>
-<button type="default" class="send" bindtap="sendMessage">发送</button>
+<button formType="submit" type="default" class="send" >发送</button>
+</form>

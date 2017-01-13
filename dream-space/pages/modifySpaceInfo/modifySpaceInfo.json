@@ -1,1 +1,5 @@
-{}
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "空间信息",
+    "navigationBarTextStyle": "black"
+}

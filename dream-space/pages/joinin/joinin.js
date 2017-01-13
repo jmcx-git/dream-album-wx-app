@@ -1,14 +1,4 @@
 // pages/joinin/joinin.js
-let entry= {"id":30,"title":null,
-"cover":"https://cdn.mokous.com/space/feed/2017-01-12/feed_oRi3q0Hd4wlyCuZKYUcNZEuvD6p4_1484222922963.jpg",
-"type":0,
-"content":"%E4%BD%A0%E6%9C%80hi%E5%93%88%E5%93%88",
-"resourceUrl":null,"duration":0,
-"avatarUrl":"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLen1EUeUia9lj733vTQRfWqZnq7zEMvGuP8MDesGgMfpruSC00apA66XQdic1TRCmuw9NnAloS6hpw/0",
-"openId":"oRi3q0Hd4wlyCuZKYUcNZEuvD6p4",
-"nickname":"昵称最长可以设置多少字呀",
-"timeDesc":"4小时前",
-"dateDesc":"01-12"}
 var app = getApp();
 Page({
   data:{
@@ -21,6 +11,7 @@ Page({
     worksId: -1,
   },
   onLoad:function(options){
+    console.log(options)
     let that = this;
     wx.getSystemInfo({
      success: function(res){
@@ -30,6 +21,7 @@ Page({
        })
       }
     })
+    console.log(this.data.activityId)
     this.loadMore()
   },
   loadMore: function(){
@@ -91,13 +83,11 @@ Page({
             success:function(res) {
               console.log(res)
               if(res.statusCode == 200){
-                if(res.data.status == 0){
-                  if(res.data.data){
-                    wx.redirectTo({
-                      url: '../vote/vote?activityId ='+that.data.activityId
-                    })
-                    return
-                  }
+                if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
+                  wx.redirectTo({
+                    url: '../vote/vote?activityId='+that.data.activityId
+                  })
+                  return
                 }
               }
               let msg = "网络错误,请稍后再试!"

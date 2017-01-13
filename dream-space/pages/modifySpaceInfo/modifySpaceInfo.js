@@ -13,7 +13,8 @@ Page({
     version:0,
     gender:1,
     spaceInfo:{},
-    secert:''
+    secert:'',
+    spaceIcon:''
   },
   onLoad: function (options) {
     let that = this;
@@ -41,11 +42,11 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取空间信息成功");
-        console.log(res);
         that.setData({
           spaceInfo:res.data.data,
-          date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0]
+          spaceIcon:res.data.data.icon,
+          date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0],
+          typeIndex:res.data.data.type
         })
       },
       fail: function(ron) {
@@ -63,7 +64,7 @@ Page({
       'spaceId':that.data.spaceId,
       'name': para.nickname,
       //出生日期可为空 yyyy-MM-dd yyyymmdd两种格式
-      'born': para.birthday,
+      'born': (para.birthday==null || para.birthday=='')?that.data.date:para.birthday,
       //0 其它 1:male 2 female
       // 'gender': para.gender == "" ? '0' : para.gender,
       //0:亲子空间 1恋爱空间
@@ -75,8 +76,6 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
-          console.log("修改成功");
-          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
             wx.navigateBack({
@@ -121,7 +120,7 @@ Page({
           },
           success: function(rps){
             that.setData({
-              avatarImg: res.tempFilePaths[0],
+              spaceIcon: res.tempFilePaths[0]
             })
             app.globalData.modifySpaceInfoFlag=true;
           },
