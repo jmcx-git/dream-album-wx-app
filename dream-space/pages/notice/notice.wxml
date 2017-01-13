@@ -8,24 +8,24 @@
       <view class="msg_sub_view">
         <view class="user_info_area">
           <view class="user_info_icon">
-            <image style="border-radius:50%;" src="{{item.avatar}}" />
+            <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl}}" />
           </view>
           <view class="user_info_name">
             {{item.nickname}}
           </view>
-          <view hidden="{{item.status}}" class="office_marker">官方</view>
+          <view hidden="{{item.type!=0}}" class="office_marker">官方</view>
         </view>
         <view class="msg_area">
           <view class="comment_view">
-            <text>{{item.comment}}</text>
+            <text>{{item.content}}</text>
           </view>
           <view class="time_view">
-            <text>{{item.time}}</text>
+            <text>{{item.timeDesc}}</text>
           </view>
         </view>
       </view>
       <view class="msg_view_commentpic">
-        <image src="{{item.pic}}" />
+        <image mode="aspectFill" src="{{item.resourceUrl}}" />
       </view>
     </view>
   </view>

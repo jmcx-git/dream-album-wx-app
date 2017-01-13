@@ -9,6 +9,9 @@ Page({
     avatarImg: '',
     typeIndex: 0,
     typeArray: ['亲子空间', '恋爱空间'],
+    inputPrefixName: '宝宝昵称',
+    inputPrefixBorn: '宝宝生日',
+    inputPrefixSex: '宝宝性别',
     addWay: 1,
     page: 0,
     btnDisabled: true
@@ -39,13 +42,14 @@ Page({
     let nowDate = that.data.date;
     let data = {
       'openId': app.globalData.openId,
-      'name': that.data.avatarImg != '' ? encodeURI(para.nickname) : para.nickname,
+      'name': that.data.avatarImg != '' ? encodeURI(para.name) : para.name,
       //出生日期可为空 yyyy-MM-dd yyyymmdd两种格式
       'born': para.birthday == "" ? nowDate : para.birthday,
       //0 其它 1:male 2 female
-      'gender': para.gender == "" ? '0' : para.gender,
+      'gender': para.gender,
       //0:亲子空间 1恋爱空间
       'type': para.type,
+      'info': that.data.avatarImg != '' ? encodeURI(para.info) : para.info,
       'version': app.globalData.version
     }
     if (that.data.avatarImg != '') {
@@ -128,8 +132,7 @@ Page({
             })
           } else if (res.data.status == -2) {
             wx.showToast({
-              icon: 'success',
-              title: '验证失败,验证码无效!'
+              title: '无效的验证码'
             })
           } else {
             app.failedToast()
@@ -169,9 +172,27 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    this.setData({
-      typeIndex: e.detail.value
-    })
+    let that = this;
+    let index = e.detail.value;
+    if (index == 0) {
+      that.setData({
+        typeIndex: index,
+        inputPrefixName: '宝宝昵称',
+        inputPrefixBorn: '宝宝生日',
+        inputPrefixSex: '宝宝性别',
+      })
+    } else if (index == 1) {
+      that.setData({
+        typeIndex: index,
+        inputPrefixName: '恋人昵称',
+        inputPrefixBorn: '纪念日',
+        inputPrefixSex: '恋人性别',
+      })
+    } else {
+      that.setData({
+        typeIndex: index
+      })
+    }
   },
   bindDateChange: function (e) {
     this.setData({
