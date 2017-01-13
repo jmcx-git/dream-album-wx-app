@@ -1,4 +1,5 @@
 var app = getApp();
+var util = require('../../utils/util.js')
 Page({
     data: {
         windowHeight: 0,
@@ -7,8 +8,9 @@ Page({
         noticeMsgs: [],
         loadStatus: false,
         nomsgs: true,
-        more: true,
-        start: 0,
+        more: false,
+        startId: 0,
+        msgType: 0,//0:官方 1:个人
         size: 10
     },
     onLoad: function (options) {
@@ -39,15 +41,23 @@ Page({
     },
     requestData: function () {
         let that = this;
+        let requestNewData = {
+            'openId': app.globalData.openId,
+            'version': app.globalData.version,
+            'size': that.data.size
+        };
+        let requestMoreData = {
+            'openId': app.globalData.openId,
+            'version': app.globalData.version,
+            'size': that.data.size,
+            'startId': that.data.startId,
+            'type': that.data.msgType
+        }
+        let requestData = that.data.startId == 0 ? requestNewData : requestMoreData;
         var url = app.globalData.serverHost + 'my/notice/list.json';
         wx.request({
             url: url,
-            data: {
-                'openId': app.globalData.openId,
-                'version': app.globalData.version,
-                'start': that.data.start,
-                'size': that.data.size
-            },
+            data: requestData,
             method: 'GET',
             success: function (res) {
                 //渲染我的数据
@@ -59,12 +69,13 @@ Page({
                             nomsgs: true
                         })
                     } else {
-                        let newStart = that.data.start + that.data.size;
+                        let length = res.data.data.resultList.length;
+                        let newStartId = res.data.data.resultList[length-1].id;
                         let newItems = that.data.noticeMsgs.concat(res.data.data.resultList)
                         that.setData({
                             noticeMsgs: newItems,
                             loadStatus: true,
-                            start: newStart,
+                            startId: newStartId,
                             more: res.data.data.more
                         })
                     }
@@ -84,7 +95,7 @@ Page({
             noticeMsgs: [],
             nomsgs: false,
             loadStatus: false,
-            start: 0,
+            startId: 0,
             size: 10,
             more: false
         })

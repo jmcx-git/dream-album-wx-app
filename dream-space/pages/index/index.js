@@ -14,12 +14,26 @@ Page({
     isOpen: false,//判断进展
     animationData1: {},
     animationData2: {},
+    animationData3: {},
     isHidden1: true,
-    isHidden2: true
+    isHidden2: true,
+    showAddPage: false
   },
   onLoad: function (options) {
     //nothing
     let that = this;
+    let animation1 = wx.createAnimation({
+      timingFunction: 'ease',
+    })
+    let animation2 = wx.createAnimation({
+      timingFunction: 'ease',
+    })
+    let animation3 = wx.createAnimation({
+      timingFunction: 'linear'
+    })
+    that.data.animation1 = animation1;
+    that.data.animation2 = animation2;
+    that.data.animation3 = animation3;
     wx.getSystemInfo({
       success: function (res) {
         let convertTimes = 750 / res.windowWidth;
@@ -186,8 +200,10 @@ Page({
       isOpen: false,//判断进展
       animationData1: {},
       animationData2: {},
+      animationData3: {},
       isHidden1: true,
-      isHidden2: true
+      isHidden2: true,
+      showAddPage: false
     })
   },
   onPullDownRefresh: function () {
@@ -217,51 +233,70 @@ Page({
   },
   bindViewTap: function () {
     let that = this;
-    // if (that.data.isProcess) {//上一个操作还没结束
-    //   wx.showToast({
-    //     title: '您手速太快了，我反应不过来',
-    //     icon: 'loading',
-    //     duration: 400
-    //   })
-    //   return;
-    // }
-    that.data.isProcess = true //进展中
-    let animation1 = wx.createAnimation({
-      timingFunction: 'ease',
-    })
-    let animation2 = wx.createAnimation({
-      timingFunction: 'ease',
-    })
-    if (that.data.isOpen) {
-      animation1.translate(0, 0).step()
-      animation2.translate(0, 0).step()
-      that.setData({
-        animationData1: animation1.export(),
-        animationData2: animation2.export(),
-      })
-      setTimeout(function () {
-        that.setData({
-          isHidden1: true,
-          isHidden2: true,
-          isOpen: false,
-          isProcess: false
-        })
-      }, 400)
-    } else {
-      animation1.translate(0, -70).step()
-      animation2.translate(-70, 0).step()
-      that.setData({
-        isHidden1: false,
-        isHidden2: false
-      })
-      setTimeout(function () {
+    that.animation1();
+  },
+  animation1: function () {
+    let that = this;
+    if (!that.data.isProcess) {
+      that.data.isProcess = true
+      let animation1 = that.data.animation1;
+      let animation2 = that.data.animation2;
+      if (that.data.isOpen) {
+        animation1.translate(0, 0).step()
+        animation2.translate(0, 0).step()
         that.setData({
           animationData1: animation1.export(),
           animationData2: animation2.export(),
-          isOpen: true,
-          isProcess: false
         })
-      }, 10)
+        setTimeout(function () {
+          that.setData({
+            isHidden1: true,
+            isHidden2: true,
+            isOpen: false,
+            isProcess: false
+          })
+        }, 400)
+      } else {
+        that.setData({
+          isHidden1: false,
+          isHidden2: false
+        })
+        setTimeout(function () {
+          animation1.translate(0, -70).step()
+          animation2.translate(-70, 0).step()
+          that.setData({
+            animationData1: animation1.export(),
+            animationData2: animation2.export(),
+            isOpen: true,
+            isProcess: false
+          })
+        }, 60)
+      }
+    }
+  },
+  animation2: function () {
+    let that = this;
+    let animation = that.data.animation3;
+    if (that.data.showAddPage) {
+      animation.opacity(0).step();
+      that.setData({
+        animationData3: animation.export()
+      })
+      setTimeout(function () {
+        that.setData({
+          showAddPage: false
+        })
+      }, 400)
+    } else {
+      animation.opacity(0.75).step();
+      that.setData({
+        showAddPage: true
+      })
+      setTimeout(function () {
+        that.setData({
+          animationData3: animation.export()
+        })
+      }, 50)
     }
   },
   onShareAppMessage: function () {
