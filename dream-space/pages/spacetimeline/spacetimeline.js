@@ -155,6 +155,9 @@ Page({
   },
   saveComment:function(e){
     let that=this;
+    if(that.data.commentContent=='' || that.data.commentContent==null || that.data.commentContent==undefined){
+      return;
+    }
     wx.request({
       url: app.globalData.serverHost+'feed/comment/add.json',
       data: {
