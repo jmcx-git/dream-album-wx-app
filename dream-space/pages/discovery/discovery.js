@@ -3,9 +3,12 @@ let pageData = {
     data:{
         activitylist: [],
         start: 0,
-        size: 10,
+        size: 2,
         noMoreList: false,
         scrollHeight: 0
+    },
+    convert2px: function(rpx){
+      return rpx / this.convertrate
     },
     onLoad:function(option){
       let that = this;
@@ -13,11 +16,13 @@ let pageData = {
       // init data
       wx.getSystemInfo({
        success: function(res){
+         that.convertrate = 750/res.windowWidth;
          that.setData({
-           scrollHeight: res.windowHeight
+           scrollHeight: res.windowHeight+that.convert2px(100)// android bug, 底部tabs不是第一页时,获取windowHeight 出错,直接添加100rpx的高度
          })
         }
       })
+      console.log("discovery"+this.data.scrollHeight)
       this.loadMore()
     },
     showdetail: function(e){

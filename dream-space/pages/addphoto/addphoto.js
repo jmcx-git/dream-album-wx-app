@@ -30,13 +30,13 @@ Page({
       return
     }
     let that = this
-    if(that.data.solgan.length <1 || that.data.desc.length <1){
-      wx.showToast({
-        icon:'loading',
-        title:"您有口号或描述未填写!"
-      })
-      return
-    }
+    // if(that.data.solgan.length <1 || that.data.desc.length <1){
+    //   wx.showToast({
+    //     icon:'loading',
+    //     title:"您有口号或描述未填写!"
+    //   })
+    //   return
+    // }
     wx.uploadFile({
       url:app.globalData.serverHost+"discovery/activity/apply.json",
       filePath: that.data.localphoto,
@@ -51,13 +51,11 @@ Page({
         console.log(res)
         if(res.statusCode == 200){
           let rdata = JSON.parse(res.data)
-          if(rdata.status ==0){
-            if(rdata.data){
-              wx.redirectTo({
-                url: '../vote/vote?activityId='+that.data.id
-              })
-              return;
-            }
+          if(rdata.status ==0 || (rdata.status == -1 && rdata.message == "您已参与")){
+            wx.redirectTo({
+              url: '../vote/vote?activityId='+that.data.id
+            })
+            return;
           }
         }
         let msg = "上传出错,请稍后再试!"
