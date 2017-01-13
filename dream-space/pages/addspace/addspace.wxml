@@ -8,6 +8,7 @@
         <image class="image_select_camera" src="../../image/camera.png" />
       </view>
     </view>
+    <view style="height:12rpx;"></view>
     <view class="input_area">
       <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
         <view class="input_cell">
