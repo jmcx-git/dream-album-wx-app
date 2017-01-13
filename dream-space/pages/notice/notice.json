@@ -1,7 +1,5 @@
 {
     "navigationBarBackgroundColor": "white",
-    "backgroundColor": "black",
-    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "通知消息",
     "enablePullDownRefresh": true
 }
