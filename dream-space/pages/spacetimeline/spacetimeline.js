@@ -100,7 +100,7 @@ Page({
           }
             that.setData({
               spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
-              start:that.data.start+res.data.data.totalCount
+              start:that.data.start+res.data.data.resultList.length
           })
           wx.stopPullDownRefresh();
           app.globalData.createFinishFlag=false;

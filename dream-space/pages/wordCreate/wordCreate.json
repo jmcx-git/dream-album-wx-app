@@ -1,4 +1,5 @@
 {
-    "navigationBarBackgroundColor": "#40E0D0",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "文字记录"
 }
