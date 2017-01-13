@@ -5,10 +5,10 @@
     <view class="actinfos">
       <view class='deadline'>
         <image src="/image/icon.png" class="icon_inner"></image>
-        <view class="txt_label"> 距离结束7天 </view>
+        <view class="txt_label"> 距离结束<text class="keyword">7</text>天 </view>
       </view>
       <view class="actwidth"/>
-      <view class="participate txt_label">1069人参加</view>
+      <view class="participate txt_label"><text class="keyword">1069</text>人参加</view>
     </view>
     <view class="activityIntr dashedline">
       <view class="activityIntrTitle">

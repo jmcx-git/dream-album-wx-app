@@ -14,10 +14,11 @@ let pageData = {
       wx.getSystemInfo({
        success: function(res){
          that.setData({
-           scrollHeight: res.windowHeight
+           scrollHeight: res.windowHeight+100
          })
         }
       })
+      console.log("discovery"+this.data.scrollHeight)
       this.loadMore()
     },
     showdetail: function(e){
