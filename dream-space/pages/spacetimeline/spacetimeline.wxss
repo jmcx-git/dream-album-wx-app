@@ -98,7 +98,7 @@ page{
   height:94rpx;
   border-radius: 50%;
   position: absolute;
-  top:276rpx;
+  top:336rpx;
   left: 30rpx;
 }
 /*列表*/
