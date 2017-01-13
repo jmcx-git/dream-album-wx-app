@@ -4,32 +4,32 @@ page{
 .resetNumber{
     height:120rpx;
     width:100%;
-    display: flex;
+    position: relative;
     margin-top:20rpx;
     margin-bottom:20rpx;
     background-color: #fff;
 }
 .resetYqm{
+    position: absolute;
     height:120rpx;
     text-align: center;
     line-height: 120rpx;
-    flex: 1;
+    left:20rpx;
 }
 .resetText{
-    flex: 2;
+    position: absolute;
     height:120rpx;
     line-height: 120rpx;
     text-align: center;
+    left:calc(50% - 90rpx);
     color: mediumspringgreen;
 }
-.resetButton{
-    flex: 1;
-}
 .resetButtonImage{
-    height:80rpx;
-    width:80rpx;
-    padding-top:20rpx;
-    padding-left: 50rpx;
+    position: absolute;
+    height:70rpx;
+    width:130rpx;
+    top:30rpx;
+    right: 20rpx;
 }
 .friendsTop{
     position: relative;
@@ -60,6 +60,7 @@ page{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: pre-wrap;
+    word-wrap: break-word;
 }
 .historyText{
     position: absolute;

@@ -6,9 +6,7 @@
     <view class="resetText">
         {{secert}}
     </view>
-    <view class="resetButton">
-        <image class="resetButtonImage" src="../../image/create.png" />
-    </view>
+    <image class="resetButtonImage" src="../../image/reset.png" />
 </view>
 
 <!--浏览记录-->

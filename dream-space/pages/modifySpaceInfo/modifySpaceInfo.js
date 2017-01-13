@@ -65,7 +65,7 @@ Page({
       'spaceId':that.data.spaceId,
       'name': para.nickname,
       //出生日期可为空 yyyy-MM-dd yyyymmdd两种格式
-      'born': para.birthday,
+      'born': (para.birthday==null || para.birthday=='')?that.data.date:para.birthday,
       //0 其它 1:male 2 female
       // 'gender': para.gender == "" ? '0' : para.gender,
       //0:亲子空间 1恋爱空间

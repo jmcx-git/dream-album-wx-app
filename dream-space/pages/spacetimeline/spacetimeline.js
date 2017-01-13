@@ -35,7 +35,7 @@ Page({
     setTimeout(function(){
       that.getSpaceTopData();
       that.getSpaceListData();
-    },500)
+    },200)
   },
   getSpaceTopData:function(){
     let that=this;
@@ -53,6 +53,7 @@ Page({
         that.setData({
           topData:res.data.data
         })
+        console.log("顶部cover＝"+that.data.topData.cover);
         app.globalData.modifySpaceInfoFlag=false;
       },
       fail: function(rns) {
@@ -63,6 +64,7 @@ Page({
   },
   getSpaceListData:function(){
     let that=this;
+    console.log("获取数据了了，start="+that.data.start+",size="+that.data.size);
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
@@ -78,9 +80,21 @@ Page({
         console.log(res);
         if(res.data.status==0){
           if(res.data.data.resultList.length<that.data.size){
+            console.log("到底了，别脱了");
             that.setData({
               noMoreData:true
             })
+          }
+          console.log("noMoreData="+that.data.noMoreData);
+          for(var i=0;i<res.data.data.resultList.length;i++){
+            var date=(((res.data.data.resultList)[i]).dateDesc).split("-");
+            if(date.length>1){
+              ((res.data.data.resultList)[i]).month=date[0];
+              ((res.data.data.resultList)[i]).day=date[1];
+              ((res.data.data.resultList)[i]).dateflag=true;
+            }else{
+              ((res.data.data.resultList)[i]).dateflag=false;
+            }
           }
             that.setData({
               spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
@@ -326,7 +340,7 @@ Page({
           if(likeIconsList.length==0 || status==0){
             var obj=new Object();
             obj.openId=wx.getStorageSync("openId");
-            obj.nickname=wx.getStorageSync("nickName");
+            obj.nickName=wx.getStorageSync("nickName");
             obj.avatarUrl=wx.getStorageSync('avatarUrl');
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
@@ -339,11 +353,12 @@ Page({
             for(var i=0;i<likeIconsList.length;i++){
               if(likeIconsList[i].openId == wx.getStorageSync("openId")){
                   ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.splice(i,1);
+                  ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=-1;
                   setTimeout(function(){
                       that.setData({
                         spacetimelineList:that.data.spacetimelineList
                       })
-                  },500)
+                  },300)
               }
             }
           }
@@ -363,15 +378,56 @@ Page({
         noMoreData:false
       })
       app.globalData.createFinishFlag=false;
-      that.getSpaceTopData();
-      that.getSpaceListData();
+      setTimeout(function(){
+        that.getSpaceTopData();
+        that.getSpaceListData();
+      },200);
+      
     },
     onReachBottom:function(){
-      console.log("下拉了");
       let that=this;
-      console.log(that.data.noMoreData);
+      console.log("到底触发了,noMoreData="+that.data.noMoreData);
       if(!that.data.noMoreData){
         that.getSpaceListData();
       }
+    },
+    changeCover:function(e){
+      let that=this;
+      wx.showActionSheet({
+        itemList:['更换相册封面'],
+        success:function(res){
+          if(res.tapIndex==0){
+            wx.chooseImage({
+              count: 1,
+              sizeType: ['original', 'compressed'],
+              sourceType: ['album', 'camera'],
+              success: function(rps){
+                wx.uploadFile({
+                  url: app.globalData.serverHost+'cover/edit.json',
+                  filePath:rps.tempFilePaths[0],
+                  name:'image',
+                  formData: {
+                    openId:wx.getStorageSync('openId'),
+                    spaceId:that.data.spaceId,
+                    version:that.data.version
+                  },
+                  success: function(rns){
+                    console.log("上传成功");
+                    console.log(rns);
+                    that.data.topData.cover=rps.tempFilePaths[0];
+                    that.setData({
+                      topData:that.data.topData
+                    })
+                  },
+                  fail: function(rfs) {
+                    console.log("上传图片失败");
+                    console.log(rfs);
+                  }
+                })
+              }
+            })
+          }
+        }
+      })
     }
 })
