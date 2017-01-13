@@ -91,6 +91,7 @@ Page({
     })
   },
   gainDesc:function(e){
+    console.log("blur:"+e.detail.value);
     let that=this;
     (that.data.imgUrls)[e.currentTarget.dataset.index].desc=e.detail.value;
     this.setData({

@@ -17,7 +17,7 @@
 <!--模版-->
 <template is="spacetimelinelatest" data="{{spacetimelineList,winWidth,myOpenId}}"/>
 <!--底部-->
-<view class="bottom">
+<view class="bottom" hidden="{{!noMoreData}}">
     <view class="bottomArea">
         <text>已经到底，没有更多啦～</text>
     </view>
