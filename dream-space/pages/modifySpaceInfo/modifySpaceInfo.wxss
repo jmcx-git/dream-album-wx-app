@@ -30,6 +30,11 @@ page{
     height: 30%;
     background-color: white;
 }
+.input_area_l{
+    width: 100%;
+    height: 22.5%;
+    background-color: white;
+}
 .input_cells{
     font-size: 30rpx;
 }

@@ -8,7 +8,7 @@
         <image class="image_select_camera" src="../../image/camera.png" />
       </view>
     </view>
-    <view class="input_area">
+    <view class="{{spaceInfo.type==0?'input_area':'input_area_l'}}">
       <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
         <view class="input_cell">
           <view class="input_cell_hd">空间类型</view>
@@ -21,20 +21,20 @@
           </view>
         </view>
         <view class="input_cell">
-          <view class="input_cell_hd">宝宝昵称</view>
+          <view class="input_cell_hd">起个昵称</view>
           <view class="input_cell_bd">
-            <input name="nickname" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" class="input" value="{{spaceInfo.name}}" placeholder-style="color:gray;" placeholder="宝宝小名" bindblur="checkData" bindinput="checkData"/>
+            <input name="nickname" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" class="input" value="{{spaceInfo.name}}" placeholder-style="color:gray;" placeholder="我就叫宝宝" bindblur="checkData" bindinput="checkData"/>
           </view>
         </view>
         <view class="input_cell">
-          <view class="input_cell_hd">宝宝生日</view>
+          <view class="input_cell_hd">{{spaceInfo.type==0?'宝宝生日':'恋爱时间'}}</view>
           <view class="input_cell_bd">
             <picker name="birthday" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
               <view>{{date}}</view>
             </picker>
           </view>
         </view>
-        <view class="input_cell">
+        <view class="input_cell" wx:if="{{spaceInfo.type==0}}">
           <view class="input_cell_hd">宝宝性别</view>
           <view class="input_cell_bd">
             <radio-group bindchange="radioChange" name="gender">

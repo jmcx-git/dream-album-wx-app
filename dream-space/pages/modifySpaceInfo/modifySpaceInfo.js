@@ -42,12 +42,11 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取空间信息成功");
-        console.log(res);
         that.setData({
           spaceInfo:res.data.data,
           spaceIcon:res.data.data.icon,
-          date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0]
+          date:res.data.data.bornDate==null?that.data.date:(res.data.data.bornDate).split(" ")[0],
+          typeIndex:res.data.data.type
         })
       },
       fail: function(ron) {
@@ -77,8 +76,6 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
-          console.log("修改成功");
-          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
             wx.navigateBack({
@@ -122,8 +119,6 @@ Page({
             version:that.data.version
           },
           success: function(rps){
-            console.log("更换成功");
-            console.log(rps);
             that.setData({
               spaceIcon: res.tempFilePaths[0]
             })
