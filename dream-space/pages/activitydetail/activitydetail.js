@@ -10,7 +10,9 @@ let pageData = {
         isshowjoinin: false,
         windowHeight:600,
         joinmargintop: 500,
-        activityIntrParts:[]
+        activityIntrParts:[],
+        deadline:{},
+        participate:{}
     },
     convert2rpx: function(px){
       return px * this.convertrate
@@ -19,7 +21,6 @@ let pageData = {
       return rpx / this.convertrate
     },
     onLoad:function(option){
-      console.log(option)
       // option parms
       this.data.id = option.id;
 
@@ -29,7 +30,7 @@ let pageData = {
          that.convertrate = 750/res.windowWidth;
          that.setData({
            windowHeight: res.windowHeight,
-           buttonstop: res.windowHeight - that.convert2px(100),
+           buttonstop: res.windowHeight - that.convert2px(98),
            joinmargintop: res.windowHeight- that.convert2px(300)
          })
         }
@@ -41,7 +42,9 @@ let pageData = {
           })
         }
       })
-      let activityDetail = {id:option.id,title:"标题1",intr:"活动的描述",content:"实现下划线方法有两种，\n 一种是html标签实现、一种是css text-decoration实现下划线样式，大家可以灵活运用。网页中默认情况下文字字体是没有下划线样式，]\n如果需要就通过以上两种方法实现；同时，如果文字被超链接锚文本，其默认有下划线样式，如果去掉超链接下划线呢？如何css实现链接无下划线？", prize: "活动的奖品",prizeList:[{title:"NO.1 免费参加特权",imgsrc:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"},{title:"NO.2 抵用券",imgsrc:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"}]}
+      let activityDetail = {id:option.id,title:"标题1",intr:"本文档将带你一步步创建完成一个微信小程序，并可以在手机上体验该小程序的实际效果。",
+      deadline:{pfx:"距离结束",keyword:7,sfx:"天"},participate:{pfx:"",keyword:1089,sfx:"人参加"},
+      content:"实现下划线方法有两种，\n 一种是html标签实现、一种是css text-decoration实现下划线样式，大家可以灵活运用。网页中默认情况下文字字体是没有下划线样式，]\n如果需要就通过以上两种方法实现；同时，如果文字被超链接锚文本，其默认有下划线样式，如果去掉超链接下划线呢？如何css实现链接无下划线？", prize: "活动的奖品",prizeList:[{title:"NO.1 免费参加特权",imgsrc:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"},{title:"NO.2 抵用券",imgsrc:"https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"}]}
       this.setData({
           id: activityDetail.id,
           title: activityDetail.title,
@@ -49,7 +52,9 @@ let pageData = {
           content: activityDetail.content,
           prize: activityDetail.prize,
           activityIntrParts:activityDetail.content.split('\n'),
-          prizeList:activityDetail.prizeList
+          prizeList:activityDetail.prizeList,
+          participate: activityDetail.participate,
+          deadline: activityDetail.deadline
       })
     },
     initData: function(activityId){

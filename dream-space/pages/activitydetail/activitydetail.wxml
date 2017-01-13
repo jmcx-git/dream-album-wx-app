@@ -1,14 +1,14 @@
 <view class="all_views">
     <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
     <view class="title">{{title}}</view>
-    <view class="description">本文档将带你一步步创建完成一个微信小程序，并可以在手机上体验该小程序的实际效果。</view>
+    <view class="description">{{intr}}</view>
     <view class="actinfos">
       <view class='deadline'>
         <image src="/image/icon.png" class="icon_inner"></image>
-        <view class="txt_label"> 距离结束<text class="keyword">7</text>天 </view>
+        <view class="txt_label">{{deadline.pfx}}<text class="keyword">{{deadline.keyword}}</text>{{deadline.sfx}}</view>
       </view>
       <view class="actwidth"/>
-      <view class="participate txt_label"><text class="keyword">1069</text>人参加</view>
+      <view class="participate txt_label">{{participate.pfx}}<text class="keyword">{{participate.keyword}}</text>{{participate.sfx}}</view>
     </view>
     <view class="activityIntr dashedline">
       <view class="activityIntrTitle">
