@@ -7,14 +7,18 @@ let pageData = {
         noMoreList: false,
         scrollHeight: 0
     },
+    convert2px: function(rpx){
+      return rpx / this.convertrate
+    },
     onLoad:function(option){
       let that = this;
 
       // init data
       wx.getSystemInfo({
        success: function(res){
+         that.convertrate = 750/res.windowWidth;
          that.setData({
-           scrollHeight: res.windowHeight+100
+           scrollHeight: res.windowHeight+that.convert2px(100)// android bug, 底部tabs不是第一页时,获取windowHeight 出错,直接添加100rpx的高度
          })
         }
       })
