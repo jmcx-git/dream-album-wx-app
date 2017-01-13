@@ -82,4 +82,6 @@ page{
     width: 90%;
     height: 100rpx;
     margin-top: 150rpx;
+    background-color: #00adef;
+    color: #ffffff;
 }
