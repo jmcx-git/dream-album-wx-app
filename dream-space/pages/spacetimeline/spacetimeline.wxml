@@ -29,18 +29,6 @@
 </view>
 </view>
 <!--点击创建之后的-->
-<!--<view hidden="{{createHidden}}">
-    <view class="controlArea">
-        <view class="picArea" bindtap="tocratePhoto" data-type="0">
-            <image src="../../image/pic.png"  class="picAreaImage"/>
-            <text class="picAreaText">照片</text>
-        </view>
-        <view class="textArea" bindtap="toCreateWord" data-type="1">
-            <image src="../../image/pic.png"  class="textAreaImage"/>
-        </view>
-    </view>
-    <image src="../../image/del.png"  class="del" bindtap="closeCreatePage"/>
-</view>-->
 <view hidden="{{createHidden}}" class="nav-view">
 <view class="nav-view-main">
     <image src="../../image/photocreate.png" bindtap="tocratePhoto" data-type="0"  class="picAreaImage"/>

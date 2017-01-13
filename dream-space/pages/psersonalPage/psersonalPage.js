@@ -17,6 +17,9 @@ Page({
         that.setData({
             personalInfo:res.data.data
         })
+        wx.setNavigationBarTitle({
+          title: res.data.data.nickname
+        })
       },
       fail: function(ron) {
         console.log("获取个人信息失败!");

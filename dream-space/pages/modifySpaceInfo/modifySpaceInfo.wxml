@@ -46,7 +46,7 @@
       </view>
     </view>
     <view class="btn_area" wx:if="{{secert!='null' && secert!='' && secert!='undefined'}}">
-      <button class="submit_btn" form-type="submit" type="primary">保存宝宝信息</button>
+      <button class="submit_btn" form-type="submit" type="primary">保存信息</button>
     </view>
   </form>
 </view>

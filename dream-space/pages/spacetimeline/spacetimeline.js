@@ -53,8 +53,10 @@ Page({
         that.setData({
           topData:res.data.data
         })
-        console.log("顶部cover＝"+that.data.topData.cover);
         app.globalData.modifySpaceInfoFlag=false;
+        wx.setNavigationBarTitle({
+          title: res.data.data.name
+        })
       },
       fail: function(rns) {
         console.log("获取顶部数据失败！");
@@ -386,13 +388,15 @@ Page({
     },
     onReachBottom:function(){
       let that=this;
-      console.log("到底触发了,noMoreData="+that.data.noMoreData);
       if(!that.data.noMoreData){
         that.getSpaceListData();
       }
     },
     changeCover:function(e){
       let that=this;
+      if(that.data.topData.secert==null || that.data.topData.secert=='' || that.data.topData.secert==undefined){
+        return;
+      }
       wx.showActionSheet({
         itemList:['更换相册封面'],
         success:function(res){
