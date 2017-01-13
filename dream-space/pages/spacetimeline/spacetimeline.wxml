@@ -2,7 +2,7 @@
 <view hidden="{{!createHidden}}" bindtouchmove="hideCommentWindow">
 <!--新的顶部-->
 <view bindtap="changeCover">
-    <image mode="scaleToFill" class="spacetimelineTopCoverImage" src="{{topData.cover}}"/>
+    <image mode="aspectFill" class="spacetimelineTopCoverImage" src="{{topData.cover}}"/>
 </view>
 <image class="spacetimelineTopIconImage" bindtap="showSpaceDetail" src="{{topData.icon}}" />
 <!--亲友团-->
