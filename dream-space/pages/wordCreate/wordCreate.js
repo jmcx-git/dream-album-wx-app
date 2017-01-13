@@ -19,26 +19,31 @@ Page({
       return;
     }
     let that=this;
-    wx.request({
-      url: app.globalData.serverHost+'feed/add.json',
-      data: {
-        'openId':wx.getStorageSync("openId"),
-        'spaceId':that.data.spaceId,
-        'version':that.data.version,
-        'type':1,
-        'content':e.detail.value.content
-      },
-      method: 'get',
-      success: function(res){
-        wx.navigateBack({
-          delta: 1
-        })
-      },
-      fail: function(ron) {
-        console.log("添加文字失败失败 ！");
-        console.log(ron);
-      }
-    })
+    wx.hideKeyboard();
+    setTimeout(function(){
+       wx.request({
+        url: app.globalData.serverHost+'feed/add.json',
+        data: {
+          'openId':wx.getStorageSync("openId"),
+          'spaceId':that.data.spaceId,
+          'version':that.data.version,
+          'type':1,
+          'content':e.detail.value.content
+        },
+        method: 'get',
+        success: function(res){
+        app.globalData.createFinishFlag=true;
+          wx.navigateBack({
+            delta: 1
+          })
+        },
+        fail: function(ron) {
+          console.log("添加文字失败 ！");
+          console.log(ron);
+        }
+      })
+    },500);
+   
     
   },
   onShow:function(){
@@ -49,6 +54,6 @@ Page({
   },
   onUnload:function(){
     console.log("页面卸载");
-    app.globalData.createFinishFlag=true;
+    // app.globalData.createFinishFlag=true;
   }
 })
