@@ -1,45 +1,3 @@
-<!--头像，昵称，操作区域-->
-<!--<template name="spacetimeline">
-    <view class="spacetimeline" wx:for="{{spacetimelineList}}" wx:for-item="globaldata" wx:for-index="globalindex" wx:key="spacetimelineList">
-        <view class="userInfoArea">
-            <image bindtap="showPersonalPage" data-openid="{{globaldata.authorOpenId}}" src="{{globaldata.avatarUrl}}" class="avatarUrl"/>
-            <view class="nickName" bindtap="showPersonalPage" data-openid="{{globaldata.authorOpenId}}">
-                <text>{{globaldata.nickname}}</text>
-            </view>
-            <view class="date">
-                <text>{{globaldata.dateDesc}}</text>
-            </view>
-            <image wx:if="{{myOpenId == globaldata.authorOpenId}}" bindtap="showHandle"  data-index="{{globalindex}}" data-feedid="{{globaldata.id}}" src="../../image/handle.png"  class="handle"/>
-        </view>-->
-        <!--内容主体-->
-        <!--<view class="spacetimelinebody">
-            <view wx:if="{{globaldata.type=='0'}}" class="spacetimelineImageTop">
-                <image bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImage" src="{{globaldata.illustration}}"/>
-                <text class="spacetimelineImageDesc">{{globaldata.content}}</text>
-            </view>
-            <view wx:elif="{{globaldata.type=='1'}}" class="spacetimelineContentText">
-                <text>{{globaldata.content}}</text>
-            </view>
-        </view>-->
-        <!--几分钟前,关注，评论按钮-->
-        <!--<view class="timeline">
-            <text class="timebefore">{{globaldata.timeDesc}}</text>
-            <image bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" class="collect" src="../../image/collect.png" />
-            <image class="replay" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" bindtap="toreplay" src="../../image/replay.png" />
-        </view>-->
-        <!--头像集合-->
-        <!--<view class="avatarCollectTop">
-            <image bindtap="showPersonalPage" wx:for="{{globaldata.likeIcons}}" src="{{item.avatarUrl}}" data-openid="{{item.openId}}" wx:key="likeIcons"  class="avatarCollectImage"/>
-        </view>-->
-        <!--回复列表-->
-        <!--<view wx:for="{{globaldata.comments}}" wx:key="comments" class="replayTop">
-            <text bindtap="showPersonalPage" data-openid="{{item.openId}}" class="replayNickName">{{item.nickname}}</text>
-            <text bindtap="delComment" data-feedid="{{globaldata.id}}" data-feedindex="{{globalindex}}" data-openid="{{item.openId}}" data-commentid="{{item.id}}" data-commentindex="{{index}}">:{{item.comment}}</text>
-        </view>
-    </view>
-</template>-->
-
-
 <!--最新样式-->
 <template name="spacetimelinelatest">
     <view class="spacetimelinelatest" wx:for="{{spacetimelineList}}" wx:for-item="globaldata" wx:for-index="globalindex" wx:key="spacetimelineList">
@@ -72,7 +30,6 @@
             <image bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" class="collect" src="{{(globaldata.ilike==-1)?'../../image/collect.png':'../../image/collectmy.png'}}" />
             <image class="replay" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" bindtap="toreplay" src="../../image/replay.png" />
         </view>
-        <!--<image wx:if="{{(globaldata.comments.length)>0 || (globaldata.likeIcons.length)>0}}" style="top:{{(globaldata.likeIcons.length)>0?75:50}}rpx;" src="../../image/tcorver.png" class="tcorver" />-->
         <!--头像集合-->
         <view class="{{(globaldata.comments.length)>0?'avatarCollectTop':'avatarCollectTopNoComments'}}" wx:if="{{globaldata.likeIcons.length>0}}">
             <image wx:if="{{(globaldata.likeIcons.length)>0}}" class="tcorver" src="../../image/tcorver.png" class="tcorver" />
