@@ -13,6 +13,6 @@
 
 <view class="friendsNickName">
     <text class="nickLeft">亲友昵称</text>
-    <text class="nickRight" style="top:{{personalInfo.nickname.length>12?30:50}}rpx;">{{personalInfo.nickname}}</text>
+    <text class="{{(personalInfo.nickname.length>14)?'nickRight':'nickRightShort'}}">{{personalInfo.nickname}}</text>
 </view>
 <!--<button type="warn" class="exitFriendsButton" bindtap="exitFriends">退出亲友团</button>-->
