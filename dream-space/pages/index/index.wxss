@@ -121,28 +121,3 @@ page {
   text-align: center;
   color: gray;
 }
-
-.add_shadow_page {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  background-color: black;
-  opacity: 0;
-}
-
-.add_shadow_btnview {
-  position: absolute;
-  width: 100%;
-  height: 200rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cancel_add {
-  position: fixed;
-  bottom: 150rpx;
-  right: 64rpx;
-  width: 40rpx;
-  height: 40rpx;
-}

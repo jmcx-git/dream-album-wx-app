@@ -1,11 +1,9 @@
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
-  <view hidden="{{!nopics}}">
-    <image class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
-    <image class="default_area_notice" src="../../image/addnotice.png" />
-  </view>
+    <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
+    <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />
 </view>
 
-<!--空间列表列表 hidden="{{showAddPage}}"-->
+<!--空间列表列表-->
 <view wx:else class="main">
   <view id="{{idx}}" wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
@@ -30,13 +28,3 @@
   <image bindtap="addSpace" data-way="1" src="../../image/spacebtn.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
   <image bindtap="addSpace" data-way="2" src="../../image/invitebtn.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
 </view>
-
-<!--添加阴影页面-->
-
-<!--<view hidden="{{!showAddPage}}" animation="{{animationData3}}" class="add_shadow_page" style="height:{{windowHeight}}px;">
-  <view class="add_shadow_btnview" style="margin-top:{{windowHeight/2-50}}px;">
-    <image bindtap="addSpace" data-way="1" src="../../image/spacebtn.png" style="width:150rpx;height:150rpx;margin:60rpx;" />
-    <image bindtap="addSpace" data-way="2" src="../../image/invitebtn.png" style="width:150rpx;height:150rpx;margin:60rpx;" />
-  </view>
-  <image bindtap="bindViewTap" class="cancel_add" src="../../image/del.png"/>
-</view>-->

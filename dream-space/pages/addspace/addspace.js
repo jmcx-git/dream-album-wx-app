@@ -8,6 +8,7 @@ Page({
     date: '2017-01-01',
     avatarImg: '',
     typeIndex: 0,
+    genderValue: 1,
     typeArray: ['亲子空间', '恋爱空间'],
     defaultAvatar: '../../image/familydefault.png',
     inputPlaceholder: '我就叫宝宝',
@@ -203,6 +204,11 @@ Page({
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value
+    })
+  },
+  changeGender: function (e) {
+    this.setData({
+      genderValue: e.currentTarget.id
     })
   }
 })

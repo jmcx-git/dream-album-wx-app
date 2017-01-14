@@ -36,6 +36,24 @@ page {
   height: 50rpx;
 }
 
+.type_select_arrow{
+  width:20rpx;
+  height:20rpx;
+  transform: rotate(90deg);
+}
+
+.radio_view{
+  display: flex;
+  align-items: center;
+}
+.radio_sub_view{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80rpx;
+  font-size: 32rpx;
+  margin-right: 6rpx;
+}
 .input_area {
   width: 100%;
   background-color: white;

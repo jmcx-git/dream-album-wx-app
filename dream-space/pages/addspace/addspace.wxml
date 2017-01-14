@@ -13,12 +13,13 @@
       <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
         <view class="input_cell">
           <view class="input_cell_hd">空间类型</view>
-          <view class="input_cell_bd">
+          <view class="input_cell_bd" style="display:inline-flex;">
             <picker name="type" bindchange="bindPickerChange" value="{{typeIndex}}" range="{{typeArray}}">
-              <view>
+              <view style="width:500rpx;">
                 {{typeArray[typeIndex]}}
               </view>
             </picker>
+            <image class="type_select_arrow" src="../../image/arrow.png" />
           </view>
         </view>
         <view class="input_cell">
@@ -38,10 +39,17 @@
         <view class="input_cell">
           <view class="input_cell_hd">{{inputPrefixSex}}</view>
           <view class="input_cell_bd">
-            <radio-group bindchange="radioChange" name="gender">
-              <radio value="1" checked>男</radio>
-              <radio value="2" style="margin-left:10rpx;">女</radio>
-            </radio-group>
+            <view class="radio_view">
+              <view id="1" catchtap="changeGender" class="radio_sub_view">
+                <image style="width:34rpx;height:34rpx;" src="{{genderValue==1?'../../image/select.png':'../../image/notselect.png'}}" />
+                <view>男</view>
+              </view>
+              <view id="2" catchtap="changeGender" class="radio_sub_view">
+                <image style="width:34rpx;height:34rpx;" src="{{genderValue==2?'../../image/select.png':'../../image/notselect.png'}}" />
+                <view>女</view>
+              </view>
+            </view>
+            <input hidden="true" name="gender" value="{{genderValue}}"/>
           </view>
         </view>
         <view class="input_cell">
