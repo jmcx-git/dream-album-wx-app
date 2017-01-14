@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/discovery/discovery",
     "pages/my/my",
-    "pages/notice/notice",
     "pages/addspace/addspace",
+    "pages/discovery/discovery",
+    "pages/notice/notice",
     "pages/addphoto/addphoto",
     "pages/activitydetail/activitydetail",
     "pages/joinin/joinin",
