@@ -3,9 +3,15 @@ let pageData = {
     data:{
         activitylist: [],
         start: 0,
-        size: 2,
+        size: 10,
         noMoreList: false,
-        scrollHeight: 0
+        scrollHeight: 0,
+        icons:[
+          "/image/timing.png",
+          "/image/timing.png",
+          "/image/counting.png",
+          "/image/result.png"
+        ]
     },
     convert2px: function(rpx){
       return rpx / this.convertrate
@@ -30,7 +36,7 @@ let pageData = {
       if(this.showdetailtouched != true){
           this.showdetailtouched = true
           wx.navigateTo({
-            url: '../activitydetail/activitydetail?id='+e.currentTarget.dataset.id,
+            url: '../activitydetail/activitydetail?activityId='+e.currentTarget.dataset.id,
             complete: function(e){
               that.showdetailtouched = false
             }
@@ -54,6 +60,7 @@ let pageData = {
         },
         method: "GET",
         success: function(res){
+          console.log("discoverylist", res)
           if(res.statusCode == 200){
             if(res.data.status ==0){
               let list = that.data.activitylist.concat(res.data.data.resultList);

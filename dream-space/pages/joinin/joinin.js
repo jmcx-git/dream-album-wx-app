@@ -9,15 +9,26 @@ Page({
     activityId:0,
     noMoreList: false,
     worksId: -1,
+    checkedIndex: -1,
+    buttonstop: 560,
+    voteWorksId:"",
+    userWorksId:""
+  },
+  convert2px: function(rpx){
+    return rpx / this.convertrate
   },
   onLoad:function(options){
     console.log(options)
     let that = this;
     wx.getSystemInfo({
      success: function(res){
+       that.convertrate = 750/res.windowWidth;
        that.setData({
          scrollHeight: res.windowHeight,
-         activityId: options.id
+         activityId: options.id,
+         buttonstop: res.windowHeight - that.convert2px(98),
+         voteWorksId:options.voteWorksId,
+         userWorksId:options.userWorksId
        })
       }
     })
@@ -85,7 +96,7 @@ Page({
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
                   wx.redirectTo({
-                    url: '../vote/vote?activityId='+that.data.activityId
+                    url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
                   })
                   return
                 }
@@ -115,7 +126,9 @@ Page({
   },
   radioChange: function (e) {
     console.log(e)
-    this.data.worksId = e.detail.value;
+    this.setData({
+      worksId :e.detail.value
+    })
   },
   onReady:function(){
     // 页面渲染完成
