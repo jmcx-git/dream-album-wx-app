@@ -75,11 +75,7 @@ Page({
     if (app.globalData.indexRefreshStatus) {
       app.globalData.indexRefreshStatus = false;
       that.reInit();
-      if (!wx.getStorageSync('openId')) {
-        that.confirmGetData()
-      } else {
-        that.getData();
-      }
+      that.onloadData();
     }
   },
   onHide: function () {
