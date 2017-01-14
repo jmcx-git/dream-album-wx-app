@@ -27,7 +27,11 @@ App({
     createFinishFlag:false,
     modifySpaceInfoFlag:false,
     indexRefreshStatus: false,
-    productName:'时光小窝'
+    productName:'时光小窝',
+    fromOpenId:'',
+    spaceId:'',
+    redirectRefer:'',
+    owner:''
   },
   serverFailedToast() {
     wx.showToast({
