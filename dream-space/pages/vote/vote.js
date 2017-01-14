@@ -92,7 +92,8 @@ Page({
         id: that.data.activityId,
         findKey: that.data.findKey,
         start: that.data.start,
-        size: that.data.size
+        size: that.data.size,
+        voteWorksId: that.data.voteWorksId
       },
       success:function(res){
         console.log(res)
