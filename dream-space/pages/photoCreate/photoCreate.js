@@ -4,7 +4,8 @@ Page({
     imgUrls:[],
     spaceId:0,
     version:0,
-    uploadFileCount:0
+    uploadFileCount:0,
+    photoDesc:'为今天的记录说点什么呢?'
   },
   onLoad:function(options){
     let that=this;
@@ -13,11 +14,10 @@ Page({
       version:options.version
     })
     wx.chooseImage({
-      count: 9, // 最多可以选择的图片张数，默认9
+      count: 1, // 最多可以选择的图片张数，默认9
       sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
       sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function(res){
-        console.log(res);
         for(var i=0;i<res.tempFilePaths.length;i++){
             var obj=new Object();
             obj.imgPath=(res.tempFilePaths)[i];
@@ -36,34 +36,49 @@ Page({
       }
     })
   },
+  chooseImage:function(e){
+    console.log(e);
+    let that=this;
+    wx.chooseImage({
+      count: 1, // 最多可以选择的图片张数，默认9
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: function(res){
+        ((that.data.imgUrls)[e.currentTarget.dataset.index]).imgPath=(res.tempFilePaths)[0];
+        that.setData({
+            imgUrls:that.data.imgUrls
+        })
+      }
+    })
+  },
   sendMessage:function(e){
     let that=this;
-    for(var i=0;i<that.data.imgUrls.length;i++){
-      that.uploadFile((that.data.imgUrls)[i]);
-    }
+    setTimeout(function(){
+      for(var i=0;i<that.data.imgUrls.length;i++){
+        that.uploadFile((that.data.imgUrls)[i]);
+      }
+    },500)
   },
   uploadFile:function(uploadData){
-    console.log(uploadData);
+    var content=encodeURI(uploadData.desc);
     let that=this;
+    let data={
+        openId:wx.getStorageSync("openId"),
+        spaceId:that.data.spaceId,
+        version:that.data.version,
+        type:0,
+        content:content
+      };
     wx.uploadFile({
-      url: 'https://developer.mokous.com/space/feed/add.json',
+      url: app.globalData.serverHost+'feed/add.json',
       filePath:uploadData.imgPath,
       name:'file',
-      formData:{
-        'openId':wx.getStorageSync("openId")+'',
-        'spaceId':that.data.spaceId,
-        'version':that.data.version,
-        'type':0,
-        'content':uploadData.desc
-      },
+      formData:data,
       success: function(res){
-        console.log("0909");
-        console.log(res);
         if(that.data.uploadFileCount==that.data.imgUrls.length-1){
             that.setData({
               uploadFileCount:0
             })
-            console.log("上传图片成功成功!");
             wx.navigateBack({
               delta: 1 // 回退前 delta(默认为1) 页面
             })
@@ -83,6 +98,26 @@ Page({
     this.setData({
       imgUrls:that.data.imgUrls
     })
+  },
+  previewImage:function(e){
+    var urls=[];
+    urls.push(e.currentTarget.dataset.src);
+    wx.previewImage({
+      urls: urls
+    })
+  },
+  showControl:function(e){
+    let that=this;
+    wx.showActionSheet({
+        itemList:['预览','更换图片'],
+        success:function(res){
+          if(res.tapIndex==0){
+            that.previewImage(e);
+          }else if(res.tapIndex==1){
+            that.chooseImage(e);
+          }
+        }
+      })
   },
   onShow:function(){
     // 页面显示

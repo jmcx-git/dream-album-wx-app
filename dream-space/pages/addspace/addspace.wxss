@@ -1,106 +1,126 @@
-page{
-    background-color: gainsboro;
+page {
+  background-color: gainsboro;
 }
 
-.image_area{
-    width: 100%;
-    height: 35%;
-}
-.image_select_view{
-    position: absolute;
-    left: 261rpx;
-    width: 228rpx;
-    height: 228rpx;
-}
-.image_select_image{
-    width: 220rpx;
-    height: 220rpx;
-    border-radius: 50%;
-    border: 4rpx solid white;
-}
-.image_select_camera{
-    position: relative;
-    top: -80rpx;
-    left: 170rpx;
-    width: 60rpx;
-    height: 60rpx;
+.image_area {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 300rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
-
-.input_area{
-    width: 100%;
-    height: 30%;
-    background-color: white;
-}
-.input_cells{
-    font-size: 30rpx;
-}
-.input_cells:before,
-.input_cells:after{
-    content:" ";
-    position:absolute;
-    left:0;
-    bottom:0;
-    right:0;
-    height:2rpx;
-    border-bottom:2rpx solid #D9D9D9;
-    color:#D9D9D9;
-}
-.input_cell{
-    display: flex;
-    align-items: center;
-    border-bottom: 2rpx solid #D9D9D9;
-}
-.input_cell_hd{
-    width:200rpx;
-    word-wrap:break-word;
-    word-break:break-all;
-    text-align: center;
-}
-.input_cell_bd{
-    flex: 1;
-}
-.input{
-    display:block;
-    height:1.4rem;
-    text-overflow:clip;
-    overflow:hidden;
-    white-space:nowrap;
-    min-height:1.4rem;
+.image_select_view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.btn_area{
-    width: 90%;
-    height: 35%;
-    padding: 0 5%;
-}
-.submit_btn{
-    position: absolute;
-    width: 90%;
-    height: 100rpx;
-    margin-top: 150rpx;
+.image_select_image {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 60rpx 0 20rpx;
+  border-radius: 50%;
+  background-color: white;
 }
 
+.image_select_camera {
+  position: relative;
+  top: -70rpx;
+  left: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
 
-.invite_input_area{
-    width: 100%;
-    height: 7.5%;
-    background-color: white;
+.input_area {
+  width: 100%;
+  background-color: white;
 }
-.invite_tips_area{
-    width: 90%;
-    padding: 5%;
-    font-size: 24rpx;
-    color: gray;
-    line-height: 1.8;
+
+.input_cells {
+  font-size: 30rpx;
 }
-.invite_btn_area{
-    width: 90%;
-    padding: 0 5%;
+
+.input_cell {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #d9d9d9;
 }
-.invite_submit_btn{
-    position: absolute;
-    width: 90%;
-    height: 100rpx;
-    margin-top: 10rpx;
+
+.input_cell_hd {
+  width: 200rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: center;
+}
+
+.input_cell_bd {
+  flex: 1;
+  align-items: center;
+}
+
+.input {
+  display: block;
+  height: 1.4rem;
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
+  min-height: 1.4rem;
+}
+
+.btn_area {
+  padding: 0 5%;
+  width: 90%;
+  height: 240rpx;
+}
+
+.submit_btn {
+  position: absolute;
+  width: 90%;
+  height: 100rpx;
+  background: #139bea;
+  color: #fff;
+  border-radius: 26rpx;
+  margin-top: 140rpx;
+  font-size: 36rpx;
+  font-weight: 200;
+}
+
+.invite_input_area {
+  width: 100%;
+  background-color: white;
+}
+
+.invite_tips_area {
+  width: 90%;
+  padding: 5%;
+  font-size: 24rpx;
+  color: gray;
+  line-height: 1.8;
+}
+
+.invite_btn_area {
+  width: 90%;
+  height: 110rpx;
+  padding: 0 5%;
+}
+
+.invite_submit_btn {
+  position: absolute;
+  width: 90%;
+  height: 100rpx;
+  background: #139bea;
+  color: #fff;
+  border-radius: 26rpx;
+  margin-top: 10rpx;
+  font-size: 36rpx;
+  font-weight: 200;
+}
+
+.btn_hover {
+  opacity: 0.7;
 }

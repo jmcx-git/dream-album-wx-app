@@ -1,0 +1,35 @@
+<view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
+  <image hidden="{{!nomsgs}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-150}}rpx;" src="../../image/nopicdefault.png" />
+</view>
+<view wx:else>
+  <view style="width:100%;height:14rpx;"></view>
+  <view class="content">
+    <view id="{{idx}}" wx:for="{{noticeMsgs}}" wx:for-index="idx" class="msg_view">
+      <view class="msg_sub_view">
+        <view class="user_info_area">
+          <view class="user_info_icon">
+            <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl}}" />
+          </view>
+          <view class="user_info_name">
+            {{item.nickname}}
+          </view>
+          <view hidden="{{item.type!=0}}" class="office_marker">官方</view>
+        </view>
+        <view class="msg_area">
+          <view class="comment_view">
+            <text>{{item.content}}</text>
+          </view>
+          <view class="time_view">
+            <text>{{item.timeDesc}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="msg_view_commentpic">
+        <image mode="aspectFill" src="{{item.resourceUrl}}" />
+      </view>
+    </view>
+  </view>
+  <view hidden="{{more}}" class="nomoretips">
+    <text>这是我的"底线"啦~</text>
+  </view>
+</view>

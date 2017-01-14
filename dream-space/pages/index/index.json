@@ -2,7 +2,6 @@
 {
     "navigationBarBackgroundColor": "#fff",
     "enablePullDownRefresh": true,
-    "backgroundColor": "black",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "空间"
 }

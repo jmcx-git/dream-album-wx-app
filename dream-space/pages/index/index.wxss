@@ -1,90 +1,102 @@
 /*模版列表*/
+
 page {
-  background-color: white;
+  background-color: gainsboro;
 }
 
-.default_area image {
+.default_area_image {
   position: absolute;
   width: 300rpx;
   height: 300rpx;
   left: 225rpx;
 }
 
-.space_container {
-  padding-bottom: 100rpx;
-}
-
 .main {
-  width: 100%;
+  width: 750rpx;
   display: flex;
   flex-wrap: wrap;
 }
 
-.sub_main_left {
-  width: 330rpx;
-  height: 440rpx;
-  padding: 5% 2% 0% 4%;
-}
-
-.sub_main_right {
-  width: 330rpx;
-  height: 440rpx;
-  padding: 5% 4% 0% 2%;
+.sub_main {
+  width: 750rpx;
+  height: 660rpx;
+  background-color: white;
+  margin-bottom: 10rpx;
 }
 
 .sub_main_image {
-  width: 100%;
-  height: 330rpx;
+  width: 750rpx;
+  height: 460rpx;
 }
 
 .image {
-  border-radius: 10rpx;
   width: 100%;
   height: 100%;
 }
 
 .sub_main_info {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 40rpx;
-  margin-top: 30rpx;
+  height: 160rpx;
+  padding: 20rpx 0;
+}
+
+.sub_main_info .time {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  padding-top: 14rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.time_line {
+  display: inline-block;
+  background-color: #000;
+  width: 80rpx;
+  height: 2rpx;
+}
+
+.time_info {
+  line-height: 1;
+  font-size: 24rpx;
+  color: #000;
+  margin: 0 20rpx;
 }
 
 .sub_main_info .name {
-  text-align: left;
-  font-size: 28rpx;
-  color: #353535;
+  text-align: center;
+  line-height: 2;
+  font-size: 40rpx;
+  font-weight: 200;
+  color: #000;
   width: 60%;
+  margin-top: 14rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.sub_main_info .recordnum {
-  text-align: right;
-  font-size: 25rpx;
-  color: rgb(150, 150, 150);
-  width: 40%;
-}
-
-.sub_main_desc {
-  text-align: left;
-  font-size: 25rpx;
-  color: rgb(150, 150, 150);
-  width: 100%;
+.sub_main_info .desc {
+  text-align: center;
+  line-height: 1.1;
+  font-size: 24rpx;
+  color: #888;
+  width: 80%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  margin-top: 15rpx;
 }
 
 .add_btn {
   position: fixed;
   bottom: 25rpx;
   right: 25rpx;
-  width: 110rpx;
-  height: 110rpx;
+  width: 116rpx;
+  height: 116rpx;
 }
 
 .add_btn image {
@@ -93,14 +105,38 @@ page {
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.85;
 }
 
-.nomoretips{
+.nomoretips {
   padding: 80rpx 50rpx 40rpx;
   width: 650rpx;
   line-height: 1;
   font-size: 30rpx;
   text-align: center;
   color: gray;
+}
+
+.add_shadow_page {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  opacity: 0;
+}
+
+.add_shadow_btnview {
+  position: absolute;
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel_add {
+  position: fixed;
+  bottom: 150rpx;
+  right: 64rpx;
+  width: 40rpx;
+  height: 40rpx;
 }

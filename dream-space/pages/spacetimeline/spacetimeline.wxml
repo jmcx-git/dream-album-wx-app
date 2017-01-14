@@ -1,21 +1,10 @@
 <import src="../../template/spacelineTemplate.wxml" />
 <view hidden="{{!createHidden}}" bindtouchmove="hideCommentWindow">
-<!--顶部-->
-<view class="spacetimelineTop">
-    <view class="spacetimelineBackground"></view>
-    <view class="spaceRecord">
-      <text>{{topData.records}}</text>
-      <text class="grayColor">记录</text>
-    </view>
-    <image class="iconImage" bindtap="showSpaceDetail" src="{{topData.avatarUrl}}" />
-    <view class="spaceInfo" bindtap="showSpaceDetail">
-        <text class="spaceInfoText">{{topData.info==null?'':topData.info}}</text>
-    </view>
-    <view class="spaceFriend">
-      <text>{{topData.occupants}}</text>
-      <text class="grayColor">亲友</text>
-    </view>
+<!--新的顶部-->
+<view bindtap="changeCover">
+    <image mode="aspectFill" class="spacetimelineTopCoverImage" src="{{topData.cover}}"/>
 </view>
+<image class="spacetimelineTopIconImage" bindtap="showSpaceDetail" src="{{topData.icon}}" />
 <!--亲友团-->
 <view class="friends">
     <view class="friends-left">
@@ -26,35 +15,28 @@
     </view>
 </view>
 <!--模版-->
-<template is="spacetimeline" data="{{spacetimelineList,winWidth}}"/>
+<template is="spacetimelinelatest" data="{{spacetimelineList,winWidth,myOpenId}}"/>
 <!--底部-->
-<view class="bottom">
+<view class="bottom" hidden="{{!noMoreData}}">
     <view class="bottomArea">
         <text>已经到底，没有更多啦～</text>
     </view>
 </view>
-<image src="../../image/create.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden}}"/>
-<view class="comment" hidden="{{commentHidden}}">
-    <input bindblur="hideComment" class="commentText" focus="{{commentFocus}}" type="text" placeholder="评论" />
-    <view class="commentSend" data-openid="{{topData.authorOpenId}}" data-feedid="{{topData.id}}" bindtap="saveComment">
-         <image class="commentSendImage" src="../../image/create.png" />
+<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden && (topData.secert!=null)}}"/>
+<form bindsubmit="saveComment">
+    <view class="commentnew" hidden="{{commentHidden}}">
+        <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <button form-type="submit" class="commentSendImageNew">发送</button>
     </view>
-</view>
+</form>
 </view>
 <!--点击创建之后的-->
-<view hidden="{{createHidden}}">
-    <view class="backgroundText">
-        <text>记录宝宝成长每一天!</text>
-    </view>
-    <view class="controlArea">
-        <view class="picArea" bindtap="tocratePhoto" data-type="0">
-            <image src="../../image/pic.png"  class="picAreaImage"/>
-            <text class="picAreaText">照片</text>
-        </view>
-        <view class="textArea" bindtap="toCreateWord" data-type="1">
-            <image src="../../image/pic.png"  class="textAreaImage"/>
-            <text class="textAreaText">文字</text>
-        </view>
-    </view>
-    <image src="../../image/del.png"  class="del" bindtap="closeCreatePage"/>
+<view hidden="{{createHidden}}" class="nav-view">
+<view class="nav-view-main">
+    <image src="../../image/photocreate.png" bindtap="tocratePhoto" data-type="0"  class="picAreaImage"/>
+    <image src="../../image/wordcreate.png" bindtap="toCreateWord" data-type="1"  class="textAreaImage"/>
+</view>
+<view class="delArea" bindtap="closeCreatePage">
+    <image src="../../image/del.png"  class="del"/>
+</view>
 </view>

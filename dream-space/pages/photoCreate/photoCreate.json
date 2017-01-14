@@ -1,4 +1,5 @@
 {
-    "navigationBarBackgroundColor": "#40E0D0",
-    "navigationBarTitleText": "照片记录"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "发表图片"
 }

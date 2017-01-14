@@ -1,4 +1,5 @@
 {
-    "navigationBarBackgroundColor": "#40E0D0",
-    "navigationBarTitleText": "宝宝亲友团"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "亲友团",
+    "navigationBarTextStyle": "black"
 }
