@@ -64,6 +64,7 @@ Page({
         console.log(res);
         if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
+          res.data.data.cover=res.data.data.cover==null?'../../image/lovedefaultcover.jpg':res.data.data.cover
         }
         that.setData({
           topData:res.data.data
