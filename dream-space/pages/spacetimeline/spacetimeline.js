@@ -16,7 +16,8 @@ Page({
     commentDefaultValue:'',
     topData:{},
     spacetimelineList:[],
-    noMoreData:false
+    noMoreData:false,
+    noContentHidden:true
   },
   onLoad: function (options) {
     let that=this;
@@ -50,6 +51,9 @@ Page({
       success: function(res){
         console.log("获取顶部数据");
         console.log(res);
+        if(res.data.data.icon==null || res.data.data.icon==''){
+          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
+        }
         that.setData({
           topData:res.data.data
         })
@@ -84,7 +88,8 @@ Page({
           if(res.data.data.resultList.length<that.data.size){
             console.log("到底了，别脱了");
             that.setData({
-              noMoreData:true
+              noMoreData:true,
+              
             })
           }
           console.log("noMoreData="+that.data.noMoreData);
@@ -101,6 +106,9 @@ Page({
             that.setData({
               spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
               start:that.data.start+res.data.data.resultList.length
+          })
+          that.setData({
+            noContentHidden:that.data.spacetimelineList.length>0?false:true
           })
           wx.stopPullDownRefresh();
           app.globalData.createFinishFlag=false;
