@@ -30,7 +30,48 @@ let pageData = {
         joined: false,
 
         // 分享数据
-        voteWorksId:""
+        voteWorksId:"",
+
+        isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
+        winnersinfolist:[{
+          content:"奖励1",
+          userinfos:[{
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          },
+          {
+            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            name:"呵呵哒",
+          }]
+      },{content:"奖励2",
+      userinfos:[{
+        src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+        name:"呵呵哒",
+      },
+      {
+        src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+        name:"呵呵哒",
+      }]}]
     },
     convert2rpx: function(px){
       return px * this.convertrate

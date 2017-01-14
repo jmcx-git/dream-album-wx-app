@@ -12,26 +12,25 @@
       <view class="actwidth"/>
       <view class="participate txt_label"><text class="keyword">{{participates}}</text>人参加</view>
     </view>
-    <view class="listofwinners dashedline" wx:if="{{true}}">
+
+    <!-- 中奖名单, 根据isShowWinnerList 判断是否显示 -->
+    <view class="listofwinners dashedline" wx:if="{{isShowWinnerList}}">
       <view class="activityIntrTitle">
         <view class="innerLine"/>
         <view class="intrTxt"> 中奖名单 </view>
         <view class="innerLine"/>
       </view>
-      <!--
-
-      -->
-      <block wx:for="{{winnerList}}" wx:key="{{index}}">
-        <view class="example">
-          <view class="expimg">
-            <image class="imginner" mode="aspectFill" src="{{item.img}}" />
-          </view>
-          <view class='exptxt'>{{item.title}}</view>
-        </view>
         <block wx:for="{{winnersinfolist}}" wx:key="{{index}}">
-          
+          <text class="contentprize">{{item.content}}</text>
+          <view class="userinfos">
+            <block wx:for="{{item.userinfos}}" wx:key="{{*this}}" wx:for-item="userinfo">
+              <view class="useritem">
+                <view class="usericon"><image class="imgusricon" src="{{userinfo.src}}"/></view>
+                <text class="username">{{userinfo.name}}</text>
+              </view>
+            </block>
+          </view>
         </block>
-      </block>
     </view>
     <view class="activityIntr dashedline">
       <view class="activityIntrTitle">
