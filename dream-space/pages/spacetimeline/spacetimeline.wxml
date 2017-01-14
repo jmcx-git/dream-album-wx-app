@@ -23,11 +23,6 @@
     </view>
 </view>
 <image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden && (topData.secert!=null)}}"/>
-
-<!--<view class="comment" hidden="{{commentHidden}}">
-    <input bindblur="hideComment" class="commentText" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" placeholder="评论" />
-    <image bindtap="saveComment" class="commentSendImage" src="../../image/sendcomment.png" />
-</view>-->
 <form bindsubmit="saveComment">
     <view class="commentnew" hidden="{{commentHidden}}">
         <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
@@ -41,5 +36,7 @@
     <image src="../../image/photocreate.png" bindtap="tocratePhoto" data-type="0"  class="picAreaImage"/>
     <image src="../../image/wordcreate.png" bindtap="toCreateWord" data-type="1"  class="textAreaImage"/>
 </view>
-    <image src="../../image/del.png"  class="del" bindtap="closeCreatePage"/>
+<view class="delArea" bindtap="closeCreatePage">
+    <image src="../../image/del.png"  class="del"/>
+</view>
 </view>
