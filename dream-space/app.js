@@ -24,8 +24,8 @@ App({
     nickName: "",
     avatarUrl: "",
     openId: "",
-    createFinishFlag:false,
-    modifySpaceInfoFlag:false,
+    createFinishFlag: false,
+    modifySpaceInfoFlag: false,
     indexRefreshStatus: false
   },
   serverFailedToast() {
@@ -56,5 +56,15 @@ App({
       icon: 'success',
       showCancel: false
     });
+  },
+  unAuthLoginToast() {
+    wx.showToast({
+      title: '未授权,请先授权'
+    })
+  },
+  refuseLoginToast() {
+    wx.showToast({
+      title: '已拒绝授权'
+    })
   }
 })

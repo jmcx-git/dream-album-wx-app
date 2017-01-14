@@ -20,6 +20,118 @@ Page({
   onLoad: function (options) {
     //nothing
     let that = this;
+    let redirectRefer = options.redirectRefer;
+    let fromOpenId = that.data.fromOpenId = options.fromOpenId;
+    let spaceId = that.data.spaceId = options.spaceId;
+    let owner = that.data.owner = options.owner;
+
+    let activityId = options.activityId;
+    let voteWorksId = options.voteWorksId;
+    let openId = app.globalData.openId;
+
+    if (redirectRefer == '' || redirectRefer == null || redirectRefer == 'null' || redirectRefer == undefined) {
+      that.onloadData();
+    } else {
+      if (redirectRefer == 1) {
+        if (openId == '') {
+          that.authLogin()
+          let openIdNow = app.globalData.openId;
+          if (openIdNow == '') {
+            //说明拒绝授权，什么都不做
+            console.log('分享后,拒绝授权,什么也不做')
+          } else {
+            that.shareLogic();
+          }
+        } else {
+          that.shareLogic();
+        }
+      } else if (redirectRefer == 2) {
+        //voteWorksId
+        if (openId == '') {
+          that.authLogin()
+          let openIdNow = app.globalData.openId;
+          if (openIdNow == '') {
+            //说明拒绝授权，什么都不做
+            console.log('分享后,拒绝授权,什么也不做')
+          } else {
+            wx.navigateTo({
+              url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
+            })
+          }
+        } else {
+          wx.navigateTo({
+            url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
+          })
+        }
+      } else {
+        console.log("redirectRefer即不为空,也不是1和2")
+      }
+    }
+  },
+  onShow: function () {
+    let that = this;
+    //强制刷新
+    if (app.globalData.indexRefreshStatus) {
+      app.globalData.indexRefreshStatus = false;
+      that.reInit();
+      if (!wx.getStorageSync('openId')) {
+        that.confirmGetData()
+      } else {
+        that.getData();
+      }
+    }
+  },
+  onHide: function () {
+    let that = this;
+    if (that.data.isOpen) {
+      that.bindViewTap();
+    }
+  },
+  shareLogic: function () {
+    let that = this;
+    let fromOpenId = that.data.fromOpenId;
+    let spaceId = that.data.spaceId;
+    let owner = that.data.owner;
+    let openId = app.globalData.openId;
+    if (owner == 1) {
+      wx.request({
+        url: app.globalData.serverHost + 'joined.json',
+        data: {
+          spaceId: spaceId,
+          openId: openId
+        },
+        method: 'GET',
+        success: function (res) {
+          if (res.statusCode == 200 && res.data.status == 0) {
+            if (res.data.data) {
+              //已加入 navigateTo space/space?spaceId=
+              wx.navigateTo({
+                url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
+              })
+            } else {
+              //未加入 navigateTo confirmJoinSpace?spaceId=&openId
+              wx.navigateTo({
+                url: '../confirmJoinSpace/confirmJoinSpace?spaceId=' + spaceId + "&openId=" + openId + "&fromOpenId=" + fromOpenId
+              })
+            }
+          } else {
+            app.errorToast(res.data.message);
+          }
+        },
+        fail: function () {
+          app.failedToast();
+        }
+      })
+    } else if (owner == 0) {
+      console.log("owner为0 什么也不做")
+      that.onloadData();
+    } else {
+      console.log("参数异常:owner即不为1也不为0");
+      that.onloadData();
+    }
+  },
+  onloadData: function () {
+    let that = this;
     let animation1 = wx.createAnimation({
       timingFunction: 'ease',
     })
@@ -44,27 +156,8 @@ Page({
       that.getData();
     }
   },
-  onShow: function () {
-    let that = this;
-    //强制刷新
-    if (app.globalData.indexRefreshStatus) {
-      app.globalData.indexRefreshStatus = false;
-      that.reInit();
-      if (!wx.getStorageSync('openId')) {
-        that.confirmGetData()
-      } else {
-        that.getData();
-      }
-    }
-  },
-  onHide: function () {
-    let that = this;
-    if (that.data.isOpen) {
-      that.bindViewTap();
-    }
-  },
-  confirmGetData: function () {
-    var that = this
+  authLogin: function () {
+    let that = this
     wx.login({
       success: function (wxLoginRes) {
         //获取code
@@ -84,7 +177,71 @@ Page({
               app.failedToast();
               return
             }
-            wx.setStorageSync('openId', openId);
+            wx.getUserInfo({
+              success: function (wxUserInfoResp) {
+                wx.request({
+                  url: app.globalData.serverHost + 'user/info.json',
+                  data: {
+                    openId: openId,
+                    encryptedData: wxUserInfoResp.encryptedData,
+                    iv: wxUserInfoResp.iv,
+                    appId: app.globalData.appId
+                  },
+                  method: 'GET',
+                  success: function (serverUserInfoResp) {
+                    if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
+                      wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
+                      wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
+                      wx.setStorageSync('openId', openId);
+                      app.globalData.openId = openId;
+                      app.globalData.nickName = serverUserInfoResp.data.data.nickName;
+                      app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
+                    } else {
+                      app.failedToast();
+                    }
+                  }
+                })
+              },
+              fail: function () {
+                //拒绝获取信息
+                app.refuseLoginToast();
+              }
+            })
+          },
+          fail: function (trd) {
+            console.log("缓存第三方key出错！", trd);
+            app.failedToast();
+          }
+        })
+      },
+      fail: function (ee) {
+        console.log("登录出错了！", ee);
+        app.failedToast();
+      }
+    })
+  },
+  confirmGetData: function () {
+    let that = this
+    wx.login({
+      success: function (wxLoginRes) {
+        //获取code
+        wx.request({
+          url: app.globalData.serverHost + 'user/session.json',
+          data: {
+            code: wxLoginRes.code,
+            appId: app.globalData.appId
+          },
+          method: 'GET',
+          success: function (sessionResp) {
+            //缓存第三方key
+            var openId = sessionResp.data
+            if (openId == "") {
+              console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
+              );
+              app.failedToast();
+              return
+            }
+            // wx.setStorageSync('openId', openId);
             wx.getUserInfo({
               success: function (wxUserInfoResp) {
                 wx.request({
@@ -113,8 +270,7 @@ Page({
               },
               fail: function () {
                 //拒绝获取信息
-                console.log("拒绝获取个人信息")
-                that.getData();
+                app.refuseLoginToast();
               }
             })
           },
@@ -161,7 +317,8 @@ Page({
           if (res.data.data == null || res.data.data.totalCount == 0) {
             console.log("没有数据!")
             that.setData({
-              nopics: true
+              nopics: true,
+              more: false
             })
           } else {
             let newStart = that.data.start + that.data.size;
@@ -200,6 +357,10 @@ Page({
   },
   addSpace: function (e) {
     let way = e.currentTarget.dataset.way;
+    if (app.globalData.openId == '') {
+      app.unAuthLoginToast();
+      return
+    }
     wx.navigateTo({
       url: '../addspace/addspace?way=' + way
     })
@@ -252,6 +413,10 @@ Page({
   },
   onPullDownRefresh: function () {
     let that = this;
+    if (app.globalData.openId == '') {
+      app.unAuthLoginToast();
+      return
+    }
     that.reInit();
     that.getData();
     wx.stopPullDownRefresh();
@@ -259,6 +424,10 @@ Page({
   onReachBottom: function () {
     let that = this;
     if (that.data.more) {
+      if (app.globalData.openId == '') {
+        app.unAuthLoginToast();
+        return
+      }
       that.getData();
     }
   },

@@ -8,7 +8,7 @@ Page({
         noticeMsgs: [],
         loadStatus: false,
         nomsgs: true,
-        more: false,
+        more: true,
         startId: 0,
         msgType: 0,//0:官方 1:个人
         size: 10
@@ -66,11 +66,12 @@ Page({
                     if (res.data.data == null || res.data.data == '' || res.data.data.totalCount == 0) {
                         console.log("没有数据!")
                         that.setData({
-                            nomsgs: true
+                            nomsgs: true,
+                            more: false
                         })
                     } else {
                         let length = res.data.data.resultList.length;
-                        let newStartId = res.data.data.resultList[length-1].id;
+                        let newStartId = res.data.data.resultList[length - 1].id;
                         let newItems = that.data.noticeMsgs.concat(res.data.data.resultList)
                         that.setData({
                             noticeMsgs: newItems,
@@ -97,7 +98,7 @@ Page({
             loadStatus: false,
             startId: 0,
             size: 10,
-            more: false
+            more: true
         })
     },
     onPullDownRefresh: function () {

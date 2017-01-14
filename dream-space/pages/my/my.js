@@ -47,6 +47,10 @@ Page({
   },
   toNoticePage: function (e) {
     let that = this;
+    if (app.globalData.openId == '') {
+      app.unAuthLoginToast();
+      return
+    }
     that.setData({
       newmsg: false
     })

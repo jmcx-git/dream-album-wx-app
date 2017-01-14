@@ -20,7 +20,7 @@
           <view hidden="{{!newmsg}}" class="redpoint"></view>
         </view>
       </view>
-      <view class="select_cell">
+      <!--<view class="select_cell">
         <image class="select_cell_icon" src="../../image/abouticon.png" />
         <text>关于我们</text>
         <view class="select_cell_arrow">
@@ -28,7 +28,7 @@
             <image style="width:100%;height:30%;" src="../../image/arrow.png" />
           </view>
         </view>
-      </view>
+      </view>-->
     </view>
   </view>
   <view class="customer">
