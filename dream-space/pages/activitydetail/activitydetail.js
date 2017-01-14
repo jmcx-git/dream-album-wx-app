@@ -136,7 +136,7 @@ let pageData = {
     },
     govote: function(e){
         wx.navigateTo({
-          url: '../vote/vote?activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="this.data.userWorksId
+          url: '../vote/vote?activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
         })
     },
     addphoto: function(e){
@@ -149,7 +149,7 @@ let pageData = {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
               wx.navigateTo({
-                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="that.data.userWorksId
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
               })
           }
         }
@@ -158,7 +158,7 @@ let pageData = {
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
       wx.navigateTo({
-        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="that.data.userWorksId
+        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
     contactus: function(e){
