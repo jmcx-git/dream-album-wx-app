@@ -1,18 +1,23 @@
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
-    <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
-    <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />
+  <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
+  <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />
 </view>
 
 <!--空间列表列表-->
 <view wx:else class="main">
   <view id="{{idx}}" wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
-      <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/avatar3.jpg':item.cover}}" />
+      <block wx:if="{{item.type==0}}">
+        <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
+      </block>
+      <block wx:else>
+        <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
+      </block>
     </view>
     <view class="sub_main_info">
       <view class="time">
         <view class="time_line"></view>
-        <text class="time_info">10 Jan.2017</text>
+        <text class="time_info">{{item.timeDesc}}</text>
         <view class="time_line"></view>
       </view>
       <view class="name">{{item.name}}</view>
