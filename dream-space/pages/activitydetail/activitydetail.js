@@ -40,11 +40,11 @@ let pageData = {
     },
     onLoad:function(option){
       // 判断分享
-      console.log("share", option)
-      console.log("share", 0)
+      app.globalData.indexRefreshStatus=true;
+
       if(option.share ==1){
         // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
-        console.log("share", option)
+
         app.globalData.fromOpenId = option.fromOpenId
         app.globalData.redirectRefer = 2
         app.globalData.activityId = option.activityId
@@ -56,12 +56,12 @@ let pageData = {
 
         // return
       }
-      console.log("share", 3)
+
 
       // option parms
       this.data.id = option.activityId;
 
-      console.log("share", 4)
+
       let that = this;
       wx.getSystemInfo({
        success: function(res){
@@ -74,9 +74,9 @@ let pageData = {
          })
         }
       })
-      console.log("share", 5)
+
     this.initData(this.data.id)
-    console.log("share", 6)
+
     },
     initData: function(activityId){
       let that = this;

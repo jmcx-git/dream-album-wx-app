@@ -18,7 +18,9 @@
         <view class="intrTxt"> 中奖名单 </view>
         <view class="innerLine"/>
       </view>
-      <!--<block wx:for="{{winnersinfolist}}">-->
+      <!--
+
+      -->
       <block wx:for="{{winnerList}}" wx:key="{{index}}">
         <view class="example">
           <view class="expimg">
@@ -26,6 +28,9 @@
           </view>
           <view class='exptxt'>{{item.title}}</view>
         </view>
+        <block wx:for="{{winnersinfolist}}" wx:key="{{index}}">
+          
+        </block>
       </block>
     </view>
     <view class="activityIntr dashedline">

@@ -56,7 +56,7 @@ Page({
       app.globalData.activityId = options.activityId
       app.globalData.voteWorksId = options.voteWorksId
       wx.switchTab({
-        url: "pages/index/index"
+        url: "../index/index"
       })
 
       return
