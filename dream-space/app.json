@@ -1,12 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addspace/addspace",
-    "pages/notice/notice",
-    "pages/my/my",
     "pages/discovery/discovery",
+    "pages/my/my",
+    "pages/notice/notice",
+    "pages/addspace/addspace",
     "pages/addphoto/addphoto",
-    "pages/test/test",
     "pages/activitydetail/activitydetail",
     "pages/joinin/joinin",
     "pages/vote/vote",
@@ -24,24 +23,25 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [{
+    "list": [ 
+      {
       "pagePath": "pages/index/index",
       "text": "空间",
       "iconPath": "image/space1.png",
       "selectedIconPath": "image/space2.png"
-    }, {
+      }, {
       "pagePath": "pages/discovery/discovery",
       "text": "发现",
       "iconPath": "image/found1.png",
       "selectedIconPath": "image/found2.png"
-    }, {
+      },{
       "pagePath": "pages/my/my",
       "text": "更多",
       "iconPath": "image/more1.png",
       "selectedIconPath": "image/more2.png"
     }],
+    "color" : "#000000",
     "borderStyle" : "white",
-    "backgroundColor" : "white",
-    "color" : "#000000"
+    "backgroundColor" : "#ffffff"
   }
 }
