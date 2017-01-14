@@ -172,7 +172,7 @@ page{
 .spacetimelineImage{
   margin-top:30rpx;
   width:100%;
-  margin-bottom: 14rpx;
+  margin-bottom: 30rpx;
 }
 .spacetimelineImageDesc{
   font-size: 28rpx;
