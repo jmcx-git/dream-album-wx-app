@@ -33,7 +33,8 @@ let pageData = {
         voteWorksId:"",
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
-        winnersinfolist:[{
+
+        winnersinfolist:[{ // fake data obj
           content:"奖励1",
           userinfos:[{
             src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
