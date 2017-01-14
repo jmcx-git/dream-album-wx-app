@@ -293,6 +293,7 @@ page{
   height:120rpx;
   top:85%;
   right:1%;
+  z-index: 10;
 }
 
 /*记录宝宝成长每一天*/
@@ -393,4 +394,18 @@ page{
   text-align: center;
   background-color: #00adef;
   color: #ffffff;
+}
+/*空间无内容时的样式*/
+.nocontent{
+  position: absolute;
+  width:100%;
+  height:330rpx;
+  z-index: 1;
+}
+.directtocreate{
+  position: absolute;
+  top:calc(85% + 35rpx);
+  width:100%;
+  height: 32rpx;
+  z-index: 3;
 }

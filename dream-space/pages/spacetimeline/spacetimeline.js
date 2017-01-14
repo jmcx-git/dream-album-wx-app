@@ -16,7 +16,8 @@ Page({
     commentDefaultValue:'',
     topData:{},
     spacetimelineList:[],
-    noMoreData:false
+    noMoreData:false,
+    noContentHidden:true
   },
   onLoad: function (options) {
     let that=this;
@@ -87,7 +88,8 @@ Page({
           if(res.data.data.resultList.length<that.data.size){
             console.log("到底了，别脱了");
             that.setData({
-              noMoreData:true
+              noMoreData:true,
+              
             })
           }
           console.log("noMoreData="+that.data.noMoreData);
@@ -104,6 +106,9 @@ Page({
             that.setData({
               spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
               start:that.data.start+res.data.data.resultList.length
+          })
+          that.setData({
+            noContentHidden:that.data.spacetimelineList.length>0?false:true
           })
           wx.stopPullDownRefresh();
           app.globalData.createFinishFlag=false;
