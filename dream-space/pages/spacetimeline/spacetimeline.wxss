@@ -131,6 +131,7 @@ page{
 .dateMonth{
   font-size: 28rpx;
   margin-left:5rpx;
+  font-weight: bold;
 }
 .avatarUrl {
   position: absolute;
@@ -172,7 +173,7 @@ page{
 .spacetimelineImage{
   margin-top:30rpx;
   width:100%;
-  margin-bottom: 14rpx;
+  margin-bottom: 30rpx;
 }
 .spacetimelineImageDesc{
   font-size: 28rpx;
@@ -307,12 +308,19 @@ page{
 .nav-view-main{
     text-align:center;
 }
+.delArea{
+  position: absolute;
+  width:200rpx;
+  height:200rpx;
+  top:70%;
+  right:50rpx;
+}
 .del{
   position: absolute;
   width:30rpx;
   height:30rpx;
-  top:70%;
-  right:100rpx;
+  top:85rpx;
+  left:85rpx;
 }
 .picAreaImage{
   position: relative;
@@ -353,4 +361,36 @@ page{
   width: 120rpx;
   margin-top:10rpx;
   margin-left: 5rpx;
+}
+/*新的评论*/
+.commentnew{
+  position: fixed;
+  height:100rpx;
+  width: 100%;
+  padding-left: 20rpx;
+  top:calc(100% - 100rpx);
+  left:0rpx;
+  background-color: #f5f5f5;
+}
+.commentTextNew{
+  width:calc(100% - 200rpx);
+  position: absolute;
+  left:20rpx;
+  line-height: 80rpx;
+  top:10rpx;
+  height:80rpx;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+.commentSendImageNew{
+  width:140rpx;
+  position: absolute;
+  top:10rpx;
+  left:calc(100% - 170rpx);
+  height:80rpx;
+  font-size: 36rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #00adef;
+  color: #ffffff;
 }
