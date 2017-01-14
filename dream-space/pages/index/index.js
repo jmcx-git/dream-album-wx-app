@@ -14,10 +14,8 @@ Page({
     isOpen: false,//判断进展
     animationData1: {},
     animationData2: {},
-    animationData3: {},
     isHidden1: true,
-    isHidden2: true,
-    showAddPage: false
+    isHidden2: true
   },
   onLoad: function (options) {
     //nothing
@@ -28,12 +26,8 @@ Page({
     let animation2 = wx.createAnimation({
       timingFunction: 'ease',
     })
-    let animation3 = wx.createAnimation({
-      timingFunction: 'linear'
-    })
     that.data.animation1 = animation1;
     that.data.animation2 = animation2;
-    that.data.animation3 = animation3;
     wx.getSystemInfo({
       success: function (res) {
         let convertTimes = 750 / res.windowWidth;
@@ -200,23 +194,9 @@ Page({
       isOpen: false,//判断进展
       animationData1: {},
       animationData2: {},
-      animationData3: {},
       isHidden1: true,
-      isHidden2: true,
-      showAddPage: false
+      isHidden2: true
     })
-  },
-  onPullDownRefresh: function () {
-    let that = this;
-    that.reInit();
-    that.getData();
-    wx.stopPullDownRefresh();
-  },
-  onReachBottom: function () {
-    let that = this;
-    if (that.data.more) {
-      that.getData();
-    }
   },
   addSpace: function (e) {
     let way = e.currentTarget.dataset.way;
@@ -232,10 +212,6 @@ Page({
     })
   },
   bindViewTap: function () {
-    let that = this;
-    that.animation1();
-  },
-  animation1: function () {
     let that = this;
     if (!that.data.isProcess) {
       that.data.isProcess = true
@@ -274,29 +250,16 @@ Page({
       }
     }
   },
-  animation2: function () {
+  onPullDownRefresh: function () {
     let that = this;
-    let animation = that.data.animation3;
-    if (that.data.showAddPage) {
-      animation.opacity(0).step();
-      that.setData({
-        animationData3: animation.export()
-      })
-      setTimeout(function () {
-        that.setData({
-          showAddPage: false
-        })
-      }, 400)
-    } else {
-      animation.opacity(0.75).step();
-      that.setData({
-        showAddPage: true
-      })
-      setTimeout(function () {
-        that.setData({
-          animationData3: animation.export()
-        })
-      }, 50)
+    that.reInit();
+    that.getData();
+    wx.stopPullDownRefresh();
+  },
+  onReachBottom: function () {
+    let that = this;
+    if (that.data.more) {
+      that.getData();
     }
   },
   onShareAppMessage: function () {
