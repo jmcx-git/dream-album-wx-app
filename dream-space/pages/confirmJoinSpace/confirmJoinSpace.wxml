@@ -1,7 +1,12 @@
 <view style="width:100%;height:{{windowHeight}}px;">
   <view class="user_info_area">
     <view class="userinfo">
-      <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl}}"/>
+      <block wx:if="{{spaceType==0}}">
+        <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl==null?'../../image/familydefault.jpg':avatarUrl}}" />
+      </block>
+      <block wx:else>
+        <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl==null?'../../image/lovedefault.jpg':avatarUrl}}" />
+      </block>
       <text class="userinfo-nickname">{{name}}</text>
       <text class="userinfo-time">{{bornDate}}</text>
     </view>

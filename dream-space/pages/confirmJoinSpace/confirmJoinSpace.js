@@ -9,7 +9,8 @@ Page({
         spaceId: 0,
         name: '',
         avatarUrl: '',
-        bornDate: ''
+        bornDate: '',
+        spaceType: 0
     },
     onLoad: function (options) {
         let that = this;
@@ -25,7 +26,7 @@ Page({
                     convertTimes: convertTimes,
                     openId: openId,
                     fromOpenId: fromOpenId,
-                    spaceId: spaceId
+                    spaceId: spaceId,
                 })
             }
         })
@@ -50,7 +51,8 @@ Page({
                     that.setData({
                         name: res.data.data.name,
                         avatarUrl: res.data.data.icon,
-                        bornDate: res.data.data.bornDate
+                        bornDate: res.data.data.bornDate,
+                        spaceType: res.data.data.type
                     })
                 } else {
                     app.failedToast();
