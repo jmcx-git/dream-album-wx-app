@@ -21,6 +21,15 @@ Page({
   onLoad: function (options) {
     let that = this;
     let way = options.way;
+    if (way == 1) {
+      wx.setNavigationBarTitle({
+        title: '创建空间'
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: '加入空间'
+      })
+    }
     let nowDate = util.formatDate(new Date())
     let page = getCurrentPages().length;
     wx.getSystemInfo({
@@ -75,8 +84,11 @@ Page({
               title: '添加成功'
             })
             app.globalData.indexRefreshStatus = true;
-            wx.navigateBack({
-              delta: that.data.page
+            // wx.navigateBack({
+            //   delta: that.data.page
+            // })
+            wx.redirectTo({
+              url: '../spacetimeline/spacetimeline?spaceId=' + data.data + "&version=" + app.globalData.version
             })
           } else {
             app.errorToast(data.message);
@@ -100,8 +112,11 @@ Page({
               title: '添加成功'
             })
             app.globalData.indexRefreshStatus = true;
-            wx.navigateBack({
-              delta: that.data.page
+            // wx.navigateBack({
+            //   delta: that.data.page
+            // })
+            wx.redirectTo({
+              url: '../spacetimeline/spacetimeline?spaceId=' + res.data.data + "&version=" + app.globalData.version
             })
           } else {
             app.errorToast(res.data.message);
@@ -141,8 +156,11 @@ Page({
               title: '验证成功'
             })
             app.globalData.indexRefreshStatus = true;
-            wx.navigateBack({
-              delta: that.data.page
+            // wx.navigateBack({
+            //   delta: that.data.page
+            // })
+            wx.redirectTo({
+              url: '../spacetimeline/spacetimeline?spaceId=' + res.data.data + "&version=" + app.globalData.version
             })
           } else if (res.data.status == -2) {
             wx.showToast({
