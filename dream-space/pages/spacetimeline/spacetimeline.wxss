@@ -354,3 +354,35 @@ page{
   margin-top:10rpx;
   margin-left: 5rpx;
 }
+/*新的评论*/
+.commentnew{
+  position: relative;
+  height:100rpx;
+  width: 100%;
+  padding-left: 20rpx;
+  top:calc(100% - 100rpx);
+  left:0rpx;
+  background-color: #f5f5f5;
+}
+.commentTextNew{
+  width:calc(100% - 200rpx);
+  position: absolute;
+  left:20rpx;
+  line-height: 80rpx;
+  top:10rpx;
+  height:80rpx;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+.commentSendImageNew{
+  width:140rpx;
+  position: absolute;
+  top:10rpx;
+  left:calc(100% - 170rpx);
+  height:80rpx;
+  font-size: 36rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #00adef;
+  color: #ffffff;
+}

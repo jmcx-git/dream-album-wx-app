@@ -155,7 +155,9 @@ Page({
   },
   saveComment:function(e){
     let that=this;
-    if(that.data.commentContent=='' || that.data.commentContent==null || that.data.commentContent==undefined){
+    var content=e.detail.value.commentContent;
+    console.log("content="+content);
+    if(content=='' || content==null || content==undefined){
       return;
     }
     wx.request({
@@ -164,14 +166,14 @@ Page({
         openId:wx.getStorageSync("openId"),
         feedId:that.data.commentFeedId,
         version:that.data.version,
-        comment:that.data.commentContent
+        comment:content
       },
       method: 'GET',
       success: function(res){
         var obj=new Object();
         obj.openId=wx.getStorageSync("openId");
         obj.nickname=wx.getStorageSync("nickName");
-        obj.comment=that.data.commentContent;
+        obj.comment=content;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
           spacetimelineList:that.data.spacetimelineList,

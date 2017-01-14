@@ -23,10 +23,17 @@
     </view>
 </view>
 <image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden && (topData.secert!=null)}}"/>
-<view class="comment" hidden="{{commentHidden}}">
+
+<!--<view class="comment" hidden="{{commentHidden}}">
     <input bindblur="hideComment" class="commentText" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" placeholder="评论" />
     <image bindtap="saveComment" class="commentSendImage" src="../../image/sendcomment.png" />
-</view>
+</view>-->
+<form bindsubmit="saveComment">
+    <view class="commentnew" hidden="{{commentHidden}}">
+        <input bindblur="hideComment" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <button form-type="submit" class="commentSendImageNew">发送</button>
+    </view>
+</form>
 </view>
 <!--点击创建之后的-->
 <view hidden="{{createHidden}}" class="nav-view">
