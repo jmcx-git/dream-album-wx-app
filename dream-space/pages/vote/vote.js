@@ -12,7 +12,8 @@ Page({
     inputVal: "",
     scrollHeight: 500,
     showSearchbar: true,
-    selectedWorksId: -1
+    selectedWorksId: -1,
+    voteWorksId:""
   },
   showInput: function () {
       this.setData({
@@ -45,6 +46,22 @@ Page({
   },
   onLoad:function(options){
     console.log("id: "+options.activityId)
+
+    // 判断分享
+    if(options.share ==1){
+      // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
+
+      app.globalData.fromOpenId = options.fromOpenId
+      app.globalData.redirectRefer = 2
+      app.globalData.activityId = options.activityId
+      app.globalData.voteWorksId = options.voteWorksId
+      wx.switchTab({
+        url: "pages/index/index"
+      })
+
+      return
+    }
+
     // 页面初始化 options为页面跳转所带来的参数
     let that = this;
     wx.getSystemInfo({
@@ -53,7 +70,9 @@ Page({
        that.setData({
          bottom_top: res.windowHeight - that.convert2px(100),
          activityId: options.activityId,
-         scrollHeight: res.windowHeight
+         scrollHeight: res.windowHeight,
+         voteWorksId: options.voteWorksId,
+         userWorksId: options.userWorksId
        })
       }
     })
@@ -123,7 +142,9 @@ Page({
   },
   radioChange: function(e){
     console.log(e)
-    this.data.selectedWorksId = e.detail.value
+    this.setData({
+      selectedWorksId : e.detail.value
+    })
   },
   onReady:function(){
     // 页面渲染完成
@@ -196,5 +217,26 @@ Page({
     })
     console.log(e)
 
+  },
+  onShareAppMessage: function () {
+    let title = app.globalData.nickName+'邀请您给他加油助威。'
+    let desc = '我正在参加活动名称,邀请您给他加油助威。'
+    let url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+'=&share=1'
+    if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
+      if(this.data.userWorksId == "" || this.data.userWorksId == undefined){
+        title = app.globalData.nickName+'邀请您参与投票。'
+        desc = '我发现一个不错的作品，想请您也来投票表达一下态度。'
+      }else{
+        title = app.globalData.nickName+'邀请您给我加油助威。'
+        desc = '我正在参加活动名称,邀请您给我加油助威,作品Id:'+this.data.userWorksId+'。'
+        url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId'+this.data.userWorksId+'=&share=1'
+      }
+
+    }
+    return {
+      title: title,
+      desc: desc,
+      path: url
+    }
   }
 })

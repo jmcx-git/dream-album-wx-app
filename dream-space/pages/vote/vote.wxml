@@ -31,8 +31,9 @@
         <view class="imgbox">
           <view class="boxitm">
             <image class="img" src="{{item.cover}}"/>
-            <radio class="icon" value="{{item.id}}"/>
-            <image hidden src="{{'/image/icon2.png'}}"/>
+            <radio class="icon" hidden value="{{item.id}}"/>
+            <image class="icon" hidden='{{false}}'
+            src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
           </view>
         </view>
         <view class="itembottom">

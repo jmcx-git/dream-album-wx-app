@@ -6,13 +6,17 @@ Page({
     solgan: "",
     desc: "",
     localphoto: "",
-    isuploading: false
+    isuploading: false,
+    voteWorksId:"",
+    userWorksId:""
   },
   onLoad:function(options){
     console.log(options)
     this.setData({
       id:options.id,
-      localphoto: options.photopath
+      localphoto: options.photopath,
+      voteWorksId:options.voteWorksId,
+      userWorksId:options.userWorksId
     })
     // 页面初始化 options为页面跳转所带来的参数
   },
@@ -53,7 +57,7 @@ Page({
           let rdata = JSON.parse(res.data)
           if(rdata.status ==0 || (rdata.status == -1 && rdata.message == "您已参与")){
             wx.redirectTo({
-              url: '../vote/vote?activityId='+that.data.id
+              url: '../vote/vote?activityId='+that.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="that.data.userWorksId
             })
             return;
           }

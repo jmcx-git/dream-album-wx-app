@@ -1,14 +1,32 @@
 <view class="all_views">
-    <image class="img" src="https://raw.githubusercontent.com/yanchunlei/res/master/ps/ps_0.png"></image>
+    <image class="img" mode="aspectFill" src="{{cover}}"></image>
     <view class="title">{{title}}</view>
-    <view class="description">{{intr}}</view>
+    <view class="description">{{introduction}}</view>
     <view class="actinfos">
       <view class='deadline'>
-        <image src="/image/icon.png" class="icon_inner"></image>
-        <view class="txt_label">{{deadline.pfx}}<text class="keyword">{{deadline.keyword}}</text>{{deadline.sfx}}</view>
+        <image src="{{showicon}}" class="icon_inner"></image>
+        <view class="txt_label">{{deadline.pfx}}
+        <text class="keyword">{{deadline.keyword}}</text>
+        {{deadline.sfx}}</view>
       </view>
       <view class="actwidth"/>
-      <view class="participate txt_label">{{participate.pfx}}<text class="keyword">{{participate.keyword}}</text>{{participate.sfx}}</view>
+      <view class="participate txt_label"><text class="keyword">{{participates}}</text>人参加</view>
+    </view>
+    <view class="listofwinners dashedline" wx:if="{{true}}">
+      <view class="activityIntrTitle">
+        <view class="innerLine"/>
+        <view class="intrTxt"> 中奖名单 </view>
+        <view class="innerLine"/>
+      </view>
+
+      <block wx:for="{{winnerList}}" wx:key="{{index}}">
+        <view class="example">
+          <view class="expimg">
+            <image class="imginner" mode="aspectFill" src="{{item.img}}" />
+          </view>
+          <view class='exptxt'>{{item.title}}</view>
+        </view>
+      </block>
     </view>
     <view class="activityIntr dashedline">
       <view class="activityIntrTitle">
@@ -20,26 +38,26 @@
         <text class="content">{{part}}</text>
       </block>
     </view>
-    <view class="examplesair dashedline">
+    <view class="examplesair dashedline" wx:if="{{examples.length >0}}">
       <block wx:for="{{examples}}" wx:key="{{index}}">
         <view class="example">
           <view class="expimg">
-            <image class="imginner" src="{{item.imgsrc}}" />
+            <image class="imginner" src="{{item.img}}"/>
           </view>
-          <view class='exptxt'>item.txt</view>
+          <view class='exptxt'>{{item.title}}</view>
         </view>
       </block>
     </view>
-    <view class="prizeIntr dashedline">
+    <view class="prizeIntr dashedline"  wx:if="{{prizeList.length >0}}">
       <view class="activityIntrTitle">
         <view class="innerLine"/>
         <view class="intrTxt"> 奖品区 </view>
         <view class="innerLine"/>
       </view>
       <block wx:for="{{prizeList}}" wx:for-item="prizeItem" wx:key="{{this}}">
-        <text class="prizeTitle">{{prizeItem.title}}</text>
-        <view class="prizeImg">
-          <image class="prizeImgItem" src="{{prizeItem.imgsrc}}"/>
+        <text class="prizeTitle">{{prizeItem.rankDesc}} {{prizeItem.title}}</text>
+        <view class="prizeImg" wx:if='{{prizeItem.img != ""}}'>
+          <image class="prizeImgItem" src="{{prizeItem.img}}"/>
         </view>
       </block>
     </view>
@@ -49,10 +67,24 @@
         </view>
     </view>
 
-    <view class="buttonviews" style="top:{{buttonstop}}px">
-      <view class="btnview" hover hover-class="btn_hover" bindtap="takein">去参加</view>
-      <view class="split"/>
-      <view class="btnview" hover hover-class="btn_hover" bindtap="govote">投票</view>
+    <view class="buttonviews" style="top:{{buttonstop}}px" >
+      <view class="both  subbuttonviews" wx:if="{{step == 1}}">
+        <view class="btnview" hover hover-class="btn_hover" bindtap="takein" wx:if="{{!joined}}">去参加</view>
+        <view class="btnview btnviewcancel" wx:if="{{joined}}">已参加</view>
+        <view class="split"/>
+        <view class="btnview" hover hover-class="btn_hover" bindtap="govote">投票</view>
+      </view>
+      <view class="showonly  subbuttonviews" wx:if="{{step ==0}}">
+        <view class="btnview btnviewcancel">活动尚未开始</view>
+      </view>
+
+      <view class="showonly  subbuttonviews" wx:if="{{step ==2}}">
+        <view class="btnview btnviewcancel">投票结果统计中</view>
+      </view>
+
+      <view class="btnone  subbuttonviews" wx:if="{{step ==3}}">
+        <view class="btnview" hover hover-class="btn_hover" bindtap="contactus">查看结果</view>
+      </view>
     </view>
     <view class="joinallviews" hidden="{{!isshowjoinin}}" style="height:{{windowHeight}}px" bindtap="cancel">
       <view class= "joininpart" style="margin-top:{{joinmargintop}}px">

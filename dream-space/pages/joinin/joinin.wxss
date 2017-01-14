@@ -1,26 +1,42 @@
 /* pages/joinin/joinin.wxss */
+page{
+  background: #eeeeee;
+}
+.list{
+  background: #ffffff;
+  padding: 20rpx;
+}
 .label{
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  margin-top: 20rpx;
+  padding: 15rpx 10rpx;
+  position: relative;
 }
 .content{
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
+  padding-left: 30rpx;
+  font-weight: 200;
 }
 .img{
   width: 200rpx;
   height: 200rpx;
+}
+.icon_choosed{
+  width: 200rpx;
+  height: 200rpx;
+  position:absolute;
 }
 .checkbox{
   margin-top: 80rpx
 }
 
 .title{
-  font-size: 40rpx;
+  font-size: 35rpx;
   margin:5rpx;
+  color: #888888;
 }
 
 .title_item{
@@ -33,4 +49,32 @@
   font-size: 30rpx;
   margin-top:20rpx;
   color:#888888;
+}
+.bottombtn{
+  position: relative;
+  height: 98rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  top: -98rpx;
+}
+
+.btnview{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  color: #00adef;
+  background-color: rgba(255,255,255,0.9);
+}
+.btnviewcancel{
+  color: #888888;
+}
+.btn_hover{
+  background-color: #dddddd;
 }
