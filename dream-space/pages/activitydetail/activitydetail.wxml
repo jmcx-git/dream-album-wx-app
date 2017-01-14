@@ -18,7 +18,7 @@
         <view class="intrTxt"> 中奖名单 </view>
         <view class="innerLine"/>
       </view>
-
+      <!--<block wx:for="{{winnersinfolist}}">-->
       <block wx:for="{{winnerList}}" wx:key="{{index}}">
         <view class="example">
           <view class="expimg">
