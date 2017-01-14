@@ -20,23 +20,34 @@ Page({
     noContentHidden:true
   },
   onLoad: function (options) {
-    let that=this;
-     wx.getSystemInfo({
-      success: function(res) {
-        that.setData({
-          winWidth:res.windowWidth
-        })
-      }
-    })
-    this.setData({
-      spaceId:options.spaceId,
-      version:options.version,
-      myOpenId:wx.getStorageSync('openId')      
-    })
-    setTimeout(function(){
-      that.getSpaceTopData();
-      that.getSpaceListData();
-    },200)
+    var owner=options.owner;
+    if(owner!=undefined && owner!=null && owner!=''){
+      app.globalData.fromOpenId=options.fromOpenId;
+      app.globalData.spaceId=options.spaceId;
+      app.globalData.redirectRefer=1;
+      app.globalData.owner=options.owner;
+       wx.switchTab({
+         url: '../index/index'
+       })
+    }else{
+      let that=this;
+      wx.getSystemInfo({
+        success: function(res) {
+          that.setData({
+            winWidth:res.windowWidth
+          })
+        }
+      })
+      this.setData({
+        spaceId:options.spaceId,
+        version:options.version,
+        myOpenId:wx.getStorageSync('openId')      
+      })
+      setTimeout(function(){
+        that.getSpaceTopData();
+        that.getSpaceListData();
+      },200)
+    }
   },
   getSpaceTopData:function(){
     let that=this;
@@ -123,7 +134,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name
     })
   },
   showMyRecord:function(){
@@ -319,6 +330,7 @@ Page({
     },500)
   },
   onShow:function(){
+    console.log("我在onshow");
     console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
     if(app.globalData.createFinishFlag){
@@ -446,5 +458,22 @@ Page({
           }
         }
       })
+    },
+    //分享
+    onShareAppMessage:function(){
+      let that=this;
+      var fromOpenId=wx.getStorageSync('openId');
+      var spaceId=that.data.spaceId;
+      var owner=(that.data.topData.secert==null || that.data.topData.secert=='' || that.data.topData.secert==undefined)?0:1;
+      var queryStr="/pages/spacetimeline/spacetimeline?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
+      var ownerTitle=wx.getStorageSync('nickName')+"邀请您入住他(她)的私密空间"+that.data.topData.name;
+      var guestTitle=wx.getStorageSync('nickName')+"邀请您使用"+app.globalData.productName;
+      var ownerContent='这是属于我们的秘密';
+      var guestContent="用它，您可以记录，分享您的珍贵时刻。"
+      return {
+        title:owner==0?guestTitle:ownerTitle,
+        desc:owner==0?guestContent:ownerContent,
+        path:queryStr
+      }
     }
 })
