@@ -10,11 +10,13 @@
 </view>
 
 <!--浏览记录-->
-<view bindtap="showDetail" data-openid="{{item.openId}}" class="friendsTop" wx:for="{{occupantList}}" wx:key="avatarUrlsTop">
+<view class="friendsHistory">
+<view bindtap="showDetail" data-openid="{{item.openId}}" class="{{(index==occupantList.length-1)?'friendsTop':'friendsTopBottom'}}" wx:for="{{occupantList}}" wx:key="avatarUrlsTop">
     <image src="{{item.avatarUrl}}" class="friends-avatarUrl" />
-    <text class="nickNameText" style="top:{{item.nickname.length>13?30:50}}rpx;">{{item.nickname}}</text>
+    <text class="nickNameText">{{item.nickname}}</text>
     <text class="historyText">{{item.info}}</text>
     <view class="navigator" >
-        <text>></text>
+        <image class="friendsArrow" src="../../image/friendsArrow.png" />
     </view>
+</view>
 </view>

@@ -4,7 +4,8 @@ Page({
     imgUrls:[],
     spaceId:0,
     version:0,
-    uploadFileCount:0
+    uploadFileCount:0,
+    photoDesc:'为今天的记录说点什么呢?'
   },
   onLoad:function(options){
     let that=this;
@@ -13,7 +14,7 @@ Page({
       version:options.version
     })
     wx.chooseImage({
-      count: 9, // 最多可以选择的图片张数，默认9
+      count: 1, // 最多可以选择的图片张数，默认9
       sizeType: ['original', 'compressed'], // original 原图，compressed 压缩图，默认二者都有
       sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
       success: function(res){
@@ -36,6 +37,7 @@ Page({
     })
   },
   chooseImage:function(e){
+    console.log(e);
     let that=this;
     wx.chooseImage({
       count: 1, // 最多可以选择的图片张数，默认9
@@ -91,12 +93,31 @@ Page({
     })
   },
   gainDesc:function(e){
-    console.log("blur:"+e.detail.value);
     let that=this;
     (that.data.imgUrls)[e.currentTarget.dataset.index].desc=e.detail.value;
     this.setData({
       imgUrls:that.data.imgUrls
     })
+  },
+  previewImage:function(e){
+    var urls=[];
+    urls.push(e.currentTarget.dataset.src);
+    wx.previewImage({
+      urls: urls
+    })
+  },
+  showControl:function(e){
+    let that=this;
+    wx.showActionSheet({
+        itemList:['预览','更换图片'],
+        success:function(res){
+          if(res.tapIndex==0){
+            that.previewImage(e);
+          }else if(res.tapIndex==1){
+            that.chooseImage(e);
+          }
+        }
+      })
   },
   onShow:function(){
     // 页面显示

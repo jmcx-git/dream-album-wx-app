@@ -1,7 +1,7 @@
 <view class="photoCreateArea" wx:if="{{imgUrls.length>0}}">
     <view class="photoCreateTop" wx:for="{{imgUrls}}" wx:key="imgUrls">
-        <image src="{{item.imgPath}}" data-index="{{index}}" bindtap="chooseImage" class="photoCreateImage"/>
-        <textarea class="photoCreateImageDesc" bindconfirm="gainDesc" data-index="{{index}}" bindblur="gainDesc" placeholder="照片描述"  />
+        <textarea maxlength="-1" class="photoCreateImageDesc" bindconfirm="gainDesc" data-index="{{index}}" bindblur="gainDesc" placeholder="{{photoDesc}}"  />
+         <image bindtap="showControl" data-src="{{item.imgPath}}" src="{{item.imgPath}}" data-index="{{index}}" bindtap="showControl" class="photoCreateImage"/>
     </view>
 </view>
 <button type="default" wx:if="{{imgUrls.length>0}}" class="send" bindtap="sendMessage">发送</button>
