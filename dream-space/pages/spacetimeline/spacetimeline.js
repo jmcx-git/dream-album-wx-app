@@ -17,7 +17,7 @@ Page({
     topData:{},
     spacetimelineList:[],
     noMoreData:false,
-    noContentHidden:true
+    noContentHidden:false
   },
   onLoad: function (options) {
     var owner=options.owner;
