@@ -42,6 +42,9 @@ Page({
       },
       method: 'GET',
       success: function(res){
+         if(res.data.data.icon==null || res.data.data.icon==''){
+          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
+        }
         that.setData({
           spaceInfo:res.data.data,
           spaceIcon:res.data.data.icon,

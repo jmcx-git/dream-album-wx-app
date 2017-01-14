@@ -50,6 +50,9 @@ Page({
       success: function(res){
         console.log("获取顶部数据");
         console.log(res);
+        if(res.data.data.icon==null || res.data.data.icon==''){
+          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
+        }
         that.setData({
           topData:res.data.data
         })
