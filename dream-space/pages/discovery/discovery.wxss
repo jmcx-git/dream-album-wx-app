@@ -58,6 +58,7 @@ page{
 .icon{
   width: 30rpx;
   height: 30rpx;
+  margin-right: 5rpx;
 }
 .title{
   margin-top: 5rpx;
@@ -107,10 +108,11 @@ page{
   font-size: 24rpx;
   color: #000000;
   margin: 0 30rpx;
-  font-weight:lighter;
+  font-weight:200;
 }
 .txttitle{
   font-size: 40rpx;
+  font-weight:200;
   color: #000000;
   white-space:nowrap;
   text-overflow:clip;
@@ -119,6 +121,7 @@ page{
 }
 .deadline{
   font-size: 24rpx;
+  font-weight:200;
   color: #ffffff;
   background-color: #000000;
   display: -webkit-box;
@@ -126,6 +129,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rpx;
 }
 
 .bottom{

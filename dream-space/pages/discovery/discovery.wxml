@@ -17,7 +17,7 @@
           </view>
           <view class="infoitem">
             <view class='deadline'>
-              <image src="/image/icon.png" class="icon"></image>
+              <image src="{{icons[item.step % icons.length]}}" class="icon"/>
               <text class="txt">{{item.stepDesc}}</text>
             </view>
           </view>

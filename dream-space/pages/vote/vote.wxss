@@ -105,7 +105,6 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  margin: 10rpx 0;
   align-items: center;
   justify-content: center;
   background-color: rgba(255,255,255,0.9);
