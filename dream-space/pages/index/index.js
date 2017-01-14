@@ -20,13 +20,12 @@ Page({
   onLoad: function (options) {
     //nothing
     let that = this;
-    let redirectRefer = options.redirectRefer;
-    let fromOpenId = that.data.fromOpenId = options.fromOpenId;
-    let spaceId = that.data.spaceId = options.spaceId;
-    let owner = that.data.owner = options.owner;
-
-    let activityId = options.activityId;
-    let voteWorksId = options.voteWorksId;
+    let redirectRefer = app.globalData.redirectRefer;
+    let fromOpenId = app.globalData.fromOpenId;
+    let spaceId = app.globalData.spaceId;
+    let owner = app.globalData.owner;
+    let activityId = app.globalData.activityId;
+    let voteWorksId = app.globalData.voteWorksId;
     let openId = app.globalData.openId;
 
     if (redirectRefer == '' || redirectRefer == null || redirectRefer == 'null' || redirectRefer == undefined) {
@@ -54,11 +53,13 @@ Page({
             //说明拒绝授权，什么都不做
             console.log('分享后,拒绝授权,什么也不做')
           } else {
+            that.clearGlobalShareData()
             wx.navigateTo({
               url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
             })
           }
         } else {
+          that.clearGlobalShareData()
           wx.navigateTo({
             url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
           })
@@ -89,9 +90,9 @@ Page({
   },
   shareLogic: function () {
     let that = this;
-    let fromOpenId = that.data.fromOpenId;
-    let spaceId = that.data.spaceId;
-    let owner = that.data.owner;
+    let fromOpenId = app.globalData.fromOpenId;
+    let spaceId = app.globalData.spaceId;
+    let owner = app.globalData.owner;
     let openId = app.globalData.openId;
     if (owner == 1) {
       wx.request({
@@ -104,12 +105,14 @@ Page({
         success: function (res) {
           if (res.statusCode == 200 && res.data.status == 0) {
             if (res.data.data) {
-              //已加入 navigateTo space/space?spaceId=
+              //已加入
+              that.clearGlobalShareData()
               wx.navigateTo({
                 url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
               })
             } else {
-              //未加入 navigateTo confirmJoinSpace?spaceId=&openId
+              //未加入
+              that.clearGlobalShareData()
               wx.navigateTo({
                 url: '../confirmJoinSpace/confirmJoinSpace?spaceId=' + spaceId + "&openId=" + openId + "&fromOpenId=" + fromOpenId
               })
@@ -430,6 +433,14 @@ Page({
       }
       that.getData();
     }
+  },
+  clearGlobalShareData: function () {
+    app.globalData.redirectRefer = '';
+    app.globalData.fromOpenId = '';
+    app.globalData.spaceId = '';
+    app.globalData.owner = '';
+    app.globalData.activityId = '';
+    app.globalData.voteWorksId = '';
   },
   onShareAppMessage: function () {
     return {
