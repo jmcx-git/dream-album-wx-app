@@ -306,7 +306,7 @@ Page({
         that.setData({
           commentHidden:true,
           commentFocus:false,
-          commentDefaultValue:''
+          // commentDefaultValue:''
         })
     },500)
   },
