@@ -26,7 +26,8 @@ App({
     openId: "",
     createFinishFlag:false,
     modifySpaceInfoFlag:false,
-    indexRefreshStatus: false
+    indexRefreshStatus: false,
+    productName:'时光小窝'
   },
   serverFailedToast() {
     wx.showToast({
