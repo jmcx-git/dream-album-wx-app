@@ -6,9 +6,15 @@ page {
 
 .default_area_image {
   position: absolute;
-  width: 300rpx;
+  width: 750rpx;
   height: 300rpx;
-  left: 225rpx;
+}
+
+.default_area_notice{
+  position: absolute;
+  width: 750rpx;
+  height: 40rpx;
+  bottom: 68rpx;
 }
 
 .main {

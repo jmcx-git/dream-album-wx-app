@@ -4,9 +4,8 @@ page {
 
 .default_area_image {
   position: absolute;
-  width: 300rpx;
+  width: 750rpx;
   height: 300rpx;
-  left: 225rpx;
 }
 
 image {

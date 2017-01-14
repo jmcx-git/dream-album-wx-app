@@ -1,5 +1,5 @@
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
-  <image hidden="{{!nomsgs}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-150}}rpx;" src="../../image/nopicdefault.png" />
+  <image hidden="{{!nomsgs}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
 </view>
 <view wx:else>
   <view style="width:100%;height:14rpx;"></view>

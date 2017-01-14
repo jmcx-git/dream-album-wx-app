@@ -9,6 +9,7 @@ Page({
     avatarImg: '',
     typeIndex: 0,
     typeArray: ['亲子空间', '恋爱空间'],
+    defaultAvatar: '../../image/familydefault.png',
     inputPlaceholder: '我就叫宝宝',
     inputPrefixBorn: '宝宝生日',
     inputPrefixSex: '宝宝性别',
@@ -38,9 +39,9 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    if(para.name.trim()==''){
+    if (para.name.trim() == '') {
       wx.showToast({
-        title:'昵称不能为空'
+        title: '昵称不能为空'
       })
       return
     }
@@ -115,9 +116,9 @@ Page({
   inviteSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    if(para.secert.trim()==''){
+    if (para.secert.trim() == '') {
       wx.showToast({
-        title:'验证码不能为空'
+        title: '验证码不能为空'
       })
       return
     }
@@ -179,6 +180,7 @@ Page({
       that.setData({
         typeIndex: index,
         inputPlaceholder: '我就叫宝宝',
+        defaultAvatar: '../../image/familydefault.png',
         inputPrefixBorn: '宝宝生日',
         inputPrefixSex: '宝宝性别',
         btnPrefix: '开启亲子空间',
@@ -187,6 +189,7 @@ Page({
       that.setData({
         typeIndex: index,
         inputPlaceholder: '就是耐你',
+        defaultAvatar: '../../image/lovedefault.png',
         inputPrefixBorn: '恋爱时间',
         inputPrefixSex: '恋人性别',
         btnPrefix: '开启恋爱空间',
