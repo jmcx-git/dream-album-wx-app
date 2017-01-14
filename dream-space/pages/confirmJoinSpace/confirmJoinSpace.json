@@ -1,5 +1,7 @@
 {
-    "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTitleText": "邀请"
+    "navigationBarTitleText": "邀请",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark"
 }

@@ -1,7 +1,8 @@
-
 {
-    "navigationBarBackgroundColor": "#fff",
-    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "空间",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "空间"
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": true
 }

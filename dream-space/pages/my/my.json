@@ -1,5 +1,7 @@
 {
-    "navigationBarBackgroundColor": "white",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "更多",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "更多"
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark"
 }

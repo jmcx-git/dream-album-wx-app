@@ -21,6 +21,7 @@ Page({
   },
   onLoad: function (options) {
     var owner=options.owner;
+    app.globalData.indexRefreshStatus = true;
     if(owner!=undefined && owner!=null && owner!=''){
       app.globalData.fromOpenId=options.fromOpenId;
       app.globalData.spaceId=options.spaceId;
