@@ -61,6 +61,7 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
+    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
@@ -72,7 +73,8 @@ Page({
       // 'gender': para.gender == "" ? '0' : para.gender,
       //0:亲子空间 1恋爱空间
       // 'type': para.type,
-      'version': that.data.version
+      'version': that.data.version,
+      'info':para.info
     }
       wx.request({
         url: url,
