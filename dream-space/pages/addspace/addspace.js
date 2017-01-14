@@ -9,12 +9,12 @@ Page({
     avatarImg: '',
     typeIndex: 0,
     typeArray: ['亲子空间', '恋爱空间'],
-    inputPrefixName: '宝宝昵称',
+    inputPlaceholder: '我就叫宝宝',
     inputPrefixBorn: '宝宝生日',
     inputPrefixSex: '宝宝性别',
+    btnPrefix: '开启亲子空间',
     addWay: 1,
-    page: 0,
-    btnDisabled: true
+    page: 0
   },
   onLoad: function (options) {
     let that = this;
@@ -38,6 +38,12 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
+    if(para.name.trim()==''){
+      wx.showToast({
+        title:'昵称不能为空'
+      })
+      return
+    }
     let url = app.globalData.serverHost + "add.json";
     let nowDate = that.data.date;
     let data = {
@@ -109,6 +115,12 @@ Page({
   inviteSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
+    if(para.secert.trim()==''){
+      wx.showToast({
+        title:'验证码不能为空'
+      })
+      return
+    }
     let url = app.globalData.serverHost + "join.json";
     wx.request({
       url: url,
@@ -147,17 +159,6 @@ Page({
       }
     })
   },
-  checkData: function (e) {
-    if (e.detail.value.trim() != '') {
-      this.setData({
-        btnDisabled: false
-      })
-    } else {
-      this.setData({
-        btnDisabled: true
-      })
-    }
-  },
   choosenImage: function (e) {
     let that = this;
     wx.chooseImage({
@@ -177,16 +178,18 @@ Page({
     if (index == 0) {
       that.setData({
         typeIndex: index,
-        inputPrefixName: '宝宝昵称',
+        inputPlaceholder: '我就叫宝宝',
         inputPrefixBorn: '宝宝生日',
         inputPrefixSex: '宝宝性别',
+        btnPrefix: '开启亲子空间',
       })
     } else if (index == 1) {
       that.setData({
         typeIndex: index,
-        inputPrefixName: '恋人昵称',
-        inputPrefixBorn: '纪念日',
+        inputPlaceholder: '就是耐你',
+        inputPrefixBorn: '恋爱时间',
         inputPrefixSex: '恋人性别',
+        btnPrefix: '开启恋爱空间',
       })
     } else {
       that.setData({

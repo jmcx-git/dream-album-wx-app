@@ -22,9 +22,9 @@
           </view>
         </view>
         <view class="input_cell">
-          <view class="input_cell_hd">{{inputPrefixName}}</view>
+          <view class="input_cell_hd">起个昵称</view>
           <view class="input_cell_bd">
-            <input name="name" class="input" placeholder-style="color:gray;" maxlength="26" placeholder="宝宝小名" bindblur="checkData" bindinput="checkData" />
+            <input name="name" class="input" placeholder-style="color:gray;" maxlength="26" placeholder="{{inputPlaceholder}}" bindblur="checkData" bindinput="checkData" />
           </view>
         </view>
         <view class="input_cell">
@@ -39,21 +39,21 @@
           <view class="input_cell_hd">{{inputPrefixSex}}</view>
           <view class="input_cell_bd">
             <radio-group bindchange="radioChange" name="gender">
-              <radio value="1" checked/>男
-              <radio value="2" />女
+              <radio value="1" checked>男</radio>
+              <radio value="2" style="margin-left:10rpx;">女</radio>
             </radio-group>
           </view>
         </view>
         <view class="input_cell">
           <view class="input_cell_hd">空间介绍</view>
           <view class="input_cell_bd">
-            <input name="info" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介..." />
+            <input name="info" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介" />
           </view>
         </view>
       </view>
     </view>
     <view class="btn_area">
-      <button class="submit_btn" disabled="{{btnDisabled}}" form-type="submit" type="primary">开启宝宝的微空间</button>
+      <button class="submit_btn" hover-class="btn_hover" form-type="submit">{{btnPrefix}}</button>
     </view>
   </form>
 
@@ -74,7 +74,7 @@
       <text>输入来自亲友的宝宝邀请码，验证通过后就可以加入宝宝亲友团，一起见证和守护宝宝的成长。</text>
     </view>
     <view class="invite_btn_area">
-      <button class="invite_submit_btn" disabled="{{btnDisabled}}" form-type="submit" type="primary">验证邀请码</button>
+      <button class="invite_submit_btn" hover-class="btn_hover" form-type="submit">验证邀请码</button>
     </view>
   </form>
 </view>
