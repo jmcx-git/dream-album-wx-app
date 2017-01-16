@@ -23,8 +23,8 @@
     </view>
 </view>
 <image src="../../image/nocontent.png" class="nocontent" hidden="{{!noContentHidden}}" />
-<image src="../../image/directtocreate.png" class="directtocreate" hidden="{{!noContentHidden || (topData.secert=='null')}}"/>
-<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert=='null')}}"/>
+<image src="../../image/directtocreate.png" class="directtocreate" hidden="{{!noContentHidden || (topData.secert==null)}}"/>
+<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert==null)}}"/>
 <form bindsubmit="saveComment">
     <view class="commentnew" hidden="{{commentHidden}}">
         <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
