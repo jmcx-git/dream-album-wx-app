@@ -5,6 +5,7 @@ Page({
     secert:'',
     spaceId:0,
     version:0,
+    type:0,
     name:''
   },
   onLoad:function(options){
@@ -23,7 +24,8 @@ Page({
         secert:options.secert,
         spaceId:options.spaceId,
         version:options.version,
-        name:options.name
+        name:options.name,
+        type:options.type
       })
       wx.request({
         url: app.globalData.serverHost+'occupant/list.json',
@@ -48,6 +50,19 @@ Page({
     }
   },
   resetYqm:function(){
+    let that=this;
+    wx.showModal({
+      title:'提醒',
+      content:'重置后，之前的邀请码将不再有效。确认重置？',
+      showCancel:true,
+      success:function(res){
+        if(res.confirm){
+          that.modifyYqm();
+        }
+      }
+    })  
+  },
+  modifyYqm:function(){
     let that=this;
     wx.request({
       url: app.globalData.serverHost+'secert/reset.json',
