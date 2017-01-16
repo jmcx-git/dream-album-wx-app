@@ -122,10 +122,11 @@ page{
   width:130rpx;
   position: absolute;
   left:30rpx;
-  top:30rpx;
+  top:22rpx;
 }
 .dateDay{
   font-size:56rpx;
+  line-height: 56rpx;
   font-weight: bold;
 }
 .dateMonth{
