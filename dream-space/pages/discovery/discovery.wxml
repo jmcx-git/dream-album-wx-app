@@ -1,5 +1,5 @@
 <view class="all_views">
-  <scroll-view scroll-y="true" bindscrolltolower="scrolltolower" style="height:{{scrollHeight}}px" lower-threshold="10">
+  <view>
     <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
       <view class="item_root" bindtap="showdetail" hover hover-class="item_hover" data-id="{{item.id}}">
         <image class="img" mode="aspectFill" src="{{item.cover}}"></image>
@@ -30,5 +30,5 @@
             <text>已经到底，没有更多啦～</text>
         </view>
     </view>
-  </scroll-view>
+  </view>
 </view>

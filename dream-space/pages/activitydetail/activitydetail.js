@@ -82,11 +82,13 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-      app.globalData.indexRefreshStatus=true;
+
+      if(option.share == 'yes'){
+        app.globalData.indexRefreshStatus=true;
+      }
 
       if(option.share ==1){
         // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
-
         app.globalData.fromOpenId = option.fromOpenId
         app.globalData.redirectRefer = 2
         app.globalData.activityId = option.activityId
@@ -130,7 +132,8 @@ let pageData = {
         },
         method: "GET",
         success: function(res) {
-          console.log("actiitydetail", res)
+          console.log("actiitydetail", res.data.data.userPrizes)
+          console.log("actiitydetail", res.data.data.userPrizes == null)
           if(res.statusCode == 200){
             if(res.data.status == 0){
               let dat = res.data.data;
@@ -144,14 +147,15 @@ let pageData = {
                 activityIntrParts:activityIntrParts,
                 showicon: icons[dat.step % icons.length],
                 deadline:{pfx:"距离结束",keyword:dat.stepTime, sfx: dat.stepTimeUnit},
-                participates: 0,
+                participates: dat.participates,
 
                 examples:dat.examples,
 
                 prizeList: dat.prizes,
                 step: dat.step,
                 joined: dat.joined > 0,
-                userWorksId: dat.worksId
+                userWorksId: dat.worksId,
+                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 4
               })
               return
             }

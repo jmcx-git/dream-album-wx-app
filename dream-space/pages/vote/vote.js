@@ -35,18 +35,25 @@ Page({
       this.setData({
           findKey: e.detail.value
       });
-      this.data.entries = []
-      this.data.noMoreList = false;
-      this.data.start = 0;
-      this.data.selectedWorksId = -1
-      this.loadMore()
+      this.refreshData()
+  },
+  refreshData: function(e){
+    this.data.entries = []
+    this.data.noMoreList = false;
+    this.data.start = 0;
+    this.setData({
+      selectedWorksId: -1
+    })
+    this.loadMore()
   },
   convert2px: function(rpx){
     return rpx / this.convertrate
   },
   onLoad:function(options){
     console.log("share: ", options)
-    app.globalData.indexRefreshStatus=true;
+    if(options.share == 'yes'){
+      app.globalData.indexRefreshStatus=true;
+    }
     // 判断分享
     if(options.share ==1){
       // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
@@ -77,6 +84,13 @@ Page({
       }
     })
 
+    this.loadMore()
+  },
+  onPullDownRefresh: function () {
+    this.refreshData()
+    wx.stopPullDownRefresh();
+  },
+  onReachBottom: function (){
     this.loadMore()
   },
   loadMore: function(){
@@ -141,11 +155,40 @@ Page({
     })
     console.log(this.data.showSearchbar)
   },
+  touchstart:function(e){
+    this.lastY = e.touches[0].pageY
+  },
+  touchmove:function(e){
+    if(this.lastY != undefined){
+      let showSearchbar = true;
+      let pageY = e.touches[0].pageY;
+      if(pageY - this.lastY <0){
+        showSearchbar = false
+      }
+      console.log("showSearchbar ", showSearchbar)
+      this.setData({
+        showSearchbar: showSearchbar
+      })
+    }
+
+
+    console.log(e)
+  },
+  touchend:function(e){
+    this.lastY = undefined
+  },
   radioChange: function(e){
     console.log(e)
-    this.setData({
-      selectedWorksId : e.detail.value
-    })
+    if(this.data.selectedWorksId != e.currentTarget.dataset.id){
+      this.setData({
+        selectedWorksId : e.currentTarget.dataset.id
+      })
+    }else{
+      this.setData({
+        selectedWorksId : -1
+      })
+    }
+
   },
   onReady:function(){
     // 页面渲染完成
@@ -179,13 +222,12 @@ Page({
               content:"投票成功",
               showCancel: false,
               success:function(res){
-                wx.navigateBack({
-                  delta: 2
-                })
+                that.refreshData()
               }
             })
             return
           }
+          msg = res.data.message
         }
         that.handleFail(msg)
       },
