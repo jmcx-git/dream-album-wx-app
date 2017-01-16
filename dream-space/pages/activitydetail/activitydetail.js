@@ -30,7 +30,7 @@ let pageData = {
         joined: false,
 
         // 分享数据
-        voteWorksId:"",
+        voteWorksId:-1,
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
@@ -132,7 +132,7 @@ let pageData = {
         },
         method: "GET",
         success: function(res) {
-          console.log("actiitydetail", res.data.data.userPrizes)
+          console.log("actiitydetail", res)
           console.log("actiitydetail", res.data.data.userPrizes == null)
           if(res.statusCode == 200){
             if(res.data.status == 0){
@@ -201,8 +201,9 @@ let pageData = {
         success: function (res) {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
+              let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
               wx.navigateTo({
-                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+voteWorksId+"&userWorksId="+that.data.userWorksId
               })
           }
         }
@@ -210,8 +211,10 @@ let pageData = {
     },
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
+      let that = this
+      let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
       wx.navigateTo({
-        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
     contactus: function(e){

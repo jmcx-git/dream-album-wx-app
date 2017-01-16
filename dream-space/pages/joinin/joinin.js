@@ -10,8 +10,8 @@ Page({
     noMoreList: false,
     worksId: -1,
     buttonstop: 560,
-    voteWorksId:"",
-    userWorksId:""
+    voteWorksId:-1,
+    userWorksId:-1
   },
   convert2px: function(rpx){
     return rpx / this.convertrate
@@ -94,6 +94,7 @@ Page({
               console.log(res)
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
+                  console.log(that.data.voteWorksId)
                   wx.redirectTo({
                     url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
                   })
