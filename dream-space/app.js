@@ -4,7 +4,6 @@ App({
   //注册自定义toast
   WeToast,
   onLaunch: function () {
-
     let openId = wx.getStorageSync("openId");
     if (typeof openId !== 'undefined' && openId != '') {
       this.globalData.openId = openId;
@@ -30,7 +29,7 @@ App({
     createFinishFlag: false,
     modifySpaceInfoFlag: false,
     indexRefreshStatus: false,
-    productName: '时光小窝',
+    productName: '时光小窝',
     fromOpenId: '',
     spaceId: '',
     redirectRefer: '',

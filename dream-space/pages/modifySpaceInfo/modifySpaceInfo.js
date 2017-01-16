@@ -36,12 +36,14 @@ Page({
     wx.request({
       url: app.globalData.serverHost+"info.json",
       data: {
-        openId:wx.getStorageSync('openId'),
+        openId:app.globalData.openId,
         spaceId:options.spaceId,
         version:options.version
       },
       method: 'GET',
       success: function(res){
+        console.log("获取空间信息信息 ");
+        console.log(res);
          if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
         }
@@ -62,6 +64,7 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
+    console.log("提交参数");
     console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
@@ -82,18 +85,20 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
+          console.log("修改成功");
+          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
             wx.navigateBack({
               delta: 1
             })
           } else {
-            app.failedToast()
+            app.failedToast();
           }
         },
         fail: function (res) {
-          console.log(res)
-          app.failedToast()
+          console.log(res);
+          app.failedToast();
         }
       })
   },
@@ -120,7 +125,7 @@ Page({
           filePath:res.tempFilePaths[0],
           name:'image',
           formData: {
-            openId:wx.getStorageSync('openId'),
+            openId:app.globalData.openId,
             spaceId:that.data.spaceId,
             version:that.data.version
           },
@@ -133,6 +138,7 @@ Page({
           fail: function(ron) {
             console.log("上传失败!");
             console.log(ron);
+            app.uploadFileFailedToast();
           }
         })
       }

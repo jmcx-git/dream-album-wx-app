@@ -42,7 +42,7 @@ Page({
       this.setData({
         spaceId:options.spaceId,
         version:options.version,
-        myOpenId:wx.getStorageSync('openId')      
+        myOpenId:app.globalData.openId     
       })
       setTimeout(function(){
         that.getSpaceTopData();
@@ -55,7 +55,7 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'detail.json',
       data: {
-        openId:wx.getStorageSync('openId'),
+        openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         version:that.data.version
       },
@@ -87,7 +87,7 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
-        openId:wx.getStorageSync('openId')+'',
+        openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         start:that.data.start,
         size:that.data.size,
@@ -132,7 +132,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId
     })
   },
   showMyRecord:function(){
@@ -179,7 +179,7 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'feed/comment/add.json',
       data: {
-        openId:wx.getStorageSync("openId"),
+        openId:app.globalData.openId,
         feedId:that.data.commentFeedId,
         version:that.data.version,
         comment:content
@@ -187,8 +187,8 @@ Page({
       method: 'GET',
       success: function(res){
         var obj=new Object();
-        obj.openId=wx.getStorageSync("openId");
-        obj.nickname=wx.getStorageSync("nickName");
+        obj.openId=app.globalData.openId;
+        obj.nickname=app.globalData.nickName;
         obj.comment=content;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
@@ -231,10 +231,9 @@ Page({
   },
   delComment:function(e){
     let that=this;
-    if(e.currentTarget.dataset.openid!=wx.getStorageSync("openId")){
+    if(e.currentTarget.dataset.openid!=app.globalData.openId){
       return;
     }
-    console.log(e);
     wx.showActionSheet({
       itemList:['删除'],
       success:function(res){
@@ -255,7 +254,7 @@ Page({
             wx.request({
               url: app.globalData.serverHost+'feed/comment/delete.json',
               data: {
-                openId:wx.getStorageSync("openId"),
+                openId:app.globalData.openId,
                 feedId:feedid,
                 commentId:commentid,
                 version:that.data.version
@@ -293,7 +292,7 @@ Page({
                 wx.request({
                   url: app.globalData.serverHost+'feed/del.json',
                   data: {
-                    openId:wx.getStorageSync('openId'),
+                    openId:app.globalData.openId,
                     feedId:e.currentTarget.dataset.feedid,
                     version:that.data.version
                   },
@@ -352,7 +351,7 @@ Page({
       wx.request({
         url: app.globalData.serverHost+'feed/like.json',
         data: {
-          openId:wx.getStorageSync("openId"),
+          openId:app.globalData.openId,
           feedId:e.currentTarget.dataset.feedid,
           status:status,
           version:that.data.version
@@ -362,9 +361,9 @@ Page({
           var likeIconsList=((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons;
           if(likeIconsList.length==0 || status==0){
             var obj=new Object();
-            obj.openId=wx.getStorageSync("openId");
-            obj.nickName=wx.getStorageSync("nickName");
-            obj.avatarUrl=wx.getStorageSync('avatarUrl');
+            obj.openId=app.globalData.openId;
+            obj.nickName=app.globalData.nickName;
+            obj.avatarUrl=app.globalData.avatarUrl;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
             setTimeout(function(){
@@ -374,7 +373,7 @@ Page({
             },500)
           }else{
             for(var i=0;i<likeIconsList.length;i++){
-              if(likeIconsList[i].openId == wx.getStorageSync("openId")){
+              if(likeIconsList[i].openId == app.globalData.openId){
                   ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.splice(i,1);
                   ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=-1;
                   setTimeout(function(){
@@ -433,7 +432,7 @@ Page({
                   filePath:rps.tempFilePaths[0],
                   name:'image',
                   formData: {
-                    openId:wx.getStorageSync('openId'),
+                    openId:app.globalData.openId,
                     spaceId:that.data.spaceId,
                     version:that.data.version
                   },
@@ -458,12 +457,12 @@ Page({
     //分享
     onShareAppMessage:function(){
       let that=this;
-      var fromOpenId=wx.getStorageSync('openId');
+      var fromOpenId=app.globalData.openId;
       var spaceId=that.data.spaceId;
       var owner=(that.data.topData.secert==null || that.data.topData.secert=='' || that.data.topData.secert==undefined)?0:1;
       var queryStr="/pages/spacetimeline/spacetimeline?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
-      var ownerTitle=wx.getStorageSync('nickName')+"邀请您入住他(她)的私密空间"+that.data.topData.name;
-      var guestTitle=wx.getStorageSync('nickName')+"邀请您使用"+app.globalData.productName;
+      var ownerTitle=app.globalData.nickName+"邀请您入住他(她)的私密空间"+that.data.topData.name;
+      var guestTitle=app.globalData.nickName+"邀请您使用"+app.globalData.productName;
       var ownerContent='这是属于我们的秘密';
       var guestContent="用它，您可以记录，分享您的珍贵时刻。"
       return {

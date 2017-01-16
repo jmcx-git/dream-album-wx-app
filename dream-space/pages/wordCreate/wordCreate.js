@@ -25,7 +25,7 @@ Page({
        wx.request({
         url: app.globalData.serverHost+'feed/add.json',
         data: {
-          'openId':wx.getStorageSync("openId"),
+          'openId':app.globalData.openId,
           'spaceId':that.data.spaceId,
           'version':that.data.version,
           'type':1,

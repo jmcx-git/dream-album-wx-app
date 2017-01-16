@@ -11,7 +11,8 @@ Page({
         more: true,
         startId: 0,
         msgType: 0,//0:官方 1:个人
-        size: 10
+        size: 10,
+        productName: app.globalData.productName
     },
     onLoad: function (options) {
         let that = this;
