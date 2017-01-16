@@ -42,8 +42,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取空间信息信息 ");
-        console.log(res);
          if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
         }
@@ -64,8 +62,6 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    console.log("提交参数");
-    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
@@ -85,10 +81,9 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
-          console.log("修改成功");
-          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
+            app.globalData.indexRefreshStatus = true;
             wx.navigateBack({
               delta: 1
             })
@@ -115,6 +110,9 @@ Page({
   },
   choosenImage: function (e) {
     let that = this;
+    if(that.data.secert=='undefined' || that.data.secert=='null' || that.data.secert==''){
+      return;
+    }
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],

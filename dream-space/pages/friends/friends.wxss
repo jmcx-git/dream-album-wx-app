@@ -33,9 +33,6 @@ page{
     top:23rpx;
     right: 30rpx;
 }
-.friendsHistory{
-    margin-top:10rpx;
-}
 .friendsTop{
     position: relative;
     height:130rpx;
@@ -56,33 +53,28 @@ page{
     width: 90rpx;
     height: 90rpx;
     border-radius: 50%;
-    top:15rpx;
+    top:20rpx;
     left:30rpx;
 }
 .nickNameText{
     position: absolute;
     left:150rpx;
     top:30rpx;
-    display: flex;
-    flex-direction: column;
-    width:calc(100% - 180rpx);
+    width:calc(100% - 230rpx);
     font-size: 32rpx;
-    line-height: 38rpx;
-    height:100rpx;
+    line-height: 45rpx;
+    height:45rpx;
+     overflow: hidden;
     text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    white-space: nowrap;
 }
 .historyText{
     position: absolute;
     left:150rpx;
-    display: flex;
-    flex-direction: column;
-    top:100rpx;
-    width:calc(100% - 180rpx);
+    top:65rpx;
+    width:calc(100% - 230rpx);
     font-size: 24rpx;
-    line-height: 24rpx;
+    line-height: 65rpx;
     color: #888888;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -99,4 +91,11 @@ page{
 .friendsArrow{
     width: 28rpx;
     height: 28rpx;
+}
+
+.instrudctionText{
+    padding:50rpx 30rpx;
+    color: #888888;
+    font-size: 24rpx;
+    line-height: 30rpx;
 }

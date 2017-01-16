@@ -21,7 +21,9 @@ Page({
   },
   onLoad: function (options) {
     var owner=options.owner;
-    app.globalData.indexRefreshStatus = true;
+    if(options.share!=undefined && options.share!=null && options.share!=''){
+      app.globalData.indexRefreshStatus = true;
+    }
     if(owner!=undefined && owner!=null && owner!=''){
       app.globalData.fromOpenId=options.fromOpenId;
       app.globalData.spaceId=options.spaceId;
@@ -132,7 +134,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId+"&type="+that.data.topData.type
     })
   },
   showMyRecord:function(){
@@ -190,7 +192,7 @@ Page({
         obj.openId=app.globalData.openId;
         obj.nickname=app.globalData.nickName;
         obj.comment=content;
-        ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
+        ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).push(obj);
         that.setData({
           spacetimelineList:that.data.spacetimelineList,
           commentHidden:true,
@@ -365,7 +367,7 @@ Page({
             obj.nickName=app.globalData.nickName;
             obj.avatarUrl=app.globalData.avatarUrl;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
-            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.push(obj);
             setTimeout(function(){
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
@@ -441,6 +443,7 @@ Page({
                     that.setData({
                       topData:that.data.topData
                     })
+                    app.globalData.indexRefreshStatus = true;
                   },
                   fail: function(rfs) {
                     console.log("上传图片失败");

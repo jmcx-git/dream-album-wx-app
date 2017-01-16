@@ -1,5 +1,5 @@
 page {
-  background-color: gainsboro;
+  background-color: #efeff4;
 }
 
 .default_area_image {

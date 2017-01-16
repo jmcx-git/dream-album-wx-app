@@ -1,4 +1,3 @@
-
 <!--pages/my/my.wxml-->
 <view style="width:100%;height:{{windowHeight}}px;">
   <view class="user_info_area">
@@ -20,6 +19,7 @@
           <view hidden="{{!newmsg}}" class="redpoint"></view>
         </view>
       </view>
+
       <!--<view class="select_cell">
         <image class="select_cell_icon" src="../../image/abouticon.png" />
         <text>关于我们</text>

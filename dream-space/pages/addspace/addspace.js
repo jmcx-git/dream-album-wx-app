@@ -19,6 +19,7 @@ Page({
     page: 0
   },
   onLoad: function (options) {
+    new app.WeToast();
     let that = this;
     let way = options.way;
     if (way == 1) {
@@ -50,9 +51,7 @@ Page({
     let that = this;
     let para = e.detail.value;
     if (para.name.trim() == '') {
-      wx.showToast({
-        title: '昵称不能为空'
-      })
+      app.showWeLittleToast(that,'还没起昵称呢 ^.^')
       return
     }
     let url = app.globalData.serverHost + "add.json";
@@ -91,12 +90,12 @@ Page({
               url: '../spacetimeline/spacetimeline?spaceId=' + data.data + "&version=" + app.globalData.version
             })
           } else {
-            app.errorToast(data.message);
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         },
         fail: function (res) {
           console.log(res);
-          app.failedToast()
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       })
     } else {
@@ -119,12 +118,12 @@ Page({
               url: '../spacetimeline/spacetimeline?spaceId=' + res.data.data + "&version=" + app.globalData.version
             })
           } else {
-            app.errorToast(res.data.message);
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         },
         fail: function (res) {
           console.log(res)
-          app.failedToast()
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       })
     }
@@ -133,9 +132,7 @@ Page({
     let that = this;
     let para = e.detail.value;
     if (para.secert.trim() == '') {
-      wx.showToast({
-        title: '验证码不能为空'
-      })
+      app.showWeLittleToast(that,'验证码不能为空')
       return
     }
     let url = app.globalData.serverHost + "join.json";
@@ -163,19 +160,17 @@ Page({
               url: '../spacetimeline/spacetimeline?spaceId=' + res.data.data + "&version=" + app.globalData.version
             })
           } else if (res.data.status == -2) {
-            wx.showToast({
-              title: '无效的验证码'
-            })
+            app.showWeLittleToast(that,'无效的验证码')
           } else {
-            app.failedToast()
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         } else {
-          app.errorToast(res.data.message)
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       },
       fail: function (res) {
         console.log(res)
-        app.failedToast()
+        app.showWeLittleToast(that,'服务器请求异常','error');
       }
     })
   },
