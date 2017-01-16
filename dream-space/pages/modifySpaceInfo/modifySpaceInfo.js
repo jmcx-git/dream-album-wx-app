@@ -42,8 +42,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取空间信息信息 ");
-        console.log(res);
          if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
         }
@@ -85,10 +83,9 @@ Page({
         data: data,
         method: 'GET',
         success: function (res) {
-          console.log("修改成功");
-          console.log(res);
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
+            app.globalData.indexRefreshStatus = true;
             wx.navigateBack({
               delta: 1
             })

@@ -21,7 +21,9 @@ Page({
   },
   onLoad: function (options) {
     var owner=options.owner;
-    app.globalData.indexRefreshStatus = true;
+    if(options.share!=undefined && options.share!=null && options.share!=''){
+      app.globalData.indexRefreshStatus = true;
+    }
     if(owner!=undefined && owner!=null && owner!=''){
       app.globalData.fromOpenId=options.fromOpenId;
       app.globalData.spaceId=options.spaceId;
@@ -61,6 +63,8 @@ Page({
       },
       method: 'GET',
       success: function(res){
+        console.log("获取顶部数据");
+        console.log(res);
         if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
         }
@@ -441,6 +445,7 @@ Page({
                     that.setData({
                       topData:that.data.topData
                     })
+                    app.globalData.indexRefreshStatus = true;
                   },
                   fail: function(rfs) {
                     console.log("上传图片失败");
