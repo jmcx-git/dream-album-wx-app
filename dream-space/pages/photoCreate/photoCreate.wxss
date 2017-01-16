@@ -15,6 +15,7 @@ page{
 }
 .photoCreateImageDesc{
     height:240rpx;
+    width:100%;
     font-size: 32rpx;
     color: #b2b2b2;
 }
