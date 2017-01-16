@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/addspace/addspace",
     "pages/index/index",
+    "pages/addspace/addspace",
     "pages/my/my",
     "pages/confirmJoinSpace/confirmJoinSpace",
     "pages/notice/notice",
