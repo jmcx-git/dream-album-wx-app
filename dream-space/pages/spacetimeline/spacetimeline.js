@@ -367,7 +367,7 @@ Page({
             obj.nickName=app.globalData.nickName;
             obj.avatarUrl=app.globalData.avatarUrl;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
-            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
+            ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.push(obj);
             setTimeout(function(){
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
