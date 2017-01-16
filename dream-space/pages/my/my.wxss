@@ -1,7 +1,7 @@
 /* pages/my/my.wxss */
 
 page {
-  background-color: gainsboro;
+  background-color: #efeff4;
 }
 
 .user_info_area {
