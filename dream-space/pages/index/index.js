@@ -33,7 +33,7 @@ Page({
     } else {
       if (redirectRefer == 1) {
         if (openId == '') {
-          that.authLogin()
+          that.authLogin(true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -47,7 +47,7 @@ Page({
       } else if (redirectRefer == 2) {
         //voteWorksId
         if (openId == '') {
-          that.authLogin()
+          that.authLogin(true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -149,77 +149,13 @@ Page({
         })
       }
     })
-    if (!wx.getStorageSync('openId')) {
-      that.confirmGetData()
+    if (!wx.getStorageSync('openId') || !wx.getStorageSync('nickName') |!wx.getStorageSync('avatarUrl')) {
+      that.confirmGetData(false)
     } else {
       that.getData();
     }
   },
-  authLogin: function () {
-    let that = this
-    wx.login({
-      success: function (wxLoginRes) {
-        //获取code
-        wx.request({
-          url: app.globalData.serverHost + 'user/session.json',
-          data: {
-            code: wxLoginRes.code,
-            appId: app.globalData.appId
-          },
-          method: 'GET',
-          success: function (sessionResp) {
-            //缓存第三方key
-            var openId = sessionResp.data
-            if (openId == "") {
-              console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
-              );
-              app.failedToast();
-              return
-            }
-            wx.getUserInfo({
-              success: function (wxUserInfoResp) {
-                wx.request({
-                  url: app.globalData.serverHost + 'user/info.json',
-                  data: {
-                    openId: openId,
-                    encryptedData: wxUserInfoResp.encryptedData,
-                    iv: wxUserInfoResp.iv,
-                    appId: app.globalData.appId
-                  },
-                  method: 'GET',
-                  success: function (serverUserInfoResp) {
-                    if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
-                      wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
-                      wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
-                      wx.setStorageSync('openId', openId);
-                      app.globalData.openId = openId;
-                      app.globalData.nickName = serverUserInfoResp.data.data.nickName;
-                      app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
-                    } else {
-                      app.failedToast();
-                    }
-                  }
-                })
-              },
-              fail: function () {
-                //拒绝获取信息
-                app.refuseLoginToast();
-              }
-            })
-          },
-          fail: function (trd) {
-            console.log("缓存第三方key出错！", trd);
-            app.failedToast();
-          }
-        })
-      },
-      fail: function (ee) {
-        console.log("登录出错了！", ee);
-        app.failedToast();
-      }
-    })
-  },
-  confirmGetData: function () {
+  confirmGetData: function (needRedirect=false) {
     let that = this
     wx.login({
       success: function (wxLoginRes) {
@@ -260,7 +196,9 @@ Page({
                       app.globalData.openId = openId;
                       app.globalData.nickName = serverUserInfoResp.data.data.nickName;
                       app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
-                      that.getData();
+                      if(!needRedirect){
+                        that.getData();
+                      }
                     } else {
                       app.failedToast();
                     }
