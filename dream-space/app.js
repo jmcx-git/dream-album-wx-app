@@ -1,5 +1,8 @@
 //app.js
+let {WeToast} = require('src/wetoast.js')
 App({
+  //注册自定义toast
+  WeToast,
   onLaunch: function () {
 
     let openId = wx.getStorageSync("openId");
@@ -32,6 +35,12 @@ App({
     spaceId: '',
     redirectRefer: '',
     owner: ''
+  },
+  showWeLittleToast: function (that, content) {
+    that.wetoast.toast({
+      title: content,
+      bodyClassName: 'my_toast_body'
+    })
   },
   serverFailedToast() {
     wx.showToast({
