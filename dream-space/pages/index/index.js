@@ -172,13 +172,15 @@ Page({
   requestData: function () {
     let that = this;
     var url = app.globalData.serverHost + 'list.json';
+    let start = this.data.start;
+    let size = this.data.size;
     wx.request({
       url: url,
       data: {
         'openId': app.globalData.openId,
         'version': app.globalData.version,
-        'start': that.data.start,
-        'size': that.data.size
+        'start': start,
+        'size': size
       },
       method: 'GET',
       success: function (res) {
@@ -192,9 +194,9 @@ Page({
               more: false
             })
           } else {
-            let newStart = that.data.start + that.data.size;
+            let newStart = start + size;
             let newItems = [];
-            if(that.data.start == 0){
+            if(start == 0){
                newItems = res.data.data.resultList;
             }else{
                newItems = that.data.items.concat(res.data.data.resultList);
