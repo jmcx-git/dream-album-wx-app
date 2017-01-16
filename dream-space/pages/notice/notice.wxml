@@ -42,6 +42,10 @@
       </view>
     </view>
   </view>
+  <view class="customer">
+    <contact-button type="default-light" size="27" session-from="dreamspace">
+    </contact-button>
+  </view>
   <view hidden="{{more}}" class="nomoretips">
     <text>这是我的"底线"啦~</text>
   </view>
