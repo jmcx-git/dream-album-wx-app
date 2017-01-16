@@ -1,6 +1,6 @@
-<view class="photoCreateArea" wx:if="{{imgUrls.length>0}}">
-    <view class="photoCreateTop" wx:for="{{imgUrls}}" wx:key="imgUrls">
-        <textarea maxlength="-1" class="photoCreateImageDesc" bindconfirm="gainDesc" data-index="{{index}}" bindblur="gainDesc" placeholder="{{photoDesc}}"  />
+<view class="photoCreateArea" wx:for="{{imgUrls}}" wx:key="imgUrls" wx:if="{{imgUrls.length>0}}">
+    <view class="photoCreateTop" >
+        <textarea maxlength="-1" class="photoCreateImageDesc" bindconfirm="gainDesc" data-index="{{index}}" bindinput="gainDesc" placeholder="{{photoDesc}}"  />
          <image bindtap="showControl" data-src="{{item.imgPath}}" src="{{item.imgPath}}" data-index="{{index}}" bindtap="showControl" class="photoCreateImage"/>
     </view>
 </view>
