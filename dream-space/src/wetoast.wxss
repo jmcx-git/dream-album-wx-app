@@ -1,56 +1,64 @@
 /**toast.wxss**/
+
 .wetoast {
-	display: none;
+  display: none;
 }
+
 .wetoast_show {
-	display: block;
+  display: block;
 }
+
 .wetoast__mask {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
+
 .wetoast__bd {
-	opacity: 0;
-	display: flex;
-	flex-direction: column;
-	position: fixed;
-    z-index: 5000;
-    min-width: 8.4em;
-    min-height: 8.4em;
-    max-width: 70%;
-    top: 300rpx;
-    left: 50%;
-    transform: translate(-50%);
-    padding: 15px;
-    box-sizing: border-box;
-    background: rgba(40, 40, 40, 0.75);
-    border-radius: 10rpx;
-    color: #FFFFFF;
-    word-wrap: break-word;
-    word-break: break-all;
-    align-items: center;
-	justify-content: space-around;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 5000;
+  min-width: 8.4em;
+  min-height: 8.4em;
+  max-width: 70%;
+  top: 300rpx;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: rgba(40, 40, 40, 0.75);
+  border-radius: 10rpx;
+  color: #fff;
+  word-wrap: break-word;
+  word-break: break-all;
+  align-items: center;
+  justify-content: space-around;
 }
+
 .wetoast__bd__img {
-	margin: 6rpx;
+  margin: 6rpx;
 }
+
 .wetoast__bd__img_desc {
-    width: 110rpx;
-    height: 110rpx;
-    vertical-align: middle;
+  width: 110rpx;
+  height: 110rpx;
+  vertical-align: middle;
 }
+
 .wetoast__bd__title {
-	margin: 6rpx 0;
-	font-size: 1.2em;
+  margin: 6rpx 0;
+  font-size: 1.2em;
 }
 
 /*自定义各种toast*/
-.my_toast_body{
-  min-height: 50rpx;
+
+.my_toast_body {
+  min-height: 70rpx;
   font-size: 30rpx;
   line-height: 1;
   min-width: 300rpx;
