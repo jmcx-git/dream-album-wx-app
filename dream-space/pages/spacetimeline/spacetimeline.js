@@ -62,8 +62,10 @@ Page({
       method: 'GET',
       success: function(res){
         if(res.data.data.icon==null || res.data.data.icon==''){
-          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
-          res.data.data.cover=res.data.data.cover==null?'../../image/lovedefaultcover.jpg':res.data.data.cover
+          res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
+        }
+        if(res.data.data.cover==null || res.data.data.cover==''){
+          res.data.data.cover=(res.data.data.type==0)?'../../image/familydefaultcover.jpg':'../../image/lovedefaultcover.jpg';
         }
         that.setData({
           topData:res.data.data
