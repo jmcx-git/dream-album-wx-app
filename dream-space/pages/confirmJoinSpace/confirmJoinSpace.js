@@ -14,6 +14,7 @@ Page({
     },
     onLoad: function (options) {
         let that = this;
+        app.globalData.indexRefreshStatus = true;
         let openId = options.openId;
         let fromOpenId = options.fromOpenId;
         let spaceId = options.spaceId;
@@ -80,7 +81,7 @@ Page({
             success: function (res) {
                 if (res.statusCode == 200 && res.data.status == 0) {
                     wx.redirectTo({
-                        url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
+                        url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version+"&share=yes"
                     })
                 } else {
                     app.showWeLittleToast(that,'服务器请求异常','error');

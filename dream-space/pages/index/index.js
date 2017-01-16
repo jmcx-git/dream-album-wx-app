@@ -55,13 +55,13 @@ Page({
           } else {
             that.clearGlobalShareData()
             wx.navigateTo({
-              url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
+              url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId+"&share=yes"
             })
           }
         } else {
           that.clearGlobalShareData()
           wx.navigateTo({
-            url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId
+            url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId+"&share=yes"
           })
         }
       } else {
@@ -104,7 +104,7 @@ Page({
               //已加入
               that.clearGlobalShareData()
               wx.navigateTo({
-                url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
+                url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version+"&share=yes"
               })
             } else {
               //未加入
