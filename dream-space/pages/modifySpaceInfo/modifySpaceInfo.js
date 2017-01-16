@@ -62,7 +62,6 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
@@ -88,12 +87,12 @@ Page({
               delta: 1
             })
           } else {
-            app.failedToast()
+            app.failedToast();
           }
         },
         fail: function (res) {
-          console.log(res)
-          app.failedToast()
+          console.log(res);
+          app.failedToast();
         }
       })
   },
@@ -133,6 +132,7 @@ Page({
           fail: function(ron) {
             console.log("上传失败!");
             console.log(ron);
+            app.uploadFileFailedToast();
           }
         })
       }
