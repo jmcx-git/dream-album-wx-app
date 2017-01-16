@@ -63,7 +63,7 @@ Page({
     var content=encodeURI(uploadData.desc);
     let that=this;
     let data={
-        openId:wx.getStorageSync("openId"),
+        openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         version:that.data.version,
         type:0,
