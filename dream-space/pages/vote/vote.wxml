@@ -24,7 +24,7 @@
 
       <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
         <view class='titlepart'>
-          <text class="txtItem">NO.{{item.rank}} {{item.solgan}}</text>
+          <text class="txtItem">NO.{{item.rank}} {{item.solgan ? item.solgan : ''}}</text>
           <view class="whitespace"/>
           <text class="txtItem">序号: {{item.id}}</text>
         </view>
@@ -48,7 +48,7 @@
         </view>
     </view>
   </view>
-  <block wx:if="{{vote==1}}">
+  <block wx:if="{{!vote || vote==1}}">
     <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
   </block>
 </view>
