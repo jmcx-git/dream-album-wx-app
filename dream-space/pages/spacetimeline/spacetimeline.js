@@ -21,7 +21,9 @@ Page({
   },
   onLoad: function (options) {
     var owner=options.owner;
-    app.globalData.indexRefreshStatus = true;
+    if(options.share!=undefined && options.share!=null && options.share!=''){
+      app.globalData.indexRefreshStatus = true;
+    }
     if(owner!=undefined && owner!=null && owner!=''){
       app.globalData.fromOpenId=options.fromOpenId;
       app.globalData.spaceId=options.spaceId;
@@ -441,6 +443,7 @@ Page({
                     that.setData({
                       topData:that.data.topData
                     })
+                    app.globalData.indexRefreshStatus = true;
                   },
                   fail: function(rfs) {
                     console.log("上传图片失败");
