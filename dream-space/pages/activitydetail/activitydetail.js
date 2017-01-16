@@ -41,41 +41,7 @@ let pageData = {
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
 
-        winnersinfolist:[{
-            num:1,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:2,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:3,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:4,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:5,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:6,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:7,
-            name:"呵呵哒",
-            vote:345
-          }]
+        winnersinfolist:[]
     },
     convert2rpx: function(px){
       return px * this.convertrate
@@ -138,8 +104,6 @@ let pageData = {
         },
         method: "GET",
         success: function(res) {
-          console.log("actiitydetail", res)
-          console.log("actiitydetail", res.data.data.userPrizes == null)
           if(res.statusCode == 200){
             if(res.data.status == 0){
               let dat = res.data.data;
@@ -163,7 +127,8 @@ let pageData = {
                 step: dat.step,
                 joined: dat.joined > 0,
                 userWorksId: dat.worksId,
-                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 4
+                winnersinfolist: dat.userPrizes,
+                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 3
               })
               return
             }

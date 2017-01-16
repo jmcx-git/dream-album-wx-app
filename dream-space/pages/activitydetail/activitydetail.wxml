@@ -42,9 +42,19 @@
           <block wx:for="{{winnersinfolist}}" wx:key="{{index}}">
             <view class="winnerinforoot {{index%2 ==1 ?'winnerlistItembgodd':''}}">
               <view class="winnernum">
-                <image class="winnericon" src="{{winnericons[index]}}" wx:if="{{index <= 2}}"/>
-                <view class="winnericon2"wx:if="{{index > 2}}" >{{item.num}}</view>
-                <text class="winnernum2">NO.{{item.num}}</text>
+                <block wx:if="{{item.rank == 1}}">
+                  <image class="winnericon" src="{{winnericons[0]}}"/>
+                </block>
+                <block wx:elif="{{item.rank == 2}}">
+                  <image class="winnericon" src="{{winnericons[1]}}" />
+                </block>
+                <block wx:elif="{{item.rank == 3}}">
+                  <image class="winnericon" src="{{winnericons[2]}}"/>
+                </block>
+                <block wx:else>
+                  <view class="winnericon2">{{item.rank}}</view>
+                </block>
+                <text class="winnernum2">NO.{{item.rank}}</text>
               </view>
               <view class="winnername">{{item.name}}</view>
               <view class="winnerVotes">{{item.vote}}</view>
