@@ -15,6 +15,7 @@ Page({
         productName: app.globalData.productName
     },
     onLoad: function (options) {
+        new app.WeToast();
         let that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -83,11 +84,11 @@ Page({
                     }
                     wx.hideToast();
                 } else {
-                    app.showWeLittleToast(that,'服务器请求异常','error');
+                    app.showWeLittleToast(that, '服务器请求异常', 'error');
                 }
             },
             fail: function () {
-                app.showWeLittleToast(that,'服务器请求异常','error');
+                app.showWeLittleToast(that, '服务器请求异常', 'error');
             }
         })
     },
