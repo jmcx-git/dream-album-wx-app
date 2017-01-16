@@ -62,8 +62,6 @@ Page({
   formSubmit: function (e) {
     let that = this;
     let para = e.detail.value;
-    console.log("提交参数");
-    console.log(para);
     let url = app.globalData.serverHost + "info/edit.json";
     let data = {
       'openId': app.globalData.openId,
