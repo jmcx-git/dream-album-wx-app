@@ -201,7 +201,7 @@ let pageData = {
         success: function (res) {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
-              let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
+              let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1 : that.data.voteWorksId
               wx.navigateTo({
                 url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+voteWorksId+"&userWorksId="+that.data.userWorksId
               })
@@ -212,7 +212,7 @@ let pageData = {
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
       let that = this
-      let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
+      let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1: that.data.voteWorksId
       wx.navigateTo({
         url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+voteWorksId+"&userWorksId="+this.data.userWorksId
       })
