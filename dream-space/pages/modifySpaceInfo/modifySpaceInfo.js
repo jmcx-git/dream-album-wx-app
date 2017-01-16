@@ -43,7 +43,7 @@ Page({
       method: 'GET',
       success: function(res){
          if(res.data.data.icon==null || res.data.data.icon==''){
-          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
+          res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
         }
         that.setData({
           spaceInfo:res.data.data,
@@ -55,6 +55,7 @@ Page({
       fail: function(ron) {
         console.log("获取空间信息出错!");
         console.log(ron);
+        app.failedToast();
       }
     })
   },

@@ -34,9 +34,7 @@ Page({
         },
         method: 'GET',
         success: function(res){
-          console.log(res);
           var nickname=((res.data.data.resultList)[0]).nickname;
-          console.log(nickname.length);
           that.setData({
             occupantList:res.data.data.resultList
           })
@@ -45,6 +43,7 @@ Page({
         fail: function(ron) {
           console.log("获取亲友团列表失败！");
           console.log(ron);
+          app.failedToast();
         }
       })
     }
@@ -67,6 +66,7 @@ Page({
       fail: function(ron) {
         console.log("重置邀请码失败!");
         console.log(ron);
+        app.errorToast("重置邀请码失败!");
       }
     })
   },

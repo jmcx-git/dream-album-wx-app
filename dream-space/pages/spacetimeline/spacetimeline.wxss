@@ -122,10 +122,11 @@ page{
   width:130rpx;
   position: absolute;
   left:30rpx;
-  top:30rpx;
+  top:22rpx;
 }
 .dateDay{
   font-size:56rpx;
+  line-height: 56rpx;
   font-weight: bold;
 }
 .dateMonth{
@@ -246,9 +247,9 @@ page{
   box-sizing: border-box;
 }
 .avatarCollectImage{
-  width:28rpx;
-  height:28rpx;
-  top:2rpx;
+  width:26rpx;
+  height:26rpx;
+  top:2.5rpx;
   margin-right: 10rpx;
   z-index: 10;
   position: relative;

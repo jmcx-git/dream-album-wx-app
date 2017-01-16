@@ -89,6 +89,7 @@ Page({
       fail: function(ron) {
         console.log("上传图片失败!");
         console.log(ron);
+        app.uploadFileFailedToast();
       }
     })
   },

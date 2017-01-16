@@ -40,6 +40,7 @@ Page({
         fail: function(ron) {
           console.log("添加文字失败 ！");
           console.log(ron);
+          app.errorToast('添加文字失败');
         }
       })
     },500);
