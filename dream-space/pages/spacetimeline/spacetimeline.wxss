@@ -246,9 +246,9 @@ page{
   box-sizing: border-box;
 }
 .avatarCollectImage{
-  width:28rpx;
-  height:28rpx;
-  top:2rpx;
+  width:26rpx;
+  height:26rpx;
+  top:2.5rpx;
   margin-right: 10rpx;
   z-index: 10;
   position: relative;
