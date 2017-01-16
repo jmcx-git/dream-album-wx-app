@@ -45,6 +45,7 @@ Page({
         fail: function(ron) {
           console.log("获取亲友团列表失败！");
           console.log(ron);
+          app.failedToast();
         }
       })
     }
@@ -67,6 +68,7 @@ Page({
       fail: function(ron) {
         console.log("重置邀请码失败!");
         console.log(ron);
+        app.errorToast("重置邀请码失败!");
       }
     })
   },

@@ -61,8 +61,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取顶部数据");
-        console.log(res);
         if(res.data.data.icon==null || res.data.data.icon==''){
           res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
           res.data.data.cover=res.data.data.cover==null?'../../image/lovedefaultcover.jpg':res.data.data.cover
@@ -78,12 +76,12 @@ Page({
       fail: function(rns) {
         console.log("获取顶部数据失败！");
         console.log(rns);
+        app.failedToast();
       }
     })
   },
   getSpaceListData:function(){
     let that=this;
-    console.log("获取数据了了，start="+that.data.start+",size="+that.data.size);
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
@@ -95,17 +93,12 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("数据列表啦");
-        console.log(res);
         if(res.data.status==0){
           if(res.data.data.resultList.length<that.data.size){
-            console.log("到底了，别脱了");
             that.setData({
               noMoreData:true,
-              
             })
           }
-          console.log("noMoreData="+that.data.noMoreData);
           for(var i=0;i<res.data.data.resultList.length;i++){
             var date=(((res.data.data.resultList)[i]).dateDesc).split("-");
             if(date.length>1){
@@ -116,9 +109,9 @@ Page({
               ((res.data.data.resultList)[i]).dateflag=false;
             }
           }
-            that.setData({
-              spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
-              start:that.data.start+res.data.data.resultList.length
+          that.setData({
+            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+            start:that.data.start+res.data.data.resultList.length
           })
           that.setData({
             noContentHidden:that.data.spacetimelineList.length>0?false:true
@@ -130,6 +123,7 @@ Page({
       fail:function(rns){
         console.log("获取列表数据失败！");
         console.log(rns);
+        app.failedToast();
       }
     })
   },
@@ -177,7 +171,6 @@ Page({
   saveComment:function(e){
     let that=this;
     var content=e.detail.value.commentContent;
-    console.log("content="+content);
     if(content=='' || content==null || content==undefined){
       return;
     }
@@ -205,6 +198,7 @@ Page({
       fail: function(ron) {
         console.log("评论失败！");
         console.log(ron);
+        app.errorToast("评论失败!");
       }
     })
   },
@@ -266,8 +260,6 @@ Page({
               },
               method: 'GET',
               success: function(res){
-                console.log("删除成功！");
-                console.log(res);
                 ((that.data.spacetimelineList)[feedindex].comments).splice(commentindex,1);
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
@@ -276,6 +268,7 @@ Page({
               fail: function(rps) {
                 console.log("删除评论失败！");
                 console.log(rps);
+                app.errorToast("删除评论失败！");
               }
             })
           }
@@ -312,6 +305,7 @@ Page({
                   fail: function(ron) {
                     console.log("删除失败");
                     console.log(ron);
+                    app.errorToast("删除记录失败！");
                   }
                 })
               }
@@ -332,8 +326,6 @@ Page({
     },500)
   },
   onShow:function(){
-    console.log("我在onshow");
-    console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
     if(app.globalData.createFinishFlag){
         that.setData({
@@ -395,6 +387,7 @@ Page({
         fail: function(ron) {
           console.log("赞操作失败!");
           console.log(ron);
+          app.errorToast("赞操作失败!");
         }
       })
     },
@@ -443,8 +436,6 @@ Page({
                     version:that.data.version
                   },
                   success: function(rns){
-                    console.log("上传成功");
-                    console.log(rns);
                     that.data.topData.cover=rps.tempFilePaths[0];
                     that.setData({
                       topData:that.data.topData
@@ -453,6 +444,7 @@ Page({
                   fail: function(rfs) {
                     console.log("上传图片失败");
                     console.log(rfs);
+                    app.uploadFileFailedToast();
                   }
                 })
               }
