@@ -42,7 +42,7 @@ Page({
       this.setData({
         spaceId:options.spaceId,
         version:options.version,
-        myOpenId:wx.getStorageSync('openId')      
+        myOpenId:app.globalData.openId     
       })
       setTimeout(function(){
         that.getSpaceTopData();
@@ -55,17 +55,17 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'detail.json',
       data: {
-        openId:wx.getStorageSync('openId'),
+        openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         version:that.data.version
       },
       method: 'GET',
       success: function(res){
-        console.log("获取顶部数据");
-        console.log(res);
         if(res.data.data.icon==null || res.data.data.icon==''){
-          res.data.data.icon=(res.data.data.type==0)?'../../familydefault.png':'../../image/lovedefault.png';
-          res.data.data.cover=res.data.data.cover==null?'../../image/lovedefaultcover.jpg':res.data.data.cover
+          res.data.data.icon=(res.data.data.type==0)?'../../image/familydefault.png':'../../image/lovedefault.png';
+        }
+        if(res.data.data.cover==null || res.data.data.cover==''){
+          res.data.data.cover=(res.data.data.type==0)?'../../image/familydefaultcover.jpg':'../../image/lovedefaultcover.jpg';
         }
         that.setData({
           topData:res.data.data
@@ -78,16 +78,16 @@ Page({
       fail: function(rns) {
         console.log("获取顶部数据失败！");
         console.log(rns);
+        app.failedToast();
       }
     })
   },
   getSpaceListData:function(){
     let that=this;
-    console.log("获取数据了了，start="+that.data.start+",size="+that.data.size);
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
-        openId:wx.getStorageSync('openId')+'',
+        openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         start:that.data.start,
         size:that.data.size,
@@ -95,17 +95,12 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("数据列表啦");
-        console.log(res);
         if(res.data.status==0){
           if(res.data.data.resultList.length<that.data.size){
-            console.log("到底了，别脱了");
             that.setData({
               noMoreData:true,
-              
             })
           }
-          console.log("noMoreData="+that.data.noMoreData);
           for(var i=0;i<res.data.data.resultList.length;i++){
             var date=(((res.data.data.resultList)[i]).dateDesc).split("-");
             if(date.length>1){
@@ -116,9 +111,9 @@ Page({
               ((res.data.data.resultList)[i]).dateflag=false;
             }
           }
-            that.setData({
-              spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
-              start:that.data.start+res.data.data.resultList.length
+          that.setData({
+            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+            start:that.data.start+res.data.data.resultList.length
           })
           that.setData({
             noContentHidden:that.data.spacetimelineList.length>0?false:true
@@ -130,13 +125,14 @@ Page({
       fail:function(rns){
         console.log("获取列表数据失败！");
         console.log(rns);
+        app.failedToast();
       }
     })
   },
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId
     })
   },
   showMyRecord:function(){
@@ -177,14 +173,13 @@ Page({
   saveComment:function(e){
     let that=this;
     var content=e.detail.value.commentContent;
-    console.log("content="+content);
     if(content=='' || content==null || content==undefined){
       return;
     }
     wx.request({
       url: app.globalData.serverHost+'feed/comment/add.json',
       data: {
-        openId:wx.getStorageSync("openId"),
+        openId:app.globalData.openId,
         feedId:that.data.commentFeedId,
         version:that.data.version,
         comment:content
@@ -192,8 +187,8 @@ Page({
       method: 'GET',
       success: function(res){
         var obj=new Object();
-        obj.openId=wx.getStorageSync("openId");
-        obj.nickname=wx.getStorageSync("nickName");
+        obj.openId=app.globalData.openId;
+        obj.nickname=app.globalData.nickName;
         obj.comment=content;
         ((that.data.spacetimelineList)[that.data.commentFeedIndex].comments).unshift(obj);
         that.setData({
@@ -205,6 +200,7 @@ Page({
       fail: function(ron) {
         console.log("评论失败！");
         console.log(ron);
+        app.errorToast("评论失败!");
       }
     })
   },
@@ -235,10 +231,9 @@ Page({
   },
   delComment:function(e){
     let that=this;
-    if(e.currentTarget.dataset.openid!=wx.getStorageSync("openId")){
+    if(e.currentTarget.dataset.openid!=app.globalData.openId){
       return;
     }
-    console.log(e);
     wx.showActionSheet({
       itemList:['删除'],
       success:function(res){
@@ -259,15 +254,13 @@ Page({
             wx.request({
               url: app.globalData.serverHost+'feed/comment/delete.json',
               data: {
-                openId:wx.getStorageSync("openId"),
+                openId:app.globalData.openId,
                 feedId:feedid,
                 commentId:commentid,
                 version:that.data.version
               },
               method: 'GET',
               success: function(res){
-                console.log("删除成功！");
-                console.log(res);
                 ((that.data.spacetimelineList)[feedindex].comments).splice(commentindex,1);
                 that.setData({
                   spacetimelineList:that.data.spacetimelineList
@@ -276,6 +269,7 @@ Page({
               fail: function(rps) {
                 console.log("删除评论失败！");
                 console.log(rps);
+                app.errorToast("删除评论失败！");
               }
             })
           }
@@ -298,7 +292,7 @@ Page({
                 wx.request({
                   url: app.globalData.serverHost+'feed/del.json',
                   data: {
-                    openId:wx.getStorageSync('openId'),
+                    openId:app.globalData.openId,
                     feedId:e.currentTarget.dataset.feedid,
                     version:that.data.version
                   },
@@ -312,6 +306,7 @@ Page({
                   fail: function(ron) {
                     console.log("删除失败");
                     console.log(ron);
+                    app.errorToast("删除记录失败！");
                   }
                 })
               }
@@ -332,8 +327,6 @@ Page({
     },500)
   },
   onShow:function(){
-    console.log("我在onshow");
-    console.log("show:"+app.globalData.createFinishFlag);
     let that=this;
     if(app.globalData.createFinishFlag){
         that.setData({
@@ -358,7 +351,7 @@ Page({
       wx.request({
         url: app.globalData.serverHost+'feed/like.json',
         data: {
-          openId:wx.getStorageSync("openId"),
+          openId:app.globalData.openId,
           feedId:e.currentTarget.dataset.feedid,
           status:status,
           version:that.data.version
@@ -368,9 +361,9 @@ Page({
           var likeIconsList=((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons;
           if(likeIconsList.length==0 || status==0){
             var obj=new Object();
-            obj.openId=wx.getStorageSync("openId");
-            obj.nickName=wx.getStorageSync("nickName");
-            obj.avatarUrl=wx.getStorageSync('avatarUrl');
+            obj.openId=app.globalData.openId;
+            obj.nickName=app.globalData.nickName;
+            obj.avatarUrl=app.globalData.avatarUrl;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=0;
             ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.unshift(obj);
             setTimeout(function(){
@@ -380,7 +373,7 @@ Page({
             },500)
           }else{
             for(var i=0;i<likeIconsList.length;i++){
-              if(likeIconsList[i].openId == wx.getStorageSync("openId")){
+              if(likeIconsList[i].openId == app.globalData.openId){
                   ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).likeIcons.splice(i,1);
                   ((that.data.spacetimelineList)[e.currentTarget.dataset.feedindex]).ilike=-1;
                   setTimeout(function(){
@@ -395,6 +388,7 @@ Page({
         fail: function(ron) {
           console.log("赞操作失败!");
           console.log(ron);
+          app.errorToast("赞操作失败!");
         }
       })
     },
@@ -438,13 +432,11 @@ Page({
                   filePath:rps.tempFilePaths[0],
                   name:'image',
                   formData: {
-                    openId:wx.getStorageSync('openId'),
+                    openId:app.globalData.openId,
                     spaceId:that.data.spaceId,
                     version:that.data.version
                   },
                   success: function(rns){
-                    console.log("上传成功");
-                    console.log(rns);
                     that.data.topData.cover=rps.tempFilePaths[0];
                     that.setData({
                       topData:that.data.topData
@@ -453,6 +445,7 @@ Page({
                   fail: function(rfs) {
                     console.log("上传图片失败");
                     console.log(rfs);
+                    app.uploadFileFailedToast();
                   }
                 })
               }
@@ -464,12 +457,12 @@ Page({
     //分享
     onShareAppMessage:function(){
       let that=this;
-      var fromOpenId=wx.getStorageSync('openId');
+      var fromOpenId=app.globalData.openId;
       var spaceId=that.data.spaceId;
       var owner=(that.data.topData.secert==null || that.data.topData.secert=='' || that.data.topData.secert==undefined)?0:1;
       var queryStr="/pages/spacetimeline/spacetimeline?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
-      var ownerTitle=wx.getStorageSync('nickName')+"邀请您入住他(她)的私密空间"+that.data.topData.name;
-      var guestTitle=wx.getStorageSync('nickName')+"邀请您使用"+app.globalData.productName;
+      var ownerTitle=app.globalData.nickName+"邀请您入住他(她)的私密空间"+that.data.topData.name;
+      var guestTitle=app.globalData.nickName+"邀请您使用"+app.globalData.productName;
       var ownerContent='这是属于我们的秘密';
       var guestContent="用它，您可以记录，分享您的珍贵时刻。"
       return {

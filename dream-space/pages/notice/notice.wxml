@@ -4,18 +4,18 @@
 <view wx:else>
   <view style="width:100%;height:14rpx;"></view>
   <view class="content">
-    <view id="{{idx}}" wx:for="{{noticeMsgs}}" wx:for-index="idx" class="msg_view">
-      <view class="msg_sub_view">
+    <view id="{{idx}}" wx:for="{{noticeMsgs}}" wx:key="{{idx}}" wx:for-index="idx" class="msg_view">
+      <view style="width:{{item.resourceUrl==null?'682':'522'}}rpx;">
         <view class="user_info_area">
           <view class="user_info_icon">
-            <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl}}" />
+            <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl==null?'../../image/familydefault.png':item.avatarUrl}}" />
           </view>
           <view class="user_info_name">
-            {{item.nickname}}
+            {{item.nickname==null?'无名氏':item.nickname}}
           </view>
           <view hidden="{{item.type!=0}}" class="office_marker">官方</view>
         </view>
-        <view class="msg_area">
+        <view class="msg_area" style="width:{{item.resourceUrl==null?'632':'472'}}rpx;">
           <view class="comment_view">
             <text>{{item.content}}</text>
           </view>
@@ -24,7 +24,7 @@
           </view>
         </view>
       </view>
-      <view class="msg_view_commentpic">
+      <view hidden="{{item.resourceUrl==null}}" class="msg_view_commentpic">
         <image mode="aspectFill" src="{{item.resourceUrl}}" />
       </view>
     </view>

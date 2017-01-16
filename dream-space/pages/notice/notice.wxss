@@ -22,16 +22,10 @@ image {
 }
 
 .msg_view {
-  width: 712rpx;
-  height: 160rpx;
+  width: 682rpx;
   border-bottom: 2rpx solid #d9d9d9;
   display: flex;
   padding: 30rpx 30rpx 30rpx 0;
-}
-
-.msg_sub_view {
-  width: 522rpx;
-  height: 160rpx;
 }
 
 .user_info_area {
@@ -64,22 +58,18 @@ image {
 }
 
 .msg_area {
-  width: 472rpx;
   margin-left: 50rpx;
-  height: 120rpx;
 }
 
 .comment_view {
   font-size: 30rpx;
-  line-height: 2;
+  line-height: 1.5;
   color: #353535;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .time_view{
   font-size:24rpx;
+  line-height: 1;
   margin-top: 20rpx;
   color: grey;
 }

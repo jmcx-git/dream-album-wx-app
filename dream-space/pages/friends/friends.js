@@ -34,17 +34,15 @@ Page({
         },
         method: 'GET',
         success: function(res){
-          console.log(res);
           var nickname=((res.data.data.resultList)[0]).nickname;
-          console.log(nickname.length);
           that.setData({
             occupantList:res.data.data.resultList
           })
-
         },
         fail: function(ron) {
           console.log("获取亲友团列表失败！");
           console.log(ron);
+          app.failedToast();
         }
       })
     }
@@ -54,7 +52,7 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'secert/reset.json',
       data: {
-          openId:wx.getStorageSync('openId'),
+          openId:app.globalData.openId,
           spaceId:that.data.spaceId,
           version:that.data.version
       },
@@ -67,6 +65,7 @@ Page({
       fail: function(ron) {
         console.log("重置邀请码失败!");
         console.log(ron);
+        app.errorToast("重置邀请码失败!");
       }
     })
   },
@@ -90,12 +89,12 @@ Page({
   },
   onShareAppMessage:function(){
       let that=this;
-      var fromOpenId=wx.getStorageSync('openId');
+      var fromOpenId=app.globalData.openId;
       var spaceId=that.data.spaceId;
       var owner=(that.data.secert==null || that.data.secert=='' || that.data.secert==undefined)?0:1;
       var queryStr="/pages/friends/friends?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
-      var ownerTitle=wx.getStorageSync('nickName')+"邀请您入住他(她)的私密空间"+that.data.name;
-      var guestTitle=wx.getStorageSync('nickName')+"邀请您使用"+app.globalData.productName;
+      var ownerTitle=app.globalData.nickName+"邀请您入住他(她)的私密空间"+that.data.name;
+      var guestTitle=app.globalData.nickName+"邀请您使用"+app.globalData.productName;
       var ownerContent='这是属于我们的秘密';
       var guestContent="用它，您可以记录，分享您的珍贵时刻。"
       return {

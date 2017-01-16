@@ -25,7 +25,7 @@ Page({
        wx.request({
         url: app.globalData.serverHost+'feed/add.json',
         data: {
-          'openId':wx.getStorageSync("openId"),
+          'openId':app.globalData.openId,
           'spaceId':that.data.spaceId,
           'version':that.data.version,
           'type':1,
@@ -40,6 +40,7 @@ Page({
         fail: function(ron) {
           console.log("添加文字失败 ！");
           console.log(ron);
+          app.errorToast('添加文字失败');
         }
       })
     },500);

@@ -24,6 +24,7 @@ Page({
       fail: function(ron) {
         console.log("获取个人信息失败!");
         console.log(ron);
+        app.failedToast();
       }
     })
   },
