@@ -4,7 +4,7 @@
 <view wx:else>
   <view style="width:100%;height:14rpx;"></view>
   <view class="content">
-    <view id="{{idx}}" wx:for="{{noticeMsgs}}" wx:for-index="idx" class="msg_view">
+    <view id="{{idx}}" wx:for="{{noticeMsgs}}" wx:key="{{idx}}" wx:for-index="idx" class="msg_view">
       <view class="msg_sub_view">
         <view class="user_info_area">
           <view class="user_info_icon">
