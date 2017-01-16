@@ -24,7 +24,7 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "list": [ 
+    "list": [
       {
       "pagePath": "pages/index/index",
       "text": "空间",

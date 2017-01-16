@@ -13,7 +13,7 @@ Page({
     scrollHeight: 500,
     showSearchbar: true,
     selectedWorksId: -1,
-    voteWorksId:""
+    voteWorksId: -1
   },
   showInput: function () {
       this.setData({
@@ -45,8 +45,8 @@ Page({
     return rpx / this.convertrate
   },
   onLoad:function(options){
-    console.log("id: "+options.activityId)
-
+    console.log("share: ", options)
+    app.globalData.indexRefreshStatus=true;
     // 判断分享
     if(options.share ==1){
       // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
@@ -93,7 +93,7 @@ Page({
         findKey: that.data.findKey,
         start: that.data.start,
         size: that.data.size,
-        voteWorksId: that.data.voteWorksId
+        voteWorksId: that.data.voteWorksId == undefined? -1: that.data.voteWorksId
       },
       success:function(res){
         console.log(res)
@@ -222,7 +222,8 @@ Page({
   onShareAppMessage: function () {
     let title = app.globalData.nickName+'邀请您给他加油助威。'
     let desc = '我正在参加活动名称,邀请您给他加油助威。'
-    let url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+'&share=1'
+    let url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.activityId+'&voteWorksId='+this.data.voteWorksId+'&share=1'
+    console.log(url)
     if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
       if(this.data.userWorksId == "" || this.data.userWorksId == undefined){
         title = app.globalData.nickName+'邀请您参与投票。'
@@ -230,7 +231,7 @@ Page({
       }else{
         title = app.globalData.nickName+'邀请您给我加油助威。'
         desc = '我正在参加活动名称,邀请您给我加油助威,作品Id:'+this.data.userWorksId+'。'
-        url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.userWorksId+'&share=1'
+        url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.activityId+'&voteWorksId='+this.data.userWorksId+'&share=1'
       }
 
     }
