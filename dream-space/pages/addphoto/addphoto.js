@@ -7,8 +7,8 @@ Page({
     desc: "",
     localphoto: "",
     isuploading: false,
-    voteWorksId:"",
-    userWorksId:""
+    voteWorksId:-1,
+    userWorksId:-1
   },
   onLoad:function(options){
     console.log(options)

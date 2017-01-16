@@ -97,6 +97,7 @@ Page({
   },
   loadMore: function(){
     console.log(this.data.findKey)
+    console.log(this.data.voteWorksId)
     if(this.data.noMoreList){
       return
     }
@@ -109,7 +110,7 @@ Page({
         findKey: that.data.findKey,
         start: that.data.start,
         size: that.data.size,
-        voteWorksId: that.data.voteWorksId == undefined? -1: that.data.voteWorksId
+        voteWorksId: that.data.voteWorksId == undefined || that.data.voteWorksId == "" || that.data.voteWorksId == null? -1: that.data.voteWorksId
       },
       success:function(res){
         console.log(res)

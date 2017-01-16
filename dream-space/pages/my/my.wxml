@@ -1,4 +1,6 @@
+
 <!--pages/my/my.wxml-->
+<import src="../../src/wetoast.wxml" />
 <view style="width:100%;height:{{windowHeight}}px;">
   <view class="user_info_area">
     <view class="userinfo">
@@ -36,3 +38,6 @@
     </contact-button>
   </view>
 </view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />
