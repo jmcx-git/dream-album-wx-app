@@ -131,6 +131,7 @@ Page({
     }
   },
   onloadData: function () {
+    app.globalData.indexRefreshStatus = false;
     let that = this;
     let animation1 = wx.createAnimation({
       timingFunction: 'ease',
@@ -192,7 +193,12 @@ Page({
             })
           } else {
             let newStart = that.data.start + that.data.size;
-            let newItems = that.data.items.concat(res.data.data.resultList)
+            let newItems = [];
+            if(that.data.start == 0){
+               newItems = res.data.data.resultList;
+            }else{
+               newItems = that.data.items.concat(res.data.data.resultList);
+            }
             that.setData({
               items: newItems,
               loadStatus: true,
