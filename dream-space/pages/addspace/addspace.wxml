@@ -1,5 +1,4 @@
-<import src="../../src/wetoast.wxml"/>
-
+<import src="../../src/wetoast.wxml" />
 <view style="width:100%;height:{{windowHeight}}px;">
 
   <!--新建模版-->
@@ -51,7 +50,7 @@
                 <view>女</view>
               </view>
             </view>
-            <input hidden="true" name="gender" value="{{genderValue}}"/>
+            <input hidden="true" name="gender" value="{{genderValue}}" />
           </view>
         </view>
         <view class="input_cell">
@@ -87,7 +86,7 @@
       <button class="invite_submit_btn" hover-class="btn_hover" form-type="submit">验证邀请码</button>
     </view>
   </form>
-
-  <!-- wetoast -->
-<template is="wetoast" data="{{...__wetoast__}}"/>
 </view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

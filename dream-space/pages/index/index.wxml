@@ -33,3 +33,6 @@
   <image bindtap="addSpace" data-way="1" src="../../image/spacebtn.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
   <image bindtap="addSpace" data-way="2" src="../../image/invitebtn.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
 </view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

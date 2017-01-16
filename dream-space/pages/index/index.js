@@ -18,6 +18,7 @@ Page({
     isHidden2: true
   },
   onLoad: function (options) {
+    new app.WeToast();
     //nothing
     let that = this;
     let redirectRefer = app.globalData.redirectRefer;
@@ -33,7 +34,7 @@ Page({
     } else {
       if (redirectRefer == 1) {
         if (openId == '') {
-          that.confirmGetData(true)
+          app.authLogin(that,true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -47,7 +48,7 @@ Page({
       } else if (redirectRefer == 2) {
         //voteWorksId
         if (openId == '') {
-          that.confirmGetData(true)
+          app.authLogin(that,true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -150,78 +151,10 @@ Page({
       }
     })
     if (!wx.getStorageSync('openId') || !wx.getStorageSync('nickName') |!wx.getStorageSync('avatarUrl')) {
-      that.confirmGetData(false)
+      app.authLogin(that,false)
     } else {
       that.getData();
     }
-  },
-  confirmGetData: function (needRedirect=false) {
-    let that = this
-    wx.login({
-      success: function (wxLoginRes) {
-        //获取code
-        wx.request({
-          url: app.globalData.serverHost + 'user/session.json',
-          data: {
-            code: wxLoginRes.code,
-            appId: app.globalData.appId
-          },
-          method: 'GET',
-          success: function (sessionResp) {
-            //缓存第三方key
-            var openId = sessionResp.data
-            if (openId == "") {
-              console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
-              );
-              app.showWeLittleToast(that,'服务器请求异常','error');
-              return
-            }
-            // wx.setStorageSync('openId', openId);
-            wx.getUserInfo({
-              success: function (wxUserInfoResp) {
-                wx.request({
-                  url: app.globalData.serverHost + 'user/info.json',
-                  data: {
-                    openId: openId,
-                    encryptedData: wxUserInfoResp.encryptedData,
-                    iv: wxUserInfoResp.iv,
-                    appId: app.globalData.appId
-                  },
-                  method: 'GET',
-                  success: function (serverUserInfoResp) {
-                    if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
-                      wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
-                      wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
-                      wx.setStorageSync('openId', openId);
-                      app.globalData.openId = openId;
-                      app.globalData.nickName = serverUserInfoResp.data.data.nickName;
-                      app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
-                      if(!needRedirect){
-                        that.getData();
-                      }
-                    } else {
-                      app.showWeLittleToast(that,'服务器请求异常','error');
-                    }
-                  }
-                })
-              },
-              fail: function () {
-                //拒绝获取信息
-                app.refuseLoginToast();
-              }
-            })
-          },
-          fail: function (trd) {
-            console.log("缓存第三方key出错！", trd);
-            app.showWeLittleToast(that,'服务器请求异常','error');
-          }
-        })
-      },
-      fail: function (ee) {
-        console.log("登录出错了！", ee);
-        app.showWeLittleToast(that,'登录异常','error');
-      }
-    })
   },
   getData: function () {
     let that = this;
@@ -293,9 +226,10 @@ Page({
     })
   },
   addSpace: function (e) {
+    let that = this;
     let way = e.currentTarget.dataset.way;
     if (app.globalData.openId == '') {
-      app.unAuthLoginToast();
+      app.unAuthLoginModal(that,false);
       return
     }
     wx.navigateTo({
@@ -351,7 +285,7 @@ Page({
   onPullDownRefresh: function () {
     let that = this;
     if (app.globalData.openId == '') {
-      app.unAuthLoginToast();
+      app.unAuthLoginModal(that,false);
       return
     }
     that.reInit();
@@ -362,7 +296,7 @@ Page({
     let that = this;
     if (that.data.more) {
       if (app.globalData.openId == '') {
-        app.unAuthLoginToast();
+        // app.unAuthLoginModal(that,false);
         return
       }
       that.getData();
