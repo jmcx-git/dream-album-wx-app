@@ -132,7 +132,7 @@ Page({
   showAllFriends:function(e){
     let that=this;
     wx.navigateTo({
-      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId
+      url: '../friends/friends?spaceId='+that.data.spaceId+"&version="+that.data.version+"&secert="+that.data.topData.secert+"&name="+that.data.topData.name+"&openId="+that.data.topData.openId+"&type="+that.data.topData.type
     })
   },
   showMyRecord:function(){
