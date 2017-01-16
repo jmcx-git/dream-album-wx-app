@@ -33,7 +33,7 @@ Page({
     } else {
       if (redirectRefer == 1) {
         if (openId == '') {
-          that.authLogin(true)
+          that.confirmGetData(true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -47,7 +47,7 @@ Page({
       } else if (redirectRefer == 2) {
         //voteWorksId
         if (openId == '') {
-          that.authLogin(true)
+          that.confirmGetData(true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做

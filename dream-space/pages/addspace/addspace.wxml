@@ -1,3 +1,5 @@
+<import src="../../src/wetoast.wxml"/>
+
 <view style="width:100%;height:{{windowHeight}}px;">
 
   <!--新建模版-->
@@ -73,16 +75,19 @@
         <view class="input_cell">
           <view class="input_cell_hd">邀请码</view>
           <view class="input_cell_bd">
-            <input name="secert" maxlength="26" class="input" placeholder-style="color:gray;" placeholder="粘贴或输入邀请码" bindblur="checkData" bindinput="checkData" />
+            <input name="secert" maxlength="26" class="input" placeholder-style="color:gray;" placeholder="输入邀请码" bindblur="checkData" bindinput="checkData" />
           </view>
         </view>
       </view>
     </view>
     <view class="invite_tips_area">
-      <text>输入来自亲友的宝宝邀请码，验证通过后就可以加入宝宝亲友团，一起见证和守护宝宝的成长。</text>
+      <text>输入亲友发送过来的空间邀请码(不区分大小写)，即可入驻亲友私密空间，实时关注好友动态。</text>
     </view>
     <view class="invite_btn_area">
       <button class="invite_submit_btn" hover-class="btn_hover" form-type="submit">验证邀请码</button>
     </view>
   </form>
+
+  <!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}"/>
 </view>
