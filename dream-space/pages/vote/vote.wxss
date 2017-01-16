@@ -109,6 +109,7 @@
   justify-content: center;
   background-color: rgba(255,255,255,0.9);
   position: fixed;
+  bottom: 0;
   border-top: 1rpx solid #eeeeee;
 }
 .hover_class{
