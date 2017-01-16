@@ -78,9 +78,9 @@ let pageData = {
       return rpx / this.convertrate
     },
     onLoad:function(option){
-      if(option.fakeopenId != undefined){
-        app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
-      }
+      // if(option.fakeopenId != undefined){
+      //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
+      // }
       // 判断分享
       app.globalData.indexRefreshStatus=true;
 
