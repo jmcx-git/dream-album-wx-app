@@ -56,7 +56,7 @@ App({
               self.showWeLittleToast(that, '服务器请求异常', 'error');
               return
             }
-            // wx.setStorageSync('openId', openId);
+            wx.setStorageSync('openId', openId);
             wx.getUserInfo({
               success: function (wxUserInfoResp) {
                 wx.request({
@@ -85,9 +85,34 @@ App({
                   }
                 })
               },
-              fail: function () {
+              fail: function (res) {
                 //拒绝获取信息
-                self.refuseLoginToast();
+                console.log(res);
+                //self.refuseLoginToast();
+                wx.request({
+                  url: self.globalData.serverHost + 'noauthorize/info.json',
+                  data: {
+                    openId: openId,
+                    appId: self.globalData.appId
+                  },
+                  method: 'GET',
+                  success: function (noAuthUserInfoResp) {
+                    console.log(noAuthUserInfoResp)
+                    if (noAuthUserInfoResp.statusCode == 200 && noAuthUserInfoResp.data.status == 0) {
+                      wx.setStorageSync('nickName', noAuthUserInfoResp.data.data.nickName);
+                      wx.setStorageSync('avatarUrl', noAuthUserInfoResp.data.data.avatarUrl);
+                      wx.setStorageSync('openId', openId);
+                      self.globalData.openId = openId;
+                      self.globalData.nickName = noAuthUserInfoResp.data.data.nickName;
+                      self.globalData.avatarUrl = noAuthUserInfoResp.data.data.avatarUrl;
+                      if (!needRedirect) {
+                        that.getData();
+                      }
+                    } else {
+                      self.showWeLittleToast(that, '服务器请求异常', 'error');
+                    }
+                  }
+                })
               }
             })
           },
@@ -143,14 +168,14 @@ App({
       success: function (res) {
         if (res.confirm) {
           self.authLogin(that, needRedirect);
-          self.globalData.indexRefreshStatus=indexRefresh;
+          self.globalData.indexRefreshStatus = indexRefresh;
         } else {
           self.refuseLoginToast();
         }
       }
     })
   },
-  refuseLoginToast() {
+  refuseLoginToast: function () {
     wx.showToast({
       title: '已拒绝授权'
     })

@@ -1,3 +1,5 @@
+<import src="../../src/wetoast.wxml" />
+
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
   <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
   <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />

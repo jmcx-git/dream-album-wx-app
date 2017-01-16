@@ -26,7 +26,6 @@ Page({
   },
   getData: function () {
     let that = this;
-    console.log('getData o');
     wx.request({
       url: app.globalData.serverHost + 'my/info.json',
       data: {
