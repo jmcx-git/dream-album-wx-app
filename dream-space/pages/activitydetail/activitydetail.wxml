@@ -15,22 +15,37 @@
 
     <!-- 中奖名单, 根据isShowWinnerList 判断是否显示 -->
     <view class="listofwinners dashedline" wx:if="{{isShowWinnerList}}">
-      <view class="activityIntrTitle">
-        <view class="innerLine"/>
-        <view class="intrTxt"> 中奖名单 </view>
-        <view class="innerLine"/>
-      </view>
-        <block wx:for="{{winnersinfolist}}" wx:key="{{index}}">
-          <text class="contentprize">{{item.content}}</text>
-          <view class="userinfos">
-            <block wx:for="{{item.userinfos}}" wx:key="{{*this}}" wx:for-item="userinfo">
-              <view class="useritem">
-                <view class="usericon"><image class="imgusricon" src="{{userinfo.src}}"/></view>
-                <text class="username">{{userinfo.name}}</text>
-              </view>
-            </block>
+        <view class="winnerlisttitle">
+          <image class="winerlistimgtitle" src="/image/detail_winner.png"/>
+        </view>
+        <view class="winnerlistcontent">
+          <!--
+          <view class="winnerlistbgradius">
+            <view class="winnerbgtop">
+              <image class="winnerimgtop" src="/image/detail-winnerlist-bg-top.png"/></view>
+            <view class="winnerbgcenter">
+              <image class="winnerimgcenter" src="/image/detail-winnerlist-bg-center.png"/></view>
+            <view class="winnerbgbottom">
+              <image class="winnerimgbottom"  src="/image/detail-winnerlist-bg-bottom.png"/></view>
           </view>
-        </block>
+          -->
+          <view class="winnerinforoot winnerlistItembgodd">
+            <view class="winnernum">名次</view>
+            <view class="winnername">参与者</view>
+            <view class="winnerVotes">得票</view>
+          </view>
+          <block wx:for="{{winnersinfolist}}" wx:key="{{index}}">
+            <view class="winnerinforoot {{index%2 ==1 ?'winnerlistItembgodd':''}}">
+              <view class="winnernum">
+                <image class="winnericon" src="{{winnericons[index]}}" wx:if="{{index <= 2}}"/>
+                <view class="winnericon2"wx:if="{{index > 2}}" >{{item.num}}</view>
+                <text class="winnernum2">NO.{{item.num}}</text>
+              </view>
+              <view class="winnername">{{item.name}}</view>
+              <view class="winnerVotes">{{item.vote}}</view>
+            </view>
+          </block>
+        </view>
     </view>
     <view class="activityIntr dashedline">
       <view class="activityIntrTitle">
