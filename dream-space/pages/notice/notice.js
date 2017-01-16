@@ -83,11 +83,11 @@ Page({
                     }
                     wx.hideToast();
                 } else {
-                    app.errorToast(res.data.message)
+                    app.showWeLittleToast(that,'服务器请求异常','error');
                 }
             },
             fail: function () {
-                app.failedToast()
+                app.showWeLittleToast(that,'服务器请求异常','error');
             }
         })
     },

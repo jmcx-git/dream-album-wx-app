@@ -114,11 +114,11 @@ Page({
               })
             }
           } else {
-            app.errorToast(res.data.message);
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         },
         fail: function () {
-          app.failedToast();
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       })
     } else if (owner == 0) {
@@ -173,7 +173,7 @@ Page({
             if (openId == "") {
               console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
               );
-              app.failedToast();
+              app.showWeLittleToast(that,'服务器请求异常','error');
               return
             }
             // wx.setStorageSync('openId', openId);
@@ -200,7 +200,7 @@ Page({
                         that.getData();
                       }
                     } else {
-                      app.failedToast();
+                      app.showWeLittleToast(that,'服务器请求异常','error');
                     }
                   }
                 })
@@ -213,13 +213,13 @@ Page({
           },
           fail: function (trd) {
             console.log("缓存第三方key出错！", trd);
-            app.failedToast();
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         })
       },
       fail: function (ee) {
         console.log("登录出错了！", ee);
-        app.failedToast();
+        app.showWeLittleToast(that,'登录异常','error');
       }
     })
   },
@@ -271,7 +271,7 @@ Page({
         }
       },
       fail: function () {
-        app.failedToast()
+        app.showWeLittleToast(that,'服务器请求异常','error');
       }
     })
   },

@@ -90,12 +90,12 @@ Page({
               url: '../spacetimeline/spacetimeline?spaceId=' + data.data + "&version=" + app.globalData.version
             })
           } else {
-            app.errorToast(data.message);
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         },
         fail: function (res) {
           console.log(res);
-          app.failedToast()
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       })
     } else {
@@ -118,12 +118,12 @@ Page({
               url: '../spacetimeline/spacetimeline?spaceId=' + res.data.data + "&version=" + app.globalData.version
             })
           } else {
-            app.errorToast(res.data.message);
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         },
         fail: function (res) {
           console.log(res)
-          app.failedToast()
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       })
     }
@@ -162,15 +162,15 @@ Page({
           } else if (res.data.status == -2) {
             app.showWeLittleToast(that,'无效的验证码')
           } else {
-            app.failedToast()
+            app.showWeLittleToast(that,'服务器请求异常','error');
           }
         } else {
-          app.errorToast(res.data.message)
+          app.showWeLittleToast(that,'服务器请求异常','error');
         }
       },
       fail: function (res) {
         console.log(res)
-        app.failedToast()
+        app.showWeLittleToast(that,'服务器请求异常','error');
       }
     })
   },
