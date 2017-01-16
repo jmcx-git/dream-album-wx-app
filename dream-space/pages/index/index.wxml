@@ -5,7 +5,7 @@
 
 <!--空间列表列表-->
 <view wx:else class="main">
-  <view id="{{idx}}" wx:for="{{items}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
+  <view id="{{idx}}" wx:for="{{items}}" wx:key="{{idx}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
       <block wx:if="{{item.type==0}}">
         <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
