@@ -46,7 +46,7 @@
          <view class="input_cell">
           <view class="input_cell_hd">空间介绍</view>
           <view class="input_cell_bd">
-            <input name="info" value="{{spaceInfo.info==null?'':spaceInfo.info}}" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介" />
+            <input name="info" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" value="{{spaceInfo.info==null?'':spaceInfo.info}}" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介" />
           </view>
         </view>
       </view>

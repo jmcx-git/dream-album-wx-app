@@ -31,6 +31,21 @@ let pageData = {
       console.log("discovery"+this.data.scrollHeight)
       this.loadMore()
     },
+    onPullDownRefresh: function () {
+      this.refreshData()
+      wx.stopPullDownRefresh();
+    },
+    onReachBottom: function (){
+      this.loadMore()
+    },
+    refreshData: function(){
+      this.setData({
+        activitylist: [],
+        start: 0,
+        noMoreList: false
+      })
+      this.loadMore()
+    },
     showdetail: function(e){
       let that = this
       if(this.showdetailtouched != true){
@@ -84,7 +99,7 @@ let pageData = {
       })
     },
     scrolltolower: function(e){
-      this.loadMore()
+
     },
     handleFail: function(msg){
       wx.showToast({

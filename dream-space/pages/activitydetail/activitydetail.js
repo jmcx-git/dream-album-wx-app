@@ -30,7 +30,7 @@ let pageData = {
         joined: false,
 
         // 分享数据
-        voteWorksId:"",
+        voteWorksId:-1,
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
@@ -82,11 +82,13 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-      app.globalData.indexRefreshStatus=true;
+
+      if(option.share == 'yes'){
+        app.globalData.indexRefreshStatus=true;
+      }
 
       if(option.share ==1){
         // let url = '../index/index?redirectRefer=2&fromOpenId='+option.fromOpenId+"&activityId="+option.activityId+"&voteWorksId="+option.voteWorksId
-
         app.globalData.fromOpenId = option.fromOpenId
         app.globalData.redirectRefer = 2
         app.globalData.activityId = option.activityId
@@ -131,6 +133,7 @@ let pageData = {
         method: "GET",
         success: function(res) {
           console.log("actiitydetail", res)
+          console.log("actiitydetail", res.data.data.userPrizes == null)
           if(res.statusCode == 200){
             if(res.data.status == 0){
               let dat = res.data.data;
@@ -144,14 +147,15 @@ let pageData = {
                 activityIntrParts:activityIntrParts,
                 showicon: icons[dat.step % icons.length],
                 deadline:{pfx:"距离结束",keyword:dat.stepTime, sfx: dat.stepTimeUnit},
-                participates: 0,
+                participates: dat.participates,
 
                 examples:dat.examples,
 
                 prizeList: dat.prizes,
                 step: dat.step,
                 joined: dat.joined > 0,
-                userWorksId: dat.worksId
+                userWorksId: dat.worksId,
+                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 4
               })
               return
             }
@@ -197,8 +201,9 @@ let pageData = {
         success: function (res) {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
+              let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
               wx.navigateTo({
-                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+voteWorksId+"&userWorksId="+that.data.userWorksId
               })
           }
         }
@@ -206,8 +211,10 @@ let pageData = {
     },
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
+      let that = this
+      let voteWorksId = that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined? that.data.userWorksId: that.data.voteWorksId
       wx.navigateTo({
-        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
     contactus: function(e){

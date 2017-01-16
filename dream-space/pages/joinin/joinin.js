@@ -9,10 +9,9 @@ Page({
     activityId:0,
     noMoreList: false,
     worksId: -1,
-    checkedIndex: -1,
     buttonstop: 560,
-    voteWorksId:"",
-    userWorksId:""
+    voteWorksId:-1,
+    userWorksId:-1
   },
   convert2px: function(rpx){
     return rpx / this.convertrate
@@ -95,6 +94,7 @@ Page({
               console.log(res)
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
+                  console.log(that.data.voteWorksId)
                   wx.redirectTo({
                     url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
                   })
@@ -114,6 +114,22 @@ Page({
       }
     })
   },
+  onPullDownRefresh: function () {
+    this.refreshData()
+    wx.stopPullDownRefresh();
+  },
+  onReachBottom: function (){
+    this.loadMore()
+  },
+  refreshData: function(){
+    this.setData({
+      start:0,
+      entries:[],
+      noMoreList: false,
+      worksId: -1
+    })
+    this.loadMore();
+  },
   handleFail: function(msg){
     wx.showToast({
       title: msg,
@@ -121,14 +137,17 @@ Page({
       duration: 2000
     })
   },
-  scrolltolower: function(e){
-    this.loadMore()
-  },
   radioChange: function (e) {
     console.log(e)
-    this.setData({
-      worksId :e.detail.value
-    })
+    if(this.data.worksId != e.currentTarget.dataset.id){
+      this.setData({
+        worksId :e.currentTarget.dataset.id
+      })
+    }else{
+      this.setData({
+        worksId : -1
+      })
+    }
   },
   onReady:function(){
     // 页面渲染完成

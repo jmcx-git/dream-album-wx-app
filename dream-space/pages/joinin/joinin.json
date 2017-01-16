@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "选择作品"
+    "navigationBarTitleText": "选择作品",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }

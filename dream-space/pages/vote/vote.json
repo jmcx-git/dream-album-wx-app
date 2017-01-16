@@ -1,3 +1,5 @@
 {
-    "navigationBarTitleText": "投票"
+    "navigationBarTitleText": "投票",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }

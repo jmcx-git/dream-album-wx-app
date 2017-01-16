@@ -51,12 +51,13 @@ page{
   color:#888888;
 }
 .bottombtn{
-  position: relative;
+  position: fixed;
   height: 98rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  top: -98rpx;
+  bottom: 0;
+  width: 100%;
 }
 
 .btnview{

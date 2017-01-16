@@ -110,6 +110,9 @@ Page({
   },
   choosenImage: function (e) {
     let that = this;
+    if(that.data.secert=='undefined' || that.data.secert=='null' || that.data.secert==''){
+      return;
+    }
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
