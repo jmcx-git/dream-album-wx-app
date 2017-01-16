@@ -33,46 +33,43 @@ let pageData = {
         voteWorksId:"",
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
+        winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
 
-        winnersinfolist:[{ // fake data obj
-          content:"奖励1",
-          userinfos:[{
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+        winnersinfolist:[{
+            num:1,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:2,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:3,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:4,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:5,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:6,
             name:"呵呵哒",
+            vote:345
           },
           {
-            src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
+            num:7,
             name:"呵呵哒",
+            vote:345
           }]
-      },{content:"奖励2",
-      userinfos:[{
-        src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
-        name:"呵呵哒",
-      },
-      {
-        src:"http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKialMMeUV7CloHKMPly30ssUIQTCic1gE4icDxibiauVykzhKf862dwbRNcdVTIAGMfrw5EHs9VrIG2CA/0",
-        name:"呵呵哒",
-      }]}]
     },
     convert2rpx: function(px){
       return px * this.convertrate
@@ -81,6 +78,9 @@ let pageData = {
       return rpx / this.convertrate
     },
     onLoad:function(option){
+      if(option.fakeopenId != undefined){
+        app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
+      }
       // 判断分享
       app.globalData.indexRefreshStatus=true;
 
