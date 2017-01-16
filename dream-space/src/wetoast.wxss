@@ -36,7 +36,7 @@
 	justify-content: space-around;
 }
 .wetoast__bd__img {
-	margin-top: 3px;
+	margin: 3px;
 }
 .wetoast__bd__img_desc {
     width: 55px;

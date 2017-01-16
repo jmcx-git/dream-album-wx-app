@@ -35,22 +35,16 @@ App({
     redirectRefer: '',
     owner: ''
   },
-  showWeLittleToast: function (that, content) {
+  showWeLittleToast: function (that, content, icon) {
     that.wetoast.toast({
+      img: icon == 'error' ? '../../image/erroricon.png' : icon,
       title: content,
       bodyClassName: 'my_toast_body'
     })
   },
-  serverFailedToast() {
-    wx.showToast({
-      title: '远程应用服务器忙，请下拉刷新重试。',
-      icon: 'success',
-      duration: 2000
-    });
-  },
   failedToast() {
     wx.showToast({
-      title: '请求异常!请稍后再试~',
+      title: '请求出现异常,请稍后!',
       icon: 'success',
       duration: 2000
     });

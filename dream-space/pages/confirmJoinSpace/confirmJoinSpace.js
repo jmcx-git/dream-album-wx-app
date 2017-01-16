@@ -55,11 +55,11 @@ Page({
                         spaceType: res.data.data.type
                     })
                 } else {
-                    app.failedToast();
+                    app.showWeLittleToast(that,'服务器请求异常','error');
                 }
             },
             fail: function () {
-                app.failedToast();
+                app.showWeLittleToast(that,'服务器请求异常','error');
             }
         })
     },
@@ -83,11 +83,11 @@ Page({
                         url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version
                     })
                 } else {
-                    app.failedToast();
+                    app.showWeLittleToast(that,'服务器请求异常','error');
                 }
             },
             fail: function () {
-                app.failedToast();
+                app.showWeLittleToast(that,'服务器请求异常','error');
             }
         })
     }
