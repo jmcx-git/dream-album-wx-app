@@ -48,5 +48,7 @@
         </view>
     </view>
   </view>
-  <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
+  <block wx:if="{{vote==1}}">
+    <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
+  </block>
 </view>
