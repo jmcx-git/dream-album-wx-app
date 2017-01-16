@@ -218,9 +218,8 @@ page{
 }
 
 .bottom{
-  height:150rpx;
+  height:100rpx;
   width:calc(100% - 40rpx);
-  padding:50rpx 20rpx;
 }
 .bottomArea{
   text-align: center;

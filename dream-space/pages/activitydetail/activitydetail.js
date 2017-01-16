@@ -14,6 +14,12 @@ let pageData = {
         deadline:{},
         participates: 0,
         showicon: icons[0],
+        stepDesc: '',
+        stepTime: 0,
+        stepTimeUnit: '',
+        activityRule: '',
+        activityTimeDesc: '',
+
 
         examples:[],
 
@@ -137,14 +143,16 @@ let pageData = {
           if(res.statusCode == 200){
             if(res.data.status == 0){
               let dat = res.data.data;
-              let activityIntrParts = [].concat(dat.contentSections);
-              activityIntrParts.push(dat.activityRule)
-              activityIntrParts.push(dat.activityTimeDesc)
               that.setData({
                 cover: dat.cover,
                 title: dat.title,
+                stepDesc: dat.stepDesc,
+                stepTimeUnit: dat.stepTimeUnit,
+                stepTime: dat.stepTime,
                 introduction: dat.introduction,
-                activityIntrParts:activityIntrParts,
+                activityTimeDesc: dat.activityTimeDesc,
+                activityRule: dat.activityRule,
+                activityIntrParts: dat.contentSections,
                 showicon: icons[dat.step % icons.length],
                 deadline:{pfx:"距离结束",keyword:dat.stepTime, sfx: dat.stepTimeUnit},
                 participates: dat.participates,
@@ -189,7 +197,12 @@ let pageData = {
     },
     govote: function(e){
         wx.navigateTo({
-          url: '../vote/vote?activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+          url: '../vote/vote?vote=1&activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+        })
+    },
+    seevote: function(e){
+        wx.navigateTo({
+          url: '../vote/vote?vote=0&activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
         })
     },
     addphoto: function(e){
@@ -214,9 +227,6 @@ let pageData = {
         url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
-    contactus: function(e){
-      console.log("联系我们")
-    },
     onShareAppMessage: function () {
       let title = app.globalData.nickName+'邀请您加入活动。'
       let desc = '有福同享，快来参加活动名称，赢取大奖。'
@@ -228,8 +238,6 @@ let pageData = {
       if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
         url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.userWorksId+'&share=1'
       }
-      console.log(url)
-
       return {
         title: title,
         desc: desc,

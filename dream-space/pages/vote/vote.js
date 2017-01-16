@@ -13,7 +13,8 @@ Page({
     scrollHeight: 500,
     showSearchbar: true,
     selectedWorksId: -1,
-    voteWorksId: -1
+    voteWorksId: -1,
+    vote: 0
   },
   showInput: function () {
       this.setData({
@@ -79,7 +80,8 @@ Page({
          activityId: options.activityId,
          scrollHeight: res.windowHeight,
          voteWorksId: options.voteWorksId,
-         userWorksId: options.userWorksId
+         userWorksId: options.userWorksId,
+         vote: options.vote
        })
       }
     })
