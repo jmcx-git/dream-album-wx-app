@@ -8,7 +8,8 @@ Page({
     wx.request({
       url: app.globalData.serverHost+'user/interaction/info.json',
       data: {
-        openId:options.openId,
+        openId:app.globalData.openId,
+        interOpenId: options.openId,
         spaceId:options.spaceId,
         version:options.version
       },

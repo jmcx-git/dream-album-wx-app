@@ -66,7 +66,7 @@ page {
 .input_cell {
   display: flex;
   align-items: center;
-  border-bottom: 2rpx solid #d9d9d9;
+  border-bottom: 2rpx solid #efeff4;
 }
 
 .input_cell_hd {
