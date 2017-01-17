@@ -221,7 +221,9 @@ page{
   right:66rpx;
 }*/
 .collect{
+  position: absolute;
   top:2rpx;
+  left: 14rpx;
   width:32rpx;
   height:32rpx;
 }
@@ -231,7 +233,6 @@ page{
   position: absolute;
   top:0rpx;
   right:46rpx;
-  text-align: center;
 }
 /*.replay{
   top:0rpx;
@@ -241,7 +242,9 @@ page{
   right:0rpx;
 }*/
 .replay{
+  position: absolute;
   top:2rpx;
+  left: 14rpx;
   width:32rpx;
   height:32rpx;
 }
@@ -251,7 +254,6 @@ page{
   height:36rpx;
   position: absolute;
   right:-14rpx;
-  text-align: center;
 }
 .avatarCollectTop{
   background-color: #efeff4;
