@@ -55,7 +55,7 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-      console.log("share", option)
+      console.log("onload")
       if(option.share == 'yes'){
         app.globalData.indexRefreshStatus=true;
       }
@@ -93,6 +93,10 @@ let pageData = {
       })
 
     this.initData(this.data.id)
+    },
+    onShow: function(){
+      console.log("onshow");
+      this.initData(this.data.id)
     },
     getWorksId: function(worksId){
       return (worksId == undefined || worksId == 'undefined' || worksId == null || worksId == 'null' || worksId == "")? -1: worksId

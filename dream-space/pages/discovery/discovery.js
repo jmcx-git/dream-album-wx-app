@@ -39,8 +39,8 @@ let pageData = {
       this.loadMore()
     },
     refreshData: function(){
+      this.data.activitylist = [];
       this.setData({
-        activitylist: [],
         start: 0,
         noMoreList: false
       })
