@@ -24,16 +24,6 @@
           <image class="winerlistimgtitle" src="/image/detail_winner.png"/>
         </view>
         <view class="winnerlistcontent">
-          <!--
-          <view class="winnerlistbgradius">
-            <view class="winnerbgtop">
-              <image class="winnerimgtop" src="/image/detail-winnerlist-bg-top.png"/></view>
-            <view class="winnerbgcenter">
-              <image class="winnerimgcenter" src="/image/detail-winnerlist-bg-center.png"/></view>
-            <view class="winnerbgbottom">
-              <image class="winnerimgbottom"  src="/image/detail-winnerlist-bg-bottom.png"/></view>
-          </view>
-          -->
           <view class="winnerinforoot winnerlistItembgodd">
             <view class="winnernum">名次</view>
             <view class="winnername">参与者</view>
