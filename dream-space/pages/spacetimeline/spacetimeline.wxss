@@ -196,14 +196,22 @@ page{
   margin-bottom: 26rpx;
 }
 .timebefore{
+  position: absolute;
+  top:0rpx;
+  left: 0rpx;
   font-size: 24rpx;
   color: #888888;
   line-height: 36rpx;
+  height: 36rpx;
 }
 .delComment{
+  position: absolute;
+  top:0rpx;
   font-size: 24rpx;
   color:#00adef;
-  margin-left: 30rpx;
+  left: 105rpx;
+  line-height: 36rpx;
+  height: 36rpx;
 }
 /*.collect{
   width:36rpx;
