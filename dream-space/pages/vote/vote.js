@@ -265,14 +265,13 @@ Page({
         }
       }
     })
-    console.log(e)
 
   },
   onShareAppMessage: function () {
     let title = app.globalData.nickName+'邀请您给他加油助威。'
     let desc = '我正在参加活动名称,邀请您给他加油助威。'
     let url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.activityId+'&voteWorksId='+this.data.voteWorksId+'&share=1'
-    console.log(url)
+
     if(this.data.voteWorksId == -1){
       if(this.data.userWorksId == -1){
         title = app.globalData.nickName+'邀请您参与投票。'
@@ -284,7 +283,7 @@ Page({
       }
 
     }
-    console.log(url)
+
     return {
       title: title,
       desc: desc,
