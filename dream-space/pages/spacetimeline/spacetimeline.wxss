@@ -428,6 +428,7 @@ page{
   text-align: center;
   background-color: #00adef;
   color: #ffffff;
+  padding:0rpx;
 }
 /*空间无内容时的样式*/
 .nocontent{
