@@ -27,8 +27,12 @@
         <view class="timeline">
             <text class="timebefore">{{globaldata.timeDesc}}</text>
             <text class="delComment" wx:if="{{myOpenId == globaldata.authorOpenId}}" bindtap="showHandle"  data-index="{{globalindex}}" data-feedid="{{globaldata.id}}">删除</text>
-            <image bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" class="collect" src="{{(globaldata.ilike==-1)?'../../image/collect.png':'../../image/collectmy.png'}}" />
-            <image class="replay" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" bindtap="toreplay" src="../../image/replay.png" />
+            <view class="collectLarge" bindtap="toCollect" data-ilike="{{globaldata.ilike}}" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}">
+                <image class="collect" src="{{(globaldata.ilike==-1)?'../../image/collect.png':'../../image/collectmy.png'}}" />
+            </view>
+            <view class="replayLarge" data-feedindex="{{globalindex}}" data-feedid="{{globaldata.id}}" bindtap="toreplay">
+                <image class="replay" src="../../image/replay.png" />
+            </view>
         </view>
         <!--头像集合-->
         <view class="{{(globaldata.comments.length)>0?'avatarCollectTop':'avatarCollectTopNoComments'}}" wx:if="{{globaldata.likeIcons.length>0}}">
