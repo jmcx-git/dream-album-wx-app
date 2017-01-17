@@ -133,7 +133,7 @@ Page({
             }
           }
           that.setData({
-            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+            spacetimelineList:that.data.start==0?res.data.data.resultList:that.data.spacetimelineList.concat(res.data.data.resultList),
             start:that.data.start+res.data.data.resultList.length
           })
           that.setData({
@@ -383,9 +383,7 @@ Page({
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
-          spacetimelineList:[],
-          noMoreData:false,
-          topData:{}
+          noMoreData:false
         })
         setTimeout(function(){
           that.getSpaceTopData();
@@ -449,8 +447,6 @@ Page({
       let that=this;
       that.setData({
         start:0,
-        topData:{},
-        spacetimelineList:[],
         noMoreData:false
       })
       app.globalData.createFinishFlag=false;
