@@ -26,6 +26,7 @@ App({
     // serverHost: "https://developer.mokous.com/space/",
     serverHost: "https://api.mokous.com/space/",
     appId: "wx1c1943ad2a3edaf1",
+    // appId: "wx0ddc8673b8df3827",
     version: '1.0.0',
     nickName: "",
     avatarUrl: "",
