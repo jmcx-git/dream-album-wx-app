@@ -211,6 +211,7 @@ Page({
     })
   },
   saveComment:function(e){
+    console.log("保存评论，评论内容为:"+e.detail.value.commentContent);
     let that=this;
     var content=e.detail.value.commentContent;
     // var content=that.data.commentContent;
