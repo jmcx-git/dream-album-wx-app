@@ -457,6 +457,7 @@ page{
   right: 25rpx;
   width: 116rpx;
   height: 116rpx;
+  z-index: 100;
 }
 
 .add_btn image {
