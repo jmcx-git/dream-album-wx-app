@@ -3,5 +3,6 @@
     "navigationBarTitleText": "聚梦",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#efeff4"
 }
