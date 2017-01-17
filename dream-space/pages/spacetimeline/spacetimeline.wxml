@@ -31,6 +31,10 @@
         <button form-type="submit" class="commentSendImageNew">发送</button>
     </view>
 </form>
+    <!--<view class="commentnew" hidden="{{commentHidden}}">
+        <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" bindinput="requireContent" placeholder="评论" />
+        <button bindtap="saveComment" class="commentSendImageNew">发送</button>
+    </view>-->
 </view>
 <!--点击创建之后的-->
 <view hidden="{{createHidden}}" class="nav-view">
