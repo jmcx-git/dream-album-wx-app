@@ -20,7 +20,6 @@ Page({
       return;
     }
     let that=this;
-    wx.hideKeyboard();
     setTimeout(function(){
        wx.request({
         url: app.globalData.serverHost+'feed/add.json',

@@ -94,6 +94,7 @@ Page({
   },
   getSpaceListData:function(){
     let that=this;
+    console.log("start="+that.data.start+",size="+that.data.size);
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
@@ -105,6 +106,8 @@ Page({
       },
       method: 'GET',
       success: function(res){
+        console.log("获取数据列表");
+        console.log(res);
         if(res.data.status==0){
           if(res.data.data.resultList.length<that.data.size){
             that.setData({
@@ -165,12 +168,12 @@ Page({
     if(that.data.isOpen) {
       that.bindViewTap();
     }
-    wx.navigateTo({
-      url: '../wordCreate/wordCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
-    })
     this.setData({
       isHidden1: true,
       isHidden2: true
+    })
+    wx.navigateTo({
+      url: '../wordCreate/wordCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
     })
   },
   tocratePhoto:function(e){
@@ -178,12 +181,12 @@ Page({
     if(that.data.isOpen) {
       that.bindViewTap();
     }
-    wx.navigateTo({
-      url: '../photoCreate/photoCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
-    })
-     this.setData({
+    this.setData({
       isHidden1: true,
       isHidden2: true
+    })
+    wx.navigateTo({
+      url: '../photoCreate/photoCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
     })
   },
   toreplay:function(e){
@@ -375,8 +378,9 @@ Page({
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
-          createHidden:true,
-          spacetimelineList:[]
+          spacetimelineList:[],
+          noMoreData:false,
+          topData:{}
         })
         setTimeout(function(){
           that.getSpaceTopData();
