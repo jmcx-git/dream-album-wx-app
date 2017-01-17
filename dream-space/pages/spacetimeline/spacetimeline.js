@@ -42,6 +42,14 @@ Page({
        })
     }else{
       let that=this;
+      let animation1 = wx.createAnimation({
+        timingFunction: 'ease',
+      })
+      let animation2 = wx.createAnimation({
+        timingFunction: 'ease',
+      })
+      that.data.animation1 = animation1;
+      that.data.animation2 = animation2;
       wx.getSystemInfo({
         success: function(res) {
           that.setData({
@@ -367,14 +375,6 @@ Page({
   },
   onShow:function(){
     let that=this;
-    let animation1 = wx.createAnimation({
-      timingFunction: 'ease',
-    })
-    let animation2 = wx.createAnimation({
-      timingFunction: 'ease',
-    })
-    that.data.animation1 = animation1;
-    that.data.animation2 = animation2;
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
