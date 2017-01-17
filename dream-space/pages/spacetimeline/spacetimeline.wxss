@@ -250,7 +250,7 @@ page{
   width:60rpx;
   height:36rpx;
   position: absolute;
-  right:-15rpx;
+  right:-14rpx;
   text-align: center;
 }
 .avatarCollectTop{
