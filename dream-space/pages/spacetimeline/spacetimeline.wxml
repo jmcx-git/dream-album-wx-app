@@ -25,24 +25,20 @@
 <image src="../../image/nocontent.png" class="nocontent" hidden="{{!noContentHidden}}" />
 <image src="../../image/directtocreate.png" class="directtocreate" hidden="{{!noContentHidden || (topData.secert==null)}}"/>
 <image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert==null)}}"/>
-<!--<form bindsubmit="saveComment">
+<form bindsubmit="saveComment">
     <view class="commentnew" hidden="{{commentHidden}}">
-        <view class="commentTextArea">
         <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
-        </view>
-        <view class="commentButton">
-            <button form-type="submit" class="commentSendImageNew">发送</button>
-        </view>
+        <button form-type="submit" class="commentSendImageNew">发送</button>
     </view>
-</form>-->
-<view class="commentnew" hidden="{{commentHidden}}">
+</form>
+    <!--<view class="commentnew" hidden="{{commentHidden}}">
         <view class="commentTextArea">
-        <input class="commentTextNew" value="{{commentDefaultValue}}" bindinput="requireContent" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+            <input class="commentTextNew" value="{{commentDefaultValue}}" bindinput="requireContent" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
         </view>
         <view class="commentButton" bindtap="saveComment">
             <text class="commentSendImageNew">发送</text>
         </view>
-    </view>
+    </view>-->
 </view>
 <!--点击创建之后的-->
 <view hidden="{{createHidden}}" class="nav-view">
