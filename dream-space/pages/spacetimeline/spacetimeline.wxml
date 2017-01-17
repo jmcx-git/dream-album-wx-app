@@ -35,7 +35,7 @@
 <!--<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert==null)}}"/>-->
 <form bindsubmit="saveComment">
     <view class="commentnew" hidden="{{commentHidden}}">
-        <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <input cursor-spacing="30" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
         <button form-type="submit" type="default" class="commentSendImageNew">发送</button>
     </view>
 </form>

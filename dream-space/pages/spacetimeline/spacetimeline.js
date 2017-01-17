@@ -235,8 +235,7 @@ Page({
         that.setData({
           spacetimelineList:that.data.spacetimelineList,
           commentHidden:true,
-          commentDefaultValue:'',
-          commentFocus:false
+          commentDefaultValue:''
         })
         wx.showToast({
           title:'评论成功',
@@ -366,7 +365,6 @@ Page({
         }
         that.setData({
           commentHidden:true,
-          commentFocus:false,
           isHidden1: true,
           isHidden2: true
           // commentDefaultValue:''
