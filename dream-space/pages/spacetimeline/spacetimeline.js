@@ -172,9 +172,15 @@ Page({
       commentFeedId:e.currentTarget.dataset.feedid,
     })
   },
+  requireContent:function(e){
+    this.setData({
+      commentContent:e.detail.value
+    })
+  },
   saveComment:function(e){
     let that=this;
-    var content=e.detail.value.commentContent;
+    // var content=e.detail.value.commentContent;
+    var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
       return;
     }
@@ -196,7 +202,8 @@ Page({
         that.setData({
           spacetimelineList:that.data.spacetimelineList,
           commentHidden:true,
-          commentDefaultValue:''
+          commentDefaultValue:'',
+          commentFocus:false
         })
       },
       fail: function(ron) {
@@ -204,12 +211,6 @@ Page({
         console.log(ron);
         app.errorToast("评论失败!");
       }
-    })
-  },
-  hideComment:function(e){
-    let that=this;
-    this.setData({
-      commentContent:e.detail.value
     })
   },
   showSpaceDetail:function(e){
