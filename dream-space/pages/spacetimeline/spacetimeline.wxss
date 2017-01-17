@@ -406,18 +406,17 @@ page{
   position: fixed;
   height:100rpx;
   width: 100%;
-  padding-left: 20rpx;
-  top:calc(100% - 100rpx);
-  left:0rpx;
   background-color: #ffffff;
   z-index: 10;
+  left:0rpx;
+  top:calc(100% - 100rpx);
 }
 .commentTextNew{
-  width:calc(100% - 200rpx);
+  width:calc(100% - 20rpx);
   position: absolute;
-  left:20rpx;
   line-height: 80rpx;
   top:10rpx;
+  left:10rpx;
   height:80rpx;
   border: 1px solid #ffffff;
   box-sizing: border-box;
