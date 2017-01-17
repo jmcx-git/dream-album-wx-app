@@ -92,7 +92,7 @@ let pageData = {
         }
       })
 
-    this.initData(this.data.id)
+    // this.initData(this.data.id)
     },
     onShow: function(){
       console.log("onshow");

@@ -23,10 +23,7 @@
     <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
 
       <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
-        <view class='titlepart'>
-          <text class="txtItem2">NO.{{item.rank}} {{item.solgan ? item.solgan : ''}}</text>
-          <text class="txtItem">序号: {{item.id}}</text>
-        </view>
+
         <view class="imgbox">
           <view class="boxitm">
             <image class="img"  mode="aspectFill" src="{{item.cover}}"/>
@@ -35,8 +32,12 @@
             src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
           </view>
         </view>
+        <view class='titlepart'>
+          <view class="txtItem2"><text class="txtnum">NO.{{item.rank}}</text> 得票{{item.votes}}</view>
+          <text class="txtItem">序号 {{item.id}}</text>
+        </view>
         <view class="itembottom">
-          <view class="votecount"> <view class="dot"/> 得票{{item.votes}} </view>
+          <view class="votecount">{{item.solgan ? item.solgan : ''}}</view>
         </view>
       </view>
     </label>
