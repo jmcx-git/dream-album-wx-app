@@ -412,15 +412,17 @@ page{
   top:calc(100% - 100rpx);
 }
 .commentTextNew{
-  width:calc(100% - 20rpx);
+  width:calc(100% - 60rpx);
   position: absolute;
   line-height: 80rpx;
   top:10rpx;
-  left:10rpx;
+  left:30rpx;
   height:80rpx;
-  border: 1px solid #ffffff;
+  border: 1px solid #efefef;
   box-sizing: border-box;
-  background-color: #efeff4;
+  background-color: #fafafa;
+  border-radius: 4px;
+  padding-left: 10rpx;
 }
 .commentSendImageNew{
   width:140rpx;
@@ -428,12 +430,16 @@ page{
   top:10rpx;
   left:calc(100% - 170rpx);
   height:80rpx;
-  font-size: 36rpx;
+  font-size: 32rpx;
   line-height: 80rpx;
   text-align: center;
   background-color: #00adef;
   color: #ffffff;
   padding:0rpx;
+}
+.placeHolder{
+  font-size: 32rpx;
+  color: #888888;
 }
 /*空间无内容时的样式*/
 .nocontent{

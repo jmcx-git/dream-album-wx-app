@@ -39,6 +39,6 @@
     </view>
 </form>-->
 <view class="commentnew" hidden="{{commentHidden}}">
-        <input cursor-spacing="30" class="commentTextNew" bindconfirm="saveComment" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text"  placeholder="评论" />
+        <input cursor-spacing="30" class="commentTextNew" bindconfirm="saveComment" value="{{commentDefaultValue}}" maxlength="-1" focus="{{commentFocus}}" type="text" placeholder-class="placeHolder"  placeholder="评论" />
     </view>
 </view>
