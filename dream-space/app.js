@@ -16,6 +16,10 @@ App({
     if (typeof avatarUrl !== 'undefined' && avatarUrl != '') {
       this.globalData.avatarUrl = avatarUrl;
     }
+    let gender = wx.getStorageSync("gender");
+    if (typeof gender !== 'undefined' && gender != '') {
+      this.globalData.gender = gender;
+    }
   },
   globalData: {
     // serverHost: "http://10.1.0.131:8080/dream-family/space/",
@@ -25,6 +29,7 @@ App({
     version: '1.0.0',
     nickName: "",
     avatarUrl: "",
+    gender: "",
     openId: "",
     createFinishFlag: false,
     modifySpaceInfoFlag: false,
@@ -72,10 +77,12 @@ App({
                     if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
                       wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
                       wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
+                      wx.setStorageSync('gender', serverUserInfoResp.data.data.gender)
                       wx.setStorageSync('openId', openId);
                       self.globalData.openId = openId;
                       self.globalData.nickName = serverUserInfoResp.data.data.nickName;
                       self.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
+                      self.globalData.gender = serverUserInfoResp.data.data.gender;
                       if (!needRedirect) {
                         that.getData();
                       }
@@ -101,10 +108,12 @@ App({
                     if (noAuthUserInfoResp.statusCode == 200 && noAuthUserInfoResp.data.status == 0) {
                       wx.setStorageSync('nickName', noAuthUserInfoResp.data.data.nickName);
                       wx.setStorageSync('avatarUrl', noAuthUserInfoResp.data.data.avatarUrl);
+                      wx.setStorageSync('gender', serverUserInfoResp.data.data.gender)
                       wx.setStorageSync('openId', openId);
                       self.globalData.openId = openId;
                       self.globalData.nickName = noAuthUserInfoResp.data.data.nickName;
                       self.globalData.avatarUrl = noAuthUserInfoResp.data.data.avatarUrl;
+                      self.globalData.gender = serverUserInfoResp.data.data.gender;
                       if (!needRedirect) {
                         that.getData();
                       }
