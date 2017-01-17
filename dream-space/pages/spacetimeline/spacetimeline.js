@@ -215,6 +215,12 @@ Page({
     var content=e.detail.value.commentContent;
     // var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
+      wx.showToast({
+          title:'评论不能为空',
+          icon:'warn',
+          duration:1000,
+          mask:true
+      })
       return;
     }
     wx.request({
