@@ -179,8 +179,8 @@ Page({
   },
   saveComment:function(e){
     let that=this;
-    var content=e.detail.value.commentContent;
-    // var content=that.data.commentContent;
+    // var content=e.detail.value.commentContent;
+    var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
       return;
     }

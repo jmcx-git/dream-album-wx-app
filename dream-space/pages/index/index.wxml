@@ -28,7 +28,7 @@
   </view>
 </view>
 <view hidden="{{more}}" class="nomoretips">
-  <text>已经拖到底了...</text>
+  <text>这是我的"底线"啦~</text>
 </view>
 <view class="add_btn">
   <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
