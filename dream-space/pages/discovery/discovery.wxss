@@ -123,13 +123,13 @@ page{
   font-size: 24rpx;
   font-weight:200;
   color: #ffffff;
-  background-color: #000000;
+  background-color: #888888;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rpx 10rpx;
+  padding: 2rpx 15rpx;
 }
 
 .bottom{
