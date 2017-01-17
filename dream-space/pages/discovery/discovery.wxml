@@ -1,0 +1,34 @@
+<view class="all_views">
+  <view>
+    <block class="listview" wx:for="{{activitylist}}" wx:key="{{id}}">
+      <view class="item_root" bindtap="showdetail" hover hover-class="item_hover" data-id="{{item.id}}">
+        <image class="img" mode="aspectFill" src="{{item.cover}}"></image>
+        <view class="info_root">
+          <view class="infoitem">
+            <view class="endtimeline"/>
+            <text class="txtendtime"> {{item.startTimeDesc}} </text>
+            <view class="endtimeline"/>
+          </view>
+          <view class="infoitem">
+            <text class="txttitle"> {{item.title}}</text>
+          </view>
+          <view class="infoitem">
+            <text class="txtendtime"> {{item.participates}}人参加 </text>
+          </view>
+          <view class="infoitem">
+            <view class='deadline'>
+              <image src="{{icons[item.step % icons.length]}}" class="icon"/>
+              <text class="txt">{{item.stepDesc}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </block>
+    <view class="bottom">
+        <view class="bottomArea">
+            <text>这是我的"底线"啦</text>
+        </view>
+    </view>
+  </view>
+</view>

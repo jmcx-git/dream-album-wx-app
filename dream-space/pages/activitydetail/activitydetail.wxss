@@ -1,0 +1,488 @@
+page{
+
+}
+
+.icon_inner{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 5rpx;
+}
+.img{
+  width: 100%;
+  height: 400rpx;
+  margin: 0;
+}
+
+.title{
+  font-size: 40rpx;
+  font-weight: 200;
+  margin:30rpx;
+  color: #000000;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+.title_item{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.content{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  margin:20rpx 30rpx;
+  font-size: 26rpx;
+  font-weight: 200;
+  color:#000000;
+  line-height:35rpx;
+  text-indent : 50rpx;
+}
+
+.buttonviews{
+  position: fixed;
+  width: 100%;
+  height: 98rpx;
+  bottom: 0;
+  border-top: 1rpx solid #eeeeee;
+}
+.subbuttonviews{
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 98rpx;
+}
+.btnview{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  width: 100%;
+  height:100%;
+  background-color: rgba(255,255,255,0.9);
+  font-size: 34rpx;
+  font-weight: 200;
+  color: #00adef;
+
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btnviewcancel{
+  color: #888888;
+}
+.btn_hover{
+  background-color: #dddddd;
+}
+.buttonviews .split{
+  display:inline;
+  width: 2rpx;
+  height: 100%;
+  background-color: #eeeeee;
+}
+
+.joinallviews{
+  position:fixed;
+  top:0;
+  bottom:0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.joininpart{
+  height: 300rpx;
+  background-color: #ffffff;
+  /*padding: 40rpx;*/
+  position:fixed;
+  width: 100%;
+  bottom: 0;
+}
+.btnlocal{
+  height: 100rpx;
+  /*margin: 0 50rpx;*/
+  background-color: #00adef;
+  /*border: 1rpx solid #0000ff;*/
+  border-radius:10px;
+  color: white;
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40rpx 40rpx 0 40rpx;
+}
+.btnlocal2{
+  height: 100rpx;
+  /*margin: 0 50rpx;*/
+  margin-top: 15rpx;
+  border-radius:10px;
+  color: #888888;
+  border-radius:10px;
+
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15rpx 40rpx 0 40rpx;
+}
+
+.local_hover1{
+  background-color: #00adfe;
+}
+
+.local_hover2{
+  background-color: #eeeeee;
+}
+
+.txtcommon{
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.txt_label{
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size:30rpx;
+  font-weight: 200;
+  color: #000000;
+
+}
+.keyword{
+  color: #00adef;
+  margin: 0 5rpx;
+}
+.actinfos{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  padding: 30rpx;
+  margin-top:30rpx;
+
+  border-top: 1rpx solid #eeeeee;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.description{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  font-size: 30rpx;
+  font-weight: 200;
+  line-height:40rpx;
+  margin: 0 30rpx;
+}
+
+.deadline{
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.participate{
+  text-align:center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actwidth{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: inline;
+  height: 2rpx;
+}
+
+.bottom{
+  height:100rpx;
+  width:calc(100% - 40rpx);
+}
+.bottomArea{
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 200;
+  width:100%;
+  height:28rpx;
+  color: #aaa;
+}
+
+.activityIntrTitle{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 80rpx;
+  margin: 17rpx 0;
+  align-items: center;
+  justify-content: center;
+}
+.activityIntr{
+
+}
+
+.dashedline{
+  border-bottom: 1rpx dashed #888888;
+}
+
+.innerLine{
+  display:inline-block;
+  background-color: #888888;
+  width: 100rpx;
+  height: 2rpx;
+}
+.intrTxt{
+  font-size: 40rpx;
+  font-weight: 200;
+  color: #000000;
+  margin: 0 30rpx;
+}
+
+.prizeTitle{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  margin:20rpx 80rpx;
+  font-size: 35rpx;
+  font-weight: 200;
+  color:#000000;
+  line-height:40rpx;
+}
+.prizeImg{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  padding: 0 60rpx;
+  margin-bottom: 40rpx;
+}
+.prizeImgItem{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 360rpx;
+  border: 2rpx dashed #000000;
+  border-radius: 20rpx;
+}
+
+.examplesair{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 15rpx;
+}
+.example{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  margin: 15rpx;
+}
+.imginner{
+  width: 100%;
+  height: 200rpx;
+}
+.exptxt{
+  text-align: center;
+  margin: 30rpx;
+  margin-bottom: 15rpx;
+  font-size: 26rpx;
+  font-weight: 200;
+  color:#000000;
+}
+.contentprize{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+
+  margin:20rpx 30rpx;
+  font-size: 26rpx;
+  font-weight: 200;
+  color:#000000;
+  line-height:35rpx;
+}
+.userinfos{
+  padding: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgusricon{
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+.useritem{
+  width: 30%;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+.usericon{
+}
+.username{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 64rpx;
+  align-items: center;
+}
+.winnerlisttitle{
+  padding: 30rpx;
+  padding-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+.winerlistimgtitle{
+  width:100%;
+  height: 100rpx;
+}
+
+.winnerinforoot{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 50rpx;
+  margin: 8rpx 0;
+  font-size: 26rpx;
+  font-weight: 200;
+}
+.winnernum{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.winnernum2{
+  text-indent : 14rpx;
+}
+
+.winnername{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  align-items: center;
+  justify-content: center;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+}
+
+.winnerVotes{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.winnerlistItembgodd{
+  background-color: #f4f4f4;
+}
+.winnerlistcontent{
+  margin: 30rpx;
+  margin-top: -15rpx;
+  background-color: #ffffff;
+  border: 10rpx solid #ff5568;
+  border-radius: 50rpx;
+  overflow: hidden;
+  position: relative;
+  padding: 30rpx 0;
+  color: #000;
+}
+
+.listofwinners{
+
+}
+
+.winnericon{
+  width: 28rpx;
+  height: 30rpx;
+}
+
+.winnericon2{
+  width: 30rpx;
+  height: 30rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:15rpx;
+  font-weight: 200;
+  color: #b0b0b0;
+  background-color: #d9d9d9;
+  border: 1rpx solod #d9d9d9;
+  border-radius: 50%;
+}
+.winnerlistbgradius{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+}
+.winnerimgtop{
+  width: 100%;
+  height: 80rpx;
+}
+.winnerimgcenter{
+  width: 100%;
+  height: 80rpx;
+}
+.winnerimgbottom{
+  width: 100%;
+  height: 80rpx;
+}
+.winnerbgtop{
+  width: 100%;
+}

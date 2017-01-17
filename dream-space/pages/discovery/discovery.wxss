@@ -1,0 +1,146 @@
+page{
+  background-color: #eeeeee;
+}
+.all_views{
+
+}
+.listview{
+
+}
+.item_root{
+  height: 655rpx;
+  /*border-bottom: solid 1rpx #eeeeee;*/
+}
+.item_hover{
+  background-color: #dddddd;
+}
+.info_root{
+  position: relative;
+  background-color: #ffffff;
+  margin: 0 30rpx;
+  top: -60rpx;
+  padding: 20rpx 0;
+}
+.title_root{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.img{
+  width: 100%;
+  height: 460rpx;
+}
+.numbox{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background-color: rgba(0,0,0,0.4);
+  width: 40rpx;
+  height: 40rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: #ffffff;
+}
+.txt{
+  text-align: center;
+}
+.colonsplit{
+  display: inline-block;
+  width: 26rpx;
+  text-align: center;
+  color: #888888;
+  font-size: 28rpx;
+  margin-top: 7rpx;
+}
+.icon{
+  width: 22rpx;
+  height: 22rpx;
+  margin-right: 5rpx;
+}
+.title{
+  margin-top: 5rpx;
+  font-size: 35rpx;
+  height: 40rpx;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.title_item{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.description{
+  font-size: 28rpx;
+  height: 120rpx;
+  line-height:40rpx;
+  margin-top:30rpx;
+  color:#888888;
+  overflow:hidden;
+}
+
+.infoitem{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 40rpx;
+  padding:5rpx 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.endtimeline{
+  display:inline-block;
+  background-color: #000000;
+  width: 80rpx;
+  height: 2rpx;
+}
+.txtendtime{
+  font-size: 24rpx;
+  color: #000000;
+  margin: 0 30rpx;
+  font-weight:200;
+}
+.txttitle{
+  font-size: 40rpx;
+  font-weight:200;
+  color: #000000;
+  white-space:nowrap;
+  text-overflow:clip;
+  overflow:hidden;
+  margin:0 50rpx;
+}
+.deadline{
+  font-size: 24rpx;
+  font-weight:200;
+  color: #ffffff;
+  background-color: #888888;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rpx 15rpx;
+}
+
+.bottom{
+  height:150rpx;
+  width:calc(100% - 40rpx);
+  padding:50rpx 20rpx;
+}
+.bottomArea{
+  text-align: center;
+  font-size: 28rpx;
+  width:100%;
+  height:28rpx;
+  color: #aaa;
+}

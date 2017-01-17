@@ -1,0 +1,23 @@
+page{
+    background-color: #efeff4;
+}
+.inputText{
+    margin-top:20rpx;
+    background-color: #ffffff;
+    width:calc(100% - 100rpx);
+    height:400rpx;
+    padding:50rpx;
+}
+.textArea{
+    width:100%;
+    height:100%;
+    font-size: 32rpx;
+    color: #000000;
+}
+.send{
+    width:90%;
+    background-color: #00adef;
+    color: #fff;
+    font-size: 34rpx;
+    margin-top:160rpx;
+}

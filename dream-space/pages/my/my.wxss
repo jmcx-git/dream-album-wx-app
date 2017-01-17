@@ -1,0 +1,95 @@
+/* pages/my/my.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.user_info_area {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 300rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 60rpx 0 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: black;
+}
+
+.select_area {
+  width: 95%;
+  background-color: white;
+  padding-left: 5%;
+}
+
+.select_cells {
+  font-size: 32rpx;
+}
+
+.select_cell {
+  display: flex;
+  align-items: center;
+}
+
+.select_cell_icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 10rpx;
+}
+
+.select_cell_arrow {
+  position: absolute;
+  right: 0;
+  width: 60rpx;
+  height: 11%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding-right: 30rpx;
+}
+
+.select_cell_arrow .arrow {
+  width: 32rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select_cell_arrow .redpoint {
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 10rpx;
+}
+
+.customer {
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: lightblue;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

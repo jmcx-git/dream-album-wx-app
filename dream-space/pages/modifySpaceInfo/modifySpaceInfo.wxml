@@ -1,0 +1,58 @@
+<view style="width:100%;height:{{windowHeight}}px;">
+
+  <!--新建模版-->
+  <form bindsubmit="formSubmit">
+    <view class="image_area">
+      <view catchtap="choosenImage" class="image_select_view" style="top:{{windowHeight*convertTimes*0.35/2-114}}rpx;">
+        <image class="image_select_image" src="{{spaceIcon}}" />
+        <image class="image_select_camera" src="../../image/camera.png" />
+      </view>
+    </view>
+    <view class="input_area">
+      <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
+        <view class="input_cell">
+          <view class="input_cell_hd">空间类型</view>
+          <view class="input_cell_bd">
+            <picker name="type" disabled="true" bindchange="bindPickerChange" value="{{spaceInfo.type}}" range="{{typeArray}}">
+              <view>
+                {{typeArray[typeIndex]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">起个昵称</view>
+          <view class="input_cell_bd">
+            <input name="nickname" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" class="input" value="{{spaceInfo.name}}" placeholder-style="color:gray;" placeholder="我就叫宝宝" bindblur="checkData" bindinput="checkData"/>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">{{spaceInfo.type==0?'宝宝生日':'恋爱时间'}}</view>
+          <view class="input_cell_bd">
+            <picker name="birthday" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
+              <view>{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">{{spaceInfo.type==0?'宝宝性别':'恋人性别'}}</view>
+          <view class="input_cell_bd">
+            <radio-group bindchange="radioChange" name="gender">
+              <radio color="#00adef" disabled="true" checked="{{spaceInfo.gender==1?true:false}}" value="1" />男
+              <radio color="#00adef" disabled="true" checked="{{spaceInfo.gender==2?true:false}}" value="2"/>女
+            </radio-group>
+          </view>
+        </view>
+         <view class="input_cell">
+          <view class="input_cell_hd">空间介绍</view>
+          <view class="input_cell_bd">
+            <input name="info" disabled="{{(secert=='null' || secert=='' || secert=='undefined')?true:false}}" value="{{spaceInfo.info==null?'':spaceInfo.info}}" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn_area" wx:if="{{secert!='null' && secert!='' && secert!='undefined'}}">
+      <button class="submit_btn" form-type="submit">保存信息</button>
+    </view>
+  </form>
+</view>

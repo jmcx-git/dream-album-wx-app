@@ -1,0 +1,124 @@
+/*模版列表*/
+
+page {
+  background-color: #efeff4;
+}
+
+.default_area_image {
+  position: absolute;
+  width: 750rpx;
+  height: 300rpx;
+}
+
+.default_area_notice{
+  position: absolute;
+  width: 750rpx;
+  height: 40rpx;
+  bottom: 68rpx;
+}
+
+.main {
+  width: 750rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sub_main {
+  width: 750rpx;
+  height: 660rpx;
+  background-color: white;
+  margin-bottom: 10rpx;
+}
+
+.sub_main_image {
+  width: 750rpx;
+  height: 460rpx;
+  border-bottom: 2rpx solid #efeff4;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+.sub_main_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 160rpx;
+  padding: 20rpx 0;
+}
+
+.sub_main_info .time {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  padding-top: 14rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.time_line {
+  display: inline-block;
+  background-color: #000;
+  width: 80rpx;
+  height: 2rpx;
+}
+
+.time_info {
+  line-height: 1;
+  font-size: 24rpx;
+  color: #000;
+  margin: 0 20rpx;
+}
+
+.sub_main_info .name {
+  text-align: center;
+  line-height: 2;
+  font-size: 40rpx;
+  font-weight: 200;
+  color: #000;
+  width: 60%;
+  margin-top: 14rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sub_main_info .desc {
+  text-align: center;
+  line-height: 1.1;
+  font-size: 24rpx;
+  color: #888;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.add_btn {
+  position: fixed;
+  bottom: 25rpx;
+  right: 25rpx;
+  width: 116rpx;
+  height: 116rpx;
+}
+
+.add_btn image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nomoretips {
+  padding: 80rpx 50rpx 40rpx;
+  width: 650rpx;
+  line-height: 1;
+  font-size: 30rpx;
+  text-align: center;
+  color: gray;
+}

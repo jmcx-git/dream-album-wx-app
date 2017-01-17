@@ -1,0 +1,18 @@
+<image class="personalImage" src="{{personalInfo.avatalUrl}}" data-src="{{personalInfo.avatalUrl}}" bindtap="showPreview" />
+<view class="personalText">
+    <text>{{personalInfo.info==null?'':personalInfo.info}}</text>
+</view>
+<view class="recordArea">
+    <text class="leftArea">点赞</text>
+    <text class="rightArea">{{personalInfo.likes}}</text>
+</view>
+<view class="recordArea">
+    <text class="leftArea">评论</text>
+    <text class="rightArea">{{personalInfo.comments}}</text>
+</view>
+
+<view class="friendsNickName">
+    <text class="nickLeft">亲友昵称</text>
+    <text class="{{(personalInfo.nickname.length>14)?'nickRight':'nickRightShort'}}">{{personalInfo.nickname}}</text>
+</view>
+<!--<button type="warn" class="exitFriendsButton" bindtap="exitFriends">退出亲友团</button>-->

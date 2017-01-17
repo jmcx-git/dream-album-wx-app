@@ -1,0 +1,44 @@
+<import src="../../template/spacelineTemplate.wxml" />
+<view bindtouchmove="hideCommentWindow">
+<!--新的顶部-->
+<view bindtap="changeCover">
+    <image mode="aspectFill" class="spacetimelineTopCoverImage" src="{{topData.cover}}"/>
+</view>
+<image class="spacetimelineTopIconImage" bindtap="showSpaceDetail" src="{{topData.icon}}" />
+<!--亲友团-->
+<view class="friends">
+    <view class="friends-left">
+        <image class="friends-left-avatarUrl" bindtap="showPersonalPage" wx:for="{{topData.occupantInfos}}" data-openid="{{item.openId}}" wx:key="occupantInfos" src="{{item.avatarUrl}}" />
+    </view>
+    <view class="friends-right"  bindtap="showAllFriends">
+      <text>全部亲友团 ></text>
+    </view>
+</view>
+<!--模版-->
+<template is="spacetimelinelatest" data="{{spacetimelineList,winWidth,myOpenId}}"/>
+<!--底部-->
+<view class="bottom" hidden="{{!noMoreData || spacetimelineList.length == 0}}">
+    <view class="bottomArea">
+        <text>这是我的"底线"啦</text>
+    </view>
+</view>
+<image src="../../image/nocontent.png" class="nocontent" hidden="{{!noContentHidden}}" />
+<image src="../../image/directtocreate.png" class="directtocreate" hidden="{{!noContentHidden || (topData.secert==null)}}"/>
+
+<!--新的添加图标-->
+<view class="add_btn" hidden="{{!commentHidden || (topData.secert==null)}}">
+  <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
+  <image bindtap="tocratePhoto" data-way="1" src="../../image/pics.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
+  <image bindtap="toCreateWord" data-way="2" src="../../image/words.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
+</view>
+<!--评论区域-->
+<!--<form bindsubmit="saveComment">
+    <view class="commentnew" hidden="{{commentHidden}}" style="top:{{winHeight-45}}px;">
+        <input cursor-spacing="30" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <button form-type="submit" type="default" class="commentSendImageNew">发送</button>
+    </view>
+</form>-->
+<view class="commentnew" hidden="{{commentHidden}}">
+        <input cursor-spacing="30" class="commentTextNew" bindconfirm="saveComment" value="{{commentDefaultValue}}" maxlength="-1" focus="{{commentFocus}}" type="text" placeholder-class="placeHolder"  placeholder="评论" />
+    </view>
+</view>

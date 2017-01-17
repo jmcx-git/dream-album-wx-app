@@ -1,0 +1,101 @@
+page{
+    background-color: #efeff4;
+}
+.resetNumber{
+    height:100rpx;
+    width:100%;
+    position: relative;
+    margin-top:10rpx;
+    background-color: #fff;
+}
+.resetYqm{
+    position: absolute;
+    height:100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    left:30rpx;
+    font-size: 32rpx;
+    color: #000000;
+}
+.resetText{
+    position: absolute;
+    height:100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    left:calc(50% - 60rpx);
+    color: #00adef;
+    font-size: 32rpx;
+}
+.resetButtonImage{
+    position: absolute;
+    height:54rpx;
+    width:122rpx;
+    top:23rpx;
+    right: 30rpx;
+}
+.friendsTop{
+    position: relative;
+    height:130rpx;
+    width:100%;
+    display: flex;
+    background-color: #fff;
+}
+.friendsTopBottom{
+    position: relative;
+    height:130rpx;
+    width:100%;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    background-color: #fff;
+}
+.friends-avatarUrl{
+    position: absolute;
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    top:20rpx;
+    left:30rpx;
+}
+.nickNameText{
+    position: absolute;
+    left:150rpx;
+    top:30rpx;
+    width:calc(100% - 230rpx);
+    font-size: 32rpx;
+    line-height: 45rpx;
+    height:45rpx;
+     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.historyText{
+    position: absolute;
+    left:150rpx;
+    top:65rpx;
+    width:calc(100% - 230rpx);
+    font-size: 24rpx;
+    line-height: 65rpx;
+    color: #888888;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.navigator{
+    position: absolute;
+    line-height: 130rpx;
+    color: #aaa;
+    text-align: center;
+    width:50rpx;
+    left:calc(100% - 50rpx);
+}
+.friendsArrow{
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.instrudctionText{
+    padding:50rpx 30rpx;
+    color: #888888;
+    font-size: 24rpx;
+    line-height: 30rpx;
+}

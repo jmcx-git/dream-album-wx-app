@@ -1,0 +1,87 @@
+page{
+    background-color: #efeff4;
+}
+.personalImage{
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    margin-left:calc(50% - 80rpx);
+    margin-top:50rpx;
+}
+.personalText{
+    line-height: 28rpx;
+    font-size: 28rpx;
+    width:90%;
+    padding-left:5%;
+    text-align: center;
+    margin-top:50rpx;
+    color: #888888;
+    margin-bottom: 50rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.recordArea{
+    display: flex;
+    background: #fff;
+    height:100rpx;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    border-bottom: 1px solid #f5f5f5;
+}
+.leftArea{
+    flex: 1;
+    padding-left: 30rpx;
+    color: #000000;
+}
+.rightArea{
+    flex: 1;
+    text-align: right;
+    padding-right: 30rpx;
+    color: #888888;
+}
+.friendsNickName{
+    position: relative;
+    background: #fff;
+    height:130rpx;
+    margin-top:20rpx;
+    width:100%;
+}
+.nickLeft{
+    position: absolute;
+    width:150rpx;
+    line-height:130rpx;
+    font-size: 32rpx;
+    left:30rpx;
+}
+.nickRight{
+    position: absolute;
+    line-height: 60rpx;
+    font-size: 36rpx;
+    width:calc(100% - 240rpx);
+    left: 210rpx;
+    height:130rpx;
+    text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-wrap;
+    color: #aaa;
+}
+.nickRightShort{
+    position: absolute;
+    line-height: 130rpx;
+    font-size: 36rpx;
+    width:calc(100% - 240rpx);
+    left: 210rpx;
+    height:130rpx;
+    text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: pre-wrap;
+    color: #aaa;
+}
+.exitFriendsButton{
+    width:90%;
+    background-color: red;
+    margin-top:150rpx;
+}

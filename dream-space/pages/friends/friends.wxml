@@ -1,0 +1,25 @@
+<!--重置邀请码-->
+<view wx:if="{{secert!='undefined' &&  secert!='null'}}" class="resetNumber">
+    <view class="resetYqm">
+        邀请码
+    </view>
+    <view class="resetText">
+        {{secert}}
+    </view>
+    <image bindtap="resetYqm" class="resetButtonImage" src="../../image/reset.png" />
+</view>
+<!--说明文案-->
+<view wx:if="{{secert!='undefined' &&  secert!='null'}}" class="instrudctionText">
+        将此邀请码发送给好友,从而邀请他们入驻您的个人空间,与您一起见证【{{type==0?'宝宝的成长':'你们的爱情'}}】，您可以通过分享当前页面的方式来完成上述操作。
+</view>
+<!--浏览记录-->
+<view class="friendsHistory">
+<view bindtap="showDetail" data-openid="{{item.openId}}" class="{{(index==occupantList.length-1)?'friendsTop':'friendsTopBottom'}}" wx:for="{{occupantList}}" wx:key="avatarUrlsTop">
+    <image src="{{item.avatarUrl}}" class="friends-avatarUrl" />
+    <text class="nickNameText">{{item.nickname}}</text>
+    <text class="historyText">{{item.info}}</text>
+    <view class="navigator" >
+        <image class="friendsArrow" src="../../image/friendsArrow.png" />
+    </view>
+</view>
+</view>

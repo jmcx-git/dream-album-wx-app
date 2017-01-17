@@ -1,0 +1,92 @@
+<import src="../../src/wetoast.wxml" />
+<view style="width:100%;height:{{windowHeight}}px;">
+
+  <!--新建模版-->
+  <form wx:if="{{addWay==1}}" bindsubmit="formSubmit">
+    <view class="image_area">
+      <view catchtap="choosenImage" class="image_select_view" style="top:{{windowHeight*convertTimes*0.35/2-114}}rpx;">
+        <image mode="aspectFill" class="image_select_image" src="{{avatarImg==''?defaultAvatar:avatarImg}}" />
+        <image class="image_select_camera" src="../../image/camera.png" />
+      </view>
+    </view>
+    <view style="height:12rpx;"></view>
+    <view class="input_area">
+      <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
+        <view class="input_cell">
+          <view class="input_cell_hd">空间类型</view>
+          <view class="input_cell_bd" style="display:inline-flex;">
+            <picker name="type" bindchange="bindPickerChange" value="{{typeIndex}}" range="{{typeArray}}">
+              <view style="width:500rpx;">
+                {{typeArray[typeIndex]}}
+              </view>
+            </picker>
+            <image class="type_select_arrow" src="../../image/arrow.png" />
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">起个昵称</view>
+          <view class="input_cell_bd">
+            <input name="name" class="input" placeholder-style="color:gray;" maxlength="26" placeholder="{{inputPlaceholder}}" bindblur="checkData" bindinput="checkData" />
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">{{inputPrefixBorn}}</view>
+          <view class="input_cell_bd">
+            <picker name="birthday" mode="date" start="1900-01-01" end="2020-01-01" bindchange="bindDateChange">
+              <view>{{date}}</view>
+            </picker>
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">{{inputPrefixSex}}</view>
+          <view class="input_cell_bd">
+            <view class="radio_view">
+              <view id="1" catchtap="changeGender" class="radio_sub_view">
+                <image style="width:34rpx;height:34rpx;" src="{{genderValue==1?'../../image/select.png':'../../image/notselect.png'}}" />
+                <view>男</view>
+              </view>
+              <view id="2" catchtap="changeGender" class="radio_sub_view">
+                <image style="width:34rpx;height:34rpx;" src="{{genderValue==2?'../../image/select.png':'../../image/notselect.png'}}" />
+                <view>女</view>
+              </view>
+            </view>
+            <input hidden="true" name="gender" value="{{genderValue}}" />
+          </view>
+        </view>
+        <view class="input_cell">
+          <view class="input_cell_hd">空间介绍</view>
+          <view class="input_cell_bd">
+            <input name="info" class="input" placeholder-style="color:gray;" maxlength="50" placeholder="空间简介" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn_area">
+      <button class="submit_btn" hover-class="btn_hover" form-type="submit">{{btnPrefix}}</button>
+    </view>
+  </form>
+
+  <!--邀请码模版-->
+  <form wx:elif="{{addWay==2}}" bindsubmit="inviteSubmit">
+    <view style="height:60rpx;"></view>
+    <view class="invite_input_area">
+      <view class="input_cells" style="line-height:{{windowHeight*0.075}}px;">
+        <view class="input_cell">
+          <view class="input_cell_hd">邀请码</view>
+          <view class="input_cell_bd">
+            <input name="secert" maxlength="26" class="input" placeholder-style="color:gray;" placeholder="输入邀请码" bindblur="checkData" bindinput="checkData" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="invite_tips_area">
+      <text>输入亲友发送过来的空间邀请码(不区分大小写)，即可入驻亲友私密空间，实时关注好友动态。</text>
+    </view>
+    <view class="invite_btn_area">
+      <button class="invite_submit_btn" hover-class="btn_hover" form-type="submit">验证邀请码</button>
+    </view>
+  </form>
+</view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

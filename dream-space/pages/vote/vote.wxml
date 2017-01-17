@@ -1,0 +1,54 @@
+<!--pages/vote/vote.wxml-->
+<view class="all_views">
+  <view class="searchbar" hidden="{{!showSearchbar}}">
+    <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="number" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="inputTyping" bindblur="hideInput" />
+                <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14"></icon>
+                <view class="weui-search-bar__text">搜索</view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+    </view>
+  </view>
+  <view bindtouchmove="touchmove" bindtouchend="touchend" bindtouchstart="touchstart">
+  <radio-group class="radio-group">
+    <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
+
+      <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
+
+        <view class="imgbox">
+          <view class="boxitm">
+            <image class="img"  mode="aspectFill" src="{{item.cover}}"/>
+            <radio class="icon" hidden value="{{item.id}}"/>
+            <image class="icon" hidden='{{false}}'
+            src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
+          </view>
+        </view>
+        <view class='titlepart'>
+          <view class="txtItem2"><text class="txtnum">NO.{{item.rank}}</text> 得票{{item.votes}}</view>
+          <text class="txtItem">序号 {{item.id}}</text>
+        </view>
+        <view class="itembottom">
+          <view class="votecount">{{item.solgan ? item.solgan : ''}}</view>
+        </view>
+      </view>
+    </label>
+    </radio-group>
+    <view class="bottom">
+        <view class="bottomArea">
+            <text>这是我的"底线"啦</text>
+        </view>
+    </view>
+  </view>
+  <block wx:if="{{!vote || vote==1}}">
+    <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
+  </block>
+</view>

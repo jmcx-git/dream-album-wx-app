@@ -1,0 +1,83 @@
+/* pages/joinin/joinin.wxss */
+page{
+  background: #eeeeee;
+}
+.list{
+  background: #ffffff;
+  padding: 20rpx;
+}
+.label{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 15rpx 10rpx;
+  position: relative;
+}
+.content{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  padding-left: 30rpx;
+  font-weight: 200;
+}
+.img{
+  width: 200rpx;
+  height: 200rpx;
+}
+.icon_choosed{
+  width: 200rpx;
+  height: 200rpx;
+  position:absolute;
+  left:10rpx;
+  top: 15rpx;
+}
+.checkbox{
+  margin-top: 80rpx
+}
+
+.title{
+  font-size: 35rpx;
+  margin:5rpx;
+  color: #888888;
+}
+
+.title_item{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+
+.description{
+  font-size: 30rpx;
+  margin-top:20rpx;
+  color:#888888;
+}
+.bottombtn{
+  position: fixed;
+  height: 98rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+}
+
+.btnview{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  color: #00adef;
+  background-color: rgba(255,255,255,0.9);
+}
+.btnviewcancel{
+  color: #888888;
+}
+.btn_hover{
+  background-color: #dddddd;
+}

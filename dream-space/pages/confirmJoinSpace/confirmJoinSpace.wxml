@@ -1,0 +1,21 @@
+<import src="../../src/wetoast.wxml" />
+<view style="width:100%;height:{{windowHeight}}px;">
+  <view class="user_info_area">
+    <view class="userinfo">
+      <block wx:if="{{spaceType==0}}">
+        <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl==null?'../../image/familydefault.jpg':avatarUrl}}" />
+      </block>
+      <block wx:else>
+        <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl==null?'../../image/lovedefault.jpg':avatarUrl}}" />
+      </block>
+      <text class="userinfo-nickname">{{name}}</text>
+      <text class="userinfo-time">{{bornDate}}</text>
+    </view>
+  </view>
+  <view class="btn_area">
+    <button bindtap="confirmJoin" class="submit_btn" hover-class="btn_hover">接受邀请,加入亲友团</button>
+  </view>
+</view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />
