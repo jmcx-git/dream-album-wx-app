@@ -56,8 +56,8 @@ page{
   margin-top: 7rpx;
 }
 .icon{
-  width: 30rpx;
-  height: 30rpx;
+  width: 22rpx;
+  height: 22rpx;
   margin-right: 5rpx;
 }
 .title{
