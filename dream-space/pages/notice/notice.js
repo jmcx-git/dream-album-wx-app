@@ -31,14 +31,14 @@ Page({
     },
     getData: function () {
         let that = this;
-        wx.showToast({
-            title: '加载中...',
-            icon: 'loading',
-            duration: 5000
-        })
-        setTimeout(function () {
-            wx.hideToast();
-        }, 5000)
+        // wx.showToast({
+        //     title: '加载中...',
+        //     icon: 'loading',
+        //     duration: 5000
+        // })
+        // setTimeout(function () {
+        //     wx.hideToast();
+        // }, 5000)
         that.requestData();
     },
     requestData: function () {
@@ -82,7 +82,7 @@ Page({
                             more: res.data.data.more
                         })
                     }
-                    wx.hideToast();
+                    // wx.hideToast();
                 } else {
                     app.showWeLittleToast(that, '服务器请求异常', 'error');
                 }

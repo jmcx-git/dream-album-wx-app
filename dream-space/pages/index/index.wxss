@@ -33,6 +33,7 @@ page {
 .sub_main_image {
   width: 750rpx;
   height: 460rpx;
+  border-bottom: 2rpx solid #efeff4;
 }
 
 .image {
