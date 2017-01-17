@@ -22,6 +22,9 @@ Page({
         })
       }
     })
+  },
+  onShow: function () {
+    let that = this;
     that.getData();
   },
   getData: function () {
@@ -53,7 +56,7 @@ Page({
   toNoticePage: function (e) {
     let that = this;
     if (app.globalData.openId == '') {
-      app.unAuthLoginModal(that,false,true);
+      app.unAuthLoginModal(that, false, true);
       return
     }
     that.setData({
