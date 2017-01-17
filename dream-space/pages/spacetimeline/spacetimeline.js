@@ -2,6 +2,7 @@ var app = getApp();
 Page({
   data: {
     winWidth:0,
+    winHeight:0,
     start:0,
     size:10,
     spaceId:0,
@@ -53,7 +54,8 @@ Page({
       wx.getSystemInfo({
         success: function(res) {
           that.setData({
-            winWidth:res.windowWidth
+            winWidth:res.windowWidth,
+            winHeight:res.windowHeight
           })
         }
       })
@@ -114,8 +116,6 @@ Page({
       },
       method: 'GET',
       success: function(res){
-        console.log("获取数据列表");
-        console.log(res);
         if(res.data.status==0){
           if(res.data.data.resultList.length<that.data.size){
             that.setData({
@@ -211,9 +211,9 @@ Page({
     })
   },
   saveComment:function(e){
-    console.log("保存评论，评论内容为:"+e.detail.value.commentContent);
     let that=this;
-    var content=e.detail.value.commentContent;
+    // var content=e.detail.value.commentContent;
+    var content=e.detail.value;
     // var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
       wx.showToast({
