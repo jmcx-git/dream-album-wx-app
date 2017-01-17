@@ -205,19 +205,43 @@ page{
   color:#00adef;
   margin-left: 30rpx;
 }
-.collect{
+/*.collect{
   width:36rpx;
   height:36rpx;
   position: absolute;
   top:0rpx;
   right:66rpx;
+}*/
+.collect{
+  width:36rpx;
+  height:36rpx;
 }
-.replay{
+.collectLarge{
+  width:60rpx;
+  height:36rpx;
+  position: absolute;
+  top:0rpx;
+  right:46rpx;
+  text-align: center;
+}
+/*.replay{
   top:0rpx;
   width:36rpx;
   height:36rpx;
   position: absolute;
   right:0rpx;
+}*/
+.replay{
+  width:36rpx;
+  height:36rpx;
+}
+.replayLarge{
+  top:0rpx;
+  width:60rpx;
+  height:36rpx;
+  position: absolute;
+  right:-15rpx;
+  text-align: center;
 }
 .avatarCollectTop{
   background-color: #efeff4;
