@@ -163,7 +163,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
-
+  line-height: 1;
   font-size:30rpx;
   font-weight: 200;
   color: #000000;
