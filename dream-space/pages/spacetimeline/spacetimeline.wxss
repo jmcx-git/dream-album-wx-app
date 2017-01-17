@@ -409,7 +409,7 @@ page{
   padding-left: 20rpx;
   top:calc(100% - 100rpx);
   left:0rpx;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   z-index: 10;
 }
 .commentTextNew{
@@ -421,6 +421,7 @@ page{
   height:80rpx;
   border: 1px solid #ffffff;
   box-sizing: border-box;
+  background-color: #efeff4;
 }
 .commentSendImageNew{
   width:140rpx;
