@@ -91,7 +91,7 @@
         <view class="bottomArea"></view>
     </view>
 
-    <view class="buttonviews" style="bottom:0px" >
+    <view class="buttonviews">
       <view class="both  subbuttonviews" wx:if="{{step == 1}}">
         <view class="btnview" hover hover-class="btn_hover" bindtap="takein" wx:if="{{!joined}}">去参加</view>
         <view class="btnview btnviewcancel" wx:if="{{joined}}">已参加</view>
@@ -110,8 +110,8 @@
         <view class="btnview" hover hover-class="btn_hover" bindtap="seevote">查看结果</view>
       </view>
     </view>
-    <view class="joinallviews" hidden="{{!isshowjoinin}}" style="height:{{windowHeight}}px" bindtap="cancel">
-      <view class= "joininpart" style="margin-top:{{joinmargintop}}px">
+    <view class="joinallviews" hidden="{{!isshowjoinin}}" bindtap="cancel">
+      <view class= "joininpart">
         <view class="btnlocal" hover hover-class="local_hover1" bindtap="addphoto">添加照片</view>
         <view class="btnlocal2" hover hover-class="local_hover2" bindtap="selectalbum">选择已有照片</view>
       </view>

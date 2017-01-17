@@ -1,5 +1,5 @@
 {
     "navigationBarTitleText": "发现",
-    "enablePullDownRefresh": false,
+    "enablePullDownRefresh": true,
     "backgroundTextStyle": "dark"
 }
