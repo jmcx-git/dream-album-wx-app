@@ -91,10 +91,8 @@ Page({
               feedId: that.data.worksId
             },
             success:function(res) {
-              console.log(res)
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
-                  console.log(that.data.voteWorksId)
                   wx.redirectTo({
                     url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
                   })
@@ -138,7 +136,6 @@ Page({
     })
   },
   radioChange: function (e) {
-    console.log(e)
     if(this.data.worksId != e.currentTarget.dataset.id){
       this.setData({
         worksId :e.currentTarget.dataset.id

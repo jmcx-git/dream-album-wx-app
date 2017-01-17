@@ -37,6 +37,7 @@ let pageData = {
 
         // 分享数据
         voteWorksId:-1,
+        userWorksId: -1,
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
@@ -54,7 +55,7 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-
+      console.log("share", option)
       if(option.share == 'yes'){
         app.globalData.indexRefreshStatus=true;
       }
@@ -86,13 +87,15 @@ let pageData = {
            windowHeight: res.windowHeight,
            buttonstop: res.windowHeight - that.convert2px(98),
            joinmargintop: res.windowHeight- that.convert2px(300),
-           voteWorksId: option.voteWorksId
+           voteWorksId: that.getWorksId(option.voteWorksId)
          })
         }
       })
 
     this.initData(this.data.id)
-
+    },
+    getWorksId: function(worksId){
+      return (worksId == undefined || worksId == 'undefined' || worksId == null || worksId == 'null' || worksId == "")? -1: worksId
     },
     initData: function(activityId){
       let that = this;
@@ -162,12 +165,12 @@ let pageData = {
     },
     govote: function(e){
         wx.navigateTo({
-          url: '../vote/vote?vote=1&activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+          url: '../vote/vote?vote=1&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
         })
     },
     seevote: function(e){
         wx.navigateTo({
-          url: '../vote/vote?vote=0&activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+          url: '../vote/vote?vote=0&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
         })
     },
     addphoto: function(e){
@@ -179,9 +182,9 @@ let pageData = {
         success: function (res) {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
-              let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1 : that.data.voteWorksId
+
               wx.navigateTo({
-                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+voteWorksId+"&userWorksId="+that.data.userWorksId
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
               })
           }
         }
@@ -190,12 +193,12 @@ let pageData = {
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
       let that = this
-      let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1: that.data.voteWorksId
       wx.navigateTo({
-        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+voteWorksId+"&userWorksId="+this.data.userWorksId
+        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
     onShareAppMessage: function () {
+      console.log("v", this.data.voteWorksId, "u", this.data.userWorksId)
       let title = app.globalData.nickName+'邀请您加入活动。'
       let desc = '有福同享，快来参加活动名称，赢取大奖。'
       let url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+'&share=1'
@@ -203,9 +206,10 @@ let pageData = {
         title = app.globalData.nickName+'邀请您给我加油助威。'
         desc = '我正在参加活动'+this.data.title+',邀请您给我加油助威,作品Id:'+this.data.userWorksId+'。'
       }
-      if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
+      if(this.data.voteWorksId == -1){
         url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.userWorksId+'&share=1'
       }
+      console.log("share", url)
       return {
         title: title,
         desc: desc,

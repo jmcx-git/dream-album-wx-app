@@ -24,8 +24,7 @@
 
       <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
         <view class='titlepart'>
-          <text class="txtItem">NO.{{item.rank}} {{item.solgan ? item.solgan : ''}}</text>
-          <view class="whitespace"/>
+          <text class="txtItem2">NO.{{item.rank}} {{item.solgan ? item.solgan : ''}}</text>
           <text class="txtItem">序号: {{item.id}}</text>
         </view>
         <view class="imgbox">
