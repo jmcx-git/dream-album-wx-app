@@ -103,7 +103,6 @@ Page({
     // 页面关闭
   },
   onShareAppMessage:function(){
-      console.log(app.globalData);
       let that=this;
       var fromOpenId=app.globalData.openId;
       var spaceId=that.data.spaceId;
