@@ -103,12 +103,13 @@ Page({
     // 页面关闭
   },
   onShareAppMessage:function(){
+      console.log(app.globalData);
       let that=this;
       var fromOpenId=app.globalData.openId;
       var spaceId=that.data.spaceId;
       var owner=(that.data.secert=='null' || that.data.secert=='' || that.data.secert=='undefined')?0:1;
       var queryStr="/pages/friends/friends?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
-      var ownerTitle=app.globalData.nickName+"邀请您入住他(她)的私密空间"+that.data.name;
+      var ownerTitle=app.globalData.nickName+"邀请您入住"+(app.globalData.gender==1?"他":"她")+"的私密空间"+that.data.name;
       var guestTitle=app.globalData.nickName+"邀请您使用"+app.globalData.productName;
       var ownerContent='这是属于我们的秘密';
       var guestContent="用它，您可以记录，分享您的珍贵时刻。"
