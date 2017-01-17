@@ -159,18 +159,6 @@ Page({
   },
   getData: function () {
     let that = this;
-    // wx.showToast({
-    //   title: '加载中...',
-    //   icon: 'loading',
-    //   duration: 5000
-    // })
-    // setTimeout(function () {
-    //   wx.hideToast();
-    // }, 5000)
-    that.requestData();
-  },
-  requestData: function () {
-    let that = this;
     var url = app.globalData.serverHost + 'list.json';
     let start = this.data.start;
     let size = this.data.size;
@@ -208,7 +196,6 @@ Page({
               more: res.data.data.more
             })
           }
-          // wx.hideToast();
         }
       },
       fail: function () {
@@ -219,11 +206,8 @@ Page({
   reInit: function () {
     let that = this;
     that.setData({
-      items: [],
-      loadStatus: false,
       nopics: false,
       start: 0,
-      size: 10,
       more: true,
       isProcess: false,//线程锁
       isOpen: false,//判断进展
@@ -304,7 +288,6 @@ Page({
     let that = this;
     if (that.data.more) {
       if (app.globalData.openId == '') {
-        // app.unAuthLoginModal(that,false);
         return
       }
       that.getData();
