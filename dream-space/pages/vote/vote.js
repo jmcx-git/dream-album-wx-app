@@ -232,6 +232,7 @@ Page({
                 that.refreshData()
               }
             })
+
             return
           }
           msg = res.data.message
@@ -241,6 +242,9 @@ Page({
       fail: function(res){
         let msg = "网络出错,请稍后再试!"
         that.handleFail(msg)
+      },
+      complete: function(res){
+        that.voting = false
       }
     })
   },
