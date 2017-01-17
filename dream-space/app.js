@@ -97,7 +97,7 @@ App({
                 console.log(res);
                 //self.refuseLoginToast();
                 wx.request({
-                  url: self.globalData.serverHost + 'noauthorize/info.json',
+                  url: self.globalData.serverHost + 'user/noauthorize/info.json',
                   data: {
                     openId: openId,
                     appId: self.globalData.appId
