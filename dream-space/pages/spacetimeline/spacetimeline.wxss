@@ -410,6 +410,7 @@ page{
   top:calc(100% - 100rpx);
   left:0rpx;
   background-color: #f5f5f5;
+  z-index: 10;
 }
 .commentTextNew{
   width:calc(100% - 200rpx);
