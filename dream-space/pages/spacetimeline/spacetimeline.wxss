@@ -260,7 +260,7 @@ page{
   white-space: pre-wrap;
   line-height: 36rpx;
   font-size: 28rpx;
-  color: #888888;
+  color: #00adef;
   padding:10rpx 20rpx;
   box-sizing: border-box;
   border-bottom: 1px solid #dbdce1;
@@ -274,7 +274,7 @@ page{
   white-space: pre-wrap;
   line-height: 36rpx;
   font-size: 28rpx;
-  color: #888888;
+  color: #00adef;
   padding:10rpx 20rpx;
   box-sizing: border-box;
 }
