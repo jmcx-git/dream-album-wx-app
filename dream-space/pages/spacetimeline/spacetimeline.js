@@ -205,6 +205,12 @@ Page({
           commentDefaultValue:'',
           commentFocus:false
         })
+        wx.showToast({
+          title:'评论成功',
+          icon:'success',
+          duration:1000,
+          mask:true
+        })
       },
       fail: function(ron) {
         console.log("评论失败！");
