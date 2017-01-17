@@ -211,10 +211,17 @@ Page({
     })
   },
   saveComment:function(e){
+    console.log("保存评论，评论内容为:"+e.detail.value.commentContent);
     let that=this;
     var content=e.detail.value.commentContent;
     // var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
+      wx.showToast({
+          title:'评论不能为空',
+          icon:'warn',
+          duration:1000,
+          mask:true
+      })
       return;
     }
     wx.request({
@@ -235,8 +242,7 @@ Page({
         that.setData({
           spacetimelineList:that.data.spacetimelineList,
           commentHidden:true,
-          commentDefaultValue:'',
-          commentFocus:false
+          commentDefaultValue:''
         })
         wx.showToast({
           title:'评论成功',
@@ -366,7 +372,6 @@ Page({
         }
         that.setData({
           commentHidden:true,
-          commentFocus:false,
           isHidden1: true,
           isHidden2: true
           // commentDefaultValue:''

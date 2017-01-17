@@ -31,22 +31,11 @@
   <image bindtap="tocratePhoto" data-way="1" src="../../image/pics.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
   <image bindtap="toCreateWord" data-way="2" src="../../image/words.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
 </view>
-<!--旧的添加图标-->
-<!--<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert==null)}}"/>-->
+<!--评论区域-->
 <form bindsubmit="saveComment">
     <view class="commentnew" hidden="{{commentHidden}}">
-        <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <input cursor-spacing="30" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
         <button form-type="submit" type="default" class="commentSendImageNew">发送</button>
     </view>
 </form>
-</view>
-<!--点击创建之后的-->
-<view hidden="{{createHidden}}" class="nav-view">
-<view class="nav-view-main">
-    <image src="../../image/photocreate.png" bindtap="tocratePhoto" data-type="0"  class="picAreaImage"/>
-    <image src="../../image/wordcreate.png" bindtap="toCreateWord" data-type="1"  class="textAreaImage"/>
-</view>
-<view class="delArea" bindtap="closeCreatePage">
-    <image src="../../image/del.png"  class="del"/>
-</view>
 </view>
