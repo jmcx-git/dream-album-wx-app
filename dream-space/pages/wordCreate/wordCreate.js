@@ -33,6 +33,7 @@ Page({
         },
         method: 'get',
         success: function(res){
+          app.globalData.createFinishFlag=true;
           wx.navigateBack({
             delta: 1
           })
@@ -55,6 +56,6 @@ Page({
   },
   onUnload:function(){
     console.log("页面卸载");
-    app.globalData.createFinishFlag=true;
+    // app.globalData.createFinishFlag=true;
   }
 })

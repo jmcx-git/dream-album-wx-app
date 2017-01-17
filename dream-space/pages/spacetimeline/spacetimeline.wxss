@@ -444,3 +444,20 @@ page{
   height: 32rpx;
   z-index: 3;
 }
+
+/*新的添加样式*/
+.add_btn {
+  position: fixed;
+  bottom: 25rpx;
+  right: 25rpx;
+  width: 116rpx;
+  height: 116rpx;
+}
+
+.add_btn image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

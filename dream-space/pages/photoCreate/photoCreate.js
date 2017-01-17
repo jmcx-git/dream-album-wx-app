@@ -79,6 +79,7 @@ Page({
             that.setData({
               uploadFileCount:0
             })
+            app.globalData.createFinishFlag=true;
             wx.navigateBack({
               delta: 1 // 回退前 delta(默认为1) 页面
             })
@@ -128,6 +129,6 @@ Page({
   },
   onUnload:function(){
     console.log("页面卸载");
-    app.globalData.createFinishFlag=true;
+    // app.globalData.createFinishFlag=true;
   }
 })
