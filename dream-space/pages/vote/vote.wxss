@@ -64,6 +64,14 @@
 .txtItem{
 
 }
+.txtItem2{
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
 .whitespace{
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -111,6 +119,8 @@
   position: fixed;
   bottom: 0;
   border-top: 1rpx solid #eeeeee;
+  color: #00adef;
+  font-weight: 200;
 }
 .hover_class{
   background-color:#dddddd;

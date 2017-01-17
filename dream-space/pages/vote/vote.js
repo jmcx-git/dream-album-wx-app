@@ -14,6 +14,7 @@ Page({
     showSearchbar: true,
     selectedWorksId: -1,
     voteWorksId: -1,
+    userWorksId: -1,
     vote: 0
   },
   showInput: function () {
@@ -95,6 +96,9 @@ Page({
   onReachBottom: function (){
     this.loadMore()
   },
+  getWorksId: function(worksId){
+    return (worksId == undefined || worksId == 'undefined' || worksId == null || worksId == 'null' || worksId == "")? -1: worksId
+  },
   loadMore: function(){
     console.log(this.data.findKey)
     console.log(this.data.voteWorksId)
@@ -110,7 +114,7 @@ Page({
         findKey: that.data.findKey,
         start: that.data.start,
         size: that.data.size,
-        voteWorksId: that.data.voteWorksId == undefined || that.data.voteWorksId == "" || that.data.voteWorksId == null? -1: that.data.voteWorksId
+        voteWorksId: that.getWorksId(that.data.voteWorksId)
       },
       success:function(res){
         console.log(res)
@@ -261,16 +265,15 @@ Page({
         }
       }
     })
-    console.log(e)
 
   },
   onShareAppMessage: function () {
     let title = app.globalData.nickName+'邀请您给他加油助威。'
     let desc = '我正在参加活动名称,邀请您给他加油助威。'
     let url = '/pages/vote/vote?fromOpenId='+app.globalData.openId+'&activityId='+this.data.activityId+'&voteWorksId='+this.data.voteWorksId+'&share=1'
-    console.log(url)
-    if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
-      if(this.data.userWorksId == "" || this.data.userWorksId == undefined){
+
+    if(this.data.voteWorksId == -1){
+      if(this.data.userWorksId == -1){
         title = app.globalData.nickName+'邀请您参与投票。'
         desc = '我发现一个不错的作品，想请您也来投票表达一下态度。'
       }else{
@@ -280,7 +283,7 @@ Page({
       }
 
     }
-    console.log(url)
+
     return {
       title: title,
       desc: desc,
