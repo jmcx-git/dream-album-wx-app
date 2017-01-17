@@ -13,7 +13,7 @@
               <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl==null?'../../image/familydefault.png':item.avatarUrl}}" />
             </block>
             <block wx:else>
-              <image mode="aspectFill" style="border-radius:50%;" src="../../image/logo.jpg" />
+              <image mode="aspectFill" style="border-radius:50%;" src="../../image/logo.png" />
             </block>
           </view>
           <block wx:if="{{item.type == 1}}">

@@ -34,7 +34,7 @@ App({
     createFinishFlag: false,
     modifySpaceInfoFlag: false,
     indexRefreshStatus: false,
-    productName: '时光小窝',
+    productName: '光阴之旅',
     fromOpenId: '',
     spaceId: '',
     redirectRefer: '',
