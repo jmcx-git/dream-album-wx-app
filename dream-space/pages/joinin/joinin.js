@@ -39,6 +39,7 @@ Page({
       return
     }
     let that = this
+    let start = this.data.start
     wx.request({
       url:app.globalData.serverHost+"/user/feed/list.json",
       data:{
@@ -50,7 +51,12 @@ Page({
         console.log(res)
         if(res.statusCode == 200){
           if(res.data.status == 0){
-            let list = that.data.entries.concat(res.data.data.resultList);
+            let list = [];
+            if(start == 0){
+              list = res.data.data.resultList
+            }else{
+              list = that.data.entries.concat(res.data.data.resultList);
+            }
             that.setData({
               entries: list,
               start: that.data.start + res.data.data.resultList.length,
@@ -120,9 +126,9 @@ Page({
     this.loadMore()
   },
   refreshData: function(){
+    this.data.entries = []
     this.setData({
       start:0,
-      entries:[],
       noMoreList: false,
       worksId: -1
     })
