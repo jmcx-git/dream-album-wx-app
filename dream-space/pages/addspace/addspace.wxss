@@ -8,16 +8,24 @@ page {
   width: 100%;
   height: 300rpx;
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-between;
 }
 
 .image_select_view {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .image_select_image {
@@ -43,12 +51,16 @@ page {
 }
 
 .radio_view{
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center !important;
+  -webkit-align-items: center;
 }
 .radio_sub_view{
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-around;
   width: 80rpx;
   font-size: 32rpx;
@@ -64,8 +76,10 @@ page {
 }
 
 .input_cell {
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   border-bottom: 2rpx solid #efeff4;
 }
 
@@ -79,6 +93,7 @@ page {
 .input_cell_bd {
   flex: 1;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .input {

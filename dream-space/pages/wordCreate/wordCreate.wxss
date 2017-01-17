@@ -2,7 +2,7 @@ page{
     background-color: #efeff4;
 }
 .inputText{
-    margin-top:20rpx;
+    margin-top:60rpx;
     background-color: #ffffff;
     width:calc(100% - 100rpx);
     height:400rpx;
