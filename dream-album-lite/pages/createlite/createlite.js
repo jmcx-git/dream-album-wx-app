@@ -30,7 +30,8 @@ let pageData = {
     pageAnimL:{},
     pagescallable: true,
     picLoadCount: 0,
-    picLoadFinished: false
+    picLoadFinished: false,
+    hiddenmusic: true
   },
   convertRpx: function(px){
     return this.convertTimes * px
@@ -62,7 +63,8 @@ let pageData = {
     this.setData({
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
-      scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
+      scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index],
+      hiddenmusic: album.music == ""
     })
   },
   init: function () {
@@ -131,7 +133,7 @@ let pageData = {
       },
       method: 'GET',
       success: function (res) {
-
+        console.log(res)
         let alist = that.data.albumList.concat(res.data)
         // alist = alist.concat(res.data)
         that.setData({
@@ -156,8 +158,11 @@ let pageData = {
       return
     }
     this.data.scrollLeftValues[this.data.choosed] = this.data.scrollLeft
+
+    let newchoosed = e.target.dataset.albumindex
+    let album = this.data.albumList[newchoosed]
     this.setData({
-      choosed: e.target.dataset.albumindex,
+      choosed: newchoosed,
       picLoadFinished: false,
       picLoadCount: 0
     })
