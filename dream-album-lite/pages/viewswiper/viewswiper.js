@@ -19,6 +19,7 @@ Page({
     imgUrl: '',
     imgs: [],
     animationData: {},
+    // animationDataPre: {},
     currentIndex: 0,
     picHeight: 520,
     picWidth: 300,
@@ -26,11 +27,9 @@ Page({
     refreshInterval: 2000,
     avatarUrl: '',
     replayHidden: false,
-    picLoadCount:0,
-    picImageList:[],
-    beifenPicImageList:[],
-    showShare:false,
     shareHidden:true,
+    showShare:false,
+    isLoadPic:false,
 
     showLayer: false,
     showNav: false,
@@ -72,7 +71,7 @@ Page({
         },
         method: 'GET',
         success: function (res) {
-          wx.hideToast();
+          // wx.hideToast();
           if (res.statusCode == 200 && res.data.status == 0) {
             that.setData({
               avatarUrl: res.data.data.avatarUrl,
@@ -83,7 +82,7 @@ Page({
         fail: function (res) {
           app.serverFailedToast();
         }
-      })
+      });
     } else {
       this.setData({
         avatarUrl: wx.getStorageSync('avatarUrl'),
@@ -120,12 +119,12 @@ Page({
     }
   },
   requestData: function (e) {
+    let that = this
     wx.showToast({
       title: '加载中',
       icon: 'loading',
       duration: 10000
     })
-    let that = this
     let userAlbumId = that.userAlbumId;
     var openId = ""
     if (this.data.fromShare) {
@@ -143,19 +142,12 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          for(var i=0;i<res.data.loopPreImgs.length;i++){
-            var object=new Object();
-            object.srcUrl=(res.data.loopPreImgs)[i];
-            object.hidden=i==0?false:true;
-            that.data.picImageList.push(object);
-          }
+          // wx.hideToast();
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
             imgs: res.data.loopPreImgs,
-            bgMusic: res.data.music,
-            picImageList:that.data.picImageList,
-            beifenPicImageList:that.data.picImageList
+            bgMusic: res.data.music
           })
           if (that.data.bgMusic != undefined && that.data.bgMusic != '') {
             that.audioCtx = wx.createAudioContext('music');
@@ -164,10 +156,9 @@ Page({
               hiddenMusicBtn: false
             })
           }
-          // 此处是动画
-          // setTimeout(function () {
-          //   that.prepareAction();
-          // }, 500)
+          setTimeout(function () {
+            that.prepareAction();
+          }, 500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -260,12 +251,23 @@ Page({
     let that = this;
     if (that.data.currentIndex < that.data.imgs.length) {
       that.setData({
-        imgUrl: that.data.imgs[that.data.currentIndex]
+        imgUrl: that.data.imgs[that.data.currentIndex],
+        isLoadPic:false
       })
+      setTimeout(function(){
+        if(!that.data.isLoadPic && that.data.currentIndex>0){
+          wx.showToast({
+            title: '加载中',
+            icon: 'loading',
+            duration: 10000
+          })
+        }
+      },1500)
     } else {
       that.setData({
         reloadHidden: false,
-        stopMusic: true
+        stopMusic: true,
+        showShare:true
       })
       if(typeof that.audioCtx !=="undefined"){
         that.audioCtx.pause();
@@ -273,23 +275,19 @@ Page({
     }
   },
   loadPic: function () {
-    let that=this;
-    that.setData({
-      picLoadCount:that.data.picLoadCount+1
+    this.setData({
+      isLoadPic:true
     })
-    if(that.data.picLoadCount==that.data.imgs.length){
-      wx.hideToast();
-      that.executeAction();
-    }
-    // let that = this;
-    // that.executeAction();
-    // setTimeout(function () {
-    //   that.setData({
-    //     currentIndex: that.data.currentIndex + 1,
-    //     animationData: {}
-    //   })
-    //   that.prepareAction();
-    // }, that.data.refreshInterval * 2 + 500)
+    wx.hideToast();
+    let that = this;
+    that.executeAction();
+    setTimeout(function () {
+      that.setData({
+        currentIndex: that.data.currentIndex + 1,
+        animationData: {}
+      })
+      that.prepareAction();
+    }, that.data.refreshInterval * 2 + 300)
   },
   executeAction: function () {
     let that = this;
@@ -300,25 +298,8 @@ Page({
       transformOrigin: '50% 50%'
     })
     this.animation = animations;
+    // this.toMiddleScale();
     this.linerStartEnd();
-    setTimeout(function(){
-      (that.data.picImageList)[that.data.currentIndex++].hidden=true;
-      if(that.data.currentIndex < that.data.picImageList.length){
-        (that.data.picImageList)[that.data.currentIndex].hidden=false;
-      }
-      that.setData({
-        currentIndex:that.data.currentIndex
-      })
-      if(that.data.currentIndex < that.data.picImageList.length){
-        that.executeAction();
-      }else{
-        that.setData({
-          reloadHidden: false,
-          stopMusic: true,
-          showShare:true
-        })
-      }
-    },that.data.refreshInterval * 2 + 200)
   },
   //放到屏幕中心位置,放大缩小
   toMiddleScale: function () {
@@ -347,30 +328,20 @@ Page({
   },
   reloadPlay: function () {
     let that = this;
-    (that.data.picImageList)[that.data.picImageList.length-1].hidden=true;
     this.setData({
       reloadHidden: true,
       currentIndex: 0,
-      picLoadCount:0,
       imgUrl: '',
-      picImageList:[],
       replayHidden: true,
       stopMusic: false,
       showShare:false,
-      animationData:{}
+      isLoadPic:false
     })
     setTimeout(function () {
       that.setData({
-        replayHidden: false,
-        picImageList:that.data.beifenPicImageList
+        replayHidden: false
       })
-      wx.showToast({
-        title:'加载中',
-        icon:'loading',
-        duration:10000,
-        mask:true
-      })
-      // that.prepareAction();
+      that.prepareAction();
     }, 500)
   },
 
@@ -410,7 +381,7 @@ Page({
       this.audioCtx.play();
     }
   },
-  showSharePic:function(){
+   showSharePic:function(){
     let that=this;
     that.setData({
       shareHidden:false
