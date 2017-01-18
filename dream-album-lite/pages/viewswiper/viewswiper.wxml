@@ -9,17 +9,20 @@
     <view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
         <audio src="{{bgMusic}}" style="display:none" id="music" loop/>
         <image hidden="{{hiddenMusicBtn}}" class="{{stopMusic?'music_btn music_btn-off':'music_btn music_btn-on'}}" src="../../image/music.png" bindtap="audioPause"/>
-        <image class="viewImage"  src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>
+        <!--<image class="viewImage"  src="{{imgUrl}}" animation="{{animationData}}" data-img="{{imgUrl}}"   bindtap="showAlbum" bindload="loadPic"/>-->
+        <!--此处进行修改-->
+         <image wx:for="{{picImageList}}" wx:key="picImageList" class="viewImage" src="{{item.srcUrl}}" hidden="{{item.hidden}}" animation="{{animationData}}" data-img="{{item.srcUrl}}" data-index="{{index}}"   bindtap="showAlbum" bindload="loadPic"/>
     </view>
 
     <view hidden="{{reloadHidden}}" class="nav-view">
+        <view><image class="img-sharenav" hidden="{{shareHidden}}" src="../../image/nav-share.png"/></view>
         <view class="nav-view-main">
-        <view><image class="img-sharenav" src="../../image/nav-share.png"/></view>
         <view><image class="img-navavator" src="{{avatarUrl}}" background-size="cover"></image>
         </view>
         <view><label class="label-nickname">{{nickName}}</label></view>        
         <view class="view-btn">        
             <button type="primary" bindtap="reloadPlay" class="replayButton">再看一遍</button>
+            <button wx:if="{{showShare && !showNav}}" type="primary" bindtap="showSharePic" class="createButton">我要分享</button>
             <button wx:if="{{showNav}}" type="primary" bindtap="showIndex" class="createButton">我也制作</button>
         </view>
     </view>

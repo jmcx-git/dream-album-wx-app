@@ -65,10 +65,12 @@ page{
 }
 
 .img-sharenav{
-    margin-left:150px !important;
-    width:400rpx !important;
-    height:170rpx !important;
-    position:relative !important;
+    /*margin-left:150px !important;*/
+    width:100% !important;
+    height:217rpx !important;
+    position:absolute !important;
+    top:0rpx;
+    left:0rpx;
     display: block;
 }
 .view-btn{
@@ -104,6 +106,11 @@ page{
 .nav-view-main{
     text-align:center;
     color: white;
+    position: absolute;
+    top:250rpx;
+    left:0rpx;
+    width:100%;
+    height:calc(100% - 250rpx);
 }
 
 .label-nickname{

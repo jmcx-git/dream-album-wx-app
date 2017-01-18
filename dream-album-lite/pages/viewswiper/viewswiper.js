@@ -19,7 +19,6 @@ Page({
     imgUrl: '',
     imgs: [],
     animationData: {},
-    // animationDataPre: {},
     currentIndex: 0,
     picHeight: 520,
     picWidth: 300,
@@ -27,6 +26,11 @@ Page({
     refreshInterval: 2000,
     avatarUrl: '',
     replayHidden: false,
+    picLoadCount:0,
+    picImageList:[],
+    beifenPicImageList:[],
+    showShare:false,
+    shareHidden:true,
 
     showLayer: false,
     showNav: false,
@@ -79,7 +83,7 @@ Page({
         fail: function (res) {
           app.serverFailedToast();
         }
-      });
+      })
     } else {
       this.setData({
         avatarUrl: wx.getStorageSync('avatarUrl'),
@@ -116,6 +120,11 @@ Page({
     }
   },
   requestData: function (e) {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    })
     let that = this
     let userAlbumId = that.userAlbumId;
     var openId = ""
@@ -135,11 +144,19 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           wx.hideToast();
+          for(var i=0;i<res.data.loopPreImgs.length;i++){
+            var object=new Object();
+            object.srcUrl=(res.data.loopPreImgs)[i];
+            object.hidden=i==0?false:true;
+            that.data.picImageList.push(object);
+          }
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
             imgs: res.data.loopPreImgs,
-            bgMusic: res.data.music
+            bgMusic: res.data.music,
+            picImageList:that.data.picImageList,
+            beifenPicImageList:that.data.picImageList
           })
           if (that.data.bgMusic != undefined && that.data.bgMusic != '') {
             that.audioCtx = wx.createAudioContext('music');
@@ -148,9 +165,10 @@ Page({
               hiddenMusicBtn: false
             })
           }
-          setTimeout(function () {
-            that.prepareAction();
-          }, 500)
+          // 此处是动画
+          // setTimeout(function () {
+          //   that.prepareAction();
+          // }, 500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -256,30 +274,54 @@ Page({
     }
   },
   loadPic: function () {
-    let that = this;
-    that.executeAction();
-    setTimeout(function () {
-      that.setData({
-        currentIndex: that.data.currentIndex + 1,
-        animationData: {}
-      })
-      that.prepareAction();
-    }, that.data.refreshInterval * 2 + 500)
+    let that=this;
+    that.setData({
+      picLoadCount:that.data.picLoadCount+1
+    })
+    console.log("当前加载图片数="+that.data.picLoadCount);
+    if(that.data.picLoadCount==that.data.imgs.length){
+      console.log("开始动画");
+      wx.hideToast();
+      that.executeAction();
+    }
+    // let that = this;
+    // that.executeAction();
+    // setTimeout(function () {
+    //   that.setData({
+    //     currentIndex: that.data.currentIndex + 1,
+    //     animationData: {}
+    //   })
+    //   that.prepareAction();
+    // }, that.data.refreshInterval * 2 + 500)
   },
   executeAction: function () {
     let that = this;
     var animations = wx.createAnimation({
       duration: that.data.refreshInterval,
-      timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
+      timingFunction: 'linear',
       delay: 0,
-      transformOrigin: '50% 50%',
-      success: function (res) {
-        console.log(res);
-      }
+      transformOrigin: '50% 50%'
     })
     this.animation = animations;
-    // this.toMiddleScale();
     this.linerStartEnd();
+    setTimeout(function(){
+      (that.data.picImageList)[that.data.currentIndex++].hidden=true;
+      if(that.data.currentIndex < that.data.picImageList.length){
+        (that.data.picImageList)[that.data.currentIndex].hidden=false;
+      }
+      that.setData({
+        currentIndex:that.data.currentIndex
+      })
+      if(that.data.currentIndex < that.data.picImageList.length){
+        that.executeAction();
+      }else{
+        that.setData({
+          reloadHidden: false,
+          stopMusic: true,
+          showShare:true
+        })
+      }
+    },that.data.refreshInterval * 2 + 200)
   },
   //放到屏幕中心位置,放大缩小
   toMiddleScale: function () {
@@ -308,18 +350,30 @@ Page({
   },
   reloadPlay: function () {
     let that = this;
+    (that.data.picImageList)[that.data.picImageList.length-1].hidden=true;
     this.setData({
       reloadHidden: true,
       currentIndex: 0,
+      picLoadCount:0,
       imgUrl: '',
+      picImageList:[],
       replayHidden: true,
-      stopMusic: false
+      stopMusic: false,
+      showShare:false,
+      animationData:{}
     })
     setTimeout(function () {
       that.setData({
-        replayHidden: false
+        replayHidden: false,
+        picImageList:that.data.beifenPicImageList
       })
-      that.prepareAction();
+      wx.showToast({
+        title:'加载中',
+        icon:'loading',
+        duration:10000,
+        mask:true
+      })
+      // that.prepareAction();
     }, 500)
   },
 
@@ -358,5 +412,16 @@ Page({
       })
       this.audioCtx.play();
     }
+  },
+  showSharePic:function(){
+    let that=this;
+    that.setData({
+      shareHidden:false
+    })
+    setTimeout(function(){
+      that.setData({
+        shareHidden:true
+      })
+    },2000)
   }
 })
