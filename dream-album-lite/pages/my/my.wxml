@@ -16,11 +16,11 @@
         <input id="{{index}}" type="text" value="{{item.title}}" bindblur="editTitle" focus="{{item.focus}}" />
       </view>
       <view class="{{userAlbumClass}}" bindlongtap="delLongTapHandle" bindtap="previewImage" data-useralbumid="{{item.userAlbumId}}">
-        <image style="width:100%;height:100%;z-index: 5;" src="../../image/imagetopt.png"/>
+        <image style="width:100%;height:100%;z-index: 5;" src="../../image/imagetopt.png" />
         <view class="imagesScrollView">
-          <image bindload="picLoad" style="width:100%;height:100%;" src="{{item.cover}}"/>
-          <image id="{{index}}" hidden="{{!showDelBtn}}" catchtap="delAlbumHandle" class="del_btn" src="../../image/del.png"/>
-          <image hidden="{{item.audioAlbum!=1}}" class="music_marker" src="../../image/music.png"/>
+          <image bindload="picLoad" style="width:100%;height:100%;" src="{{item.cover}}" />
+          <image id="{{index}}" hidden="{{!showDelBtn}}" catchtap="delAlbumHandle" class="del_btn" src="../../image/del.png" />
+          <image hidden="{{item.audioAlbum!=1}}" class="music_marker" src="../../image/music.png" />
         </view>
       </view>
     </view>

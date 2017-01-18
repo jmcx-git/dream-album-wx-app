@@ -3,6 +3,7 @@ Page({
   data: {
     winHeight: 0,
     winWidth: 0,
+    convertTimes: 2,
     items: [],
     avatarUrl: '',
     nopichidden: 'none',
@@ -22,9 +23,15 @@ Page({
   },
   onLoad: function () {
     let that = this;
-    that.setData({
-      winWidth: app.globalData.windowWidth,
-      winHeight: app.globalData.windowHeight
+    wx.getSystemInfo({
+      success: function (res) {
+        let convertTimes = 750 / res.windowWidth;
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight,
+          convertTimes: convertTimes
+        })
+      }
     })
     if (!wx.getStorageSync('openId')) {
       this.confirmGetData()
@@ -110,6 +117,7 @@ Page({
                     icon: 'success',
                     duration: 2000
                   });
+                  that.refreshData();
                 } else {
                   wx.showToast({
                     title: '删除失败,请稍后重试!',
@@ -246,7 +254,6 @@ Page({
               marginLeft: res.data.length == 1 ? 160 : 110
             })
           }
-          // wx.hideToast();
         }
       },
       fail: function () {
@@ -256,11 +263,11 @@ Page({
   },
   picLoad: function (e) {
     let that = this;
-    this.setData({
+    that.setData({
       picLoadCount: that.data.picLoadCount + 1
     })
-    if (this.data.picLoadCount == this.data.items.length ||
-      this.data.picLoadCount >= 3) {
+    if (that.data.picLoadCount == that.data.items.length ||
+      that.data.picLoadCount >= 3) {
       wx.hideToast();
       console.log("Pic load");
       that.setData({
@@ -275,7 +282,7 @@ Page({
         picLoadFinish: true
       })
       wx.hideToast();
-    }, 10000)
+    }, 1000)
   },
   onShow: function () {
     if (app.globalData.finishCreateFlag) {
