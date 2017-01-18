@@ -11,11 +11,14 @@ Page({
     authorizeContent: ". 获得你的公开信息(昵称、头像等)",
     picLoadFinish: false,
     picLoadCount: 0,
-    indicatorDots:false,
-    autoplay:false,
-    a:3000,
-    duration:500,
-    marginLeft:110
+    indicatorDots: false,
+    autoplay: false,
+    a: 3000,
+    duration: 500,
+    marginLeft: 110,
+    userAlbumClass: 'imageTopPic',
+    isDelShakeModel: false,
+    showDelBtn: false
   },
   onLoad: function () {
     let that = this;
@@ -50,103 +53,162 @@ Page({
       nopichidden: 'none',
       viewtap: false,
       picLoadFinish: false,
-      picLoadCount: 0
+      picLoadCount: 0,
+      userAlbumClass: 'imageTopPic',
+      isDelShakeModel: false,
+      showDelBtn: false
     })
     this.getData();
   },
   previewImage: function (e) {
     let that = this;
-    if (!that.data.viewtap) {
+    //控制longtap后不会直接跳转预览页
+    if (!that.data.viewtap || that.data.isDelShakeModel) {
       return;
     }
     wx.navigateTo({
       url: '../viewswiper/viewswiper?userAlbumId=' + e.currentTarget.dataset.useralbumid
     })
   },
-  confirmGetData: function(){
-    var that = this
+  delLongTapHandle: function () {
+    let that = this;
+    if (!that.data.isDelShakeModel) {
+      that.setData({
+        userAlbumClass: 'imageTopPic shake_animation',
+        isDelShakeModel: true,
+        showDelBtn: true
+      })
+    }
+  },
+  delAlbumHandle: function (e) {
+    let that = this;
+    let index = e.currentTarget.id;
+    let item = that.data.items[index];
+    that.setData({
+      isDelShakeModel: false,
+      userAlbumClass: 'imageTopPic',
+      showDelBtn: false
+    })
     wx.showModal({
-      title: that.data.authorizeTitle,
-      content: that.data.authorizeContent,
-      showCancel: false,
+      title: '删除提示',
+      content: '是否删除' + item.title + '?',
       success: function (res) {
         if (res.confirm) {
-          //用户点击确定
-          wx.login({
-            success: function (wxLoginRes) {
-              //获取code
-              wx.request({
-                url: app.globalData.serverHost + 'album/user/getSession.json',
-                data: {
-                  code: wxLoginRes.code,
-                  appId: app.globalData.appId
-                },
-                method: 'GET',
-                success: function (sessionResp) {
-                  //缓存第三方key
-                  var openId = sessionResp.data
-                  if(openId == ""){
-                    console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
-                      );
-                    app.weixinServerFailedToast();
-                    return
-                  }
-                  wx.setStorageSync('openId', openId);
-                  wx.getUserInfo({
-                    success: function (wxUserInfoResp) {
-                      wx.request({
-                        url: app.globalData.serverHost + 'album/user/getUserInfo.json',
-                        data: {
-                          openId: openId,
-                          encryptedData: wxUserInfoResp.encryptedData,
-                          iv: wxUserInfoResp.iv,
-                          appId: app.globalData.appId
-                        },
-                        method: 'GET',
-                        success: function (serverUserInfoResp) {
-                          if(serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0){
-                            wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
-                            wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
-                            wx.setStorageSync('openId', openId);
-                            app.globalData.openId = openId;
-                            app.globalData.nickName = serverUserInfoResp.data.data.nickName;
-                            app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
-                            that.getData();
-                          }else{
-                            app.serverFailedToast();
-                          }
-                        }
-                      })
-                    },
-                    fail: function () {
-                      app.weixinServerFailedToast();
-                    }
-                  })
-                },
-                fail: function (trd) {
-                  console.log("缓存第三方key出错！");
-                  console.log(trd);
-                }
-              })
+          wx.request({
+            url: app.globalData.serverHost + 'album/delete.json',
+            data: {
+              openId: app.globalData.openId + '',
+              userAlbumId: item.userAlbumId + ''
             },
-            fail: function (ee) {
-              console.log("登录出错了！");
-              console.log(ee);
+            method: 'GET',
+            success: function (res) {
+              console.log(res)
+              if (res.statusCode == 200 && res.data.status == 0) {
+                if (res.data.data) {
+                  wx.showToast({
+                    title: '删除成功',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                } else {
+                  wx.showToast({
+                    title: '删除失败,请稍后重试!',
+                    icon: 'success',
+                    duration: 2000
+                  });
+                }
+              } else {
+                wx.showToast({
+                  title: '删除操作异常,请稍后重试!',
+                  icon: 'success',
+                  duration: 2000
+                });
+              }
+            },
+            fail: function () {
+              wx.showToast({
+                title: '网络请求异常,请稍后重试!',
+                icon: 'success',
+                duration: 2000
+              });
             }
           })
-        } else {
-          //TODO 用户取消 无法使用
         }
       }
     })
   },
-  getData: function() {
+  confirmGetData: function () {
+    var that = this
+    wx.login({
+      success: function (wxLoginRes) {
+        //获取code
+        wx.request({
+          url: app.globalData.serverHost + 'album/user/getSession.json',
+          data: {
+            code: wxLoginRes.code,
+            appId: app.globalData.appId
+          },
+          method: 'GET',
+          success: function (sessionResp) {
+            //缓存第三方key
+            var openId = sessionResp.data
+            if (openId == "") {
+              console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
+              );
+              app.weixinServerFailedToast();
+              return
+            }
+            wx.setStorageSync('openId', openId);
+            wx.getUserInfo({
+              success: function (wxUserInfoResp) {
+                wx.request({
+                  url: app.globalData.serverHost + 'album/user/getUserInfo.json',
+                  data: {
+                    openId: openId,
+                    encryptedData: wxUserInfoResp.encryptedData,
+                    iv: wxUserInfoResp.iv,
+                    appId: app.globalData.appId
+                  },
+                  method: 'GET',
+                  success: function (serverUserInfoResp) {
+                    if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
+                      wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
+                      wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
+                      wx.setStorageSync('openId', openId);
+                      app.globalData.openId = openId;
+                      app.globalData.nickName = serverUserInfoResp.data.data.nickName;
+                      app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
+                      that.getData();
+                    } else {
+                      app.serverFailedToast();
+                    }
+                  }
+                })
+              },
+              fail: function () {
+                app.weixinServerFailedToast();
+              }
+            })
+          },
+          fail: function (trd) {
+            console.log("缓存第三方key出错！");
+            console.log(trd);
+          }
+        })
+      },
+      fail: function (ee) {
+        console.log("登录出错了！");
+        console.log(ee);
+      }
+    })
+  },
+  getData: function () {
     let that = this;
     let nickName = wx.getStorageSync("nickName");
     let avatarUrl = wx.getStorageSync("avatarUrl");
 
-    if(typeof nickName === "undefined" || typeof avatarUrl === "undefined" || (nickName == "" && avatarUrl == "")
-      || nickName == "undefined" || avatarUrl == "undefined"){
+    if (typeof nickName === "undefined" || typeof avatarUrl === "undefined" || (nickName == "" && avatarUrl == "")
+      || nickName == "undefined" || avatarUrl == "undefined") {
       that.confirmGetData();
       return;
     }
@@ -181,7 +243,7 @@ Page({
               items: res.data,
               nopichidden: 'none',
               viewtap: true,
-              marginLeft:res.data.length==1?160:110
+              marginLeft: res.data.length == 1 ? 160 : 110
             })
           }
           // wx.hideToast();
@@ -221,8 +283,27 @@ Page({
       app.globalData.finishCreateFlag = false;
     }
   },
+  onHide: function () {
+    let that = this;
+    //shake态下模拟失焦 取消shake
+    if (that.data.isDelShakeModel) {
+      that.setData({
+        isDelShakeModel: false,
+        userAlbumClass: 'imageTopPic',
+        showDelBtn: false
+      })
+    }
+  },
   toEdit: function (e) {
     let that = this
+    //shake态下模拟失焦 取消shake
+    if (that.data.isDelShakeModel) {
+      that.setData({
+        isDelShakeModel: false,
+        userAlbumClass: 'imageTopPic',
+        showDelBtn: false
+      })
+    }
     let index = e.currentTarget.id;
     let item = this.data.items[index]
     item.isEditTitle = true;
@@ -251,7 +332,7 @@ Page({
           let itemx = that.data.items[index];
           if (!res.confirm) {
             itemx.title = orititle;
-            
+
             that.setData({
               items: that.data.items
             })
@@ -280,8 +361,8 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-      title: '分享一个相册工具',
-      desc: '亲爱的，相信我，你会爱上她的，点击查看！',
+      title: '分享一个相册制作工具',
+      desc: '我发现一个一分钟即可制作精美相册的工具，邀您来使用。',
       path: '/pages/my/my'
     }
   }
