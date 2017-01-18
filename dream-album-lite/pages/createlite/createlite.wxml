@@ -1,11 +1,12 @@
 <view class="top_split_line"></view>
 <view class="content" wx:if="{{!hiddenGrid}}" style="padding-top:20rpx; padding-right:20rpx">
 <scroll-view class="scroll-view_content" scroll-y="true" style="width: 100%; height:{{content_hegiht-20}}rpx; padding: 0 0 0 {{sy_left}}rpx;">
-  <view class="content_detail" bindtap="changepreview" hidden="{{!picLoadFinished}}">
+  <view class="content_detail" style="width:{{moduleWidth*2 +27}}rpx" bindtap="changepreview" hidden="{{!picLoadFinished}}">
     <view class="content_item" wx:for="{{pageList}}" wx:key="{{rank}}"   style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" >
       <image class="bg_img" style="width:{{moduleWidth}}rpx; height:{{moduleHeight}}rpx;" src="{{item.preview}}" bindload="loadPagePic"/>
     </view>
     <image src="../../image/imgtop.png" style="position:absolute; top:0rpx; left: 5rpx; width:{{moduleWidth*2 +27}}rpx; height:{{moduleHeight*2 +46}}rpx; z-index: 5"/>
+    <image hidden="{{hiddenmusic}}" class="music_btn" src="../../image/music.png"/>
   </view>
 </scroll-view>
 </view>
