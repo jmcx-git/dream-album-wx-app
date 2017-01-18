@@ -1,24 +1,33 @@
+
 <!--scroll-view-x  start-->
 <view class="allTop" style="width:{{winWidth}}px;">
-    <image class="titleClass" src="../../image/titleblue.png"/>
-    <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
-    <image style="display:{{nopichidden}}" class="nopicClass" src="../../image/nopicdefault.png" />
+  <image class="titleClass" src="../../image/titleblue.png" />
+  <image class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover"></image>
+  <image style="display:{{nopichidden}}" class="nopicClass" src="../../image/nopicdefault.png" />
 </view>
+
 <!--模版列表-->
 <view class="scrollTops">
-    <scroll-view scroll-x="true" class="scrollViewTop" hidden="{{!picLoadFinish}}">
-        <view class="imageTop"  wx:for="{{items}}" wx:key="items" style="margin-left: {{marginLeft}}rpx;margin-right:{{(index+1)==items.length?marginLeft:0}}rpx;height:{{winHeight/2+winHeight/10}}px;">
-            <view bindtap="toEdit" id="{{index}}" hidden="{{item.isEditTitle}}" class="imageScrollTitle">{{item.title}}</view>
-            <image src="../../image/eidt.png" id="{{index}}" bindtap="toEdit" class="editImage" hidden="{{item.isEditTitle}}"/>
-            <view class="imageScrollInput" hidden="{{!item.isEditTitle}}">
-                <input id="{{index}}"  type="text" value="{{item.title}}" bindblur="editTitle" focus="{{item.focus}}"/>
-            </view>
-            <image class="imageTopPic" src="../../image/imagetopt.png" bindtap="previewImage"  data-albumid="{{item.id==undefined?item.albumId:item.id}}" data-useralbumid="{{item.userAlbumId}}"/>
-            <image class="imagesScrollView" bindload="picLoad"  src="{{item.cover}}" />
+  <scroll-view scroll-x="true" class="scrollViewTop" hidden="{{!picLoadFinish}}">
+    <view class="imageTop" wx:for="{{items}}" wx:key="items" style="margin-left: {{marginLeft}}rpx;margin-right:{{(index+1)==items.length?marginLeft:0}}rpx;height:{{winHeight/2+winHeight/10}}px;">
+      <view bindtap="toEdit" id="{{index}}" hidden="{{item.isEditTitle}}" class="imageScrollTitle">{{item.title}}</view>
+      <image src="../../image/eidt.png" id="{{index}}" bindtap="toEdit" class="editImage" hidden="{{item.isEditTitle}}" />
+      <view class="imageScrollInput" hidden="{{!item.isEditTitle}}">
+        <input id="{{index}}" type="text" value="{{item.title}}" bindblur="editTitle" focus="{{item.focus}}" />
+      </view>
+      <view class="{{userAlbumClass}}" bindlongtap="delLongTapHandle" bindtap="previewImage" data-useralbumid="{{item.userAlbumId}}">
+        <image style="width:100%;height:100%;z-index: 5;" src="../../image/imagetopt.png" />
+        <view class="imagesScrollView">
+          <image bindload="picLoad" style="width:100%;height:100%;" src="{{item.cover}}" />
+          <image id="{{index}}" hidden="{{!showDelBtn}}" catchtap="delAlbumHandle" class="del_btn" src="../../image/del.png" />
+          <image hidden="{{item.audioAlbum!=1}}" class="music_marker" src="../../image/music.png" />
         </view>
-    </scroll-view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
 <view style="width:{{winWidth}}px;">
-    <image style="width:{{winWidth/4.5}}px;height:{{winWidth/4.5}}px;"  class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList"/>
+  <image style="width:{{winWidth/4.5}}px;height:{{winWidth/4.5}}px;" class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList" />
 </view>
+
 <!--scroll-view-x  end-->
