@@ -143,7 +143,6 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          wx.hideToast();
           for(var i=0;i<res.data.loopPreImgs.length;i++){
             var object=new Object();
             object.srcUrl=(res.data.loopPreImgs)[i];
@@ -278,9 +277,7 @@ Page({
     that.setData({
       picLoadCount:that.data.picLoadCount+1
     })
-    console.log("当前加载图片数="+that.data.picLoadCount);
     if(that.data.picLoadCount==that.data.imgs.length){
-      console.log("开始动画");
       wx.hideToast();
       that.executeAction();
     }
