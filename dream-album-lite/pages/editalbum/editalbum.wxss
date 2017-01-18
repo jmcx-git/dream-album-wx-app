@@ -137,7 +137,7 @@ page{
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
-    animation: rotate 10s linear infinite;
+/*    animation: rotate 10s linear infinite;*/
 }
 .music_btn-on{
     animation-play-state: running !important;
