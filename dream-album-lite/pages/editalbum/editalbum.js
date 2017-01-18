@@ -30,7 +30,8 @@ let pageData = {
     pageAnimR:{},
     pageAnimL:{},
     pagescallable: true,
-    albumId: 0
+    albumId: 0,
+    hiddenmusic: true
   },
   convertRpx: function(px){
     return this.convertTimes * px
@@ -74,7 +75,8 @@ let pageData = {
       // photoList: this.getPhotoList(index),
       hiddenGrid: true,
       photoCount: photoCount,
-      scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index]
+      scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index],
+      hiddenmusic: album.music == ""
     })
   },
   init: function () {
@@ -178,8 +180,11 @@ let pageData = {
   },
   chooseTemplate: function (e) {
     this.data.scrollLeftValues[this.data.choosed] = this.data.scrollLeft
+    let newchoosed = e.target.dataset.albumindex
+    let album = this.data.albumList[newchoosed]
     this.setData({
-      choosed: e.target.dataset.albumindex
+      choosed: newchoosed
+
     })
     this.initAlbumDetail(this.data.choosed)
     if(this.data.albumList[this.data.choosed].initPhoto != true){

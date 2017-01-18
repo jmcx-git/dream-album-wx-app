@@ -4,6 +4,7 @@
     <block wx:for="{{pageList}}" wx:key="id" wx:for-index="idx">
       <view id="{{item.id}}" style="display:inline-block; width: {{content_width *0.87}}rpx; height:{{content_hegiht}}rpx; padding: 0 0 0 0; position:relative" >
         <view style="border-radius: 16rpx; width:{{pageFullWidth}}rpx; height:{{pageFullHeight}}rpx;margin: 40rpx 0 0 80rpx; position:relative" >
+          <image hidden="{{hiddenmusic}}" class="music_btn" src="../../image/music.png"/>
           <image class="bg_img" style="border-radius: 16rpx; width:100%; height:{{pageFullHeight}}rpx" src="{{item.editImgUrl}}"/>
           <block wx:for="{{item.photoInfos}}" wx:for-item="photoItem" wx:key="{{id}}">
             <view style="position:absolute; width:100px; height:100px;" animation="{{photoItem.transformImg}}">
