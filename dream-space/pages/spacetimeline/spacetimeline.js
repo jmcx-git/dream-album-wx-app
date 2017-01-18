@@ -104,7 +104,6 @@ Page({
   },
   getSpaceListData:function(){
     let that=this;
-    console.log("start="+that.data.start+",size="+that.data.size);
     wx.request({
       url: app.globalData.serverHost+'feed/list.json',
       data: {
