@@ -52,12 +52,18 @@ Page({
     })
   },
   sendMessage:function(e){
+    wx.showToast({
+      title:'保存中',
+      icon:'loading',
+      duration:10000,
+      mask:true
+    })
     let that=this;
     setTimeout(function(){
       for(var i=0;i<that.data.imgUrls.length;i++){
         that.uploadFile((that.data.imgUrls)[i]);
       }
-    },500)
+    },200)
   },
   uploadFile:function(uploadData){
     var content=encodeURI(uploadData.desc);
@@ -79,6 +85,7 @@ Page({
             that.setData({
               uploadFileCount:0
             })
+            wx.hideToast();
             app.globalData.createFinishFlag=true;
             wx.navigateBack({
               delta: 1 // 回退前 delta(默认为1) 页面
