@@ -34,7 +34,7 @@ Page({
       }
     })
     if (!wx.getStorageSync('openId')) {
-      this.confirmGetData()
+      that.confirmGetData()
     } else {
       that.getData();
     }
@@ -42,12 +42,6 @@ Page({
   onPullDownRefresh: function () {
     this.refreshData();
     wx.stopPullDownRefresh();
-  },
-  createAlbum: function (e, tempFilePaths) {
-    let url = "../createlite/createlite"
-    wx.navigateTo({
-      url: url
-    })
   },
   viewTemplateList: function (e) {
     wx.navigateTo({
@@ -220,7 +214,7 @@ Page({
       that.confirmGetData();
       return;
     }
-    this.setData({
+    that.setData({
       nickName: nickName,
       avatarUrl: avatarUrl
     })
@@ -230,7 +224,7 @@ Page({
       duration: 10000
     })
     that.consoleImage();
-    var url = app.globalData.serverHost + 'album/getMyAlbum.json';
+    let url = app.globalData.serverHost + 'album/getMyAlbum.json';
     wx.request({
       url: url,
       data: {
@@ -282,7 +276,7 @@ Page({
         picLoadFinish: true
       })
       wx.hideToast();
-    }, 1000)
+    }, 3000)
   },
   onShow: function () {
     if (app.globalData.finishCreateFlag) {
