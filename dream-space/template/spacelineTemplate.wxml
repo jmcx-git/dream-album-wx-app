@@ -16,8 +16,20 @@
         <!--内容主体-->
         <view class="spacetimelinebody">
             <view wx:if="{{globaldata.type=='0'}}" class="spacetimelineImageTop">
-                <text class="spacetimelineImageDesc">{{globaldata.content}}</text>
+                <text class="spacetimelineImageDesc">{{globaldata.content==null?'':globaldata.content}}</text>
+                <!--1张图片-->
                 <image mode="widthFix" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImage" src="{{globaldata.illustration}}"/>
+                <!--多张图片-->
+                <!--<view class="spacetimelineImageMoreTop">
+                <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                 <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                  <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMoreEven" src="{{globaldata.illustration}}"/>
+                   <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                    <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                     <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMoreEven" src="{{globaldata.illustration}}"/>
+                      <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                       <image mode="scaleToFill" bindtap="previewImage" data-src="{{globaldata.illustration}}" class="spacetimelineImageMore" src="{{globaldata.illustration}}"/>
+                       </view>-->
             </view>
             <view wx:elif="{{globaldata.type=='1'}}" class="spacetimelineContentText">
                 <text>{{globaldata.content}}</text>
