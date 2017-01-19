@@ -87,27 +87,26 @@
         </view>
       </block>
     </view>
-    <view class="bottom">
-        <view class="bottomArea"></view>
-    </view>
 
     <view class="buttonviews">
       <view class="both  subbuttonviews" wx:if="{{step == 1}}">
         <view class="btnview" hover hover-class="btn_hover" bindtap="takein" wx:if="{{!joined}}">去参加</view>
         <view class="btnview btnviewcancel" wx:if="{{joined}}">已参加</view>
         <view class="split"/>
-        <view class="btnview" hover hover-class="btn_hover" bindtap="govote">投票</view>
+        <view class="btnview" hover hover-class="btn_hover" bindtap="voteone">投票</view>
       </view>
       <view class="showonly  subbuttonviews" wx:if="{{step ==0}}">
         <view class="btnview btnviewcancel">活动尚未开始</view>
       </view>
 
+
       <view class="showonly  subbuttonviews" wx:if="{{step ==2}}">
-        <view class="btnview btnviewcancel" bindtap="seevote">投票结果统计中</view>
+        <view class="btnview btnviewcancel">投票结果统计中</view>
       </view>
 
+
       <view class="btnone  subbuttonviews" wx:if="{{step ==3}}">
-        <view class="btnview" hover hover-class="btn_hover" bindtap="seevote">查看结果</view>
+        <view class="btnview btnviewcancel" >查看结果</view>
       </view>
     </view>
     <view class="joinallviews" hidden="{{!isshowjoinin}}" bindtap="cancel">
@@ -116,4 +115,62 @@
         <view class="btnlocal2" hover hover-class="local_hover2" bindtap="selectalbum">选择已有照片</view>
       </view>
     </view>
+    <view class="voteclass dashedline" wx:if="{{step !=0}}">
+      <view class="activityIntrTitle">
+        <view class="innerLine"/>
+        <view class="intrTxt"> 投票区 </view>
+        <view class="innerLine"/>
+      </view>
+      <view class='refreshiconbox'>
+        <image class="refreshicon" src="../../image/refresh.png" bindtap="refreshVoteList"/>
+      </view>
+    <view class="searchbar">
+      <view class="weui-search-bar">
+          <view class="weui-search-bar__form">
+              <view class="weui-search-bar__box">
+                  <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                  <input type="number" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="inputTyping" bindblur="hideInput" />
+                  <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                      <icon type="clear" size="14"></icon>
+                  </view>
+              </view>
+              <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                  <icon class="weui-icon-search" type="search" size="14"></icon>
+                  <view class="weui-search-bar__text">搜索</view>
+              </label>
+          </view>
+          <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+      </view>
+    </view>
+    <view bindtouchmove="touchmove" bindtouchend="touchend" bindtouchstart="touchstart">
+    <radio-group class="radio-group">
+      <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
+
+        <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
+
+          <view class="imgbox">
+            <view class="boxitm">
+              <image class="img"  mode="aspectFill" src="{{item.cover}}"/>
+              <radio class="icon" hidden value="{{item.id}}"/>
+              <image class="icon" hidden='{{false}}'
+              src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
+            </view>
+          </view>
+          <view class='titlepart'>
+            <view class="txtItem2"><text class="txtnum">NO.{{item.rank}}</text> 得票{{item.votes}}</view>
+            <text class="txtItem">序号 {{item.id}}</text>
+          </view>
+          <view class="itembottom">
+            <view class="votecount">{{item.solgan ? item.solgan : ''}}</view>
+          </view>
+        </view>
+      </label>
+      </radio-group>
+    </view>
+  </view>
+  <view class="bottom">
+      <view class="bottomArea">
+          <text>这是我的"底线"啦</text>
+      </view>
+  </view>
 </view>

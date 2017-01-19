@@ -42,7 +42,19 @@ let pageData = {
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
 
-        winnersinfolist:[]
+        winnersinfolist:[],
+
+
+        entries:[],
+        start: 0,
+        size: 10,
+        noMoreList: false,
+        findKey: "",
+        inputShowed: false,
+        inputVal: "",
+        scrollHeight: 500,
+        showSearchbar: true,
+        selectedWorksId: -1,
     },
     convert2rpx: function(px){
       return px * this.convertrate
@@ -125,7 +137,6 @@ let pageData = {
                 activityRule: dat.activityRule,
                 activityIntrParts: dat.contentSections,
                 showicon: icons[dat.step % icons.length],
-                deadline:{pfx:"距离结束",keyword:dat.stepTime, sfx: dat.stepTimeUnit},
                 participates: dat.participates,
 
                 examples:dat.examples,
@@ -137,6 +148,12 @@ let pageData = {
                 winnersinfolist: dat.userPrizes,
                 isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 3
               })
+
+              console.log("loadmore", that.data.step)
+              if(that.data.step != 0){
+                // 如果是投票中的话,显示列表, 如果是完成,查看结果
+                that.refreshData()
+              }
               return
             }
           }
@@ -219,6 +236,207 @@ let pageData = {
         desc: desc,
         path: url
       }
+    },
+    showInput: function () {
+        this.setData({
+            inputShowed: true
+        });
+    },
+    hideInput: function () {
+        this.setData({
+            inputVal: "",
+            inputShowed: false
+        });
+    },
+    clearInput: function () {
+        this.setData({
+            inputVal: ""
+        });
+    },
+    inputTyping: function (e) {
+        this.setData({
+            findKey: e.detail.value
+        });
+        this.refreshData()
+    },
+    refreshVoteList: function(e){
+      this.setData({
+        findKey: ""
+      })
+      this.refreshData()
+    },
+    refreshData: function(){
+      this.data.entries = []
+      this.data.noMoreList = false;
+      this.data.start = 0;
+      this.setData({
+        selectedWorksId: -1
+      })
+      this.loadMore()
+    },
+    onPullDownRefresh: function () {
+      this.refreshData()
+      wx.stopPullDownRefresh();
+    },
+    onReachBottom: function (){
+      this.loadMore()
+    },
+    loadMore: function(){
+      console.log("loadmore1", this.data.findKey)
+      console.log("loadmore2", this.data.voteWorksId)
+      if(this.data.noMoreList){
+        return
+      }
+      let that = this;
+      let start = that.data.start
+      wx.request({
+        url: app.globalData.serverHost +"discovery/activity/works/list.json",
+        data:{
+          openId: app.globalData.openId,
+          id: that.data.id,
+          findKey: that.data.findKey,
+          start: that.data.start,
+          size: that.data.size,
+          voteWorksId: that.getWorksId(that.data.voteWorksId)
+        },
+        success:function(res){
+          console.log(res)
+          let list = []
+          if(start == 0){
+            list = res.data.data.resultList
+          }else{
+            list = that.data.entries.concat(res.data.data.resultList);
+          }
+          if(res.statusCode == 200){
+            if(res.data.status == 0){
+              that.setData({
+                entries: list,
+                start: that.data.start + res.data.data.resultList.length,
+                noMoreList: res.data.data.resultList.length < that.data.size
+              })
+              return
+            }
+          }
+          let msg = "服务器错误,请稍后再试!"
+          that.handleFail(msg)
+        },
+        fail: function(res){
+          let msg = "网络出错,请稍后再试!"
+          that.handleFail(msg)
+        }
+      })
+    },handleScroll: function(e){
+      let scrollTop = e.detail.scrollTop;
+      let deltaY = e.detail.deltaY;
+      let showSearchbar = true;
+      if(deltaY > 0){
+        showSearchbar = true;
+      }else{
+        if(scrollTop > 48){
+          showSearchbar = false;
+        }
+      }
+      this.setData({
+        showSearchbar: showSearchbar
+      })
+      console.log(this.data.showSearchbar)
+    },
+    touchstart:function(e){
+      this.lastY = e.touches[0].pageY
+    },
+    touchmove:function(e){
+      if(this.lastY != undefined){
+        let showSearchbar = true;
+        let pageY = e.touches[0].pageY;
+        if(pageY - this.lastY <0){
+          showSearchbar = false
+        }
+        console.log("showSearchbar ", showSearchbar)
+        this.setData({
+          showSearchbar: showSearchbar
+        })
+      }
+
+
+      console.log(e)
+    },
+    touchend:function(e){
+      this.lastY = undefined
+    },
+    radioChange: function(e){
+      console.log(e)
+      if(this.data.selectedWorksId != e.currentTarget.dataset.id){
+        this.setData({
+          selectedWorksId : e.currentTarget.dataset.id
+        })
+      }else{
+        this.setData({
+          selectedWorksId : -1
+        })
+      }
+
+    },
+    voteforone:function(){
+      let that = this;
+      this.voting = true;
+      wx.request({
+        url:app.globalData.serverHost + "discovery/activity/vote.json",
+        data:{
+          openId: app.globalData.openId,
+          id: that.data.id,
+          worksId: that.data.selectedWorksId
+        },
+        success:function(res){
+          console.log(res)
+          let msg = "服务器错误,请稍后再试!"
+          if(res.statusCode ==200){
+            if(res.data.status ==0){
+              wx.showModal({
+                title:"提示",
+                content:"投票成功",
+                showCancel: false,
+                success:function(res){
+                  that.refreshData()
+                }
+              })
+
+              return
+            }
+            msg = res.data.message
+          }
+          that.handleFail(msg)
+        },
+        fail: function(res){
+          let msg = "网络出错,请稍后再试!"
+          that.handleFail(msg)
+        },
+        complete: function(res){
+          that.voting = false
+        }
+      })
+    },
+    voteone:function(e){
+      let that = this;
+      if(this.voting == true){
+        return
+      }
+      if(that.data.selectedWorksId == -1){
+        wx.showToast({
+          title:"还未选择相册",
+          duration:2000
+        })
+        return
+      }
+      wx.showModal({
+        title:"提示",
+        content:"确定为"+that.data.selectedWorksId+"号投票",
+        success:function(res){
+          if(res.confirm){
+            that.voteforone()
+          }
+        }
+      })
+
     }
 
 }
