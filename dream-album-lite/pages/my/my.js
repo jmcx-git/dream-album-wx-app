@@ -81,6 +81,16 @@ Page({
       })
     }
   },
+  cancleDelHandle: function(){
+    let that = this;
+    if (that.data.isDelShakeModel) {
+      that.setData({
+        userAlbumClass: 'imageTopPic',
+        isDelShakeModel: false,
+        showDelBtn: false
+      })
+    }
+  },
   delAlbumHandle: function (e) {
     let that = this;
     let index = e.currentTarget.id;
@@ -90,11 +100,14 @@ Page({
       userAlbumClass: 'imageTopPic',
       showDelBtn: false
     })
+    let useConfirmDel = false;
+    let deleteInfo="";
     wx.showModal({
       title: '删除提示',
       content: '是否删除' + item.title + '?',
       success: function (res) {
         if (res.confirm) {
+          useConfirmDel=true;
           wx.request({
             url: app.globalData.serverHost + 'album/delete.json',
             data: {
@@ -103,36 +116,44 @@ Page({
             },
             method: 'GET',
             success: function (res) {
-              console.log(res)
               if (res.statusCode == 200 && res.data.status == 0) {
                 if (res.data.data) {
-                  wx.showToast({
-                    title: '删除成功',
-                    icon: 'success',
-                    duration: 2000
+                  setTimeout(function(){
+                    wx.showToast({
+                      title: "删除成功!",
+                      icon: "success",
+                      duration: 1500
+                    })},500);
+                  let thatItems =  that.data.items;
+                  thatItems.splice(index,1);
+                  that.setData({
+                    items: thatItems
                   });
-                  that.refreshData();
-                } else {
-                  wx.showToast({
-                    title: '删除失败,请稍后重试!',
-                    icon: 'success',
-                    duration: 2000
-                  });
+                  //that.refreshData();
+                } else {                  
+                  setTimeout(function(){
+                    wx.showToast({
+                      title: "删除失败,请稍后重试!",
+                      icon: "success",
+                      duration: 1500
+                    })},500);
                 }
-              } else {
-                wx.showToast({
-                  title: '删除操作异常,请稍后重试!',
-                  icon: 'success',
-                  duration: 2000
-                });
+              } else {         
+                setTimeout(function(){
+                  wx.showToast({
+                    title: "删除失败,请稍后重试!",
+                    icon: "success",
+                    duration: 1500
+                  })},500);
               }
             },
-            fail: function () {
-              wx.showToast({
-                title: '网络请求异常,请稍后重试!',
-                icon: 'success',
-                duration: 2000
-              });
+            fail: function () {       
+              setTimeout(function(){
+                wx.showToast({
+                  title: "远程服务器忙，请稍后重试！",
+                  icon: "success",
+                  duration: 1500
+                })},500);
             }
           })
         }

@@ -31,7 +31,9 @@ let pageData = {
     pagescallable: true,
     picLoadCount: 0,
     picLoadFinished: false,
-    hiddenmusic: true
+    hiddenmusic: true,
+    stopMusic: true,
+    bgMusic: ""
   },
   convertRpx: function(px){
     return this.convertTimes * px
@@ -45,7 +47,7 @@ let pageData = {
     this.anim = wx.createAnimation({
       transformOrigin:"0 0 0",
       duration: 0,
-    })
+    });
     this.preview = 0;
     this.init()
   },
@@ -64,8 +66,13 @@ let pageData = {
       hiddenGrid: hiddenGrid == true? true: false,
       photoCount: photoCount,
       scrollLeft: this.data.scrollLeftValues[index] == undefined? 0: this.data.scrollLeftValues[index],
-      hiddenmusic: album.music == ""
+      hiddenmusic: album.music == "",
+      bgMusic: album.music
     })
+    if (typeof album.music !== "undefined" && album.music != ''
+      && album.music != 'null') {
+      this.audioCtx = wx.createAudioContext('music');
+    }
   },
   init: function () {
     let that = this
@@ -221,6 +228,24 @@ let pageData = {
     // console.log(e)
     this.preview = (this.preview+1) %2
     this.initpreview()
+  },
+  controlMusic: function(){
+    if (!this.data.stopMusic) {
+      this.setData({
+        stopMusic: true
+      })
+      this.audioCtx.pause();
+    } else {
+      this.setData({
+        stopMusic: false
+      })
+      this.audioCtx.play();
+    }
+  },
+  stopAnimation: function(){
+    this.setData({
+      stopMusic: true
+    })
   },
   initpreview: function(){
     // console.log(this.preview)
