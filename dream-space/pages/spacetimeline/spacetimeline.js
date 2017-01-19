@@ -2,6 +2,7 @@ var app = getApp();
 Page({
   data: {
     winWidth:0,
+    winHeight:0,
     start:0,
     size:10,
     spaceId:0,
@@ -17,9 +18,17 @@ Page({
     topData:{},
     spacetimelineList:[],
     noMoreData:false,
-    noContentHidden:false
+    noContentHidden:false,
+    // 新的添加样式样式
+    isProcess: false,//线程锁
+    isOpen: false,//判断进展
+    animationData1: {},
+    animationData2: {},
+    isHidden1: true,
+    isHidden2: true
   },
   onLoad: function (options) {
+    let that=this;
     var owner=options.owner;
     if(options.share!=undefined && options.share!=null && options.share!=''){
       app.globalData.indexRefreshStatus = true;
@@ -34,10 +43,19 @@ Page({
        })
     }else{
       let that=this;
+      let animation1 = wx.createAnimation({
+        timingFunction: 'ease',
+      })
+      let animation2 = wx.createAnimation({
+        timingFunction: 'ease',
+      })
+      that.data.animation1 = animation1;
+      that.data.animation2 = animation2;
       wx.getSystemInfo({
         success: function(res) {
           that.setData({
-            winWidth:res.windowWidth
+            winWidth:res.windowWidth,
+            winHeight:res.windowHeight
           })
         }
       })
@@ -114,7 +132,7 @@ Page({
             }
           }
           that.setData({
-            spacetimelineList:that.data.spacetimelineList.concat(res.data.data.resultList),
+            spacetimelineList:that.data.start==0?res.data.data.resultList:that.data.spacetimelineList.concat(res.data.data.resultList),
             start:that.data.start+res.data.data.resultList.length
           })
           that.setData({
@@ -154,12 +172,26 @@ Page({
   },
   toCreateWord:function(){
     let that=this;
+    if(that.data.isOpen) {
+      that.bindViewTap();
+    }
+    this.setData({
+      isHidden1: true,
+      isHidden2: true
+    })
     wx.navigateTo({
       url: '../wordCreate/wordCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
     })
   },
   tocratePhoto:function(e){
     let that=this;
+    if(that.data.isOpen) {
+      that.bindViewTap();
+    }
+    this.setData({
+      isHidden1: true,
+      isHidden2: true
+    })
     wx.navigateTo({
       url: '../photoCreate/photoCreate?spaceId='+that.data.spaceId+"&version="+that.data.version
     })
@@ -172,10 +204,23 @@ Page({
       commentFeedId:e.currentTarget.dataset.feedid,
     })
   },
+  requireContent:function(e){
+    this.setData({
+      commentContent:e.detail.value
+    })
+  },
   saveComment:function(e){
     let that=this;
-    var content=e.detail.value.commentContent;
+    // var content=e.detail.value.commentContent;
+    var content=e.detail.value;
+    // var content=that.data.commentContent;
     if(content=='' || content==null || content==undefined){
+      wx.showToast({
+          title:'评论不能为空',
+          icon:'warn',
+          duration:1000,
+          mask:true
+      })
       return;
     }
     wx.request({
@@ -198,18 +243,18 @@ Page({
           commentHidden:true,
           commentDefaultValue:''
         })
+        wx.showToast({
+          title:'评论成功',
+          icon:'success',
+          duration:1000,
+          mask:true
+        })
       },
       fail: function(ron) {
         console.log("评论失败！");
         console.log(ron);
         app.errorToast("评论失败!");
       }
-    })
-  },
-  hideComment:function(e){
-    let that=this;
-    this.setData({
-      commentContent:e.detail.value
     })
   },
   showSpaceDetail:function(e){
@@ -321,9 +366,13 @@ Page({
   hideCommentWindow:function(e){
     let that=this;
     setTimeout(function(){
+        if(that.data.isOpen) {
+          that.bindViewTap();
+        }
         that.setData({
           commentHidden:true,
-          commentFocus:false,
+          isHidden1: true,
+          isHidden2: true
           // commentDefaultValue:''
         })
     },500)
@@ -333,8 +382,7 @@ Page({
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
-          createHidden:true,
-          spacetimelineList:[]
+          noMoreData:false
         })
         setTimeout(function(){
           that.getSpaceTopData();
@@ -398,8 +446,6 @@ Page({
       let that=this;
       that.setData({
         start:0,
-        topData:{},
-        spacetimelineList:[],
         noMoreData:false
       })
       app.globalData.createFinishFlag=false;
@@ -464,7 +510,7 @@ Page({
       var spaceId=that.data.spaceId;
       var owner=(that.data.topData.secert==null || that.data.topData.secert=='' || that.data.topData.secert==undefined)?0:1;
       var queryStr="/pages/spacetimeline/spacetimeline?fromOpenId="+fromOpenId+"&spaceId="+spaceId+"&owner="+owner;
-      var ownerTitle=app.globalData.nickName+"邀请您入住他(她)的私密空间"+that.data.topData.name;
+      var ownerTitle=app.globalData.nickName+"邀请您入住"+(app.globalData.gender==1?"他":"她")+"的私密空间"+that.data.topData.name;
       var guestTitle=app.globalData.nickName+"邀请您使用"+app.globalData.productName;
       var ownerContent='这是属于我们的秘密';
       var guestContent="用它，您可以记录，分享您的珍贵时刻。"
@@ -473,5 +519,45 @@ Page({
         desc:owner==0?guestContent:ownerContent,
         path:queryStr
       }
+    },
+    // 新的添加
+    bindViewTap: function () {
+    let that = this;
+    if (!that.data.isProcess) {
+      that.data.isProcess = true
+      let animation1 = that.data.animation1;
+      let animation2 = that.data.animation2;
+      if (that.data.isOpen) {
+        animation1.translate(0, 0).step()
+        animation2.translate(0, 0).step()
+        that.setData({
+          animationData1: animation1.export(),
+          animationData2: animation2.export(),
+        })
+        setTimeout(function () {
+          that.setData({
+            isHidden1: true,
+            isHidden2: true,
+            isOpen: false,
+            isProcess: false
+          })
+        }, 400)
+      } else {
+        that.setData({
+          isHidden1: false,
+          isHidden2: false
+        })
+        setTimeout(function () {
+          animation1.translate(-20, -70).step()
+          animation2.translate(-70, 0).step()
+          that.setData({
+            animationData1: animation1.export(),
+            animationData2: animation2.export(),
+            isOpen: true,
+            isProcess: false
+          })
+        }, 60)
+      }
     }
+  },
 })

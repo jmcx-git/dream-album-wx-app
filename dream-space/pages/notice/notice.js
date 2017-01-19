@@ -15,6 +15,7 @@ Page({
         productName: app.globalData.productName
     },
     onLoad: function (options) {
+        new app.WeToast();
         let that = this;
         wx.getSystemInfo({
             success: function (res) {
@@ -30,28 +31,18 @@ Page({
     },
     getData: function () {
         let that = this;
-        wx.showToast({
-            title: '加载中...',
-            icon: 'loading',
-            duration: 5000
-        })
-        setTimeout(function () {
-            wx.hideToast();
-        }, 5000)
-        that.requestData();
-    },
-    requestData: function () {
-        let that = this;
+        let startId = that.data.startId;
+        let size = that.data.size;
         let requestNewData = {
             'openId': app.globalData.openId,
             'version': app.globalData.version,
-            'size': that.data.size
+            'size': size
         };
         let requestMoreData = {
             'openId': app.globalData.openId,
             'version': app.globalData.version,
-            'size': that.data.size,
-            'startId': that.data.startId,
+            'size': size,
+            'startId': startId,
             'type': that.data.msgType
         }
         let requestData = that.data.startId == 0 ? requestNewData : requestMoreData;
@@ -73,7 +64,12 @@ Page({
                     } else {
                         let length = res.data.data.resultList.length;
                         let newStartId = res.data.data.resultList[length - 1].id;
-                        let newItems = that.data.noticeMsgs.concat(res.data.data.resultList)
+                        let newItems = [];
+                        if (startId == 0) {
+                            newItems = res.data.data.resultList;
+                        } else {
+                            newItems = that.data.noticeMsgs.concat(res.data.data.resultList)
+                        }
                         that.setData({
                             noticeMsgs: newItems,
                             loadStatus: true,
@@ -81,24 +77,20 @@ Page({
                             more: res.data.data.more
                         })
                     }
-                    wx.hideToast();
                 } else {
-                    app.showWeLittleToast(that,'服务器请求异常','error');
+                    app.showWeLittleToast(that, '服务器请求异常', 'error');
                 }
             },
             fail: function () {
-                app.showWeLittleToast(that,'服务器请求异常','error');
+                app.showWeLittleToast(that, '服务器请求异常', 'error');
             }
         })
     },
     reInit: function () {
         let that = this;
         that.setData({
-            noticeMsgs: [],
             nomsgs: false,
-            loadStatus: false,
             startId: 0,
-            size: 10,
             more: true
         })
     },

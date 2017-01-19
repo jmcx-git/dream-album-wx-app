@@ -17,10 +17,21 @@ Page({
   },
   sendMessage:function(e){
     if(e.detail.value.content==''){
+      wx.showToast({
+        title:'内容不能为空',
+        icon:'warning',
+        duration:1000,
+        mask:true
+      })
       return;
     }
+    wx.showToast({
+      title:'保存中',
+      icon:'loading',
+      duration:10000,
+      mask:true
+    })
     let that=this;
-    wx.hideKeyboard();
     setTimeout(function(){
        wx.request({
         url: app.globalData.serverHost+'feed/add.json',
@@ -33,6 +44,8 @@ Page({
         },
         method: 'get',
         success: function(res){
+          wx.hideToast();
+          app.globalData.createFinishFlag=true;
           wx.navigateBack({
             delta: 1
           })
@@ -55,6 +68,6 @@ Page({
   },
   onUnload:function(){
     console.log("页面卸载");
-    app.globalData.createFinishFlag=true;
+    // app.globalData.createFinishFlag=true;
   }
 })

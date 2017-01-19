@@ -1,3 +1,4 @@
+<import src="../../src/wetoast.wxml" />
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
   <image hidden="{{!nomsgs}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
 </view>
@@ -8,21 +9,21 @@
       <view style="width:{{item.resourceUrl==null?'682':'522'}}rpx;">
         <view class="user_info_area">
           <view class="user_info_icon">
-            <block wx:if = "{{item.type == 1}}">
+            <block wx:if="{{item.type == 1}}">
               <image mode="aspectFill" style="border-radius:50%;" src="{{item.avatarUrl==null?'../../image/familydefault.png':item.avatarUrl}}" />
             </block>
             <block wx:else>
-              <image mode="aspectFill" style="border-radius:50%;" src="../../image/logo.jpg" />
+              <image mode="aspectFill" style="border-radius:50%;" src="../../image/logo.png" />
             </block>
           </view>
-          <block wx:if = "{{item.type == 1}}">
+          <block wx:if="{{item.type == 1}}">
             <view class="user_info_name">
               {{item.nickname==null?'无名氏':item.nickname}}
             </view>
           </block>
           <block wx:else>
             <view class="user_info_name">
-                {{productName}}
+              {{productName}}
             </view>
           </block>
           <view hidden="{{item.type!=0}}" class="office_marker">官方</view>
@@ -41,7 +42,14 @@
       </view>
     </view>
   </view>
+  <view class="customer">
+    <contact-button type="default-light" size="27" session-from="dreamspace">
+    </contact-button>
+  </view>
   <view hidden="{{more}}" class="nomoretips">
     <text>这是我的"底线"啦~</text>
   </view>
 </view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

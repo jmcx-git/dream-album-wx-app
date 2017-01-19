@@ -14,6 +14,12 @@ let pageData = {
         deadline:{},
         participates: 0,
         showicon: icons[0],
+        stepDesc: '',
+        stepTime: 0,
+        stepTimeUnit: '',
+        activityRule: '',
+        activityTimeDesc: '',
+
 
         examples:[],
 
@@ -31,45 +37,12 @@ let pageData = {
 
         // 分享数据
         voteWorksId:-1,
+        userWorksId: -1,
 
         isShowWinnerList: false,// 控制是否显示中奖名单,根据step = 4 和userPrizes == null\undefined 确定
         winnericons:["/image/detailwinner1.png","/image/detailwinner2.png","/image/detailwinner3.png"],
 
-        winnersinfolist:[{
-            num:1,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:2,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:3,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:4,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:5,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:6,
-            name:"呵呵哒",
-            vote:345
-          },
-          {
-            num:7,
-            name:"呵呵哒",
-            vote:345
-          }]
+        winnersinfolist:[]
     },
     convert2rpx: function(px){
       return px * this.convertrate
@@ -82,7 +55,7 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-
+      console.log("onload")
       if(option.share == 'yes'){
         app.globalData.indexRefreshStatus=true;
       }
@@ -114,13 +87,19 @@ let pageData = {
            windowHeight: res.windowHeight,
            buttonstop: res.windowHeight - that.convert2px(98),
            joinmargintop: res.windowHeight- that.convert2px(300),
-           voteWorksId: option.voteWorksId
+           voteWorksId: that.getWorksId(option.voteWorksId)
          })
         }
       })
 
-    this.initData(this.data.id)
-
+    // this.initData(this.data.id)
+    },
+    onShow: function(){
+      console.log("onshow");
+      this.initData(this.data.id)
+    },
+    getWorksId: function(worksId){
+      return (worksId == undefined || worksId == 'undefined' || worksId == null || worksId == 'null' || worksId == "")? -1: worksId
     },
     initData: function(activityId){
       let that = this;
@@ -132,19 +111,19 @@ let pageData = {
         },
         method: "GET",
         success: function(res) {
-          console.log("actiitydetail", res)
-          console.log("actiitydetail", res.data.data.userPrizes == null)
           if(res.statusCode == 200){
             if(res.data.status == 0){
               let dat = res.data.data;
-              let activityIntrParts = [].concat(dat.contentSections);
-              activityIntrParts.push(dat.activityRule)
-              activityIntrParts.push(dat.activityTimeDesc)
               that.setData({
                 cover: dat.cover,
                 title: dat.title,
+                stepDesc: dat.stepDesc,
+                stepTimeUnit: dat.stepTimeUnit,
+                stepTime: dat.stepTime,
                 introduction: dat.introduction,
-                activityIntrParts:activityIntrParts,
+                activityTimeDesc: dat.activityTimeDesc,
+                activityRule: dat.activityRule,
+                activityIntrParts: dat.contentSections,
                 showicon: icons[dat.step % icons.length],
                 deadline:{pfx:"距离结束",keyword:dat.stepTime, sfx: dat.stepTimeUnit},
                 participates: dat.participates,
@@ -155,7 +134,8 @@ let pageData = {
                 step: dat.step,
                 joined: dat.joined > 0,
                 userWorksId: dat.worksId,
-                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 4
+                winnersinfolist: dat.userPrizes,
+                isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 3
               })
               return
             }
@@ -189,7 +169,12 @@ let pageData = {
     },
     govote: function(e){
         wx.navigateTo({
-          url: '../vote/vote?activityId='+this.data.id+'&voteWorksId'+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+          url: '../vote/vote?vote=1&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
+        })
+    },
+    seevote: function(e){
+        wx.navigateTo({
+          url: '../vote/vote?vote=0&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+"&userWorksId="+this.data.userWorksId
         })
     },
     addphoto: function(e){
@@ -201,9 +186,9 @@ let pageData = {
         success: function (res) {
           if(res.tempFilePaths.length >0){
               let photopath = res.tempFilePaths[0]
-              let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1 : that.data.voteWorksId
+
               wx.navigateTo({
-                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+voteWorksId+"&userWorksId="+that.data.userWorksId
+                url:'../addphoto/addphoto?id='+that.data.id+"&photopath="+photopath+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
               })
           }
         }
@@ -212,15 +197,12 @@ let pageData = {
     selectalbum :function(e){
       console.log("选择已有照片",this.data.id)
       let that = this
-      let voteWorksId = (that.data.voteWorksId == -1 || that.data.voteWorksId ==""|| that.data.voteWorksId == undefined)? -1: that.data.voteWorksId
       wx.navigateTo({
-        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+voteWorksId+"&userWorksId="+this.data.userWorksId
+        url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
-    contactus: function(e){
-      console.log("联系我们")
-    },
     onShareAppMessage: function () {
+      console.log("v", this.data.voteWorksId, "u", this.data.userWorksId)
       let title = app.globalData.nickName+'邀请您加入活动。'
       let desc = '有福同享，快来参加活动名称，赢取大奖。'
       let url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+'&share=1'
@@ -228,11 +210,10 @@ let pageData = {
         title = app.globalData.nickName+'邀请您给我加油助威。'
         desc = '我正在参加活动'+this.data.title+',邀请您给我加油助威,作品Id:'+this.data.userWorksId+'。'
       }
-      if(this.data.voteWorksId == "" || this.data.voteWorksId == undefined){
+      if(this.data.voteWorksId == -1){
         url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.userWorksId+'&share=1'
       }
-      console.log(url)
-
+      console.log("share", url)
       return {
         title: title,
         desc: desc,

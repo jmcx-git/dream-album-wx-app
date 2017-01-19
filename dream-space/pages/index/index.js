@@ -18,6 +18,7 @@ Page({
     isHidden2: true
   },
   onLoad: function (options) {
+    new app.WeToast();
     //nothing
     let that = this;
     let redirectRefer = app.globalData.redirectRefer;
@@ -33,7 +34,7 @@ Page({
     } else {
       if (redirectRefer == 1) {
         if (openId == '') {
-          that.confirmGetData(true)
+          app.authLogin(that, true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -47,7 +48,7 @@ Page({
       } else if (redirectRefer == 2) {
         //voteWorksId
         if (openId == '') {
-          that.confirmGetData(true)
+          app.authLogin(that, true)
           let openIdNow = app.globalData.openId;
           if (openIdNow == '') {
             //说明拒绝授权，什么都不做
@@ -55,13 +56,13 @@ Page({
           } else {
             that.clearGlobalShareData()
             wx.navigateTo({
-              url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId+"&share=yes"
+              url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId + "&share=yes"
             })
           }
         } else {
           that.clearGlobalShareData()
           wx.navigateTo({
-            url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId+"&share=yes"
+            url: '../activitydetail/activitydetail?fromOpenId=' + fromOpenId + '&activityId=' + activityId + '&voteWorksId=' + voteWorksId + "&share=yes"
           })
         }
       } else {
@@ -104,7 +105,7 @@ Page({
               //已加入
               that.clearGlobalShareData()
               wx.navigateTo({
-                url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version+"&share=yes"
+                url: '../spacetimeline/spacetimeline?spaceId=' + spaceId + "&version=" + app.globalData.version + "&share=yes"
               })
             } else {
               //未加入
@@ -114,11 +115,11 @@ Page({
               })
             }
           } else {
-            app.showWeLittleToast(that,'服务器请求异常','error');
+            app.showWeLittleToast(that, '服务器请求异常', 'error');
           }
         },
         fail: function () {
-          app.showWeLittleToast(that,'服务器请求异常','error');
+          app.showWeLittleToast(that, '服务器请求异常', 'error');
         }
       })
     } else if (owner == 0) {
@@ -130,6 +131,7 @@ Page({
     }
   },
   onloadData: function () {
+    app.globalData.indexRefreshStatus = false;
     let that = this;
     let animation1 = wx.createAnimation({
       timingFunction: 'ease',
@@ -149,102 +151,24 @@ Page({
         })
       }
     })
-    if (!wx.getStorageSync('openId') || !wx.getStorageSync('nickName') |!wx.getStorageSync('avatarUrl')) {
-      that.confirmGetData(false)
+    if (!wx.getStorageSync('openId') || !wx.getStorageSync('nickName') | !wx.getStorageSync('avatarUrl')) {
+      app.authLogin(that, false)
     } else {
       that.getData();
     }
   },
-  confirmGetData: function (needRedirect=false) {
-    let that = this
-    wx.login({
-      success: function (wxLoginRes) {
-        //获取code
-        wx.request({
-          url: app.globalData.serverHost + 'user/session.json',
-          data: {
-            code: wxLoginRes.code,
-            appId: app.globalData.appId
-          },
-          method: 'GET',
-          success: function (sessionResp) {
-            //缓存第三方key
-            var openId = sessionResp.data
-            if (openId == "") {
-              console.log("Get user openId failed. resp:" + sessionResp + ", code:" + wxLoginRes.code + ", appId:" + app.globalData.appId
-              );
-              app.showWeLittleToast(that,'服务器请求异常','error');
-              return
-            }
-            // wx.setStorageSync('openId', openId);
-            wx.getUserInfo({
-              success: function (wxUserInfoResp) {
-                wx.request({
-                  url: app.globalData.serverHost + 'user/info.json',
-                  data: {
-                    openId: openId,
-                    encryptedData: wxUserInfoResp.encryptedData,
-                    iv: wxUserInfoResp.iv,
-                    appId: app.globalData.appId
-                  },
-                  method: 'GET',
-                  success: function (serverUserInfoResp) {
-                    if (serverUserInfoResp.statusCode == 200 && serverUserInfoResp.data.status == 0) {
-                      wx.setStorageSync('nickName', serverUserInfoResp.data.data.nickName);
-                      wx.setStorageSync('avatarUrl', serverUserInfoResp.data.data.avatarUrl);
-                      wx.setStorageSync('openId', openId);
-                      app.globalData.openId = openId;
-                      app.globalData.nickName = serverUserInfoResp.data.data.nickName;
-                      app.globalData.avatarUrl = serverUserInfoResp.data.data.avatarUrl;
-                      if(!needRedirect){
-                        that.getData();
-                      }
-                    } else {
-                      app.showWeLittleToast(that,'服务器请求异常','error');
-                    }
-                  }
-                })
-              },
-              fail: function () {
-                //拒绝获取信息
-                app.refuseLoginToast();
-              }
-            })
-          },
-          fail: function (trd) {
-            console.log("缓存第三方key出错！", trd);
-            app.showWeLittleToast(that,'服务器请求异常','error');
-          }
-        })
-      },
-      fail: function (ee) {
-        console.log("登录出错了！", ee);
-        app.showWeLittleToast(that,'登录异常','error');
-      }
-    })
-  },
   getData: function () {
     let that = this;
-    wx.showToast({
-      title: '加载中...',
-      icon: 'loading',
-      duration: 5000
-    })
-    setTimeout(function () {
-      wx.hideToast();
-    }, 5000)
-    that.requestData();
-  },
-  requestData: function () {
-    let that = this;
     var url = app.globalData.serverHost + 'list.json';
+    let start = this.data.start;
+    let size = this.data.size;
     wx.request({
       url: url,
       data: {
         'openId': app.globalData.openId,
         'version': app.globalData.version,
-        'start': that.data.start,
-        'size': that.data.size
+        'start': start,
+        'size': size
       },
       method: 'GET',
       success: function (res) {
@@ -258,8 +182,13 @@ Page({
               more: false
             })
           } else {
-            let newStart = that.data.start + that.data.size;
-            let newItems = that.data.items.concat(res.data.data.resultList)
+            let newStart = start + size;
+            let newItems = [];
+            if (start == 0) {
+              newItems = res.data.data.resultList;
+            } else {
+              newItems = that.data.items.concat(res.data.data.resultList);
+            }
             that.setData({
               items: newItems,
               loadStatus: true,
@@ -267,22 +196,18 @@ Page({
               more: res.data.data.more
             })
           }
-          wx.hideToast();
         }
       },
       fail: function () {
-        app.showWeLittleToast(that,'服务器请求异常','error');
+        app.showWeLittleToast(that, '服务器请求异常', 'error');
       }
     })
   },
   reInit: function () {
     let that = this;
     that.setData({
-      items: [],
-      loadStatus: false,
       nopics: false,
       start: 0,
-      size: 10,
       more: true,
       isProcess: false,//线程锁
       isOpen: false,//判断进展
@@ -293,9 +218,10 @@ Page({
     })
   },
   addSpace: function (e) {
+    let that = this;
     let way = e.currentTarget.dataset.way;
     if (app.globalData.openId == '') {
-      app.unAuthLoginToast();
+      app.unAuthLoginModal(that, false);
       return
     }
     wx.navigateTo({
@@ -351,7 +277,7 @@ Page({
   onPullDownRefresh: function () {
     let that = this;
     if (app.globalData.openId == '') {
-      app.unAuthLoginToast();
+      app.unAuthLoginModal(that, false);
       return
     }
     that.reInit();
@@ -362,7 +288,6 @@ Page({
     let that = this;
     if (that.data.more) {
       if (app.globalData.openId == '') {
-        app.unAuthLoginToast();
         return
       }
       that.getData();
@@ -377,10 +302,13 @@ Page({
     app.globalData.voteWorksId = '';
   },
   onShareAppMessage: function () {
+    let openId = app.globalData.openId;
+    let nickName = app.globalData.nickName;
+    let productName = app.globalData.productName;
     return {
-      title: '分享一个微空间',
-      desc: '加入我的私有空间一起愉快的玩耍吧',
-      path: '/pages/index/index'
+      title: nickName + '邀请您使用' + productName,
+      desc: '用它，您可以记录，分享您的珍贵时刻。',
+      path: '/pages/index/index?fromOpenId=' + openId
     }
   }
 })

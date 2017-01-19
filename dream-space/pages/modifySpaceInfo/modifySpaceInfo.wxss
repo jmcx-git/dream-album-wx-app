@@ -9,15 +9,23 @@ page {
   height: 300rpx;
   background-color: white;
   display: flex;
+  display: -webkit-flex !important;
   flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-between;
 }
 
 .image_select_view {
   display: flex;
+  display: -webkit-flex !important;
   flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .image_select_image {
@@ -44,11 +52,15 @@ page {
 
 .radio_view{
   display: flex;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
 }
 .radio_sub_view{
   display: flex;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-around;
   width: 80rpx;
   font-size: 32rpx;
@@ -66,7 +78,9 @@ page {
 
 .input_cell {
   display: flex;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   border-bottom: 2rpx solid #d9d9d9;
 }
 
@@ -80,10 +94,12 @@ page {
 .input_cell_bd {
   flex: 1;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .input {
   display: block;
+  display: -webkit-flex !important;
   height: 1.4rem;
   text-overflow: clip;
   overflow: hidden;

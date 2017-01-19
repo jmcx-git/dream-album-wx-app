@@ -39,8 +39,8 @@ let pageData = {
       this.loadMore()
     },
     refreshData: function(){
+      this.data.activitylist = [];
       this.setData({
-        activitylist: [],
         start: 0,
         noMoreList: false
       })
@@ -66,6 +66,7 @@ let pageData = {
         return;
       }
       let that = this
+      let start = that.data.start
       wx.request({
         url: app.globalData.serverHost + "discovery/list.json",
         data:{
@@ -78,7 +79,13 @@ let pageData = {
           console.log("discoverylist", res)
           if(res.statusCode == 200){
             if(res.data.status ==0){
-              let list = that.data.activitylist.concat(res.data.data.resultList);
+              let list =[]
+              if(start == 0){
+                list = res.data.data.resultList
+              }else{
+                list = that.data.activitylist.concat(res.data.data.resultList);
+              }
+
               that.setData({
                 activitylist: list,
                 start: that.data.start + res.data.data.resultList.length,

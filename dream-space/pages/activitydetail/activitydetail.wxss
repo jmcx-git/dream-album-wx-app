@@ -49,7 +49,7 @@ page{
   position: fixed;
   width: 100%;
   height: 98rpx;
-
+  bottom: 0;
   border-top: 1rpx solid #eeeeee;
 }
 .subbuttonviews{
@@ -96,13 +96,17 @@ page{
 .joinallviews{
   position:fixed;
   top:0;
+  bottom:0;
   width: 100%;
   background-color: rgba(0,0,0,0.5);
 }
 .joininpart{
   height: 300rpx;
   background-color: #ffffff;
-  padding: 40rpx;
+  /*padding: 40rpx;*/
+  position:fixed;
+  width: 100%;
+  bottom: 0;
 }
 .btnlocal{
   height: 100rpx;
@@ -117,6 +121,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 40rpx 40rpx 0 40rpx;
 }
 .btnlocal2{
   height: 100rpx;
@@ -132,6 +137,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 15rpx 40rpx 0 40rpx;
 }
 
 .local_hover1{
@@ -157,7 +163,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: center;
-
+  line-height: 1;
   font-size:30rpx;
   font-weight: 200;
   color: #000000;
@@ -218,9 +224,8 @@ page{
 }
 
 .bottom{
-  height:150rpx;
+  height:100rpx;
   width:calc(100% - 40rpx);
-  padding:50rpx 20rpx;
 }
 .bottomArea{
   text-align: center;

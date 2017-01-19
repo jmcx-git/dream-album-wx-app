@@ -1,19 +1,31 @@
+page {
+  background-color: white;
+}
+
 .user_info_area {
   position: relative;
   top: 0;
   width: 100%;
   height: 600rpx;
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-between;
 }
 
 .userinfo {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .userinfo-avatar {

@@ -10,16 +10,24 @@ page {
   width: 100%;
   height: 300rpx;
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: space-between;
 }
 
 .userinfo {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
 }
 
 .userinfo-avatar {
@@ -44,9 +52,10 @@ page {
 }
 
 .select_cell {
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   align-items: center;
-  border-bottom: 2rpx solid #d9d9d9;
+  -webkit-align-items: center;
 }
 
 .select_cell_icon {
@@ -60,17 +69,22 @@ page {
   right: 0;
   width: 60rpx;
   height: 11%;
-  display: flex;
-  flex-direction: row-reverse;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: row-reverse !important;
+  -webkit-flex-direction: row-reverse;
   align-items: center;
+  -webkit-align-items: center;
   padding-right: 30rpx;
 }
 
 .select_cell_arrow .arrow {
   width: 32rpx;
   height: 100%;
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: center;
 }
 
@@ -90,7 +104,9 @@ page {
   height: 100rpx;
   background: lightblue;
   border-radius: 50%;
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: center;
 }

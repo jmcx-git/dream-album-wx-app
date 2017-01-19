@@ -1,5 +1,5 @@
 <import src="../../template/spacelineTemplate.wxml" />
-<view hidden="{{!createHidden}}" bindtouchmove="hideCommentWindow">
+<view bindtouchmove="hideCommentWindow">
 <!--新的顶部-->
 <view bindtap="changeCover">
     <image mode="aspectFill" class="spacetimelineTopCoverImage" src="{{topData.cover}}"/>
@@ -19,26 +19,26 @@
 <!--底部-->
 <view class="bottom" hidden="{{!noMoreData || spacetimelineList.length == 0}}">
     <view class="bottomArea">
-        <text>已经到底，没有更多啦～</text>
+        <text>这是我的"底线"啦</text>
     </view>
 </view>
 <image src="../../image/nocontent.png" class="nocontent" hidden="{{!noContentHidden}}" />
 <image src="../../image/directtocreate.png" class="directtocreate" hidden="{{!noContentHidden || (topData.secert==null)}}"/>
-<image src="../../image/addcontent.png"  class="createImg" bindtap="openCreatePage" hidden="{{!commentHidden || (topData.secert==null)}}"/>
-<form bindsubmit="saveComment">
-    <view class="commentnew" hidden="{{commentHidden}}">
-        <input class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
-        <button form-type="submit" class="commentSendImageNew">发送</button>
+
+<!--新的添加图标-->
+<view class="add_btn" hidden="{{!commentHidden || (topData.secert==null)}}">
+  <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
+  <image bindtap="tocratePhoto" data-way="1" src="../../image/pics.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
+  <image bindtap="toCreateWord" data-way="2" src="../../image/words.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
+</view>
+<!--评论区域-->
+<!--<form bindsubmit="saveComment">
+    <view class="commentnew" hidden="{{commentHidden}}" style="top:{{winHeight-45}}px;">
+        <input cursor-spacing="30" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
+        <button form-type="submit" type="default" class="commentSendImageNew">发送</button>
     </view>
-</form>
-</view>
-<!--点击创建之后的-->
-<view hidden="{{createHidden}}" class="nav-view">
-<view class="nav-view-main">
-    <image src="../../image/photocreate.png" bindtap="tocratePhoto" data-type="0"  class="picAreaImage"/>
-    <image src="../../image/wordcreate.png" bindtap="toCreateWord" data-type="1"  class="textAreaImage"/>
-</view>
-<view class="delArea" bindtap="closeCreatePage">
-    <image src="../../image/del.png"  class="del"/>
-</view>
+</form>-->
+<view class="commentnew" hidden="{{commentHidden}}">
+        <input cursor-spacing="30" class="commentTextNew" bindconfirm="saveComment" value="{{commentDefaultValue}}" maxlength="-1" focus="{{commentFocus}}" type="text" placeholder-class="placeHolder"  placeholder="评论" />
+    </view>
 </view>

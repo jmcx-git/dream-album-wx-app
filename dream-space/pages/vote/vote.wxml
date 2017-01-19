@@ -23,11 +23,7 @@
     <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
 
       <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
-        <view class='titlepart'>
-          <text class="txtItem">NO.{{item.rank}} {{item.solgan}}</text>
-          <view class="whitespace"/>
-          <text class="txtItem">序号: {{item.id}}</text>
-        </view>
+
         <view class="imgbox">
           <view class="boxitm">
             <image class="img"  mode="aspectFill" src="{{item.cover}}"/>
@@ -36,17 +32,23 @@
             src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
           </view>
         </view>
+        <view class='titlepart'>
+          <view class="txtItem2"><text class="txtnum">NO.{{item.rank}}</text> 得票{{item.votes}}</view>
+          <text class="txtItem">序号 {{item.id}}</text>
+        </view>
         <view class="itembottom">
-          <view class="votecount"> <view class="dot"/> 得票{{item.votes}} </view>
+          <view class="votecount">{{item.solgan ? item.solgan : ''}}</view>
         </view>
       </view>
     </label>
     </radio-group>
     <view class="bottom">
         <view class="bottomArea">
-            <text>已经到底，没有更多啦～</text>
+            <text>这是我的"底线"啦</text>
         </view>
     </view>
   </view>
-  <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
+  <block wx:if="{{!vote || vote==1}}">
+    <view class="bottom_btn" hover hover-class="hover_class" bindtap="voteone">投票</view>
+  </block>
 </view>

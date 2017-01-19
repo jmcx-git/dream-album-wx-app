@@ -1,3 +1,5 @@
+<import src="../../src/wetoast.wxml" />
+
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
   <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
   <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />
@@ -26,10 +28,13 @@
   </view>
 </view>
 <view hidden="{{more}}" class="nomoretips">
-  <text>已经拖到底了...</text>
+  <text>这是我的"底线"啦~</text>
 </view>
 <view class="add_btn">
   <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
   <image bindtap="addSpace" data-way="1" src="../../image/spacebtn.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="z-index:1;width:116rpx;height:116rpx;" />
   <image bindtap="addSpace" data-way="2" src="../../image/invitebtn.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
 </view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

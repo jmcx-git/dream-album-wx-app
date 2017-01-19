@@ -39,6 +39,7 @@ Page({
       return
     }
     let that = this
+    let start = this.data.start
     wx.request({
       url:app.globalData.serverHost+"/user/feed/list.json",
       data:{
@@ -50,7 +51,12 @@ Page({
         console.log(res)
         if(res.statusCode == 200){
           if(res.data.status == 0){
-            let list = that.data.entries.concat(res.data.data.resultList);
+            let list = [];
+            if(start == 0){
+              list = res.data.data.resultList
+            }else{
+              list = that.data.entries.concat(res.data.data.resultList);
+            }
             that.setData({
               entries: list,
               start: that.data.start + res.data.data.resultList.length,
@@ -91,10 +97,8 @@ Page({
               feedId: that.data.worksId
             },
             success:function(res) {
-              console.log(res)
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
-                  console.log(that.data.voteWorksId)
                   wx.redirectTo({
                     url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
                   })
@@ -122,9 +126,9 @@ Page({
     this.loadMore()
   },
   refreshData: function(){
+    this.data.entries = []
     this.setData({
       start:0,
-      entries:[],
       noMoreList: false,
       worksId: -1
     })
@@ -138,7 +142,6 @@ Page({
     })
   },
   radioChange: function (e) {
-    console.log(e)
     if(this.data.worksId != e.currentTarget.dataset.id){
       this.setData({
         worksId :e.currentTarget.dataset.id

@@ -17,14 +17,17 @@ image {
   background-color: white;
   width: 712rpx;
   padding-left: 38rpx;
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
 
 .msg_view {
   width: 682rpx;
-  border-bottom: 2rpx solid #d9d9d9;
-  display: flex;
+  border-bottom: 2rpx solid #efeff4;
+  display: flex !important;
+  display: -webkit-flex !important;
   padding: 30rpx 30rpx 30rpx 0;
 }
 
@@ -45,14 +48,14 @@ image {
   line-height: 40rpx;
 }
 
-.office_marker{
+.office_marker {
   width: 46rpx;
   height: 24rpx;
   border-radius: 4rpx;
   background-color: rgb(20, 157, 236);
   color: white;
   line-height: 24rpx;
-  font-size:18rpx;
+  font-size: 18rpx;
   text-align: center;
   margin: 6rpx;
 }
@@ -67,8 +70,8 @@ image {
   color: #353535;
 }
 
-.time_view{
-  font-size:24rpx;
+.time_view {
+  font-size: 24rpx;
   line-height: 1;
   margin-top: 20rpx;
   color: grey;
@@ -79,11 +82,26 @@ image {
   height: 160rpx;
 }
 
-.nomoretips{
+.nomoretips {
   padding: 80rpx 50rpx 40rpx;
   width: 650rpx;
   line-height: 1;
   font-size: 30rpx;
   text-align: center;
   color: gray;
+}
+
+.customer {
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: lightblue;
+  border-radius: 50%;
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
 }

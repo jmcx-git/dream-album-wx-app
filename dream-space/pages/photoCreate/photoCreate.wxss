@@ -17,7 +17,7 @@ page{
     height:240rpx;
     width:100%;
     font-size: 32rpx;
-    color: #b2b2b2;
+    color: #000000;
 }
 .photoCreateImage{
     position: relative;
