@@ -50,7 +50,7 @@ page{
 
 .loading_page{
     position: absolute;
-    padding: 150rpx 275rpx; 
+    padding: 150rpx 275rpx;
 }
 .loading_pic{
     width: 200rpx;
@@ -210,4 +210,5 @@ page{
     height:80rpx;
     top:calc(100% - 100rpx);
     right:20rpx;
+    z-index: 100;
 }

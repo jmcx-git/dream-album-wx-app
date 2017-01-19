@@ -27,6 +27,7 @@ Page({
     showShare:false,
 
     isLoadPic:false,
+    serverMakeAlbumToastShow: false,
 
     showLayer: false,
     showNav: false,
@@ -100,7 +101,35 @@ Page({
     })
     let from = that.from;
     let albumId = that.albumId;
-    let userAlbumId = that.userAlbumId;
+    let userAlbumId = that.userAlbumId;    
+    var title = "";
+    if(from == 1){
+      title = "努力制作相册中";
+      setTimeout(function(){
+        if(that.data.isLoadPic){
+          wx.showToast({
+            title: title,
+            icon: 'loading',
+            duration: 10000,
+            success: function(){
+              that.setData({
+                serverMakeAlbumToastShow: true
+              });
+            }
+          });
+        }
+      }, 500);
+    }
+    setTimeout(function(){
+      if(that.data.isLoadPic){
+        return;
+      }else{
+        that.setData({
+          refresh:true,
+          refreshtip: '点击页面刷新'
+        })
+      }
+    },10000);
     if (userAlbumId != undefined && from == 1) {
       that.setData({
         refresh:true
@@ -112,21 +141,10 @@ Page({
         refresh:false
       })
     }
-    that.requestData(from);
+    that.requestData();
   },
-  requestData: function (from = 0) {
+  requestData: function () {
     let that = this
-    var title = "";
-    if(from == 0){
-      title = "相载相册中";
-    }else{
-      title = "努力制作相册中";
-    }
-    wx.showToast({
-      title: title,
-      icon: 'loading',
-      duration: 10000
-    })
     let userAlbumId = that.userAlbumId;
     var openId = ""
     if (this.data.fromShare) {
@@ -144,7 +162,7 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          // wx.hideToast();
+          wx.hideToast();
           var itemPros = [];
           for(var i = 0; i < res.data.loopPreImgs.length; i++){
             var itemPro = {};
@@ -165,6 +183,20 @@ Page({
               hiddenMusicBtn: false
             })
           }
+          setTimeout(function(){
+            if(!that.data.isLoadPic){
+              wx.showToast({
+                title: "正在为您努力加载图片中，请稍候",
+                icon: 'loading',
+                duration: 10000,
+                success: function(){
+                  that.setData({
+                    serverMakeAlbumToastShow: true
+                  });
+                }
+              })}
+            }, 500);
+
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
@@ -245,10 +277,10 @@ Page({
   },
   loadPic: function () {
     let curLoads =  this.data.loadTotal + 1;
+    this.setData({
+      loadTotal: curLoads
+    });
     if(curLoads < this.data.loopPreImgs.length){
-      this.setData({
-        loadTotal: curLoads
-      });
       return
     }
     this.setData({
@@ -261,6 +293,11 @@ Page({
     this.doCssAnimation();
   },
   doCssAnimation: function(){
+    this.setData({
+      refresh: false,
+      replayHidden: true,
+      reloadHidden: true
+    });
     let that = this;
     for (var i = 0; i <= that.data.itemProperties.length; i++) {
       let curIndex = i;
@@ -296,11 +333,12 @@ Page({
   reloadPlay: function () {
     let that = this;
     this.setData({
+      refresh: false,
       reloadHidden: true,
       replayHidden: true,
       stopMusic: false,
       showShare:false,
-      isLoadPic:false
+      isLoadPic:true
     })
     for (var i = 0; i < that.data.itemProperties.length; i++) {
       that.data.itemProperties[i].cssName = "hiddenNow";
@@ -308,12 +346,9 @@ Page({
     that.setData({
       itemProperties: that.data.itemProperties
     });
-    setTimeout(function () {
-      that.setData({
-        replayHidden: false
-      });
+    setTimeout(function () {      
       that.doCssAnimation();
-    }, 500);
+    }, 100);
   },
 
   reloadSwiperPlay: function () {

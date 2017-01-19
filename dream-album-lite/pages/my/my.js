@@ -22,22 +22,25 @@ Page({
     showDelBtn: false
   },
   onLoad: function () {
-    let that = this;
+    var that = this;
     wx.getSystemInfo({
       success: function (res) {
-        let convertTimes = 750 / res.windowWidth;
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight,
-          convertTimes: convertTimes
-        })
+          convertTimes: 750 / res.windowWidth
+        });
       }
-    })
-    if (!wx.getStorageSync('openId')) {
+    });
+    
+    if (!this.allDataExists()) {
       that.confirmGetData()
     } else {
       that.getData();
     }
+  },
+  allDataExists: function(){
+    return wx.getStorageSync('openId') && wx.getStorageSync('nickName') && wx.getStorageSync('avatarUrl')
   },
   onPullDownRefresh: function () {
     this.refreshData();

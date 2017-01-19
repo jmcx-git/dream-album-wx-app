@@ -42,6 +42,7 @@ page{
 .scrollViewTop{
     white-space: nowrap; 
     display: flex;
+    display: -webkit-flex;
 }
 .imageTop{
      display: inline-block;

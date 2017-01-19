@@ -26,7 +26,7 @@
     </view>
   </scroll-view>
 </view>
-<view style="width:100%;height:{{winWidth/4.5}}px;">
+<view style="height:{{winWidth/4.5}}px;">
   <image style="width:{{winWidth/4.5}}px;height:{{winWidth/4.5}}px;" class="insertClassScroll" src="../../image/createNew.png" bindtap="viewTemplateList" />
 </view>
 </view>

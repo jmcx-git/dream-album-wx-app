@@ -7,7 +7,7 @@
             <text class="loading_text">{{refreshtip}}</text>
         </view>
     </view>
-    <view wx:elif="{{!replayHidden}}" style="height:{{winHeight}}px;width:{{winWidth}}px; ">
+    <view wx:else style="height:{{winHeight}}px;width:{{winWidth}}px; ">
         <audio src="{{bgMusic}}" style="display:none" id="music" loop/>
         <image hidden="{{hiddenMusicBtn}}" class="music_btn {{  stopMusic?'music_btn-off':'music_btn-on'}}" src="../../image/music.png" bindtap="audioPause"/>
         <image wx:for="{{loopPreImgs}}" wx:key="loopPreImgs" class="viewImage {{itemProperties[index].cssName}}" src="{{item}}" data-img="{{item}}" data-index="{{index}}"   bindtap="showAlbum" bindload="loadPic"/>
