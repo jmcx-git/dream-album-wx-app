@@ -2,33 +2,30 @@ var app = getApp();
 Page({
   data: {
     userAnimation: true,
+    winWidth: 0,
+    winHeight: 0,
 
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
     duration: 500,
-    winWidth: 0,
-    winHeight: 0,
-    bigPreImg: '',
     loopPreImgs: [],
+    itemProperties: [],
     shareAlbumId: '',
     shareUserAlbumId: '',
     refresh: true,
     refreshtip: '',
     clickCount: 0,
-    imgUrl: '',
-    imgs: [],
-    animationData: {},
-    // animationDataPre: {},
-    currentIndex: 0,
     picHeight: 520,
     picWidth: 300,
     reloadHidden: true,
     refreshInterval: 2000,
     avatarUrl: '',
+
     replayHidden: false,
     shareHidden:true,
     showShare:false,
+
     isLoadPic:false,
 
     showLayer: false,
@@ -39,7 +36,11 @@ Page({
     fromShareUserOpenId: '',
     stopMusic: false,
     bgMusic: '',
-    hiddenMusicBtn: true
+    hiddenMusicBtn: true,
+    loadTotal:0,
+    cssAnimationTimeMilles: 4000
+    // if you want to modify above attr value, also you should modify the value in wxss file.
+    // see wxss file animation-duration
   },
   onLoad: function (options) {
     let that = this;
@@ -101,27 +102,28 @@ Page({
     let albumId = that.albumId;
     let userAlbumId = that.userAlbumId;
     if (userAlbumId != undefined && from == 1) {
-      wx.showToast({
-        title: '加载中',
-        icon: 'loading',
-        duration: 5000
+      that.setData({
+        refresh:true
       })
-      setTimeout(function () {
-        that.requestData()
-      }, 5000)
     } else {
-      //若出现网络状况未能等到接口的makeComplete状态可能会出现
+      //若出现网络状未能等到接口的makeComplete状态可能会出现
       //用户从首页跳转预览页时会出现正在制作中的图片提示
       that.setData({
         refresh:false
       })
-      that.requestData()
     }
+    that.requestData(from);
   },
-  requestData: function (e) {
+  requestData: function (from = 0) {
     let that = this
+    var title = "";
+    if(from == 0){
+      title = "相载相册中";
+    }else{
+      title = "努力制作相册中";
+    }
     wx.showToast({
-      title: '加载中',
+      title: title,
       icon: 'loading',
       duration: 10000
     })
@@ -143,29 +145,33 @@ Page({
       success: function (res) {
         if (res.data.makeComplete) {
           // wx.hideToast();
+          var itemPros = [];
+          for(var i = 0; i < res.data.loopPreImgs.length; i++){
+            var itemPro = {};
+            itemPro.cssName = "hiddenNow";
+            itemPros.push(itemPro);
+          }
+          that.setData({
+            itemProperties: itemPros
+          });
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
-            imgs: res.data.loopPreImgs,
             bgMusic: res.data.music
           })
           if (that.data.bgMusic != undefined && that.data.bgMusic != '') {
             that.audioCtx = wx.createAudioContext('music');
-            that.audioCtx.play();
             that.setData({
               hiddenMusicBtn: false
             })
           }
-          setTimeout(function () {
-            that.prepareAction();
-          }, 500)
         } else {
           that.setData({
             refreshtip: '点击页面刷新'
           })
         }
       }
-    })
+    });
   },
   showIndex:function(){
     var url = '../my/my?from=share&fromShareUserOpenId=' + app.globalData.openId;
@@ -180,7 +186,7 @@ Page({
     })
     setTimeout(function () {
       if (that.data.clickCount >= 2) {
-        that.showPreviewImage(e.currentTarget.dataset.img);
+        that.showPreviewImage(e.currentTarget.dataset.index);
       } else {
         that.setData({
           clickCount: 0
@@ -188,12 +194,11 @@ Page({
       }
     }, 500);
   },
-  showPreviewImage: function (imgs) {
+  showPreviewImage: function (curImgIndex) {
     let that = this;
-    var urls = [];
-    urls.push(imgs);
     wx.previewImage({
-      urls: urls
+      current: that.data.loopPreImgs[curImgIndex],
+      urls: that.data.loopPreImgs
     });
     that.setData({
       clickCount: 0
@@ -210,15 +215,7 @@ Page({
   },
   onUnload: function () {
     let that = this;
-    this.setData({
-      currentIndex: 0,
-      imgs: [],
-      animationData: {}
-    })
     if (app.globalData.finishCreateFlag) {
-      // wx.redirectTo({
-      //   url: "../my/my"
-      // })
       wx.navigateBack({
         delta: getCurrentPages().length
       })
@@ -246,103 +243,77 @@ Page({
       path: '/pages/viewswiper/viewswiper?' + queryStr
     }
   },
-  // 动画效果
-  prepareAction: function () {
-    let that = this;
-    if (that.data.currentIndex < that.data.imgs.length) {
-      that.setData({
-        imgUrl: that.data.imgs[that.data.currentIndex],
-        isLoadPic:false
-      })
-      setTimeout(function(){
-        if(!that.data.isLoadPic && that.data.currentIndex>0){
-          wx.showToast({
-            title: '加载中',
-            icon: 'loading',
-            duration: 10000
-          })
-        }
-      },1500)
-    } else {
-      that.setData({
-        reloadHidden: false,
-        stopMusic: true,
-        showShare:true
-      })
-      if(typeof that.audioCtx !=="undefined"){
-        that.audioCtx.pause();
-      }
-    }
-  },
   loadPic: function () {
+    let curLoads =  this.data.loadTotal + 1;
+    if(curLoads < this.data.loopPreImgs.length){
+      this.setData({
+        loadTotal: curLoads
+      });
+      return
+    }
     this.setData({
       isLoadPic:true
     })
     wx.hideToast();
-    let that = this;
-    that.executeAction();
-    setTimeout(function () {
-      that.setData({
-        currentIndex: that.data.currentIndex + 1,
-        animationData: {}
-      })
-      that.prepareAction();
-    }, that.data.refreshInterval * 2 + 300)
-  },
-  executeAction: function () {
-    let that = this;
-    var animations = wx.createAnimation({
-      duration: that.data.refreshInterval,
-      timingFunction: 'linear',
-      delay: 0,
-      transformOrigin: '50% 50%'
-    })
-    this.animation = animations;
-    // this.toMiddleScale();
-    this.linerStartEnd();
-  },
-  //放到屏幕中心位置,放大缩小
-  toMiddleScale: function () {
-    let that = this;
-    var x = this.data.winWidth / 2 - this.data.picWidth / 2;
-    var y = this.data.winHeight / 2 - this.data.picHeight / 2;
-    // this.animation.translate(x,y).scale(2,2).step();
-    this.animation.scale(2.6, 2.4).step();
-    this.animation.scale(0, 0).step();
-    this.setData({
-      animationData: that.animation.export()
-    })
-  },
-  //放到屏幕中心位置,渐变出现消失
-  linerStartEnd: function () {
-    let that = this;
-    this.animation.opacity(1).step();
-    if (this.data.currentIndex != this.data.imgs.length - 1) {
-      this.animation.opacity(0).step();
-    } else {
-      this.animation.opacity(0.2).step();
+    if(typeof this.audioCtx !=="undefined"){
+      this.audioCtx.play();
     }
-    this.setData({
-      animationData: that.animation.export()
-    })
+    this.doCssAnimation();
+  },
+  doCssAnimation: function(){
+    let that = this;
+    for (var i = 0; i <= that.data.itemProperties.length; i++) {
+      let curIndex = i;
+      let timeoutMis = i * that.data.cssAnimationTimeMilles;
+      if( i == that.data.itemProperties.length){
+        setTimeout(function(){
+          that.setData({
+            reloadHidden: false,
+            stopMusic: true,
+            showShare:true
+          });
+          if(typeof that.audioCtx !=="undefined"){
+            that.audioCtx.pause();
+          }
+        }, timeoutMis);
+      }else if(i + 1 == that.data.itemProperties.length){
+        setTimeout(function(){
+          that.data.itemProperties[curIndex].cssName="css-half-animation css-half-show";
+          that.setData({
+            itemProperties: that.data.itemProperties
+          });
+        }, timeoutMis);        
+      }else{
+        setTimeout(function(){
+          that.data.itemProperties[curIndex].cssName = "css-animation";
+          that.setData({
+            itemProperties: that.data.itemProperties
+          })
+        }, timeoutMis);
+      }
+    }
   },
   reloadPlay: function () {
     let that = this;
     this.setData({
       reloadHidden: true,
-      currentIndex: 0,
-      imgUrl: '',
       replayHidden: true,
       stopMusic: false,
       showShare:false,
       isLoadPic:false
     })
+    for (var i = 0; i < that.data.itemProperties.length; i++) {
+      that.data.itemProperties[i].cssName = "hiddenNow";
+    }
+    that.setData({
+      itemProperties: that.data.itemProperties
+    });
     setTimeout(function () {
       that.setData({
         replayHidden: false
-      })
-      that.prepareAction();
-    }, 500)
+      });
+      that.doCssAnimation();
+    }, 500);
   },
 
   reloadSwiperPlay: function () {
