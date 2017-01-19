@@ -56,8 +56,11 @@ Page({
         if(res.statusCode == 200){
           let rdata = JSON.parse(res.data)
           if(rdata.status ==0 || (rdata.status == -1 && rdata.message == "您已参与")){
-            wx.redirectTo({
-              url: '../vote/vote?activityId='+that.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+            // wx.redirectTo({
+            //   url: '../vote/vote?activityId='+that.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+            // })
+            wx.navigateBack({
+              delta: 1
             })
             return;
           }

@@ -99,9 +99,12 @@ Page({
             success:function(res) {
               if(res.statusCode == 200){
                 if(res.data.status == 0 || (res.data.status == -1 && res.data.message == "您已参与")){
-                  wx.redirectTo({
-                    url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+                  wx.navigateBack({
+                    delta: 1
                   })
+                  // wx.redirectTo({
+                  //   url: '../vote/vote?activityId='+that.data.activityId+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+that.data.userWorksId
+                  // })
                   return
                 }
               }
