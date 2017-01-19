@@ -50,20 +50,19 @@ page{
 }
 .imagesScrollView{
     width:434rpx;
-    height:90%;
+    height: calc(100% - 22rpx);
     position: absolute;
     z-index: 4;
     top:0rpx;
     left:0rpx;
     box-sizing: border-box;
-    margin-top:62rpx;
+    margin-top: 22rpx;
     box-shadow:2px 2px 1px #ececec;
 }
 .imageTopPic{
     width:434rpx;
     height:93%;
     position: absolute;
-    z-index: 5;
     top:0px;
     left:0px;
     margin-top:40rpx;
@@ -101,4 +100,38 @@ page{
     color: #00adef;
     text-align: center;
     line-height: 28rpx;
+}
+
+.del_btn{
+    position: absolute;
+    width: 44rpx;
+    height: 44rpx;
+    top: -22rpx;
+    left: -22rpx;
+}
+
+.music_marker{
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    top: 10rpx;
+    right: 10rpx;
+}
+
+.shake_animation {
+  animation: shake 1.2s linear infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(1deg);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-1deg);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: rotate(1deg);
+  }
 }

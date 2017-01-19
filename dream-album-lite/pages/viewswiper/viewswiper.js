@@ -27,6 +27,9 @@ Page({
     refreshInterval: 2000,
     avatarUrl: '',
     replayHidden: false,
+    shareHidden:true,
+    showShare:false,
+    isLoadPic:false,
 
     showLayer: false,
     showNav: false,
@@ -68,7 +71,7 @@ Page({
         },
         method: 'GET',
         success: function (res) {
-          wx.hideToast();
+          // wx.hideToast();
           if (res.statusCode == 200 && res.data.status == 0) {
             that.setData({
               avatarUrl: res.data.data.avatarUrl,
@@ -117,6 +120,11 @@ Page({
   },
   requestData: function (e) {
     let that = this
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    })
     let userAlbumId = that.userAlbumId;
     var openId = ""
     if (this.data.fromShare) {
@@ -134,7 +142,7 @@ Page({
       method: 'GET',
       success: function (res) {
         if (res.data.makeComplete) {
-          wx.hideToast();
+          // wx.hideToast();
           that.setData({
             refresh: false,
             loopPreImgs: res.data.loopPreImgs,
@@ -243,12 +251,23 @@ Page({
     let that = this;
     if (that.data.currentIndex < that.data.imgs.length) {
       that.setData({
-        imgUrl: that.data.imgs[that.data.currentIndex]
+        imgUrl: that.data.imgs[that.data.currentIndex],
+        isLoadPic:false
       })
+      setTimeout(function(){
+        if(!that.data.isLoadPic && that.data.currentIndex>0){
+          wx.showToast({
+            title: '加载中',
+            icon: 'loading',
+            duration: 10000
+          })
+        }
+      },1500)
     } else {
       that.setData({
         reloadHidden: false,
-        stopMusic: true
+        stopMusic: true,
+        showShare:true
       })
       if(typeof that.audioCtx !=="undefined"){
         that.audioCtx.pause();
@@ -256,6 +275,10 @@ Page({
     }
   },
   loadPic: function () {
+    this.setData({
+      isLoadPic:true
+    })
+    wx.hideToast();
     let that = this;
     that.executeAction();
     setTimeout(function () {
@@ -264,18 +287,15 @@ Page({
         animationData: {}
       })
       that.prepareAction();
-    }, that.data.refreshInterval * 2 + 500)
+    }, that.data.refreshInterval * 2 + 300)
   },
   executeAction: function () {
     let that = this;
     var animations = wx.createAnimation({
       duration: that.data.refreshInterval,
-      timingFunction: 'linear', // "linear","ease","ease-in","ease-in-out","ease-out","step-start","step-end"
+      timingFunction: 'linear',
       delay: 0,
-      transformOrigin: '50% 50%',
-      success: function (res) {
-        console.log(res);
-      }
+      transformOrigin: '50% 50%'
     })
     this.animation = animations;
     // this.toMiddleScale();
@@ -313,7 +333,9 @@ Page({
       currentIndex: 0,
       imgUrl: '',
       replayHidden: true,
-      stopMusic: false
+      stopMusic: false,
+      showShare:false,
+      isLoadPic:false
     })
     setTimeout(function () {
       that.setData({
@@ -358,5 +380,16 @@ Page({
       })
       this.audioCtx.play();
     }
+  },
+   showSharePic:function(){
+    let that=this;
+    that.setData({
+      shareHidden:false
+    })
+    setTimeout(function(){
+      that.setData({
+        shareHidden:true
+      })
+    },2000)
   }
 })

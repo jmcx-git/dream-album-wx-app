@@ -19,8 +19,10 @@ page {
 
 .main {
   width: 750rpx;
-  display: flex;
+  display: flex !important;
+  display: -webkit-flex !important;
   flex-wrap: wrap;
+  -webkit-flex-wrap:wrap;
 }
 
 .sub_main {
@@ -42,9 +44,13 @@ page {
 }
 
 .sub_main_info {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
   align-items: center;
+  -webkit-align-items: center;
   width: 100%;
   height: 160rpx;
   padding: 20rpx 0;
@@ -57,6 +63,7 @@ page {
   width: 100%;
   padding-top: 14rpx;
   align-items: center;
+  -webkit-align-items: center;
   justify-content: center;
 }
 
