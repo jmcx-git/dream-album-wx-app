@@ -54,14 +54,17 @@ Page({
   },
   chooseImageAdd:function(e){
     let that=this;
+    var count=9-that.data.imgUrls.length;
     wx.chooseImage({
-      count: 1,
+      count: count,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res){
-        var obj=new Object();
-        obj.imgPath=(res.tempFilePaths)[0];
-        that.data.imgUrls.push(obj);
+        for(var i=0;i<res.tempFilePaths.length;i++){
+            var obj=new Object();
+            obj.imgPath=(res.tempFilePaths)[i];
+            that.data.imgUrls.push(obj);
+        }
         that.setData({
             imgUrls:that.data.imgUrls
         })
@@ -182,10 +185,15 @@ Page({
     })
   },
   previewImage:function(e){
+    let that=this;
     var urls=[];
-    urls.push(e.currentTarget.dataset.src);
+    for(var i=0;i<that.data.imgUrls.length;i++){
+      urls.push(((that.data.imgUrls)[i]).imgPath);
+    }
+    // urls.push(e.currentTarget.dataset.src);
     wx.previewImage({
-      urls: urls
+      urls: urls,
+      current:e.currentTarget.dataset.src
     })
   },
   showControl:function(e){
