@@ -11,7 +11,7 @@ Page({
     genderValue: 1,
     typeArray: ['亲子空间', '恋爱空间'],
     defaultAvatar: '../../image/familydefault.png',
-    inputPlaceholder: '我就叫宝宝',
+    inputPlaceholder: '起个名字吧',
     inputPrefixBorn: '宝宝生日',
     inputPrefixSex: '宝宝性别',
     btnPrefix: '开启亲子空间',
@@ -193,7 +193,7 @@ Page({
     if (index == 0) {
       that.setData({
         typeIndex: index,
-        inputPlaceholder: '我就叫宝宝',
+        inputPlaceholder: '起个名字吧',
         defaultAvatar: '../../image/familydefault.png',
         inputPrefixBorn: '宝宝生日',
         inputPrefixSex: '宝宝性别',
@@ -202,7 +202,7 @@ Page({
     } else if (index == 1) {
       that.setData({
         typeIndex: index,
-        inputPlaceholder: '就是耐你',
+        inputPlaceholder: '起个名字吧',
         defaultAvatar: '../../image/lovedefault.png',
         inputPrefixBorn: '恋爱时间',
         inputPrefixSex: '恋人性别',
