@@ -340,16 +340,16 @@ Page({
     }
   },
   audioPause: function () {
-    if (!this.data.stopMusic) {
-      this.setData({
-        stopMusic: true
-      })
-      this.audioCtx.pause();
-    } else {
+    if (this.data.stopMusic) {
       this.setData({
         stopMusic: false
       })
       this.audioCtx.play();
+    } else {
+      this.setData({
+        stopMusic: true
+      })
+      this.audioCtx.pause();
     }
   },
    showSharePic:function(){
