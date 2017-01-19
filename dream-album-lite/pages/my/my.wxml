@@ -1,4 +1,4 @@
-<view bindtap="cancleDelHandle">
+<view style="height:{{winHeight}}px;'" bindtap="cancleDelHandle">
 <!--scroll-view-x  start-->
 <view class="allTop" style="width:{{winWidth}}px;">
   <image class="titleClass" src="../../image/titleblue.png" />
