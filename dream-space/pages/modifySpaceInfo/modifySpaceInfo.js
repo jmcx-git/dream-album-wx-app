@@ -84,9 +84,17 @@ Page({
           if (res.statusCode == 200 && res.data.status == 0) {
             app.globalData.modifySpaceInfoFlag=true;
             app.globalData.indexRefreshStatus = true;
-            wx.navigateBack({
-              delta: 1
+            wx.showToast({
+              title:'保存成功',
+              icon:'success',
+              duration:1000,
+              mask:true
             })
+            setTimeout(function(){
+              wx.navigateBack({
+                  delta: 1
+                })
+              },1000)
           } else {
             app.failedToast();
           }
