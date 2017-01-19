@@ -32,12 +32,6 @@
   <image bindtap="toCreateWord" data-way="2" src="../../image/words.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="z-index:2;width:116rpx;height:116rpx;" />
 </view>
 <!--评论区域-->
-<!--<form bindsubmit="saveComment">
-    <view class="commentnew" hidden="{{commentHidden}}" style="top:{{winHeight-45}}px;">
-        <input cursor-spacing="30" class="commentTextNew" value="{{commentDefaultValue}}" focus="{{commentFocus}}" type="text" name="commentContent" placeholder="评论" />
-        <button form-type="submit" type="default" class="commentSendImageNew">发送</button>
-    </view>
-</form>-->
 <view class="commentnew" hidden="{{commentHidden}}">
         <input cursor-spacing="30" class="commentTextNew" bindconfirm="saveComment" value="{{commentDefaultValue}}" maxlength="-1" focus="{{commentFocus}}" type="text" placeholder-class="placeHolder"  placeholder="评论" />
     </view>
