@@ -61,8 +61,12 @@
       <block wx:for="{{activityIntrParts}}" wx:for-item="part" wx:key="{{this}}">
         <text class="content">{{part}}</text>
       </block>
-      <text class="content">活动规则:{{activityRule}}</text>
-      <text class="content">活动时间:{{activityTimeDesc}}</text>
+      <view class="content">活动规则：</view>
+      <block wx:for = "{{activityRules}}" wx:for-item="rule" wx:key="{{this}}">
+        <text class="content">{{rule}}</text>
+      </block>
+      <text class="content">活动时间：{{activityTimeDesc}}</text>
+      <text class="content">开奖时间：{{prizeTimeDesc}}</text>
     </view>
     <view class="examplesair dashedline" wx:if="{{examples.length >0}}">
       <block wx:for="{{examples}}" wx:key="{{index}}">

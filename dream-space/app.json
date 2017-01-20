@@ -5,8 +5,6 @@
     "pages/addspace/addspace",
     "pages/about/about",
     "pages/notice/notice",
-    "pages/userLead/userLead",
-    "pages/userLeadDetail/userLeadDetail",
     "pages/confirmJoinSpace/confirmJoinSpace",
     "pages/discovery/discovery",
     "pages/addphoto/addphoto",

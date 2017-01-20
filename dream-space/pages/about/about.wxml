@@ -3,9 +3,9 @@
   <view class="about_info">
     <image mode="aspectFill" class="about_info_icon" src="../../image/aboutlogo.png" />
     <text class="name_font">光阴之旅</text>
-    <text class="version_font">Version 1.1.0</text>
+    <text class="version_font">{{aboutInfo.version?aboutInfo.version:'1.0.0'}}</text>
     <view class="about_desc">
-      <text>一分钟极简制作记录生活中的每一点感动</text>
+      <text>{{aboutInfo.solgan?aboutInfo.solgan:'一分钟记录生活中的每一刻感动'}}</text>
     </view>
     <image class="divide_line" src="../../image/divideline.png" />
     <view class="contact_info">

@@ -471,7 +471,7 @@ Page({
         return;
       }
       wx.showActionSheet({
-        itemList:['更换相册封面'],
+        itemList:['更换空间封面'],
         success:function(res){
           if(res.tapIndex==0){
             wx.chooseImage({

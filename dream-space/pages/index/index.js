@@ -14,10 +14,8 @@ Page({
     isOpen: false,//判断进展
     animationData1: {},
     animationData2: {},
-    animationData3: {},
     isHidden1: true,
     isHidden2: true,
-    isHidden3: true,
     longclick:false
   },
   onLoad: function (options) {
@@ -142,12 +140,8 @@ Page({
     let animation2 = wx.createAnimation({
       timingFunction: 'ease',
     })
-    let animation3 = wx.createAnimation({
-      timingFunction: 'ease',
-    })
     that.data.animation1 = animation1;
     that.data.animation2 = animation2;
-    that.data.animation3 = animation3;
     wx.getSystemInfo({
       success: function (res) {
         let convertTimes = 750 / res.windowWidth;
@@ -220,10 +214,8 @@ Page({
       isOpen: false,//判断进展
       animationData1: {},
       animationData2: {},
-      animationData3: {},
       isHidden1: true,
       isHidden2: true,
-      isHidden3: true
     })
   },
   addSpace: function (e) {
@@ -235,16 +227,6 @@ Page({
     }
     wx.navigateTo({
       url: '../addspace/addspace?way=' + way
-    })
-  },
-  toLeadPage: function (e) {
-    let that = this;
-    if (app.globalData.openId == '') {
-      app.unAuthLoginModal(that, false);
-      return
-    }
-    wx.navigateTo({
-      url: '../userLead/userLead'
     })
   },
   toSpace: function (e) {
@@ -265,21 +247,17 @@ Page({
       that.data.isProcess = true
       let animation1 = that.data.animation1;
       let animation2 = that.data.animation2;
-      let animation3 = that.data.animation3;
       if (that.data.isOpen) {
         animation1.translate(0, 0).step()
         animation2.translate(0, 0).step()
-        animation3.translate(0, 0).step()
         that.setData({
           animationData1: animation1.export(),
           animationData2: animation2.export(),
-          animationData3: animation3.export()
         })
         setTimeout(function () {
           that.setData({
             isHidden1: true,
             isHidden2: true,
-            isHidden3: true,
             isOpen: false,
             isProcess: false
           })
@@ -288,16 +266,13 @@ Page({
         that.setData({
           isHidden1: false,
           isHidden2: false,
-          isHidden3: false
         })
         setTimeout(function () {
-          animation1.translate(0, -70).step()
-          animation2.translate(-49, -49).step()
-          animation3.translate(-70, -0).step()
+          animation1.translate(-20, -70).step()
+          animation2.translate(-70, -0).step()
           that.setData({
             animationData1: animation1.export(),
             animationData2: animation2.export(),
-            animationData3: animation3.export(),
             isOpen: true,
             isProcess: false
           })
@@ -347,13 +322,14 @@ Page({
     that.setData({
       longclick:true
     })
+    var content = e.currentTarget.dataset.owner == 0 ? "退出":"删除";
     wx.showActionSheet({
-      itemList:['删除'],
+      itemList:[content],
       success:function(res){
         if(res.tapIndex==0){
              wx.showModal({
               title:'提示',
-              content:'确定要删除或离开当前空间?',
+              content:'确定要' + content + '当前空间?',
               showCancel:true,
               success:function(ron){
                 if(ron.confirm){
@@ -379,9 +355,7 @@ Page({
                       })
                     },
                     fail: function(rps) {
-                      console.log("删除空间失败！");
-                      console.log(rps);
-                      app.errorToast("删除空间失败！");
+                      app.errorToast("操作失败！");
                     }
                   })
                 }else{

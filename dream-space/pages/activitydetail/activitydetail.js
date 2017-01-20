@@ -18,7 +18,9 @@ let pageData = {
         stepTime: 0,
         stepTimeUnit: '',
         activityRule: '',
+        activityRules: [],
         activityTimeDesc: '',
+        prizeTimeDesc: '',
 
 
         examples:[],
@@ -128,11 +130,13 @@ let pageData = {
                 cover: dat.cover,
                 title: dat.title,
                 stepDesc: dat.stepDesc,
+                prizeTimeDesc: dat.prizeTimeDesc,
                 stepTimeUnit: dat.stepTimeUnit,
                 stepTime: dat.stepTime,
                 introduction: dat.introduction,
                 activityTimeDesc: dat.activityTimeDesc,
                 activityRule: dat.activityRule,
+                activityRules: dat.activityRules,
                 activityIntrParts: dat.contentSections,
                 showicon: icons[dat.step % icons.length],
                 participates: dat.participates,
@@ -259,7 +263,15 @@ let pageData = {
       this.setData({
         findKey: ""
       })
+      wx.showToast({
+        title: "正在刷新",
+        icon: "success",
+        duration: 1000
+      });
       this.refreshData()
+      setTimeout(function(){
+        wx.hideToast();
+      },1200);
     },
     refreshData: function(){
       this.data.entries = []

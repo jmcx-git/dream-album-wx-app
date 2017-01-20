@@ -10,7 +10,7 @@
   <view id="{{idx}}" wx:for="{{items}}" wx:key="{{idx}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
       <block wx:if="{{item.type==0}}">
-        <image mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
+        <image mode="aspectFill" data-spaceid="{{item.id}}" data-owner="{{item.owner}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
       </block>
       <block wx:else>
         <image mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
@@ -34,7 +34,6 @@
   <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
   <image bindtap="addSpace" data-way="1" src="../../image/spacebtn.png" animation="{{animationData1}}" hidden="{{isHidden1}}" style="width:116rpx;height:116rpx;" />
   <image bindtap="addSpace" data-way="2" src="../../image/invitebtn.png" animation="{{animationData2}}" hidden="{{isHidden2}}" style="width:116rpx;height:116rpx;" />
-  <image bindtap="toLeadPage" src="../../image/lead.png" animation="{{animationData3}}" hidden="{{isHidden3}}" style="width:116rpx;height:116rpx;" />
 </view>
 
 <!-- wetoast -->

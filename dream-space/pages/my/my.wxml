@@ -30,15 +30,6 @@
           </view>
         </view>
       </view>
-      <view bindtap="toLeadPage" class="select_cell">
-        <image class="select_cell_icon" src="../../image/useleadicon.png" />
-        <text>使用教程</text>
-        <view class="select_cell_arrow">
-          <view class="arrow">
-            <image style="width:100%;height:30%;" src="../../image/arrow.png" />
-          </view>
-        </view>
-      </view>
     </view>
   </view>
   <view class="contact_info">
