@@ -21,8 +21,8 @@ Page({
     },
     onShareAppMessage: function () {
         return {
-            title: '关于我们', // 分享标题
-            desc: '联系方式', // 分享描述
+            title: '关于' + app.globalData.productName, // 分享标题
+            desc: '这里有' + app.globalData.productName + '团队的联系方式', // 分享描述
             path: '/pages/about/about' // 分享路径
         }
     }

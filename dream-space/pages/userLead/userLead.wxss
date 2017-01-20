@@ -1,0 +1,107 @@
+page {
+  background-color: #efeff4;
+}
+
+.default_area_image {
+  position: absolute;
+  width: 750rpx;
+  height: 300rpx;
+}
+
+image {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  background-color: white;
+  width: 712rpx;
+  padding-left: 38rpx;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+
+.msg_view {
+  width: 682rpx;
+  border-bottom: 2rpx solid #efeff4;
+  display: flex !important;
+  display: -webkit-flex !important;
+  padding: 30rpx 30rpx 30rpx 0;
+}
+
+.user_info_area {
+  width: 100%;
+  height: 40rpx;
+  display: inline-flex;
+}
+
+.user_info_icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.user_info_name {
+  margin-left: 10rpx;
+  font-size: 30rpx;
+  line-height: 40rpx;
+}
+
+.office_marker {
+  width: 46rpx;
+  height: 24rpx;
+  border-radius: 4rpx;
+  background-color: rgb(20, 157, 236);
+  color: white;
+  line-height: 24rpx;
+  font-size: 18rpx;
+  text-align: center;
+  margin: 6rpx;
+}
+
+.msg_area {
+  margin-left: 50rpx;
+}
+
+.comment_view {
+  font-size: 40rpx;
+  line-height: 1.5;
+  color: #353535;
+}
+
+.time_view {
+  font-size: 24rpx;
+  line-height: 1;
+  margin-top: 20rpx;
+  color: grey;
+}
+
+.msg_view_commentpic {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.nomoretips {
+  padding: 80rpx 50rpx 40rpx;
+  width: 650rpx;
+  line-height: 1;
+  font-size: 30rpx;
+  text-align: center;
+  color: gray;
+}
+
+.customer {
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: lightblue;
+  border-radius: 50%;
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+}

@@ -72,11 +72,18 @@ Page({
       app.unAuthLoginModal(that, false, true);
       return
     }
-    that.setData({
-      newmsg: false
-    })
     wx.navigateTo({
       url: '../about/about'
+    })
+  },
+  toLeadPage: function (e) {
+    let that = this;
+    if (app.globalData.openId == '') {
+      app.unAuthLoginModal(that, false, true);
+      return
+    }
+    wx.navigateTo({
+      url: '../userLead/userLead'
     })
   }
 })
