@@ -89,10 +89,11 @@ page {
 .qrcode_img{
   width: 252rpx;
   height: 252rpx;
+  border: 2rpx dashed black;
 }
 
 .qrcode_text{
-  padding: 10rpx;
+  padding-top: 30rpx;
   font-size: 24rpx;
   line-height: 1;
   color: #353535;
