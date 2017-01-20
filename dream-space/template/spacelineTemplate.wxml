@@ -1,6 +1,6 @@
 <!--最新样式-->
 <template name="spacetimelinelatest">
-    <view class="spacetimelinelatest" wx:for="{{spacetimelineList}}" wx:for-item="globaldata" wx:for-index="globalindex" wx:key="spacetimelineList">
+    <view class="{{((globaldata.likeIcons.length)>0 || (globaldata.comments.length)>0)?'spacetimelinelatesthave':'spacetimelinelatest'}}" wx:for="{{spacetimelineList}}" wx:for-item="globaldata" wx:for-index="globalindex" wx:key="spacetimelineList">
         <!--头像，昵称，操作区域-->
         <view class="userInfoArea">
             <view class="date">
