@@ -108,6 +108,13 @@ page{
 }
 .spacetimelinelatest{
   background-color: #fff;
+  /*padding-bottom:30rpx;*/
+  padding-top:10rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eeeeee;
+}
+.spacetimelinelatesthave{
+  background-color: #fff;
   padding-bottom:30rpx;
   padding-top:10rpx;
   box-sizing: border-box;
