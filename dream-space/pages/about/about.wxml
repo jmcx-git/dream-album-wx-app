@@ -1,0 +1,8 @@
+<import src="../../src/wetoast.wxml" />
+
+<view style="width:100%;height:{{windowHeight}}px;">
+    
+</view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />
