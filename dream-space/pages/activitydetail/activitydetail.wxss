@@ -509,10 +509,10 @@ page{
 
 .itembottom{
   position: relative;
-  margin:0 80rpx;
   height: 30rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   font-weight: 200;
+  padding: 20rpx 0 40rpx 0;
 }
 .icon{
   position: relative;
@@ -698,4 +698,76 @@ page{
   height: 80rpx;
   right: 56rpx;
   top: 0rpx;
+}
+
+.nitem_root{
+  margin: 20rpx 80rpx;
+}
+.nitem_up{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+
+.ncover{
+  width: 350rpx;
+  height: 360rpx;
+}
+.ninfos{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  white-space:nowrap;
+  text-overflow:clip;
+  overflow:hidden;
+  color: #000000;
+}
+.n_rank{
+  font-size: 36rpx;
+  line-height:36rpx;
+  font-weight: 600;
+}
+.n_worksid{
+  font-size: 28rpx;
+  line-height: 28rpx;
+  margin: 40rpx 0;
+}
+.ntworksid{
+  color: #00adef
+}
+.n_votecount{
+  font-size: 40rpx;
+  line-height: 40rpx;
+  font-weight: 600;
+}
+.ntvote{
+  font-size: 24rpx;
+  line-height: 24rpx;
+  font-weight: 400;
+}
+.n_btn{
+  margin-top: 40rpx;
+  width: 164rpx;
+  height: 56rpx;
+  background-color: #00adef;
+  color: #ffffff;
+  font-size: 28rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 28rpx;
+}
+
+.nvotehover{
+  background-color: #009cde;
 }
