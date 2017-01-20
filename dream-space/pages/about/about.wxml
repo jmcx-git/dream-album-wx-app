@@ -10,11 +10,11 @@
     <image class="divide_line" src="../../image/divideline.png" />
     <view class="contact_info">
       <view data-url="{{aboutInfo.mpQrCode}}" catchtap="viewImg" class="contact_sub_info">
-        <image class="qrcode_img" src="{{aboutInfo.mpQrCode}}" />
+        <image class="qrcode_mp_img" src="{{aboutInfo.mpQrCode}}" />
         <text class="qrcode_text">公众号</text>
       </view>
       <view data-url="{{aboutInfo.officialServiceQrCode}}" catchtap="viewImg" class="contact_sub_info">
-        <image class="qrcode_img" src="{{aboutInfo.officialServiceQrCode}}" />
+        <image class="qrcode_offices_img" src="{{aboutInfo.officialServiceQrCode}}" />
         <text class="qrcode_text">客服群</text>
       </view>
     </view>

@@ -86,9 +86,16 @@ page {
   justify-content: space-around;
 }
 
-.qrcode_img{
-  width: 252rpx;
-  height: 252rpx;
+.qrcode_mp_img{
+  width: 250rpx;
+  height: 250rpx;
+  border: 2rpx dashed black;
+}
+
+.qrcode_offices_img{
+  width: 230rpx;
+  height: 230rpx;
+  padding: 10rpx;
   border: 2rpx dashed black;
 }
 
