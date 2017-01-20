@@ -163,7 +163,7 @@ page{
 .spacetimelinebody{
   position: relative;
   left:174rpx;
-  top:12rpx;
+  top:18rpx;
   width:calc(100% - 204rpx);
   word-wrap: break-word;
 }
@@ -175,16 +175,17 @@ page{
   font-size: 28rpx;
   line-height: 48rpx;
   color: #000000;
+  margin-bottom: 30rpx;
 }
 .spacetimelineImage{
-  margin-top:30rpx;
+  /*margin-top:18rpx;*/
   width:100%;
 }
 .spacetimelineImageMoreTop{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-top:30rpx;
+  /*margin-top:18rpx;*/
 }
 .spacetimelineImageMore{
   width:172rpx;
@@ -205,6 +206,15 @@ page{
 }
 .timeline{
   margin-top: 30rpx;
+  position: relative;
+  height:36rpx;
+  left:174rpx;
+  width:calc(100% - 204rpx);
+  top:0rpx;
+  margin-bottom: 26rpx;
+}
+.timelinemore{
+  margin-top: 15rpx;
   position: relative;
   height:36rpx;
   left:174rpx;
