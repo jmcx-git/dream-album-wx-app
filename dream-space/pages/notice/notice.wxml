@@ -38,7 +38,7 @@
         </view>
       </view>
       <view hidden="{{item.resourceUrl==null}}" class="msg_view_commentpic">
-        <image mode="aspectFill" src="{{item.resourceUrl}}" />
+        <image data-url="{{item.resourceUrl}}" catchtap="viewImg" mode="aspectFill" src="{{item.resourceUrl}}" />
       </view>
     </view>
   </view>

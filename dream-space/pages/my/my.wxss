@@ -117,7 +117,7 @@ page {
   bottom: 30rpx;
   width: 750rpx;
   font-size: 28rpx;
-  line-height: 1;
+  line-height: 1.5;
   color: #888;
   text-align: center;
 }

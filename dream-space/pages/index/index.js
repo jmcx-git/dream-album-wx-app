@@ -285,9 +285,9 @@ Page({
           isHidden3: false
         })
         setTimeout(function () {
-          animation1.translate(-49, -49).step()
-          animation2.translate(-70, 0).step()
-          animation3.translate(0, -70).step()
+          animation1.translate(0, -70).step()
+          animation2.translate(-49, -49).step()
+          animation3.translate(-70, -0).step()
           that.setData({
             animationData1: animation1.export(),
             animationData2: animation2.export(),

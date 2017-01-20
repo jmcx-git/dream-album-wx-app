@@ -1,19 +1,19 @@
 <import src="../../src/wetoast.wxml" />
-<view wx:if="{{loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
+<view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
   <image hidden="{{!nomsgs}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
 </view>
 <view wx:else>
   <view class="content">
     <view class="content_top_area">
       <text class="title">{{itemDetail.title}}</text>
-      <text class="time_desc">{{itemDetail.time}}</text>
+      <text class="time_desc">{{itemDetail.timeDesc}}</text>
     </view>
     <view class="content_detail">
       <view id="{{idx}}" wx:for="{{itemDetail.content}}" wx:key="{{idx}}" wx:for-index="idx">
-        <image hidden="{{item.imgUrl==null}}" class="content_detail_img" mode="aspectFill" src="{{item.imgUrl}}" />
         <view hidden="{{item.content==null||item.content==''}}" class="content_detail_text">
           <text>{{item.content}}</text>
         </view>
+        <image hidden="{{item.imgUrl==null||item.imgUrl==''}}" class="content_detail_img" mode="aspectFill" src="{{item.imgUrl}}" />
       </view>
     </view>
   </view>

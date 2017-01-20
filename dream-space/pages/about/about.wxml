@@ -9,12 +9,12 @@
     </view>
     <image class="divide_line" src="../../image/divideline.png" />
     <view class="contact_info">
-      <view class="contact_sub_info">
-        <image class="qrcode_img" src="../../image/familydefault.png" />
+      <view data-url="{{aboutInfo.mpQrCode}}" catchtap="viewImg" class="contact_sub_info">
+        <image class="qrcode_img" src="{{aboutInfo.mpQrCode}}" />
         <text class="qrcode_text">公众号</text>
       </view>
-      <view class="contact_sub_info">
-        <image class="qrcode_img" src="../../image/lovedefault.png" />
+      <view data-url="{{aboutInfo.officialServiceQrCode}}" catchtap="viewImg" class="contact_sub_info">
+        <image class="qrcode_img" src="{{aboutInfo.officialServiceQrCode}}" />
         <text class="qrcode_text">客服群</text>
       </view>
     </view>

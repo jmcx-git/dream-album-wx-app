@@ -5,8 +5,7 @@ Page({
     windowHeight: 0,
     windowWidth: 0,
     convertTimes: 2,
-    avatarUrl: '',
-    nickName: '',
+    myInfo: {},
     newmsg: false
   },
   onLoad: function (options) {
@@ -40,8 +39,7 @@ Page({
         console.log(res);
         if (res.statusCode == 200 && res.data.status == 0) {
           that.setData({
-            avatarUrl: res.data.data.avatarUrl,
-            nickName: res.data.data.nickname,
+            myInfo: res.data.data,
             newmsg: res.data.data.notices == 1 ? true : false
           })
         } else {
@@ -51,6 +49,13 @@ Page({
       fail: function () {
         app.showWeLittleToast(that, '服务器请求异常', 'error');
       }
+    })
+  },
+  viewImg: function (e) {
+    let url = e.currentTarget.dataset.url;
+    wx.previewImage({
+      current: url, // 当前显示图片的http链接
+      urls: [url] // 需要预览的图片http链接列表
     })
   },
   toNoticePage: function (e) {
