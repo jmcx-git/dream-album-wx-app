@@ -4,8 +4,8 @@
 <view style="width:100%;height:{{windowHeight}}px;">
   <view class="user_info_area">
     <view class="userinfo">
-      <image mode="aspectFill" class="userinfo-avatar" src="{{avatarUrl}}" background-size="cover" />
-      <text class="userinfo-nickname">{{nickName}}</text>
+      <image mode="aspectFill" class="userinfo-avatar" src="{{myInfo.avatarUrl}}" background-size="cover" />
+      <text class="userinfo-nickname">{{myInfo.nickName}}</text>
     </view>
   </view>
   <view style="height:12rpx;"></view>
@@ -31,8 +31,8 @@
         </view>
       </view>
       <view bindtap="toLeadPage" class="select_cell">
-        <image class="select_cell_icon" src="../../image/abouticon.png" />
-        <text>使用说明</text>
+        <image class="select_cell_icon" src="../../image/useleadicon.png" />
+        <text>使用教程</text>
         <view class="select_cell_arrow">
           <view class="arrow">
             <image style="width:100%;height:30%;" src="../../image/arrow.png" />
@@ -42,7 +42,9 @@
     </view>
   </view>
   <view class="contact_info">
-    <text>官方QQ群：160796981</text>
+    <block id="{{idx}}" wx:for="{{myInfo.bottomDesc}}" wx:key="{{idx}}" wx:for-index="idx">
+      <view>{{item}}</view>
+    </block>
   </view>
   <view class="customer">
     <contact-button type="default-light" size="27" session-from="dreamspace">

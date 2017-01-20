@@ -65,7 +65,7 @@ image {
 }
 
 .comment_view {
-  font-size: 40rpx;
+  font-size: 30rpx;
   line-height: 1.5;
   color: #353535;
 }
