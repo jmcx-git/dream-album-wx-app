@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/userLead/userLead",
     "pages/my/my",
-    "pages/about/about",
-    "pages/userLeadDetail/userLeadDetail",
     "pages/addspace/addspace",
+    "pages/about/about",
     "pages/notice/notice",
+    "pages/userLead/userLead",
+    "pages/userLeadDetail/userLeadDetail",
     "pages/confirmJoinSpace/confirmJoinSpace",
     "pages/discovery/discovery",
     "pages/addphoto/addphoto",
