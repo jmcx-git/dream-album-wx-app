@@ -512,7 +512,7 @@ page{
   height: 30rpx;
   font-size: 24rpx;
   font-weight: 200;
-  padding: 20rpx 0 40rpx 0;
+  padding-top: 20rpx;
 }
 .icon{
   position: relative;
@@ -701,7 +701,7 @@ page{
 }
 
 .nitem_root{
-  margin: 20rpx 80rpx;
+  margin: 40rpx 80rpx;
 }
 .nitem_up{
   display: -webkit-box;
