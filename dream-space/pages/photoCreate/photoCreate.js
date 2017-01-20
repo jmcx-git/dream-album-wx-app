@@ -7,7 +7,8 @@ Page({
     uploadFileCount:0,
     photoDesc:'为今天的记录说点什么呢?',
     photoContent:'',
-    init:false
+    init:false,
+    feedId:0
   },
   onLoad:function(options){
     let that=this;
@@ -90,33 +91,62 @@ Page({
      return;
     }
     wx.showToast({
-      title:'保存中',
+      title:'准备上传',
       icon:'loading',
       duration:10000,
       mask:true
     })
-    // var content=encodeURI(that.data.photoContent);
-    // setTimeout(function(){
-    //   for(var i=0;i<that.data.imgUrls.length;i++){
-    //     that.uploadFile((that.data.imgUrls)[i]);
-    //   }
-    // },200)
     setTimeout(function(){
-      that.uploadFileRank(0);
+      that.sendContent();
     },200)
+  },
+  sendContent:function(){
+    let that=this;
+    var content=that.data.photoContent;
+    wx.request({
+      url: app.globalData.serverHost+'feed/multi/add.json',
+      data: {
+        content:content,
+        openId:app.globalData.openId,
+        spaceId:that.data.spaceId,
+        version:that.data.version
+      },
+      method: 'GET',
+      success: function(res){
+        wx.hideToast();
+        that.setData({
+          feedId:res.data.data
+        })
+        setTimeout(function(){
+          that.uploadFileRank(0);
+        },200)
+      },
+      fail: function(ron) {
+        console.log("提交简介失败");
+        console.log(ron);
+        app.failedToast();
+      }
+    })
   },
   uploadFileRank:function(index){
     let that=this;
-    var content=encodeURI(that.data.photoContent);
+    wx.showToast({
+      title:'上传第'+(index+1)+'张图片',
+      icon:'loading',
+      duration:10000,
+      mask:true
+    })
     let data={
         openId:app.globalData.openId,
         spaceId:that.data.spaceId,
         version:that.data.version,
-        type:0,
-        content:content
+        feedId:that.data.feedId,
+        index:index,
+        count:that.data.imgUrls.length,
+        type:0
       };
     wx.uploadFile({
-      url: app.globalData.serverHost+'feed/add.json',
+      url: app.globalData.serverHost+'feed/multi/add.json',
       filePath:((that.data.imgUrls)[index]).imgPath,
       name:'file',
       formData:data,
@@ -132,7 +162,10 @@ Page({
             })
         }else{
           that.data.uploadFileCount+=1;
-          that.uploadFileRank(that.data.uploadFileCount);
+          setTimeout(function(){
+            wx.hideToast();
+            that.uploadFileRank(that.data.uploadFileCount);
+          },200)
         }
       },
       fail: function(ron) {
