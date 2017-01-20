@@ -5,9 +5,9 @@
     <radio-group bindchange="">
       <label wx:for="{{entries}}" wx:key="{{id}}">
         <view class="label" bindtap = "radioChange" data-id="{{item.id}}">
-          <radio class="checkbox" hidden="{{true}}"/>
-          <image class="img" src="{{item.cover}}"/>
-          <image class="icon_choosed" src="/image/albumchoosed.png" hidden="{{item.id != worksId}}"/>
+          <radio class="checkbox" hidden="{{true}}" />
+          <image class="img" src="{{item.cover}}" data-index="{{index}}" catchtap="previewimgs"/>
+          <image class="icon_choosed" src="/image/albumchoosed.png" hidden="{{item.id != worksId}}" data-index="{{index}}" catchtap="previewimgs"/>
           <view class="content">
           <view class ="title">{{item.dateDesc}}</view>
           <view class ="description">{{item.content}}</view>
