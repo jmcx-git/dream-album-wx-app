@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/addspace/addspace",
+    "pages/about/about",
     "pages/my/my",
     "pages/notice/notice",
     "pages/confirmJoinSpace/confirmJoinSpace",

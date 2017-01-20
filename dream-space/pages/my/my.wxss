@@ -56,6 +56,7 @@ page {
   display: -webkit-flex !important;
   align-items: center;
   -webkit-align-items: center;
+  border-bottom: 2rpx solid #efeff4;
 }
 
 .select_cell_icon {

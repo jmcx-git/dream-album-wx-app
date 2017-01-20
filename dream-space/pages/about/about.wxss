@@ -1,0 +1,40 @@
+page {
+  background-color: #efeff4;
+}
+
+.user_info_area {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 300rpx;
+  background-color: white;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+}
+
+.userinfo {
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.userinfo-avatar {
+  width: 150rpx;
+  height: 150rpx;
+  margin: 60rpx 0 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: black;
+}

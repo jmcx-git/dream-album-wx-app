@@ -14,8 +14,10 @@ Page({
     isOpen: false,//判断进展
     animationData1: {},
     animationData2: {},
+    animationData3: {},
     isHidden1: true,
-    isHidden2: true
+    isHidden2: true,
+    isHidden3: true
   },
   onLoad: function (options) {
     new app.WeToast();
@@ -139,8 +141,12 @@ Page({
     let animation2 = wx.createAnimation({
       timingFunction: 'ease',
     })
+    let animation3 = wx.createAnimation({
+      timingFunction: 'ease',
+    })
     that.data.animation1 = animation1;
     that.data.animation2 = animation2;
+    that.data.animation3 = animation3;
     wx.getSystemInfo({
       success: function (res) {
         let convertTimes = 750 / res.windowWidth;
@@ -213,8 +219,10 @@ Page({
       isOpen: false,//判断进展
       animationData1: {},
       animationData2: {},
+      animationData3: {},
       isHidden1: true,
-      isHidden2: true
+      isHidden2: true,
+      isHidden3: true
     })
   },
   addSpace: function (e) {
@@ -241,17 +249,21 @@ Page({
       that.data.isProcess = true
       let animation1 = that.data.animation1;
       let animation2 = that.data.animation2;
+      let animation3 = that.data.animation3;
       if (that.data.isOpen) {
         animation1.translate(0, 0).step()
         animation2.translate(0, 0).step()
+        animation3.translate(0, 0).step()
         that.setData({
           animationData1: animation1.export(),
           animationData2: animation2.export(),
+          animationData3: animation3.export()
         })
         setTimeout(function () {
           that.setData({
             isHidden1: true,
             isHidden2: true,
+            isHidden3: true,
             isOpen: false,
             isProcess: false
           })
@@ -259,14 +271,17 @@ Page({
       } else {
         that.setData({
           isHidden1: false,
-          isHidden2: false
+          isHidden2: false,
+          isHidden3: false
         })
         setTimeout(function () {
-          animation1.translate(-20, -70).step()
+          animation1.translate(-49, -49).step()
           animation2.translate(-70, 0).step()
+          animation3.translate(0, -70).step()
           that.setData({
             animationData1: animation1.export(),
             animationData2: animation2.export(),
+            animationData3: animation3.export(),
             isOpen: true,
             isProcess: false
           })

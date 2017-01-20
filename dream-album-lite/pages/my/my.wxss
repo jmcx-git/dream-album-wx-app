@@ -1,122 +1,138 @@
-page{
-    background-color: #fff;
+page {
+  background-color: #fff;
 }
-.allTop{
-    position: relative;
-    height:204rpx;
+
+.allTop {
+  position: relative;
+  height: 204rpx;
 }
-.titleClass{
-    position: absolute;
-    height:204rpx;
-    width:100%;
+
+.titleClass {
+  position: absolute;
+  height: 204rpx;
+  width: 100%;
 }
+
 /* + */
+
 .userinfo-avatar {
   position: absolute;
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  top:40rpx;
+  top: 40rpx;
   margin-left: calc(50% - 60rpx);
-  border:1px solid #99def9;
+  border: 1px solid #99def9;
 }
+
 /*no pic*/
-.nopicClass{
-    position: absolute;
-    top:230px;
-    left:calc(50% - 60px);
-    width:120px;
-    height:130px;
+
+.nopicClass {
+  position: absolute;
+  top: 230px;
+  left: calc(50% - 60px);
+  width: 120px;
+  height: 130px;
 }
+
 /*新的样式列表scrollview-x*/
-.insertClassScroll{
-    position: absolute;
-    left: calc(50% - 76rpx);
-    top:82%;
-    z-index: 10;
-}
-.scrollTops{
-    position: relative;
-    top:20rpx;
-}
-.scrollViewTop{
-    white-space: nowrap; 
-    display: flex;
-    display: -webkit-flex;
-}
-.imageTop{
-     display: inline-block;
-     position: relative;
-     width:434rpx;
-}
-.imagesScrollView{
-    width:434rpx;
-    height: calc(100% - 22rpx);
-    position: absolute;
-    z-index: 4;
-    top:0rpx;
-    left:0rpx;
-    box-sizing: border-box;
-    margin-top: 22rpx;
-    box-shadow:2px 2px 1px #ececec;
-}
-.imageTopPic{
-    width:434rpx;
-    height:93%;
-    position: absolute;
-    top:0px;
-    left:0px;
-    margin-top:40rpx;
-}
-.imageScrollTitle{
-    position: absolute;
-    top:0rpx;
-    left:45rpx;
-    /*width:434rpx;*/
-    width:389rpx;
-    height:28rpx;
-    font-size: 28rpx;
-    color: #00adef;
-    text-align: left;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 28rpx;
-}
-.editImage{
-    position: absolute;
-    top:0rpx;
-    left:5rpx;
-    height:30rpx;
-    width:30rpx;
-}
-.imageScrollInput{
-    background-color: rgba(222,222,222,0.5);
-    position: absolute;
-    top:0rpx;
-    left:0px;
-    width:434rpx;
-    height:48rpx;
-    font-size: 28rpx;
-    color: #00adef;
-    text-align: center;
-    line-height: 28rpx;
+
+.insertClassScroll {
+  position: absolute;
+  left: calc(50% - 76rpx);
+  top: 82%;
+  z-index: 10;
 }
 
-.del_btn{
-    position: absolute;
-    width: 44rpx;
-    height: 44rpx;
-    top: -22rpx;
-    left: -22rpx;
+.scrollTops {
+  position: relative;
+  top: 20rpx;
 }
 
-.music_marker{
-    position: absolute;
-    width: 60rpx;
-    height: 60rpx;
-    top: 10rpx;
-    right: 10rpx;
+.scrollViewTop {
+  white-space: nowrap;
+  display: flex;
+  display: -webkit-flex;
+}
+
+.imageTop {
+  display: inline-block;
+  position: relative;
+  width: 434rpx;
+}
+
+.imagesScrollView {
+  width: 434rpx;
+  height: calc(100% - 22rpx);
+  position: absolute;
+  z-index: 4;
+  top: 0rpx;
+  left: 0rpx;
+  box-sizing: border-box;
+  margin-top: 22rpx;
+  box-shadow: 2px 2px 1px #ececec;
+}
+
+.imageTopPic {
+  width: 434rpx;
+  height: 93%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin-top: 40rpx;
+}
+
+.imageScrollTitle {
+  position: absolute;
+  top: 0rpx;
+  left: 45rpx;
+  /*width:434rpx;*/
+  width: 389rpx;
+  height: 28rpx;
+  font-size: 28rpx;
+  color: #00adef;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 28rpx;
+}
+
+.editImage {
+  position: absolute;
+  top: 0rpx;
+  left: 5rpx;
+  height: 30rpx;
+  width: 30rpx;
+}
+
+.imageScrollInput {
+  background-color: rgba(222, 222, 222, 0.5);
+  position: absolute;
+  top: 0rpx;
+  left: 0px;
+  width: 434rpx;
+  height: 48rpx;
+  font-size: 28rpx;
+  color: #00adef;
+  text-align: center;
+  line-height: 28rpx;
+}
+
+.del_btn {
+  position: absolute;
+  width: 44rpx;
+  height: 44rpx;
+  top: -22rpx;
+  left: -22rpx;
+}
+
+.music_marker {
+  position: absolute;
+  width: 60rpx;
+  height: 60rpx;
+  top: 10rpx;
+  right: 10rpx;
 }
 
 .shake_animation {
@@ -124,6 +140,20 @@ page{
 }
 
 @keyframes shake {
+  0%, 100% {
+    transform: rotate(1deg);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-1deg);
+  }
+
+  20%, 40%, 60%, 80% {
+    transform: rotate(1deg);
+  }
+}
+
+@-webkit-keyframes shake {
   0%, 100% {
     transform: rotate(1deg);
   }
