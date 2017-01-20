@@ -327,7 +327,7 @@ page{
 .replayTop{
   position: relative;
   padding:10rpx 20rpx;
-  width:calc(100% - 243rpx);
+  width:calc(100% - 244rpx);
   top:0rpx;
   left:174rpx;
   font-size: 28rpx;
