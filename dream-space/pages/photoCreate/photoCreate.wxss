@@ -8,6 +8,7 @@ page{
     /*height:450rpx;*/
     padding:50rpx;
     display: flex;
+    display: -webkit-flex;
     flex-direction: column;
 }
 .photoCreateTop{
@@ -29,7 +30,8 @@ page{
     top:0rpx;
     width:140rpx;
     height:140rpx;
-    margin-right: 10rpx;
+    margin-right: 15rpx;
+    margin-bottom: 15rpx;
 }
 .send{
     width:90%;
