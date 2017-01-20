@@ -409,7 +409,7 @@ let pageData = {
       })
     },
     nvoteone: function(e){
-      
+
       let that = this;
       if(this.voting == true){
         return
