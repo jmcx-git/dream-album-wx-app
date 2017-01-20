@@ -1,7 +1,16 @@
 <import src="../../src/wetoast.wxml" />
-
 <view style="width:100%;height:{{windowHeight}}px;">
-    
+  <view class="about_info">
+    <image mode="aspectFill" class="about_info_icon" src="../../image/aboutlogo.png" />
+    <text class="name_font">光阴之旅</text>
+    <text class="version_font">Version 1.1.0</text>
+    <view class="about_desc">
+      <text>一分钟极简制作记录生活中的每一点感动</text>
+    </view>
+  </view>
+  <view class="contact_info">
+    <text>官方QQ群：160796981</text>
+  </view>
 </view>
 
 <!-- wetoast -->

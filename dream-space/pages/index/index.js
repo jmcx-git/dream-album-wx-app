@@ -236,6 +236,16 @@ Page({
       url: '../addspace/addspace?way=' + way
     })
   },
+  toLeadPage: function (e) {
+    let that = this;
+    if (app.globalData.openId == '') {
+      app.unAuthLoginModal(that, false);
+      return
+    }
+    wx.navigateTo({
+      url: '../userLead/userLead'
+    })
+  },
   toSpace: function (e) {
     let index = e.currentTarget.id;
     let spaceId = this.data.items[index].id;

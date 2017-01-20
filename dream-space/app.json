@@ -1,9 +1,11 @@
 {
   "pages": [
+    "pages/userLead/userLead",
+    "pages/userLeadDetail/userLeadDetail",
     "pages/index/index",
-    "pages/addspace/addspace",
-    "pages/about/about",
     "pages/my/my",
+    "pages/about/about",
+    "pages/addspace/addspace",
     "pages/notice/notice",
     "pages/confirmJoinSpace/confirmJoinSpace",
     "pages/discovery/discovery",

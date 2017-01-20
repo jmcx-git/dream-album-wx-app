@@ -1,13 +1,8 @@
 page {
-  background-color: #efeff4;
+  background-color: #fff;
 }
 
-.user_info_area {
-  position: relative;
-  top: 0;
-  width: 100%;
-  height: 300rpx;
-  background-color: white;
+.about_info_area {
   display: flex !important;
   display: -webkit-flex !important;
   flex-direction: column !important;
@@ -18,7 +13,7 @@ page {
   justify-content: space-between;
 }
 
-.userinfo {
+.about_info {
   display: flex !important;
   display: -webkit-flex !important;
   flex-direction: column !important;
@@ -28,13 +23,50 @@ page {
   -webkit-align-items: center;
 }
 
-.userinfo-avatar {
-  width: 150rpx;
-  height: 150rpx;
-  margin: 60rpx 0 20rpx;
-  border-radius: 50%;
+.name_font {
+  font-size: 28rpx;
+  color: #353535;
+  line-height: 1;
+  padding: 10rpx;
 }
 
-.userinfo-nickname {
-  color: black;
+.version_font {
+  font-size: 28rpx;
+  color: #888;
+  font-weight: 200;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+.about_info_icon {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 80rpx 0 40rpx;
+}
+
+.about_desc {
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  width: 560rpx;
+  height: 102rpx;
+  color: #353535;
+  font-size: 28rpx;
+  line-height: 1;
+  border: 2rpx dashed #353535;
+  border-radius: 102rpx;
+  margin-top: 80rpx;
+}
+
+.contact_info {
+  position: absolute;
+  bottom: 150rpx;
+  width: 750rpx;
+  font-size: 28rpx;
+  font-weight: 200;
+  line-height: 1;
+  color: #888;
+  text-align: center;
 }
