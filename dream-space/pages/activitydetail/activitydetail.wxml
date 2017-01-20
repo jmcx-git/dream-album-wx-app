@@ -93,7 +93,7 @@
         <view class="btnview" hover hover-class="btn_hover" bindtap="takein" wx:if="{{!joined}}">去参加</view>
         <view class="btnview btnviewcancel" wx:if="{{joined}}">已参加</view>
         <view class="split"/>
-        <view class="btnview" hover hover-class="btn_hover" bindtap="voteone">投票</view>
+        <view class="btnview" hover hover-class="btn_hover" bindtap="findmoreactivity">更多活动</view>
       </view>
       <view class="showonly  subbuttonviews" wx:if="{{step ==0}}">
         <view class="btnview btnviewcancel">活动尚未开始</view>
@@ -142,30 +142,23 @@
           <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
       </view>
     </view>
-    <view bindtouchmove="touchmove" bindtouchend="touchend" bindtouchstart="touchstart">
-    <radio-group class="radio-group">
-      <label class="listview" wx:for="{{entries}}" wx:key="{{id}}">
-
-        <view class="item_root" bindtap="radioChange" data-id = "{{item.id}}">
-
-          <view class="imgbox">
-            <view class="boxitm">
-              <image class="img"  mode="aspectFill" src="{{item.cover}}"/>
-              <radio class="icon" hidden value="{{item.id}}"/>
-              <image class="icon" hidden='{{false}}'
-              src="{{item.id == selectedWorksId? '/image/vote_choosed.png':'/image/vote_unchoosed.png'}}"/>
-            </view>
-          </view>
-          <view class='titlepart'>
-            <view class="txtItem2"><text class="txtnum">NO.{{item.rank}}</text> 得票{{item.votes}}</view>
-            <text class="txtItem">序号 {{item.id}}</text>
-          </view>
-          <view class="itembottom">
-            <view class="votecount">{{item.solgan ? item.solgan : ''}}</view>
+    <view class="listview">
+    <block wx:for="{{entries}}" wx:key="{{id}}">
+      <view class="nitem_root">
+        <view class="nitem_up">
+          <image class="ncover" src="{{item.cover}}" catchtap="previewimgs" data-index="{{index}}"/>
+          <view class="ninfos">
+            <view class="n_rank">第{{item.rank}}名</view>
+            <view class="n_worksid">编号<text class="ntworksid">{{item.id}}</text></view>
+            <view class="n_votecount">{{item.votes}}<text class="ntvote">票</text></view>
+            <view class="n_btn" hover hover-class="nvotehover" bindtap="nvoteone" data-id="{{item.id}}">投票</view>
           </view>
         </view>
-      </label>
-      </radio-group>
+        <view class="itembottom">
+          <view class="votecount">{{item.solgan ? item.solgan : ' '}}</view>
+        </view>
+      </view>
+    </block>
     </view>
   </view>
   <view class="bottom">
