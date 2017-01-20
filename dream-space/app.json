@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addspace/addspace",
     "pages/my/my",
+    "pages/addspace/addspace",
+    "pages/about/about",
     "pages/notice/notice",
     "pages/confirmJoinSpace/confirmJoinSpace",
     "pages/discovery/discovery",

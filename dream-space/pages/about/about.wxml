@@ -1,0 +1,25 @@
+<import src="../../src/wetoast.wxml" />
+<view style="width:100%;height:{{windowHeight}}px;">
+  <view class="about_info">
+    <image mode="aspectFill" class="about_info_icon" src="../../image/aboutlogo.png" />
+    <text class="name_font">光阴之旅</text>
+    <text class="version_font">{{aboutInfo.version?aboutInfo.version:'1.0.0'}}</text>
+    <view class="about_desc">
+      <text>{{aboutInfo.solgan?aboutInfo.solgan:'一分钟记录生活中的每一刻感动'}}</text>
+    </view>
+    <image class="divide_line" src="../../image/divideline.png" />
+    <view class="contact_info">
+      <view data-url="{{aboutInfo.mpQrCode}}" catchtap="viewImg" class="contact_sub_info">
+        <image class="qrcode_mp_img" src="{{aboutInfo.mpQrCode}}" />
+        <text class="qrcode_text">公众号</text>
+      </view>
+      <view data-url="{{aboutInfo.officialServiceQrCode}}" catchtap="viewImg" class="contact_sub_info">
+        <image class="qrcode_offices_img" src="{{aboutInfo.officialServiceQrCode}}" />
+        <text class="qrcode_text">客服群</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- wetoast -->
+<template is="wetoast" data="{{...__wetoast__}}" />

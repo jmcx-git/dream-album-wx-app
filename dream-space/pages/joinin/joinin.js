@@ -155,6 +155,17 @@ Page({
       })
     }
   },
+  previewimgs: function(e){
+    let index = e.currentTarget.dataset.index
+    let urls = this.data.entries[index].illustrations
+    if(urls!=undefined && urls.length >0){
+      wx.previewImage({
+        current: urls[0], // 当前显示图片的http链接
+        urls: urls // 需要预览的图片http链接列表
+      })
+    }
+
+  },
   onReady:function(){
     // 页面渲染完成
   },

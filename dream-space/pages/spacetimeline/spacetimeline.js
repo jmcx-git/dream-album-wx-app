@@ -270,10 +270,12 @@ Page({
     })
   },
   previewImage:function(e){
+    let that=this;
     var urls=[];
-    urls.push(e.currentTarget.dataset.src);
+    urls=((that.data.spacetimelineList)[e.currentTarget.dataset.index]).illustrations;
     wx.previewImage({
-      urls: urls
+      urls: urls,
+      current:e.currentTarget.dataset.src
     })
   },
   delComment:function(e){
@@ -347,7 +349,8 @@ Page({
                   success: function(res){
                     that.data.spacetimelineList.splice(e.currentTarget.dataset.index,1);
                     that.setData({
-                      spacetimelineList:that.data.spacetimelineList
+                      spacetimelineList:that.data.spacetimelineList,
+                      noContentHidden:that.data.spacetimelineList.length>0?false:true
                     })
                   },
                   fail: function(ron) {
@@ -382,7 +385,8 @@ Page({
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
-          noMoreData:false
+          noMoreData:false,
+          spacetimelineList:[]
         })
         setTimeout(function(){
           that.getSpaceTopData();
@@ -467,7 +471,7 @@ Page({
         return;
       }
       wx.showActionSheet({
-        itemList:['更换相册封面'],
+        itemList:['更换空间封面'],
         success:function(res){
           if(res.tapIndex==0){
             wx.chooseImage({

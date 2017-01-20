@@ -1,99 +1,114 @@
-page{
-  background-color: #ffffff;
+page {
+  background-color: #fff;
 }
-.content{
-  background-color: #ffffff;
-  display:flex;
+
+.content {
+  background-color: #fff;
+  display: flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
 }
-.scroll-view_content{
-  background-image:url("https://cdn.mokous.com/static/album/image/albumbook.png");
-  background-repeat:no-repeat;
+
+.scroll-view_content {
+  background-image: url("https://cdn.mokous.com/static/album/image/albumbook.png");
+  background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.content_detail{
-  display:flex;
-  flex-wrap: wrap;
 
+.content_detail {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
 }
-.content_item{
+
+.content_item {
   position: relative;
-  display:block;
+  display: block;
   margin: 10rpx 0 0 10rpx;
 }
-.splitline{
+
+.splitline {
   width: 100%;
   height: 2rpx;
   margin-top: 10rpx;
-  background:#888888;
+  background: #888;
 }
-.item{
+
+.item {
   position: absolute;
-  margin-top :20rpx;
+  margin-top: 20rpx;
 }
-.item_detail{
+
+.item_detail {
   position: absolute;
   white-space: nowrap;
   left: 40rpx;
-  top: 0rpx
+  top: 0rpx;
 }
-.item_item{
-  display:inline-block;
+
+.item_item {
+  display: inline-block;
   margin: 0 0 0 6rpx;
   position: relative;
 }
-.choosed{
-  display:inline-block;
-  position:absolute;
-  top:0;
-  background:rgba(0, 0, 0, 0.4);
-  width:100%;
-  height:100%;
-}
-.chooseimgbtn{
+
+.choosed {
+  display: inline-block;
   position: absolute;
-  width:160rpx;
-  height:160rpx;
-  z-index: 10;
-  right:40rpx;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
 }
-.savebtn{
+
+.chooseimgbtn {
   position: absolute;
-  width:160rpx;
-  height:160rpx;
+  width: 160rpx;
+  height: 160rpx;
   z-index: 10;
-  right:40rpx;
+  right: 40rpx;
 }
-.bg_img{
+
+.savebtn {
+  position: absolute;
+  width: 160rpx;
+  height: 160rpx;
+  z-index: 10;
+  right: 40rpx;
+}
+
+.bg_img {
   position: absolute;
   z-index: 1;
 }
 
-.border_choosed{
-  border: 2rpx solid rgb(0,170,243);
-}
-.border_unchoosed{
-  border: 2rpx solid rgba(0,0,0,0);
+.border_choosed {
+  border: 2rpx solid rgb(0, 170, 243);
 }
 
-.footer{
+.border_unchoosed {
+  border: 2rpx solid rgba(0, 0, 0, 0);
+}
+
+.footer {
   position: fixed;
   bottom: 0rpx;
   width: 750rpx;
   color: #1aad19;
-  z-index:10;
+  z-index: 10;
   display: flex;
+  display: -webkit-flex;
   height: 100rpx;
 }
 
-.footer_item{
+.footer_item {
   background-color: #ff5956;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
 }
 
-.footer_item .back{
+.footer_item .back {
   position: relative;
   top: 25rpx;
   left: 50rpx;
@@ -101,7 +116,7 @@ page{
   height: 50rpx;
 }
 
-.footer_item .add{
+.footer_item .add {
   position: relative;
   top: 25rpx;
   left: 100rpx;
@@ -109,7 +124,7 @@ page{
   height: 50rpx;
 }
 
-.footer_item .next{
+.footer_item .next {
   position: relative;
   top: 25rpx;
   left: 150rpx;
@@ -117,43 +132,59 @@ page{
   height: 50rpx;
 }
 
-
-.scroll-view_H{
+.scroll-view_H {
   white-space: nowrap;
 }
-.scroll-view-item{
+
+.scroll-view-item {
   height: 400rpx;
 }
-.scroll-view-item_H{
+
+.scroll-view-item_H {
   display: inline-block;
   width: 100%;
   height: 400rpx;
 }
-.music_btn{
-    position: absolute;
-    z-index: 10;
-    top: 10rpx;
-    right: 10rpx;
-    width: 60rpx;
-    height: 60rpx;
-    border-radius: 50%;
-/*    animation: rotate 10s linear infinite;*/
+
+.music_btn {
+  position: absolute;
+  z-index: 10;
+  top: 10rpx;
+  right: 10rpx;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  /*    animation: rotate 10s linear infinite;*/
 }
-.music_btn-on{
-    animation-play-state: running !important;
-    -webkit-animation-play-state: running !important;
-    -moz-animation-play-state: running !important;
+
+.music_btn-on {
+  animation-play-state: running !important;
+  -webkit-animation-play-state: running !important;
+  -moz-animation-play-state: running !important;
 }
-.music_btn-off{
-    animation-play-state: paused !important;
-    -webkit-animation-play-state:paused !important;
-    -moz-animation-play-state: none !important;
+
+.music_btn-off {
+  animation-play-state: paused !important;
+  -webkit-animation-play-state: paused !important;
+  -moz-animation-play-state: none !important;
 }
+
 @keyframes rotate {
-    from {
-        transform: rotate(0);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

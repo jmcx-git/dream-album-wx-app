@@ -1,0 +1,107 @@
+page {
+  background-color: #fff;
+}
+
+.about_info_area {
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+}
+
+.about_info {
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.name_font {
+  font-size: 28rpx;
+  color: #353535;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+.version_font {
+  font-size: 28rpx;
+  color: #888;
+  font-weight: 200;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+.about_info_icon {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 80rpx 0 40rpx;
+}
+
+.about_desc {
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  width: 560rpx;
+  height: 102rpx;
+  color: #353535;
+  font-size: 28rpx;
+  line-height: 1;
+  border: 2rpx dashed #353535;
+  border-radius: 51rpx;
+  margin: 40rpx 0rpx;
+}
+
+.divide_line{
+  width: 100%;
+  height: 12rpx;
+}
+
+.contact_info {
+  margin-top: 40rpx;
+  width: 560rpx;
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+}
+
+.contact_sub_info{
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-around;
+}
+
+.qrcode_mp_img{
+  width: 250rpx;
+  height: 250rpx;
+  border: 2rpx dashed black;
+}
+
+.qrcode_offices_img{
+  width: 230rpx;
+  height: 230rpx;
+  padding: 10rpx;
+  border: 2rpx dashed black;
+}
+
+.qrcode_text{
+  padding-top: 30rpx;
+  font-size: 24rpx;
+  line-height: 1;
+  color: #353535;
+}

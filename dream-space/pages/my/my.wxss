@@ -56,6 +56,7 @@ page {
   display: -webkit-flex !important;
   align-items: center;
   -webkit-align-items: center;
+  border-bottom: 2rpx solid #efeff4;
 }
 
 .select_cell_icon {
@@ -109,4 +110,14 @@ page {
   align-items: center;
   -webkit-align-items: center;
   justify-content: center;
+}
+
+.contact_info {
+  position: absolute;
+  bottom: 30rpx;
+  width: 750rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #888;
+  text-align: center;
 }

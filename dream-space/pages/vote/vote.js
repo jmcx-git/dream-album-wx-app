@@ -243,7 +243,7 @@ Page({
     }
     if(that.data.selectedWorksId == -1){
       wx.showToast({
-        title:"还未选择相册",
+        title:"还未选择作品",
         duration:2000
       })
       return

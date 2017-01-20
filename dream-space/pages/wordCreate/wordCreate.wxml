@@ -1,4 +1,6 @@
 <form bindsubmit="sendMessage">
+<view style="width:100%; height:30px;display:block; margin-top:10px">
+</view>
 <view class="inputText">
     <textarea maxlength="-1" class="textArea" cursor-spacing="200" name="content" placeholder="{{placeholderText}}"></textarea>
 </view>

@@ -18,7 +18,9 @@ let pageData = {
         stepTime: 0,
         stepTimeUnit: '',
         activityRule: '',
+        activityRules: [],
         activityTimeDesc: '',
+        prizeTimeDesc: '',
 
 
         examples:[],
@@ -67,7 +69,6 @@ let pageData = {
       //   app.globalData.openId = "oRi3q0Fle8CvJWlZ3EWo-uuvvUh8"
       // }
       // 判断分享
-      console.log("onload")
       if(option.share == 'yes'){
         app.globalData.indexRefreshStatus=true;
       }
@@ -107,7 +108,6 @@ let pageData = {
     // this.initData(this.data.id)
     },
     onShow: function(){
-      console.log("onshow");
       this.initData(this.data.id)
     },
     getWorksId: function(worksId){
@@ -130,11 +130,13 @@ let pageData = {
                 cover: dat.cover,
                 title: dat.title,
                 stepDesc: dat.stepDesc,
+                prizeTimeDesc: dat.prizeTimeDesc,
                 stepTimeUnit: dat.stepTimeUnit,
                 stepTime: dat.stepTime,
                 introduction: dat.introduction,
                 activityTimeDesc: dat.activityTimeDesc,
                 activityRule: dat.activityRule,
+                activityRules: dat.activityRules,
                 activityIntrParts: dat.contentSections,
                 showicon: icons[dat.step % icons.length],
                 participates: dat.participates,
@@ -149,7 +151,6 @@ let pageData = {
                 isShowWinnerList: dat.userPrizes != null && dat.userPrizes != undefined && dat.step == 3
               })
 
-              console.log("loadmore", that.data.step)
               if(that.data.step != 0){
                 // 如果是投票中的话,显示列表, 如果是完成,查看结果
                 that.refreshData()
@@ -212,14 +213,13 @@ let pageData = {
       })
     },
     selectalbum :function(e){
-      console.log("选择已有照片",this.data.id)
       let that = this
       wx.navigateTo({
         url: '../joinin/joinin?id='+this.data.id+"&voteWorksId="+that.data.voteWorksId+"&userWorksId="+this.data.userWorksId
       })
     },
     onShareAppMessage: function () {
-      console.log("v", this.data.voteWorksId, "u", this.data.userWorksId)
+
       let title = app.globalData.nickName+'邀请您加入活动。'
       let desc = '有福同享，快来参加活动名称，赢取大奖。'
       let url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.voteWorksId+'&share=1'
@@ -230,7 +230,7 @@ let pageData = {
       if(this.data.voteWorksId == -1){
         url = '/pages/activitydetail/activitydetail?fromOpenId='+app.globalData.openId+'&activityId='+this.data.id+'&voteWorksId='+this.data.userWorksId+'&share=1'
       }
-      console.log("share", url)
+
       return {
         title: title,
         desc: desc,
@@ -263,7 +263,15 @@ let pageData = {
       this.setData({
         findKey: ""
       })
+      wx.showToast({
+        title: "正在刷新",
+        icon: "success",
+        duration: 1000
+      });
       this.refreshData()
+      setTimeout(function(){
+        wx.hideToast();
+      },1200);
     },
     refreshData: function(){
       this.data.entries = []
@@ -282,8 +290,7 @@ let pageData = {
       this.loadMore()
     },
     loadMore: function(){
-      console.log("loadmore1", this.data.findKey)
-      console.log("loadmore2", this.data.voteWorksId)
+
       if(this.data.noMoreList){
         return
       }
@@ -300,7 +307,7 @@ let pageData = {
           voteWorksId: that.getWorksId(that.data.voteWorksId)
         },
         success:function(res){
-          console.log(res)
+
           let list = []
           if(start == 0){
             list = res.data.data.resultList
@@ -339,32 +346,19 @@ let pageData = {
       this.setData({
         showSearchbar: showSearchbar
       })
-      console.log(this.data.showSearchbar)
+
     },
     touchstart:function(e){
-      this.lastY = e.touches[0].pageY
+
     },
     touchmove:function(e){
-      if(this.lastY != undefined){
-        let showSearchbar = true;
-        let pageY = e.touches[0].pageY;
-        if(pageY - this.lastY <0){
-          showSearchbar = false
-        }
-        console.log("showSearchbar ", showSearchbar)
-        this.setData({
-          showSearchbar: showSearchbar
-        })
-      }
 
-
-      console.log(e)
     },
     touchend:function(e){
-      this.lastY = undefined
+
     },
     radioChange: function(e){
-      console.log(e)
+
       if(this.data.selectedWorksId != e.currentTarget.dataset.id){
         this.setData({
           selectedWorksId : e.currentTarget.dataset.id
@@ -375,6 +369,11 @@ let pageData = {
         })
       }
 
+    },
+    findmoreactivity: function(e){
+      wx.switchTab({
+        url: '../discovery/discovery'
+      })
     },
     voteforone:function(){
       let that = this;
@@ -387,15 +386,21 @@ let pageData = {
           worksId: that.data.selectedWorksId
         },
         success:function(res){
-          console.log(res)
+
           let msg = "服务器错误,请稍后再试!"
           if(res.statusCode ==200){
             if(res.data.status ==0){
               wx.showModal({
                 title:"提示",
                 content:"投票成功",
-                showCancel: false,
+                cancelText: "返回",
+                confirmText: "更多活动",
                 success:function(res){
+                  if(res.confirm){
+                    wx.switchTab({
+                      url: '../discovery/discovery'
+                    })
+                  }
                   that.refreshData()
                 }
               })
@@ -414,6 +419,26 @@ let pageData = {
           that.voting = false
         }
       })
+    },
+    nvoteone: function(e){
+
+      let that = this;
+      if(this.voting == true){
+        return
+      }
+      let selectedWorksId = e.currentTarget.dataset.id
+      if(selectedWorksId != undefined && selectedWorksId != -1){
+        that.data.selectedWorksId = selectedWorksId;
+        wx.showModal({
+          title:"提示",
+          content:"确定为"+selectedWorksId+"号投票",
+          success:function(res){
+            if(res.confirm){
+              that.voteforone()
+            }
+          }
+        })
+      }
     },
     voteone:function(e){
       let that = this;
@@ -437,6 +462,17 @@ let pageData = {
         }
       })
 
+    },
+    previewimgs: function(e){
+      let that = this
+      let index = e.currentTarget.dataset.index
+      let urls = this.data.entries[index].illustrations
+      if(urls!=undefined && urls.length >0){
+        wx.previewImage({
+          current: urls[0], // 当前显示图片的http链接
+          urls: urls // 需要预览的图片http链接列表
+        })
+      }
     }
 
 }

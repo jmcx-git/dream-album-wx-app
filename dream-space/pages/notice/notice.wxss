@@ -28,7 +28,19 @@ image {
   border-bottom: 2rpx solid #efeff4;
   display: flex !important;
   display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  /*align-items: center;
+  -webkit-align-items: center;*/
   padding: 30rpx 30rpx 30rpx 0;
+}
+
+.msg_sub_view {
+  display: flex !important;
+  display: -webkit-flex !important;
+  width: 632rpx;
+  margin: 10rpx 0rpx 0rpx 50rpx;
 }
 
 .user_info_area {
@@ -60,10 +72,6 @@ image {
   margin: 6rpx;
 }
 
-.msg_area {
-  margin-left: 50rpx;
-}
-
 .comment_view {
   font-size: 30rpx;
   line-height: 1.5;
@@ -73,7 +81,7 @@ image {
 .time_view {
   font-size: 24rpx;
   line-height: 1;
-  margin-top: 20rpx;
+  margin: 20rpx 0rpx 0rpx 50rpx;
   color: grey;
 }
 
