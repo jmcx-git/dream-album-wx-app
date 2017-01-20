@@ -385,7 +385,8 @@ Page({
     if(app.globalData.createFinishFlag){
         that.setData({
           start:0,
-          noMoreData:false
+          noMoreData:false,
+          spacetimelineList:[]
         })
         setTimeout(function(){
           that.getSpaceTopData();

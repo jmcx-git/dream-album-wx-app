@@ -15,80 +15,60 @@ image {
 
 .content {
   background-color: white;
-  width: 712rpx;
-  padding-left: 38rpx;
+  width: 750rpx;
   display: flex !important;
   display: -webkit-flex !important;
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
 }
 
-.msg_view {
-  width: 682rpx;
-  border-bottom: 2rpx solid #efeff4;
+.content_top_area {
   display: flex !important;
   display: -webkit-flex !important;
-  padding: 30rpx 30rpx 30rpx 0;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-around;
+  width: 750rpx;
+  height: 180rpx;
+  border-bottom: 4rpx dashed black;
 }
 
-.user_info_area {
-  width: 100%;
-  height: 40rpx;
-  display: inline-flex;
+.title {
+  font-size: 50rpx;
+  line-height: 1;
+  font-weight: 500;
 }
 
-.user_info_icon {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.user_info_name {
-  margin-left: 10rpx;
+.time_desc {
   font-size: 30rpx;
-  line-height: 40rpx;
-}
-
-.office_marker {
-  width: 46rpx;
-  height: 24rpx;
-  border-radius: 4rpx;
-  background-color: rgb(20, 157, 236);
-  color: white;
-  line-height: 24rpx;
-  font-size: 18rpx;
-  text-align: center;
-  margin: 6rpx;
-}
-
-.msg_area {
-  margin-left: 50rpx;
-}
-
-.comment_view {
-  font-size: 40rpx;
-  line-height: 1.5;
+  line-height: 1;
+  font-weight: 300;
   color: #353535;
 }
 
-.time_view {
-  font-size: 24rpx;
-  line-height: 1;
-  margin-top: 20rpx;
-  color: grey;
+.content_detail {
+  background-color: white;
+  width: 750rpx;
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
 
-.msg_view_commentpic {
-  width: 160rpx;
-  height: 160rpx;
+.content_detail_img {
+  width: 750rpx;
+  height: 500rpx;
 }
 
-.nomoretips {
-  padding: 80rpx 50rpx 40rpx;
-  width: 650rpx;
-  line-height: 1;
+.content_detail_text {
+  width: 710rpx;
+  padding: 30rpx 20rpx;
   font-size: 30rpx;
-  text-align: center;
-  color: gray;
+  line-height: 1.5;
+  text-indent: 2em;
 }
 
 .customer {

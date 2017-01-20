@@ -7,9 +7,17 @@
     <view class="about_desc">
       <text>一分钟极简制作记录生活中的每一点感动</text>
     </view>
-  </view>
-  <view class="contact_info">
-    <text>官方QQ群：160796981</text>
+    <image class="divide_line" src="../../image/divideline.png" />
+    <view class="contact_info">
+      <view class="contact_sub_info">
+        <image class="qrcode_img" src="../../image/familydefault.png" />
+        <text class="qrcode_text">公众号</text>
+      </view>
+      <view class="contact_sub_info">
+        <image class="qrcode_img" src="../../image/lovedefault.png" />
+        <text class="qrcode_text">客服群</text>
+      </view>
+    </view>
   </view>
 </view>
 

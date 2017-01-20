@@ -5,7 +5,7 @@ Page({
         windowWidth: 0,
         convertTimes: 2,
         detailId: 0,
-        item: {},
+        itemDetail: {},
         loadStatus: false,
         nomsgs: true,
         productName: app.globalData.productName
@@ -30,10 +30,19 @@ Page({
     getData: function () {
         let that = this;
         let contents = [];
-        for(let i = 0 ; i < 5; i ++){
+        for (let i = 0; i < 5; i++) {
             let content = {};
-            content.content="一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动"
+            content.content = "一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动,一分钟极简制作记录生活中的每一点感动"
+            content.imgUrl = "../../image/lovedefaultcover.jpg"
+            contents.push(content);
         }
+        let itemDetail = that.data.itemDetail;
+        itemDetail.title = "光阴之旅";
+        itemDetail.time = "2018-08-08 08:08:08";
+        itemDetail.content = contents;
+        that.setData({
+            itemDetail: itemDetail
+        })
         // let id = that.data.detailId;
         // let requestData = {
         //     'openId': app.globalData.openId,
@@ -57,7 +66,7 @@ Page({
         //             } else {
         //                 let newItem = res.data.data;
         //                 that.setData({
-        //                     item: newItem,
+        //                     itemDetail: newItem,
         //                     loadStatus: true
         //                 })
         //             }

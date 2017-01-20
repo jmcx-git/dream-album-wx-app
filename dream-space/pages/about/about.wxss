@@ -56,17 +56,44 @@ page {
   font-size: 28rpx;
   line-height: 1;
   border: 2rpx dashed #353535;
-  border-radius: 102rpx;
-  margin-top: 80rpx;
+  border-radius: 51rpx;
+  margin: 40rpx 0rpx;
+}
+
+.divide_line{
+  width: 100%;
+  height: 12rpx;
 }
 
 .contact_info {
-  position: absolute;
-  bottom: 150rpx;
-  width: 750rpx;
-  font-size: 28rpx;
-  font-weight: 200;
+  margin-top: 40rpx;
+  width: 560rpx;
+  display: flex !important;
+  display: -webkit-flex !important;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-between;
+}
+
+.contact_sub_info{
+  display: flex !important;
+  display: -webkit-flex !important;
+  flex-direction: column !important;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: space-around;
+}
+
+.qrcode_img{
+  width: 252rpx;
+  height: 252rpx;
+}
+
+.qrcode_text{
+  padding: 10rpx;
+  font-size: 24rpx;
   line-height: 1;
-  color: #888;
-  text-align: center;
+  color: #353535;
 }
