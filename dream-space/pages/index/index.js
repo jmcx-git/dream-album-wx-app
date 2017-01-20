@@ -17,7 +17,8 @@ Page({
     animationData3: {},
     isHidden1: true,
     isHidden2: true,
-    isHidden3: true
+    isHidden3: true,
+    longclick:false
   },
   onLoad: function (options) {
     new app.WeToast();
@@ -247,6 +248,11 @@ Page({
     })
   },
   toSpace: function (e) {
+    let that=this;
+    if(that.data.longclick){
+      return;
+    }
+    console.log("进入");
     let index = e.currentTarget.id;
     let spaceId = this.data.items[index].id;
     wx.navigateTo({
@@ -335,5 +341,62 @@ Page({
       desc: '用它，您可以记录，分享您的珍贵时刻。',
       path: '/pages/index/index?fromOpenId=' + openId
     }
+  },
+  delSpaceInfo:function(e){
+    let that=this;
+    that.setData({
+      longclick:true
+    })
+    wx.showActionSheet({
+      itemList:['删除'],
+      success:function(res){
+        if(res.tapIndex==0){
+             wx.showModal({
+              title:'提示',
+              content:'确定要删除或离开当前空间?',
+              showCancel:true,
+              success:function(ron){
+                if(ron.confirm){
+                  wx.request({
+                    url: app.globalData.serverHost+'leave.json',
+                    data: {
+                      openId:app.globalData.openId,
+                      spaceId:e.currentTarget.dataset.spaceid,
+                      version:app.globalData.version
+                    },
+                    method: 'GET',
+                    success: function(ros){
+                      (that.data.items).splice(e.currentTarget.dataset.index,1);
+                      that.setData({
+                          items:that.data.items,
+                          longclick:false
+                      })
+                      wx.showToast({
+                          title:'操作成功',
+                          icon:'success',
+                          duration:1000,
+                          mask:true
+                      })
+                    },
+                    fail: function(rps) {
+                      console.log("删除空间失败！");
+                      console.log(rps);
+                      app.errorToast("删除空间失败！");
+                    }
+                  })
+                }else{
+                  that.setData({
+                    longclick:false
+                  })
+                }
+              }
+            })
+        }else{
+          that.setData({
+            longclick:false
+          })
+        }
+      }
+    })
   }
 })

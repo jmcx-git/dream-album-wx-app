@@ -10,10 +10,10 @@
   <view id="{{idx}}" wx:for="{{items}}" wx:key="{{idx}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
       <block wx:if="{{item.type==0}}">
-        <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
+        <image mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
       </block>
       <block wx:else>
-        <image mode="aspectFill" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
+        <image mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
       </block>
     </view>
     <view class="sub_main_info">
