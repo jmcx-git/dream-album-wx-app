@@ -23,7 +23,7 @@ App({
   },
   globalData: {
     // serverHost: "http://10.1.0.131:8080/dream-family/space/",
-    serverHost: "https://developer.mokous.com/space/",
+    serverHost: "https://api.mokous.com/space/",
     appId: "wx0ddc8673b8df3827",
     version: '1.0.0',
     nickName: "",

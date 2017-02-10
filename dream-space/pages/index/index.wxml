@@ -1,5 +1,4 @@
 <import src="../../src/wetoast.wxml" />
-
 <view wx:if="{{!loadStatus}}" style="width:100%;height:{{windowHeight}}px;">
   <image hidden="{{!nopics}}" class="default_area_image" style="top:{{windowHeight*convertTimes/2-300}}rpx;" src="../../image/empty.png" />
   <image hidden="{{!nopics}}" class="default_area_notice" src="../../image/addnotice.png" />
@@ -10,10 +9,11 @@
   <view id="{{idx}}" wx:for="{{items}}" wx:key="{{idx}}" bindtap="toSpace" wx:for-index="idx" class="sub_main">
     <view class="sub_main_image">
       <block wx:if="{{item.type==0}}">
-        <image mode="aspectFill" data-spaceid="{{item.id}}" data-owner="{{item.owner}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}" />
+        <image wx:if="{{ item.loaded }}" mode="aspectFill" data-spaceid="{{item.id}}" data-owner="{{item.owner}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/familydefaultcover.jpg':item.cover}}"
+        />
       </block>
       <block wx:else>
-        <image mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
+        <image wx:if="{{ item.loaded }}" mode="aspectFill" data-spaceid="{{item.id}}" data-index="{{idx}}" catchlongtap="delSpaceInfo" class="image" src="{{item.cover==null?'../../image/lovedefaultcover.jpg':item.cover}}" />
       </block>
     </view>
     <view class="sub_main_info">
@@ -26,9 +26,9 @@
       <view class="desc">{{item.info==null?'主人没有什么介绍耶~':item.info}}</view>
     </view>
   </view>
-</view>
-<view hidden="{{more}}" class="nomoretips">
-  <text>这是我的"底线"啦~</text>
+  <view hidden="{{more}}" class="nomoretips">
+    <text>这是我的"底线"啦~</text>
+  </view>
 </view>
 <view class="add_btn">
   <image bindtap="bindViewTap" src="../../image/add.png" style="z-index:3;" />
@@ -38,3 +38,7 @@
 
 <!-- wetoast -->
 <template is="wetoast" data="{{...__wetoast__}}" />
+
+<!-- 引入图片预加载组件 -->
+<import src="../../img-loader/img-loader.wxml" />
+<template is="img-loader" data="{{ imgLoadList }}"></template>

@@ -1,4 +1,5 @@
 var app = getApp();
+const ImgLoader = require('../../img-loader/img-loader.js');
 Page({
   data: {
     windowHeight: 0,
@@ -16,10 +17,11 @@ Page({
     animationData2: {},
     isHidden1: true,
     isHidden2: true,
-    longclick:false
+    longclick: false
   },
   onLoad: function (options) {
     new app.WeToast();
+    this.imgLoader = new ImgLoader(this, this.imageOnLoad.bind(this));
     //nothing
     let that = this;
     let redirectRefer = app.globalData.redirectRefer;
@@ -196,6 +198,10 @@ Page({
               start: newStart,
               more: res.data.data.more
             })
+            //同时发起全部图片的加载
+            that.data.items.forEach(item => {
+              that.imgLoader.load(item.cover)
+            })
           }
         }
       },
@@ -203,6 +209,15 @@ Page({
         app.showWeLittleToast(that, '服务器请求异常', 'error');
       }
     })
+  },
+  //加载完成后的回调
+  imageOnLoad(err, data) {
+    const items = this.data.items.map(item => {
+      if (item.cover == data.src)
+        item.loaded = true
+      return item
+    })
+    this.setData({ items })
   },
   reInit: function () {
     let that = this;
@@ -230,8 +245,8 @@ Page({
     })
   },
   toSpace: function (e) {
-    let that=this;
-    if(that.data.longclick){
+    let that = this;
+    if (that.data.longclick) {
       return;
     }
     console.log("进入");
@@ -317,57 +332,57 @@ Page({
       path: '/pages/index/index?fromOpenId=' + openId
     }
   },
-  delSpaceInfo:function(e){
-    let that=this;
+  delSpaceInfo: function (e) {
+    let that = this;
     that.setData({
-      longclick:true
+      longclick: true
     })
-    var content = e.currentTarget.dataset.owner == 0 ? "退出":"删除";
+    var content = e.currentTarget.dataset.owner == 0 ? "退出" : "删除";
     wx.showActionSheet({
-      itemList:[content],
-      success:function(res){
-        if(res.tapIndex==0){
-             wx.showModal({
-              title:'提示',
-              content:'确定要' + content + '当前空间?',
-              showCancel:true,
-              success:function(ron){
-                if(ron.confirm){
-                  wx.request({
-                    url: app.globalData.serverHost+'leave.json',
-                    data: {
-                      openId:app.globalData.openId,
-                      spaceId:e.currentTarget.dataset.spaceid,
-                      version:app.globalData.version
-                    },
-                    method: 'GET',
-                    success: function(ros){
-                      (that.data.items).splice(e.currentTarget.dataset.index,1);
-                      that.setData({
-                          items:that.data.items,
-                          longclick:false
-                      })
-                      wx.showToast({
-                          title:'操作成功',
-                          icon:'success',
-                          duration:1000,
-                          mask:true
-                      })
-                    },
-                    fail: function(rps) {
-                      app.errorToast("操作失败！");
-                    }
-                  })
-                }else{
-                  that.setData({
-                    longclick:false
-                  })
-                }
+      itemList: [content],
+      success: function (res) {
+        if (res.tapIndex == 0) {
+          wx.showModal({
+            title: '提示',
+            content: '确定要' + content + '当前空间?',
+            showCancel: true,
+            success: function (ron) {
+              if (ron.confirm) {
+                wx.request({
+                  url: app.globalData.serverHost + 'leave.json',
+                  data: {
+                    openId: app.globalData.openId,
+                    spaceId: e.currentTarget.dataset.spaceid,
+                    version: app.globalData.version
+                  },
+                  method: 'GET',
+                  success: function (ros) {
+                    (that.data.items).splice(e.currentTarget.dataset.index, 1);
+                    that.setData({
+                      items: that.data.items,
+                      longclick: false
+                    })
+                    wx.showToast({
+                      title: '操作成功',
+                      icon: 'success',
+                      duration: 1000,
+                      mask: true
+                    })
+                  },
+                  fail: function (rps) {
+                    app.errorToast("操作失败！");
+                  }
+                })
+              } else {
+                that.setData({
+                  longclick: false
+                })
               }
-            })
-        }else{
+            }
+          })
+        } else {
           that.setData({
-            longclick:false
+            longclick: false
           })
         }
       }
